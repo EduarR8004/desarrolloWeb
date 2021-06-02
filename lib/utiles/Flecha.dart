@@ -9,6 +9,7 @@ class _FlechaState extends State<Flecha> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.fromLTRB(150, 0, 0, 0),
       child:FadeInLeft(child: Icon(Icons.arrow_forward ,color:Colors.black ,size: 30,),
         duration: Duration(seconds:5),
       ),

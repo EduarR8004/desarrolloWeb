@@ -52,62 +52,60 @@ class ProfilePageState extends State<ProfilePage>with SingleTickerProviderStateM
 }
 
 
-    @override
+  @override
   Widget build(BuildContext context) {
     var menu = new Menu(data:widget.data,retorno:'');
     var encabezado= new Encabezado(data:widget.data,titulo:'Roles y Objetos',);
     return WillPopScope(
     onWillPop: () {  },
-    child: SafeArea(
-      child:Scaffold(
-        appBar: new AppBar(
-          flexibleSpace:encabezado,
-          backgroundColor: Colors.transparent,
-        ),
-      drawer: menu,
-      body: Container(
-        alignment: Alignment.center,
-        color:Colors.white ,
-        child:
-        Center(
-        child:Container(
-          width: 600,
-          height: 800,
+      child: SafeArea(
+        child:Scaffold(
+          appBar: new AppBar(
+            flexibleSpace:encabezado,
+            backgroundColor: Colors.transparent,
+          ),
+          drawer: menu,
+          body: Container(
           alignment: Alignment.center,
           color:Colors.white ,
-          child: Center(
-            child:Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              TabBar(
-                unselectedLabelColor: Colors.black,
-                labelColor: Colors.red,
-                tabs: [
-                  Tab(
-                    text: 'Asignar Objetos',
+            child:Center(
+              child:Container(
+                width: 1200,
+                height: 700,
+                alignment: Alignment.center,
+                color:Colors.white ,
+                child: Center(
+                  child:Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    TabBar(
+                      unselectedLabelColor: Colors.black,
+                      labelColor: Colors.red,
+                      tabs: [
+                        Tab(
+                          text: 'Asignar Objetos',
+                        ),
+                        Tab(
+                          text: 'Asignar Roles',
+                        )
+                      ],
+                      controller: _tabController,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: [AutoCompletar(widget.data), RolesCompletar(widget.data), ],
+                        controller: _tabController,
+                      ),
+                    ),
+                  ],
                   ),
-                  Tab(
-                    text: 'Asignar Roles',
-                  )
-                ],
-                controller: _tabController,
-                indicatorSize: TabBarIndicatorSize.tab,
-              ),
-              Expanded(
-                child: TabBarView(
-                  children: [AutoCompletar(widget.data), RolesCompletar(widget.data), ],
-                  controller: _tabController,
                 ),
               ),
-            ],
-          ),
+            ),
           ),
         ),
       ),
-      ),
-      
-      ),
-    ),
     );
   }
 }
@@ -127,33 +125,33 @@ class _AutoCompletarState extends State<AutoCompletar> {
   bool asignados = false;
   String dropdownValue = 'Opciones';
   
-deleteSelected(rolesTemp) async {
-  if(rolesTemp.length>0){
-    var session= Conexion();
-    session.set_token(widget.data.token);
-    var rol= Roles(session);
-    await rol.eliminar_rol(rolesTemp[0].id).then((_){
-      successDialog(
-       context, 
-        'Rol Eliminado Correctamente',
-        neutralText: "Aceptar",
-        neutralAction: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage(data:widget.data))); 
+  deleteSelected(rolesTemp) async {
+    if(rolesTemp.length>0){
+      var session= Conexion();
+      session.set_token(widget.data.token);
+      var rol= Roles(session);
+      await rol.eliminar_rol(rolesTemp[0].id).then((_){
+        successDialog(
+        context, 
+          'Rol Eliminado Correctamente',
+          neutralText: "Aceptar",
+          neutralAction: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfilePage(data:widget.data))); 
+          },
+        );
+      });
+    }else
+    {
+      warningDialog(
+        context, 
+        'Por favor seleccione un Rol',
+          negativeAction: (){
         },
       );
-    });
-  }else
-  {
-    warningDialog(
-      context, 
-      'Por favor seleccione un Rol',
-        negativeAction: (){
-      },
-    );
+    }
   }
-}
 
-Future <List<Rol>> descargar_roles()async{
+  Future <List<Rol>> descargar_roles()async{
    List map;
     if(roles.length > 0){
        return roles;
@@ -171,14 +169,14 @@ Future <List<Rol>> descargar_roles()async{
         }
         return roles;
     }
-}
+  }
   String currentText = "";
   GlobalKey<AutoCompleteTextFieldState<Rol>> key = new GlobalKey();
   AutoCompleteTextField textField;
 
   @override void initState() {
     Container(
-      width: 800,
+      width: 400,
       child: textField = new AutoCompleteTextField<Rol>(
         decoration: new InputDecoration(
           hintText:"Ingrese el Rol",
@@ -213,23 +211,25 @@ Future <List<Rol>> descargar_roles()async{
       )
     );
       super.initState();
-    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children:[
-        AsignarObjetos(),
         Container(
-          child: boton(),),
+          width: 400,
+          child:AsignarObjetos(),
+        ),
+        Container(
+          child: boton(),
+        ),
         SizedBox(height:10),
-        Container(padding: EdgeInsets.all(2),child:Column(children: [Text('Objetos Asignados')],)),
         asignados?
         ObjetosAsignados(widget.data,rolesTemp):Container(child:Column(children: [Text('')],)),
         // Container(padding: EdgeInsets.all(2),child:Column(children: [Text('Objetos No Asignados')],)),
         // asignados?
         // ObjetosNoAsignados(widget.data,rolesTemp):Container(child:Column(children: [Text('')],)),
-        
       ]
     );
   }
@@ -239,32 +239,40 @@ Future <List<Rol>> descargar_roles()async{
       future:descargar_roles(),
       builder:(context,snapshot){
         if(snapshot.hasData){
-          Column body = new Column(children: [
+          Column body = 
+          Column(children: [
             new ListTile(
-                title: textField,
-                trailing: new IconButton(
-                    icon: new Icon(Icons.search),
-                    onPressed: () {
-                      setState(() {
-                        if (currentText != "") {
-                          rolesTemp.add(roles.firstWhere((i) => i.nombre.toLowerCase().contains(currentText)));
-                          //textField.clear();
-                          //currentText = "";
-                        }
-                      });
-                    })),
+              title: textField,
+              trailing: new IconButton(
+                icon: new Icon(Icons.search),
+                onPressed: () {
+                  setState(() {
+                    if (currentText != "") {
+                      rolesTemp.add(roles.firstWhere((i) => i.nombre.toLowerCase().contains(currentText)));
+                      //textField.clear();
+                      //currentText = "";
+                    }
+                  });
+                }
+              )
+            ),
           ]);
           body.children.addAll(rolesTemp.map((item) {
-            return Container(child:Column(
-              mainAxisSize: MainAxisSize.min,
-               mainAxisAlignment: MainAxisAlignment.start,
-              verticalDirection: VerticalDirection.down,
-              children: [
-               Text(item.nombre,style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold,fontSize: 16,),), 
-               Text(item.descripcion),
-            ],));
+            return Container(
+              width: 500,
+              child:Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                verticalDirection: VerticalDirection.down,
+                children: [
+                Text(item.nombre,style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold,fontSize: 16,),), 
+                Text(item.descripcion),
+                ],
+              )
+            );
             //:ListTile(title: Text('nada'), subtitle: Text('de nada'));
-          }));
+          })
+          );
           return body;
         }else{
           return
@@ -272,7 +280,6 @@ Future <List<Rol>> descargar_roles()async{
             child:CircularProgressIndicator()
             //Splash1(),
           );
-          
         }
       },
     );
@@ -290,11 +297,10 @@ Future <List<Rol>> descargar_roles()async{
         color: Colors.green,
       ),
       onChanged: (String newValue) {
-        
         if(newValue=='Crear'){
-          
           Navigator.of(context).push(
-                                 MaterialPageRoute(builder: (context) => CrearRol(false,data:widget.data,rol:null))); 
+            MaterialPageRoute(builder: (context) => CrearRol(false,data:widget.data,rol:null))
+          ); 
         }
         else if(newValue=='Eliminar')
         {
@@ -302,25 +308,24 @@ Future <List<Rol>> descargar_roles()async{
         }
         else if(newValue=='Editar')
         {
-            if(rolesTemp.length>0){
-            Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => CrearRol(true,data:widget.data,rol:rolesTemp[0]))); 
-            }else{
-              errorDialog(
-              context, 
-              "Por favor seleccione un Rol",
-              negativeAction: (){
-              },
-            );
-            }
+          if(rolesTemp.length>0){
+          Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => CrearRol(true,data:widget.data,rol:rolesTemp[0]))); 
+          }else{
+            errorDialog(
+            context, 
+            "Por favor seleccione un Rol",
+            negativeAction: (){
+            },
+          );
+          }
         }
-          
         setState(() {
           dropdownValue = newValue;
         });
       },
       items: <String>['Opciones','Crear', 'Editar', 'Eliminar']
-          .map<DropdownMenuItem<String>>((String value) {
+      .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),

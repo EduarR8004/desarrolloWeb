@@ -204,7 +204,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
       }
     );
   }
- Future <List<EntradaCana>> listar_haciendas()async{
+  Future <List<EntradaCana>> listar_haciendas()async{
     var session= Conexion();
     session.set_token(widget.data.token);
     var usuario= EntradasCana(session);
@@ -229,13 +229,13 @@ class _EntradasCanasState extends State<EntradasCanas> {
           print("ninguno de los anteriores");
         }                                          
       });
-    DateTime llegaInicial = DateTime.parse(entrada[0].fch_ini_ent);
-    DateTime llegaFinal = DateTime.parse(entrada[0].fch_ult_ent);
-    llegaItexto=DateFormat('dd/MM/yyyy').format(llegaInicial);
-    llegaFtexto=DateFormat('dd/MM/yyyy').format( llegaFinal);
-    return entrada;
-  }  
-}
+      DateTime llegaInicial = DateTime.parse(entrada[0].fch_ini_ent);
+      DateTime llegaFinal = DateTime.parse(entrada[0].fch_ult_ent);
+      llegaItexto=DateFormat('dd/MM/yyyy').format(llegaInicial);
+      llegaFtexto=DateFormat('dd/MM/yyyy').format( llegaFinal);
+      return entrada;
+    }  
+  }
 
   parametros(parametro){
    for ( var par in parametro)
@@ -257,8 +257,8 @@ class _EntradasCanasState extends State<EntradasCanas> {
       // inicial=mapItexto;
       // fin=mapFtexto;
       return codParametro;
-
   }
+
   @override
   Widget build(BuildContext context) {
     var menu = new Menu(data:widget.data,retorno:'entrada');
@@ -272,14 +272,8 @@ class _EntradasCanasState extends State<EntradasCanas> {
             backgroundColor: Colors.transparent,
           ),
           drawer: menu,
-          body: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(child:dataBody()),
-              ],
-            ),
-          ),
+          body: Center(child:dataBody()) 
+          
         ),
       ),
     );
@@ -290,108 +284,192 @@ class _EntradasCanasState extends State<EntradasCanas> {
       builder:(context,snapshot){
         if(snapshot.hasData){
           _entrada = (entrada).toList();
-          // cambiar?_startTimeController.text=llegaItexto:_startTimeController.text=inicial;
-          // cambiar?_endTimeController.text=llegaFtexto:_endTimeController.text=fin;
           _startTimeController.text=llegaItexto;
           _endTimeController.text=llegaFtexto;
           cambiar?codParametro=entrada[0].cod_hda:codParametro=codRespeuesta;
-          //tabla = true;
           return 
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:Column(
-              mainAxisSize: MainAxisSize.min,
+          Center(child:
+            Column(
+              crossAxisAlignment:CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
-              verticalDirection: VerticalDirection.down,
               children:<Widget>[
-                SizedBox(height:15),
                 Row(
-                  mainAxisAlignment:MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children:[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                      child: DateTimeField(
-                        controller: _startTimeController,
-                        onChanged: (text) {
-                          if(_endTimeController.text!='')
-                          {  
-                            llegaItexto=_startTimeController.text;
-                            var fechaicambio=_startTimeController.text.split('/');
-                            var fechafcambio=_endTimeController.text.split('/');
-                            var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                            var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
-                            DateTime parseInicial = DateTime.parse(ini);
-                            DateTime parseFinal = DateTime.parse(ffinal);
-                            String nfechaI=DateFormat('dd/MM/yyyy').format(parseInicial);
-                            String nfechaF=DateFormat('dd/MM/yyyy').format(parseFinal);
-                            //DateTime startDate = DateTime.parse(nfechaI);
-                            //DateTime endDate = DateTime.parse(nfechaF);
-                            if(parseInicial.isBefore(parseFinal))
-                            {
-                              setState(() {
-                                tabla = false;
-                                });
-                                //dataTable(_startTimeController.text,_endTimeController.text,codParametro);
-                            }else{
-                                _startTimeController.text='';
-                                errorDialog(
-                                  context, 
-                                  error,
-                                  negativeAction: (){
-                                  },
-                                );
-                              }
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:[         
+                  Container(
+                  width: 400,
+                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                    child: DateTimeField(
+                      controller: _startTimeController,
+                      onChanged: (text) {
+                        if(_endTimeController.text!='')
+                        {  
+                          llegaItexto=_startTimeController.text;
+                          var fechaicambio=_startTimeController.text.split('/');
+                          var fechafcambio=_endTimeController.text.split('/');
+                          var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
+                          var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                          DateTime parseInicial = DateTime.parse(ini);
+                          DateTime parseFinal = DateTime.parse(ffinal);
+                          String nfechaI=DateFormat('dd/MM/yyyy').format(parseInicial);
+                          String nfechaF=DateFormat('dd/MM/yyyy').format(parseFinal);
+                          //DateTime startDate = DateTime.parse(nfechaI);
+                          //DateTime endDate = DateTime.parse(nfechaF);
+                          if(parseInicial.isBefore(parseFinal))
+                          {
+                            setState(() {
+                              tabla = false;
+                              });
+                              //dataTable(_startTimeController.text,_endTimeController.text,codParametro);
                           }else{
-                            infoDialog(
-                              context, 
-                              validarFecha,
-                              negativeAction: (){
-                              },
-                            );
+                              _startTimeController.text='';
+                              errorDialog(
+                                context, 
+                                error,
+                                negativeAction: (){
+                                },
+                              );
+                            }
+                        }else{
+                          infoDialog(
+                            context, 
+                            validarFecha,
+                            negativeAction: (){
+                            },
+                          );
                         }
-                        },
-                        format: format,
-                        onShowPicker: (context, currentValue) {
-                          return showDatePicker(
-                              context: context,
-                              firstDate: DateTime(1900),
-                              initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: IconButton(
-                            onPressed: (){
-                              },
-                            icon: Icon(
-                            Icons.calendar_today,
-                            color: Colors.grey,
-                            ),
+                      },
+                      format: format,
+                      onShowPicker: (context, currentValue) {
+                        return showDatePicker(
+                            context: context,
+                            firstDate: DateTime(1900),
+                            initialDate: currentValue ?? DateTime.now(),
+                            lastDate: DateTime(2100));
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: IconButton(
+                          onPressed: (){
+                            },
+                          icon: Icon(
+                          Icons.calendar_today,
+                          color: Colors.grey,
                           ),
-                          enabledBorder:
-                            UnderlineInputBorder(      
-                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                              ),  
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                              ),
-                              border: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                              ),
-                          labelText: 'Fecha Inicial',
                         ),
+                        enabledBorder:
+                          UnderlineInputBorder(      
+                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                          ),  
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                          ),
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                          ),
+                        labelText: 'Fecha Inicial',
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                      child:DateTimeField(
-                        controller:_endTimeController,
-                        onChanged: (text) { 
-                        if(_startTimeController.text!="")
-                        { 
-                          llegaFtexto=_endTimeController.text;
-                          cambioFechaF=true;
+                  ),
+                  Container(
+                    width: 400,
+                    padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                    child:DateTimeField(
+                      controller:_endTimeController,
+                      onChanged: (text) { 
+                      if(_startTimeController.text!="")
+                      { 
+                        llegaFtexto=_endTimeController.text;
+                        cambioFechaF=true;
+                        var fechaicambio=_startTimeController.text.split('/');
+                        var fechafcambio=_endTimeController.text.split('/');
+                        var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
+                        var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                        DateTime parseInicial = DateTime.parse(ini);
+                        DateTime parseFinal = DateTime.parse(ffinal);
+                        String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
+                        String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
+                        //DateTime startDate = DateTime.parse(nfechaI);
+                        //DateTime endDate = DateTime.parse(nfechaF);
+                        if(parseInicial.isBefore(parseFinal))
+                        {
+                          setState(() {
+                            tabla = false;
+                          });
+                        }else{
+                          _endTimeController.text='';
+                          errorDialog(
+                            context, 
+                            error,
+                            negativeAction: (){
+                            },
+                          );
+                        }
+                      }else{
+                        infoDialog(
+                          context, 
+                          validarFecha,
+                          negativeAction: (){
+                          },
+                        );
+                      }
+                      },
+                      format: format,
+                      onShowPicker: (context, currentValue) {
+                        return showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1900),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate: DateTime(2100)
+                        );
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: IconButton(
+                          onPressed: (){
+                            },
+                          icon: Icon(
+                          Icons.calendar_today,
+                          color: Colors.grey,
+                          ),
+                        ),
+                        enabledBorder:
+                        UnderlineInputBorder(      
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                        ),  
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                        ),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                        ), 
+                        labelText: 'Fecha Final',
+                      ),
+                    ),
+                  ),
+                  Container(
+                  width: 400,
+                  height: 40,
+                  //margin: const EdgeInsets.fromLTRB(38, 5, 38,10),
+                  decoration: BoxDecoration(
+                    border: Border(bottom:BorderSide(width: 1,
+                      color: Color.fromRGBO(83, 86, 90, 1.0),
+                    ),
+                    ),
+                  ),
+                    child: DropdownButtonHideUnderline(
+                      child: new DropdownButton<String>(
+                        hint: Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: Center(
+                            child:Text(entrada[0].cod_hda.toString()+' - '+entrada[0].nm_hda.toString(), textAlign: TextAlign.center,style: TextStyle(
+                        fontSize: 15.0,
+                        fontFamily: 'Karla',
+                        
+                        ),),),),
+                        value:selectedRegion,
+                        isDense: true,
+                        onChanged: (String newValue) {
+                        if(_endTimeController.text!=''&& _startTimeController.text!="")
+                        {  
                           var fechaicambio=_startTimeController.text.split('/');
                           var fechafcambio=_endTimeController.text.split('/');
                           var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
@@ -400,15 +478,20 @@ class _EntradasCanasState extends State<EntradasCanas> {
                           DateTime parseFinal = DateTime.parse(ffinal);
                           String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
                           String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
-                          //DateTime startDate = DateTime.parse(nfechaI);
-                          //DateTime endDate = DateTime.parse(nfechaF);
-                          if(parseInicial.isBefore(parseFinal))
-                          {
-                          setState(() {
-                            tabla = false;
+                          DateTime startDate = DateTime.parse(nfechaI);
+                          DateTime endDate = DateTime.parse(nfechaF);
+                          if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
+                          {   
+                            setState(() {
+                              parametro=entrada.where((a) => a.nm_hda==newValue);
+                              codRespeuesta=parametros(parametro);
+                              _startTimeController.text=inicial;
+                              _endTimeController.text=fin;
+                              cambiar = false;
+                              detalle = true;
+                              selectedRegion = newValue;
                             });
                           }else{
-                            _endTimeController.text='';
                             errorDialog(
                               context, 
                               error,
@@ -416,134 +499,41 @@ class _EntradasCanasState extends State<EntradasCanas> {
                               },
                             );
                           }
-                        }else{
-                            infoDialog(
-                              context, 
-                              validarFecha,
-                              negativeAction: (){
-                              },
-                            );
+                        }else
+                        {
+                          infoDialog(
+                            context, 
+                            validarFecha,
+                            negativeAction: (){
+                            },
+                          );
                         }
+                          print(selectedRegion);
                         },
-                        format: format,
-                        onShowPicker: (context, currentValue) {
-                          return showDatePicker(
-                              context: context,
-                              firstDate: DateTime(1900),
-                              initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
-                        },
-                        decoration: InputDecoration(
-                          prefixIcon: IconButton(
-                                onPressed: (){
-                                  },
-                                icon: Icon(
-                                Icons.calendar_today,
-                                color: Colors.grey,
-                                ),
-                              ),
-                              enabledBorder:
-                              UnderlineInputBorder(      
-                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                              ),  
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                              ),
-                              border: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                              ),
-                              
-                          labelText: 'Fecha Final',
-                        ),
+                        items: _entrada.map((EntradaCana map) {
+                          return new DropdownMenuItem<String>(
+                            value: map.nm_hda,
+                            //child: Center(
+                            child:Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 5, 2,2),
+                            child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.center,
+                              style: new TextStyle(color: Colors.black)
+                            ),
+                          ),
+                        //),
+                        );
+                        }).toList(),
                       ),
                     ),
-                    Container(
-                      height: 40,
-                      alignment: Alignment.centerLeft,
-                      margin: const EdgeInsets.fromLTRB(38, 5, 38,10),
-                      decoration: BoxDecoration(
-                        border: Border(bottom:BorderSide(width: 1,
-                          color: Color.fromRGBO(83, 86, 90, 1.0),
-                        ),
-                        ),
-                      ),
-                        child: DropdownButtonHideUnderline(
-                          child: new DropdownButton<String>(
-                            hint: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Center(
-                                child:Text(entrada[0].cod_hda.toString()+' - '+entrada[0].nm_hda.toString(), textAlign: TextAlign.center,style: TextStyle(
-                            fontSize: 15.0,
-                            fontFamily: 'Karla',
-                            
-                            ),),),),
-                            value:selectedRegion,
-                            isDense: true,
-                            onChanged: (String newValue) {
-                              if(_endTimeController.text!=''&& _startTimeController.text!="")
-                            {  
-                                var fechaicambio=_startTimeController.text.split('/');
-                                var fechafcambio=_endTimeController.text.split('/');
-                                var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                                var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
-                                DateTime parseInicial = DateTime.parse(ini);
-                                DateTime parseFinal = DateTime.parse(ffinal);
-                                String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
-                                String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
-                                DateTime startDate = DateTime.parse(nfechaI);
-                                DateTime endDate = DateTime.parse(nfechaF);
-                                if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
-                                {   
-                                    setState(() {
-                                      parametro=entrada.where((a) => a.nm_hda==newValue);
-                                      codRespeuesta=parametros(parametro);
-                                      _startTimeController.text=inicial;
-                                      _endTimeController.text=fin;
-                                      cambiar = false;
-                                      detalle = true;
-                                      selectedRegion = newValue;
-                                    });
-                                }else{
-                                  errorDialog(
-                                    context, 
-                                    error,
-                                    negativeAction: (){
-                                    },
-                                  );
-                                }
-                            }else
-                            {
-                              infoDialog(
-                                context, 
-                                validarFecha,
-                                negativeAction: (){
-                                },
-                              );
-                            }
-                              print(selectedRegion);
-                            },
-                            items: _entrada.map((EntradaCana map) {
-                              return new DropdownMenuItem<String>(
-                                value: map.nm_hda,
-                                //child: Center(
-                                child:Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 5, 2,2),
-                                child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.center,
-                                  style: new TextStyle(color: Colors.black)
-                                ),
-                              ),
-                            //),
-                            );
-                            }).toList(),
-                          ),
-                        ),
-                    ), 
-                  ]
+                  ), 
+                ]
                 ),
+                //SizedBox(height:15),
                 tabla?dataTotalVacia():dataTotal(_startTimeController.text,_endTimeController.text,codParametro),
-                tabla?tablaVacia():dataTable(_startTimeController.text,_endTimeController.text,codParametro),
+                tabla?tablaVacia():Expanded(child:dataTable(_startTimeController.text,_endTimeController.text,codParametro)),
+                
               ],
-            ),
+            )
           ); 
         } else if (snapshot.hasError) {
           return  Column(children:[
@@ -675,8 +665,13 @@ Widget  dataTotal(ini,fin,cod_hda) {
   builder:(context,snapshot){
     if(snapshot.hasData){
       return  
+      Container(
+        alignment: Alignment.center,
+        width:500,
+        child:
         Column(
-          mainAxisAlignment:MainAxisAlignment.center,
+          crossAxisAlignment:CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children:<Widget>[
             Container(child: 
               Padding(
@@ -715,7 +710,8 @@ Widget  dataTotal(ini,fin,cod_hda) {
               ),
             ),
           ],
-        );
+        )
+      );
     }else{
       return
       Center(

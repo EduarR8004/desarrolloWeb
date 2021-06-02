@@ -49,8 +49,11 @@ class _RolesCompletarState extends State<RolesCompletar> {
   GlobalKey<AutoCompleteTextFieldState<Usuario>> key = new GlobalKey();
   AutoCompleteTextField textField;
 
-  @override void initState() {
-      textField = new AutoCompleteTextField<Usuario>(
+  @override 
+  void initState() {
+    Container(
+      width: 400,
+      child:textField = new AutoCompleteTextField<Usuario>(
         decoration: new InputDecoration(
           hintText:"Ingrese el Usuario",
         ),
@@ -81,29 +84,31 @@ class _RolesCompletarState extends State<RolesCompletar> {
         itemFilter: (item, query) {
           return item.nombre_completo.toLowerCase().startsWith(query.toLowerCase());
         },
-      );
-      super.initState();
-    }
+      ),
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-            backgroundColor: Colors.white,
-            body: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              verticalDirection: VerticalDirection.down,
-                children: <Widget>[
-                  autocompletar(),
-                  SizedBox(height:10),
-                  Container(padding: EdgeInsets.all(2),child:Column(children: [Text('Roles Asignados')],)),
-                  asignados?
-                  RolesAsignados(widget.data,usuariosTemp):Container(child:Column(children: [Text('')],)),
-                  // Container(padding: EdgeInsets.all(2),child:Column(children: [Text('Roles No Asignados')],)),
-                  // asignados?
-                  // RolesNoAsignados(widget.data,usuariosTemp):Container(child:Column(children: [Text('')],)),
-                ],
-              ),
+    return  
+    Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: <Widget>[
+          Container(
+            alignment: Alignment.topLeft,
+            width: 400,
+            child:autocompletar(),
+          ),
+          SizedBox(height:10),
+          asignados?
+          RolesAsignados(widget.data,usuariosTemp):Container(child:Column(children: [Text('')],)),
+          // Container(padding: EdgeInsets.all(2),child:Column(children: [Text('Roles No Asignados')],)),
+          // asignados?
+          // RolesNoAsignados(widget.data,usuariosTemp):Container(child:Column(children: [Text('')],)),
+        ],
+      ),
     );
   }
 
@@ -112,34 +117,40 @@ class _RolesCompletarState extends State<RolesCompletar> {
       future:descargar_usuarios(),
       builder:(context,snapshot){
         if(snapshot.hasData){
-          Column body = new Column(children: [
+          Column body = new Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
             new ListTile(
-                title: textField,
-                trailing: new IconButton(
-                    icon: new Icon(Icons.search),
-                    onPressed: () {
-                      setState(() {
-                        if (currentText != "") {
-                          usuariosTemp.add(users.firstWhere((i) => i.nombre_completo.toLowerCase().contains(currentText)));
-                          textField.clear();
-                          currentText = "";
-                        }
-                      });
-                    }))
+              title: textField,
+              trailing: new IconButton(
+                icon: new Icon(Icons.search),
+                onPressed: () {
+                  setState(() {
+                    if (currentText != "") {
+                      usuariosTemp.add(users.firstWhere((i) => i.nombre_completo.toLowerCase().contains(currentText)));
+                      textField.clear();
+                      currentText = "";
+                    }
+                  });
+                }
+              )
+            )
           ]);
-
           body.children.addAll(usuariosTemp.map((item) {
-            return Container(child:Column(
+            return Container(
+              width: 500,
+              child:Column(
               mainAxisSize: MainAxisSize.min,
-               mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               verticalDirection: VerticalDirection.down,
               children: [
                Text(item.nombre_completo,style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold,fontSize: 16,)), 
                //Text(item.descripcion),
-            ],));
+              ],
+            )
+            );
             //return ListTile(title: Text(item.nombre_completo), subtitle: Text(item.nombre_completo));
           }));
-
           return body;
         }else{
           return
@@ -147,7 +158,6 @@ class _RolesCompletarState extends State<RolesCompletar> {
             child:CircularProgressIndicator()
             //Splash1(),
           );
-          
         }
       },
     );

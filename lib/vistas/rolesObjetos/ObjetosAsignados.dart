@@ -120,10 +120,10 @@ class _ObjetosAsignadosState extends State<ObjetosAsignados> {
       }else
       {  
         errorDialog(
-              context, 
-              "Por favor seleccione un objeto",
-              negativeAction: (){
-              },
+          context, 
+          "Por favor seleccione un objeto",
+          negativeAction: (){
+          },
         );
       }
     });
@@ -174,19 +174,19 @@ class _ObjetosAsignadosState extends State<ObjetosAsignados> {
       });
       return objetos;
     }
-}
+  }
 
-remover_objetos(objetoa)async{
-  var session= Conexion();
-  session.set_token(widget.data.token);
-  var objeto= Objetos(session);
-  var id=widget.obj[0].id;
-  var token=widget.data.token;
-  await objeto.remover_objeto_rol(id,objetoa).then((_){
-  });
-}
+  remover_objetos(objetoa)async{
+    var session= Conexion();
+    session.set_token(widget.data.token);
+    var objeto= Objetos(session);
+    var id=widget.obj[0].id;
+    var token=widget.data.token;
+    await objeto.remover_objeto_rol(id,objetoa).then((_){
+    });
+  }
 
-deleteSelectedNo() async {
+  deleteSelectedNo() async {
     setState(() {
       List objetoNoT=[];
       if (selectedObjectNo.isNotEmpty) {
@@ -244,236 +244,245 @@ deleteSelectedNo() async {
       });
       return objetosNo;
     }
-}
+  } 
 
-asignar_objeto(objetoa)async{
-  var session= Conexion();
-  session.set_token(widget.data.token);
-  var objeto= Objetos(session);
-  var token=widget.data.token;
-  await objeto.asignar_objeto_rol(widget.obj[0].id,objetoa).then((_){
-  });
-}
+  asignar_objeto(objetoa)async{
+    var session= Conexion();
+    session.set_token(widget.data.token);
+    var objeto= Objetos(session);
+    var token=widget.data.token;
+    await objeto.asignar_objeto_rol(widget.obj[0].id,objetoa).then((_){
+    });
+  }
    
-    @override
+  @override
   Widget build(BuildContext context) {
     var id=widget.obj[0].id;
-    return Expanded(child:
-                    SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child:Column(children:[
-                      Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child:Container(
-                          decoration: BoxDecoration(
-                          //color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: RaisedButton(
-                          textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                          //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                          color: Color.fromRGBO(56, 124, 43, 1.0),
-                          child: Text('Quitar', style: TextStyle(
-                            color: Colors.white,
-                            //Color.fromRGBO(83, 86, 90, 1.0),
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          )),
+    return Expanded(
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          Padding(
+            padding: EdgeInsets.fromLTRB(10,10,10,0),
+              child:Column(
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children:[
+                  Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Objetos Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child:Container(
+                      alignment:Alignment.topRight,
+                      decoration: BoxDecoration(
+                      //color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: RaisedButton(
+                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                        color: Color.fromRGBO(56, 124, 43, 1.0),
+                        child: Text('Quitar', style: TextStyle(
+                          color: Colors.white,
+                          //Color.fromRGBO(83, 86, 90, 1.0),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                        )),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0),
-                          //side: BorderSide(color: Colors.white)
+                        //side: BorderSide(color: Colors.white)
                         ),
                         onPressed: () {
-                         deleteSelected();
+                        deleteSelected();
                         },
                       ),
+                    ),
+                  ),
+                  Expanded(child:dataBody(id)),   
+                ]
+              ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(10,10,10,0),
+              child:Column(
+                //mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Objetos No Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child:Container(
+                      alignment:Alignment.topRight,
+                      decoration: BoxDecoration(
+                      //color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
                       ),
-                      ),
-                      dataBody(id),   
-                      Container(padding: EdgeInsets.all(2),child:Column(children: [Text('Objetos No Asignados')],)),
-                      Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child:Container(
-                          decoration: BoxDecoration(
-                          //color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: RaisedButton(
-                          textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                          //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                          color: Color.fromRGBO(56, 124, 43, 1.0),
-                          child: Text('Asignar', style: TextStyle(
-                            color: Colors.white,
-                            //Color.fromRGBO(83, 86, 90, 1.0),
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          )),
+                      child: RaisedButton(
+                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                        color: Color.fromRGBO(56, 124, 43, 1.0),
+                        child: Text('Asignar', style: TextStyle(
+                          color: Colors.white,
+                          //Color.fromRGBO(83, 86, 90, 1.0),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                        )),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0),
-                          //side: BorderSide(color: Colors.white)
+                        //side: BorderSide(color: Colors.white)
                         ),
                         onPressed: () {
-                         deleteSelectedNo();
+                          deleteSelectedNo();
                         },
                       ),
-                      ),
-                      ),
-                      dataBodyNo(id),  
-            ],
-            ),
-            ),      
+                    ),
+                  ),
+                  Expanded(child:dataBodyNo(id)),
+                ]
+              ),
+          ),
+        ],
+      ),
     );
-  
   }
 
-  Widget  dataBody(id) {
-     return FutureBuilder <List<Objeto>>(
+  Widget dataBody(id) {
+    return FutureBuilder <List<Objeto>>(
       future:listar_objetos_asignados(id),
       builder:(context,snapshot){
         if(snapshot.hasData){
+          var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
           return  
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                  child: SingleChildScrollView( 
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                       headingRowColor:
-                      MaterialStateColor.resolveWith((states) =>Colors.white ),
-                      //Color.fromRGBO(136,139, 141, 1.0)
-                      sortAscending: sort,
-                      sortColumnIndex: 0,
-                      columns: [
-                        DataColumn(
-                            label: Text("Objeto"),
-                            numeric: false,
-                            tooltip: "Objeto",
-                            onSort: (columnIndex, ascending) {
-                              setState(() {
-                                sort = !sort;
-                              });
-                              onSortColum(columnIndex, ascending);
-                            }),
-                        DataColumn(
-                          label: Text("Descripción"),
-                          numeric: false,
-                          tooltip: "Descripción",
-                          onSort: (columnIndex, ascending) {
-                              setState(() {
-                                sort = !sort;
-                              });
-                              onSortColum(columnIndex, ascending);
-                            }
-                        ),
-                      ],
-                      rows: objetos
-                          .map(
-                            (obj) => DataRow(
-                                    selected: selectedObject.contains(obj),
-                                    onSelectChanged: (b) {
-                                      print("Onselect");
-                                      onSelectedRow(b, obj);
-                                    },
-                                    cells: [
-                                      DataCell(
-                                        Text(obj.objeto),
-                                        onTap: () {
-                                          print('Selected ${obj.objeto}');
-                                        },
-                                      ),
-                                      DataCell(
-                                        Text(obj.descripcion),
-                                      ),
-                                    ]),
-                          )
-                          .toList(),
-                    ),
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SingleChildScrollView( 
+              scrollDirection: Axis.horizontal,
+              child: DataTable(
+                headingRowColor:MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+                //Color.fromRGBO(136,139, 141, 1.0)
+                sortAscending: sort,
+                sortColumnIndex: 0,
+                columns: [
+                  DataColumn(
+                    label: Text("Objeto",style: textStyle),
+                    numeric: false,
+                    tooltip: "Objeto",
+                    onSort: (columnIndex, ascending) {
+                      setState(() {
+                        sort = !sort;
+                      });
+                      onSortColum(columnIndex, ascending);
+                    }
                   ),
-              );
-          
+                  DataColumn(
+                    label: Text("Descripción",style: textStyle),
+                    numeric: false,
+                    tooltip: "Descripción",
+                    onSort: (columnIndex, ascending) {
+                      setState(() {
+                        sort = !sort;
+                      });
+                      onSortColum(columnIndex, ascending);
+                    }
+                  ),
+                ],
+                rows: objetos.map(
+                  (obj) => DataRow(
+                    selected: selectedObject.contains(obj),
+                    onSelectChanged: (b) {
+                      print("Onselect");
+                      onSelectedRow(b, obj);
+                    },
+                    cells: [
+                      DataCell(
+                        Text(obj.objeto),
+                        onTap: () {
+                          print('Selected ${obj.objeto}');
+                        },
+                      ),
+                      DataCell(
+                        Text(obj.descripcion),
+                      ),
+                    ]
+                  ),
+                ).toList(),
+              ),
+            ),
+          );
         }else{
           return
           Center(
             child:CircularProgressIndicator()
             //Splash1(),
           );
-          
         }
       },
     );
   }
 
   Widget  dataBodyNo(id) {
-     return FutureBuilder <List<Objeto>>(
+    return FutureBuilder <List<Objeto>>(
       future:listar_objetos_noasignados(id),
       builder:(context,snapshot){
         if(snapshot.hasData){
+          var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
           return  
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                  child: SingleChildScrollView( 
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                       headingRowColor:
-                      MaterialStateColor.resolveWith((states) =>Colors.white ),
-                      //Color.fromRGBO(136,139, 141, 1.0)
-                      sortAscending: sort,
-                      sortColumnIndex: 0,
-                      columns: [
-                        DataColumn(
-                            label: Text("Objeto"),
-                            numeric: false,
-                            tooltip: "Obj",
-                            onSort: (columnIndexNo, ascendingNo) {
-                              setState(() {
-                                sortNo = !sortNo;
-                              });
-                              onSortColumNo(columnIndexNo, ascendingNo);
-                            }),
-                        DataColumn(
-                          label: Text("Descripción"),
-                          numeric: false,
-                          tooltip: "Descri",
-                          onSort: (columnIndexNo, ascendingNo) {
-                              setState(() {
-                                sortNo = !sortNo;
-                              });
-                              onSortColumNo(columnIndexNo, ascendingNo);
-                            }
-                        ),
-                      ],
-                      rows: objetosNo
-                          .map(
-                            (objNo) => DataRow(
-                                    selected: selectedObjectNo.contains(objNo),
-                                    onSelectChanged: (b) {
-                                      print("Onselect");
-                                      onSelectedRowNo(b, objNo);
-                                    },
-                                    cells: [
-                                      DataCell(
-                                        Text(objNo.objeto),
-                                        onTap: () {
-                                          print('Selected ${objNo.objeto}');
-                                        },
-                                      ),
-                                      DataCell(
-                                        Text(objNo.descripcion),
-                                      ),
-                                      
-                                    ]),
-                          )
-                          .toList(),
-                    ),
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+              child:DataTable(
+                headingRowColor:MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+                //Color.fromRGBO(136,139, 141, 1.0)
+                sortAscending: sort,
+                sortColumnIndex: 0,
+                columns: [
+                  DataColumn(
+                    label: Text("Objeto",style: textStyle),
+                    numeric: false,
+                    tooltip: "Obj",
+                    onSort: (columnIndexNo, ascendingNo) {
+                      setState(() {
+                        sortNo = !sortNo;
+                      });
+                      onSortColumNo(columnIndexNo, ascendingNo);
+                    }
                   ),
-              );
-          
+                  DataColumn(
+                    label: Text("Descripción",style: textStyle),
+                    numeric: false,
+                    tooltip: "Descri",
+                    onSort: (columnIndexNo, ascendingNo) {
+                      setState(() {
+                        sortNo = !sortNo;
+                      });
+                      onSortColumNo(columnIndexNo, ascendingNo);
+                    }
+                  ),
+                ],
+                rows: objetosNo.map(
+                  (objNo) => DataRow(
+                    selected: selectedObjectNo.contains(objNo),
+                    onSelectChanged: (b) {
+                      print("Onselect");
+                      onSelectedRowNo(b, objNo);
+                    },
+                    cells: [
+                      DataCell(
+                        Text(objNo.objeto),
+                        onTap: () {
+                          print('Selected ${objNo.objeto}');
+                        },
+                      ),
+                      DataCell(
+                        Text(objNo.descripcion),
+                      ),
+                    ]
+                  ),
+                ).toList(),
+              ),
+          );
         }else{
           return
           Center(
             child:CircularProgressIndicator()
             //Splash1(),
           );
-          
         }
       },
     );

@@ -346,7 +346,7 @@ class _VerConsultasState extends State<VerConsultas> {
           child:dataTable(fecha_inicial,fecha_final,tipo)
         ):Container(),
       ],
-    );
+      );
   }
 //1640995140000 1546300800000
 Widget listaAgnoInicial(){

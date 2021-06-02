@@ -229,138 +229,151 @@ remover_rol(rolesa)async{
   @override
   Widget build(BuildContext context) {
     var id=widget.obj[0].usuario_id;
-    return Expanded(child:
-                    SingleChildScrollView(
-                    scrollDirection: Axis.vertical,
-                    child:Column(children:[
-                      Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child:Container(
-                          decoration: BoxDecoration(
-                          //color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: RaisedButton(
-                          textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                          //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                          color: Color.fromRGBO(56, 124, 43, 1.0),
-                          child: Text('Quitar', style: TextStyle(
-                            color: Colors.white,
-                            //Color.fromRGBO(83, 86, 90, 1.0),
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          )),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          //side: BorderSide(color: Colors.white)
-                        ),
-                        onPressed: () {
-                         deleteSelected();
-                        },
+    return Expanded(
+      child:Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          Padding(
+            padding: EdgeInsets.fromLTRB(10,10,10,0),
+            child:
+            Column(
+              children:[
+                Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Roles Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child:Container(
+                    decoration: BoxDecoration(
+                    //color: Colors.white,
+                    borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: RaisedButton(
+                      textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                      //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                      color: Color.fromRGBO(56, 124, 43, 1.0),
+                      child: Text('Quitar', style: TextStyle(
+                        color: Colors.white,
+                        //Color.fromRGBO(83, 86, 90, 1.0),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      )),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        //side: BorderSide(color: Colors.white)
                       ),
-                      ),
-                      ),
-                      dataBody(id), 
-                      Container(padding: EdgeInsets.all(2),child:Column(children: [Text('Roles No Asignados')],)),
-                      Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child:Container(
-                          decoration: BoxDecoration(
-                          //color: Colors.white,
-                          borderRadius: BorderRadius.circular(14),
-                        ),
-                        child: RaisedButton(
-                          textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                          //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                          color: Color.fromRGBO(56, 124, 43, 1.0),
-                          child: Text('Asignar', style: TextStyle(
-                            color: Colors.white,
-                            //Color.fromRGBO(83, 86, 90, 1.0),
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold
-                          )),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          //side: BorderSide(color: Colors.white)
-                        ),
-                        onPressed: () {
-                         deleteSelectedNo();
-                        },
-                      ),
-                      ),
-                      ),
-                      dataBodyNo(id),     
-            ],
+                      onPressed: () {
+                        deleteSelected();
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(child:dataBody(id)),
+              ],
             ),
-            ),              
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(10,10,10,0),
+            child:Column(
+              children:[
+                Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Roles No Asignados',style:TextStyle(fontWeight:FontWeight.bold),)],)),
+                Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child:Container(
+                    decoration: BoxDecoration(
+                    //color: Colors.white,
+                    borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: RaisedButton(
+                      textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                      //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                      color: Color.fromRGBO(56, 124, 43, 1.0),
+                      child: Text('Asignar', style: TextStyle(
+                        color: Colors.white,
+                        //Color.fromRGBO(83, 86, 90, 1.0),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold
+                      )),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        //side: BorderSide(color: Colors.white)
+                      ),
+                      onPressed: () {
+                        deleteSelectedNo();
+                      },
+                    ),
+                  ),
+                ),
+                Expanded(child:dataBodyNo(id)),
+              ],
+            ),
+          ),
+        ],
+      ),             
     );
   }
 
   Widget  dataBody(id) {
-     return FutureBuilder <List<Rol>>(
+    return FutureBuilder <List<Rol>>(
       future:descargar_roles_asignados(id),
       builder:(context,snapshot){
         if(snapshot.hasData){
+          var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
           return 
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                  child: SingleChildScrollView( 
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                       headingRowColor:
-                      MaterialStateColor.resolveWith((states) =>Colors.white ),
-                      //Color.fromRGBO(136,139, 141, 1.0)
-                      sortAscending: sort,
-                      sortColumnIndex: 0,
-                      columns: [
-                        DataColumn(
-                            label: Text("Objeto"),
-                            numeric: false,
-                            tooltip: "Objeto",
-                            onSort: (columnIndex, ascending) {
-                              setState(() {
-                                sort = !sort;
-                              });
-                              onSortColum(columnIndex, ascending);
-                            }),
-                        DataColumn(
-                          label: Text("Descripción"),
-                          numeric: false,
-                          tooltip: "Descripción",
-                          onSort: (columnIndex, ascending) {
-                              setState(() {
-                                sort = !sort;
-                              });
-                              onSortColum(columnIndex, ascending);
-                            }
-                        ),
-                      ],
-                      rows: roles
-                          .map(
-                            (obj) => DataRow(
-                                    selected: selectedRol.contains(obj),
-                                    onSelectChanged: (b) {
-                                      print("Onselect");
-                                      onSelectedRow(b, obj);
-                                    },
-                                    cells: [
-                                      DataCell(
-                                        Text(obj.nombre),
-                                        onTap: () {
-                                          print('Selected ${obj..nombre}');
-                                        },
-                                      ),
-                                      DataCell(
-                                        Text(obj.descripcion),
-                                      ),
-                                      
-                                    ]),
-                          )
-                          .toList(),
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: SingleChildScrollView( 
+                scrollDirection: Axis.horizontal,
+                child: DataTable(
+                  headingRowColor:MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+                  //Color.fromRGBO(136,139, 141, 1.0)
+                  sortAscending: sort,
+                  sortColumnIndex: 0,
+                  columns: [
+                    DataColumn(
+                      label: Text("Objeto",style: textStyle),
+                      numeric: false,
+                      tooltip: "Objeto",
+                      onSort: (columnIndex, ascending) {
+                        setState(() {
+                          sort = !sort;
+                        });
+                        onSortColum(columnIndex, ascending);
+                      }
                     ),
-                  ),
-              );
-          
+                    DataColumn(
+                      label: Text("Descripción",style: textStyle),
+                      numeric: false,
+                      tooltip: "Descripción",
+                      onSort: (columnIndex, ascending) {
+                        setState(() {
+                          sort = !sort;
+                        });
+                        onSortColum(columnIndex, ascending);
+                      }
+                    ),
+                  ],
+                  rows: roles.map(
+                        (obj) => DataRow(
+                          selected: selectedRol.contains(obj),
+                          onSelectChanged: (b) {
+                            print("Onselect");
+                            onSelectedRow(b, obj);
+                          },
+                          cells: [
+                            DataCell(
+                              Text(obj.nombre),
+                              onTap: () {
+                                print('Selected ${obj..nombre}');
+                              },
+                            ),
+                            DataCell(
+                              Text(obj.descripcion),
+                            ),
+                          ]
+                        ),
+                  ).toList(),
+                ),
+              ),
+            );    
         }else{
           return
           Center(
@@ -374,77 +387,75 @@ remover_rol(rolesa)async{
   }
 
    Widget  dataBodyNo(id) {
-     return FutureBuilder <List<Rol>>(
+    return FutureBuilder <List<Rol>>(
       future:descargar_roles_noasignados(id),
       builder:(context,snapshot){
         if(snapshot.hasData){
+          var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
           return  
-              SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                  child: SingleChildScrollView( 
-                    scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                       headingRowColor:
-                      MaterialStateColor.resolveWith((states) =>Colors.white ),
-                      //Color.fromRGBO(136,139, 141, 1.0)
-                      sortAscending: sortNo,
-                      sortColumnIndex: 0,
-                      columns: [
-                        DataColumn(
-                            label: Text("Objeto"),
-                            numeric: false,
-                            tooltip: "Objeto",
-                            onSort: (columnIndexNo, ascending) {
-                              setState(() {
-                                sortNo = !sortNo;
-                              });
-                              onSortColumNo(columnIndexNo, ascending);
-                            }),
-                        DataColumn(
-                          label: Text("Descripción"),
-                          numeric: false,
-                          tooltip: "Descripción",
-                          onSort: (columnIndexNo, ascending) {
-                              setState(() {
-                                sortNo = !sortNo;
-                              });
-                              onSortColumNo(columnIndexNo, ascending);
-                            }
-                        ),
-                      ],
-                      rows: rolesNo
-                          .map(
-                            (objNo) => DataRow(
-                                    selected: selectedRolNo.contains(objNo),
-                                    onSelectChanged: (b) {
-                                      print("Onselect");
-                                      onSelectedRowNo(b, objNo);
-                                    },
-                                    cells: [
-                                      DataCell(
-                                        Text(objNo.nombre),
-                                        onTap: () {
-                                          print('Selected ${objNo.nombre}');
-                                        },
-                                      ),
-                                      DataCell(
-                                        Text(objNo.descripcion),
-                                      ),
-                                      
-                                    ]),
-                          )
-                          .toList(),
-                    ),
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+                child: SingleChildScrollView( 
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    headingRowColor:MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+                    //Color.fromRGBO(136,139, 141, 1.0)
+                    sortAscending: sortNo,
+                    sortColumnIndex: 0,
+                    columns: [
+                      DataColumn(
+                        label: Text("Objeto",style: textStyle),
+                        numeric: false,
+                        tooltip: "Objeto",
+                        onSort: (columnIndexNo, ascending) {
+                          setState(() {
+                            sortNo = !sortNo;
+                          });
+                          onSortColumNo(columnIndexNo, ascending);
+                        }
+                      ),
+                      DataColumn(
+                        label: Text("Descripción",style: textStyle),
+                        numeric: false,
+                        tooltip: "Descripción",
+                        onSort: (columnIndexNo, ascending) {
+                          setState(() {
+                            sortNo = !sortNo;
+                          });
+                          onSortColumNo(columnIndexNo, ascending);
+                        }
+                      ),
+                    ],
+                    rows: rolesNo.map(
+                      (objNo) => DataRow(
+                        selected: selectedRolNo.contains(objNo),
+                        onSelectChanged: (b) {
+                          print("Onselect");
+                          onSelectedRowNo(b, objNo);
+                        },
+                        cells: [
+                          DataCell(
+                            Text(objNo.nombre),
+                            onTap: () {
+                              print('Selected ${objNo.nombre}');
+                            },
+                          ),
+                          DataCell(
+                            Text(objNo.descripcion),
+                          ),
+                          
+                        ]
+                      ),
+                    ).toList(),
                   ),
-              );
-          
+                ),
+            );
         }else{
           return
           Center(
             child:CircularProgressIndicator()
             //Splash1(),
           );
-          
         }
       },
     );

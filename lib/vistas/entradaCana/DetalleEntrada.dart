@@ -188,48 +188,50 @@ class _DetalleEntradaState extends State<DetalleEntrada> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              // height: 60,
-              //   width: 600,
-              margin: EdgeInsets.only(top:21),
-              decoration: BoxDecoration(
-                color: Colors.white,  
-                  //borderRadius: BorderRadius.circular(20),
-                image: DecorationImage(
-                  image: AssetImage('images/titulop.png'),
-                  fit: BoxFit.cover
-                ),
-              ),
-              child:Row(
-                children:<Widget>[
-                  Container(
-                    child:IconButton(
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
+            // Container(
+            //   // height: 60,
+            //   //   width: 600,
+            //   margin: EdgeInsets.only(top:21),
+            //   decoration: BoxDecoration(
+            //     color: Colors.white,  
+            //       //borderRadius: BorderRadius.circular(20),
+            //     image: DecorationImage(
+            //       image: AssetImage('images/titulop.png'),
+            //       fit: BoxFit.cover
+            //     ),
+            //   ),
+            //   child:Row(
+            //     children:<Widget>[
+            //       Container(
+            //         child:IconButton(
+            //           icon: Icon(
+            //             Icons.arrow_back,
+            //             color: Colors.white,
+            //           ),
+            //           onPressed: () {
+            //             Navigator.of(context).pop();
+            //           },
+            //         ),
                     
-                  ),
-                  Center(
-                    child:Text("Detalle de Entrada de Caña",
-                      style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            //       ),
+            //       Center(
+            //         child:Text("Detalle de Entrada de Caña",
+            //           style: TextStyle(
+            //           color: Colors.white,
+            //           fontSize: 20,
+            //           fontWeight: FontWeight.bold
+            //           ),
+            //         ),
+            //       )
+            //     ],
+            //   ),
+            // ),
             Container(
               padding:const EdgeInsets.fromLTRB(3, 2, 0,0),
               alignment: Alignment.topLeft,
-              child:Row(children:[
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
                 RaisedButton(
                   textColor: Color.fromRGBO(83, 86, 90, 1.0),
                   //textColor: Color.fromRGBO(255, 210, 0, 1.0),
