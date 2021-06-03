@@ -265,36 +265,42 @@ class _ObjetosAsignadosState extends State<ObjetosAsignados> {
           Padding(
             padding: EdgeInsets.fromLTRB(10,10,10,0),
               child:Column(
-                //crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children:[
-                  Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Objetos Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
-                  Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child:Container(
-                      alignment:Alignment.topRight,
-                      decoration: BoxDecoration(
-                      //color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: RaisedButton(
-                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                        child: Text('Quitar', style: TextStyle(
-                          color: Colors.white,
-                          //Color.fromRGBO(83, 86, 90, 1.0),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        )),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        //side: BorderSide(color: Colors.white)
+                  //Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Objetos Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children:[
+                      Padding(
+                      padding: EdgeInsets.fromLTRB(5,5,5,10),
+                      child:Container(
+                        alignment:Alignment.topRight,
+                        decoration: BoxDecoration(
+                        //color: Colors.white,
+                          borderRadius: BorderRadius.circular(14),
                         ),
-                        onPressed: () {
-                        deleteSelected();
-                        },
+                        child: RaisedButton(
+                          textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                          //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                          color: Color.fromRGBO(56, 124, 43, 1.0),
+                          child: Text('Quitar', style: TextStyle(
+                            color: Colors.white,
+                            //Color.fromRGBO(83, 86, 90, 1.0),
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
+                          )),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          //side: BorderSide(color: Colors.white)
+                          ),
+                          onPressed: () {
+                          deleteSelected();
+                          },
+                        ),
                       ),
-                    ),
+                      ),
+                    ]
                   ),
                   Expanded(child:dataBody(id)),   
                 ]
@@ -303,36 +309,42 @@ class _ObjetosAsignadosState extends State<ObjetosAsignados> {
           Padding(
             padding: EdgeInsets.fromLTRB(10,10,10,0),
               child:Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
-                  Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Objetos No Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
-                  Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child:Container(
-                      alignment:Alignment.topRight,
-                      decoration: BoxDecoration(
-                      //color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: RaisedButton(
-                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                        child: Text('Asignar', style: TextStyle(
-                          color: Colors.white,
-                          //Color.fromRGBO(83, 86, 90, 1.0),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        )),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                        //side: BorderSide(color: Colors.white)
+                  //Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Objetos No Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children:[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(5,5,5,10),
+                        child:Container(
+                          alignment:Alignment.topRight,
+                          decoration: BoxDecoration(
+                          //color: Colors.white,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: RaisedButton(
+                            textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                            //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                            color: Color.fromRGBO(56, 124, 43, 1.0),
+                            child: Text('Asignar', style: TextStyle(
+                              color: Colors.white,
+                              //Color.fromRGBO(83, 86, 90, 1.0),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold
+                            )),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            //side: BorderSide(color: Colors.white)
+                            ),
+                            onPressed: () {
+                              deleteSelectedNo();
+                            },
+                          ),
                         ),
-                        onPressed: () {
-                          deleteSelectedNo();
-                        },
                       ),
-                    ),
+                    ]
                   ),
                   Expanded(child:dataBodyNo(id)),
                 ]
@@ -361,9 +373,9 @@ class _ObjetosAsignadosState extends State<ObjetosAsignados> {
                 sortColumnIndex: 0,
                 columns: [
                   DataColumn(
-                    label: Text("Objeto",style: textStyle),
+                    label: Text("Objetos\nAsignados",style: textStyle),
                     numeric: false,
-                    tooltip: "Objeto",
+                    tooltip: "Objetos Asignado",
                     onSort: (columnIndex, ascending) {
                       setState(() {
                         sort = !sort;
@@ -433,9 +445,9 @@ class _ObjetosAsignadosState extends State<ObjetosAsignados> {
                 sortColumnIndex: 0,
                 columns: [
                   DataColumn(
-                    label: Text("Objeto",style: textStyle),
+                    label: Text("Objetos\nNo Asignados",style: textStyle),
                     numeric: false,
-                    tooltip: "Obj",
+                    tooltip: "Objetos No Asignados",
                     onSort: (columnIndexNo, ascendingNo) {
                       setState(() {
                         sortNo = !sortNo;

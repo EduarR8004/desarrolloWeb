@@ -60,35 +60,49 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
       ),
       actions: <Widget>[
         Container(
+          width:150,
+          height:35,
           alignment: Alignment.bottomLeft,
+          decoration: BoxDecoration(
+          //color: Colors.white,
+            borderRadius: BorderRadius.circular(14),
+          ),
           child:RaisedButton(
-                  textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                color: Color.fromRGBO(56, 124, 43, 1.0),
-                child: Text('Cancelar', style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold
-                )),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                onPressed: _onCancelTap,
+            textColor: Color.fromRGBO(83, 86, 90, 1.0),
+            color: Color.fromRGBO(56, 124, 43, 1.0),
+            child: Text('Cancelar', style: TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold
+            )
+            ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+          onPressed: _onCancelTap,
           ),
         ),
         Container(
+          width:150,
+          height:35,
           alignment: Alignment.bottomLeft,
+          decoration: BoxDecoration(
+          //color: Colors.white,
+            borderRadius: BorderRadius.circular(14),
+          ),
           child:RaisedButton(
-                  textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                color: Color.fromRGBO(56, 124, 43, 1.0),
-                child: Text('Aceptar', style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold
-                )),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50.0),
-                ),
-                onPressed: _onSubmitTap,
+            textColor: Color.fromRGBO(83, 86, 90, 1.0),
+            color: Color.fromRGBO(56, 124, 43, 1.0),
+            child: Text('Aceptar', style: TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold
+            )
+            ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50.0),
+          ),
+          onPressed: _onSubmitTap,
           ),
         ),
       ],

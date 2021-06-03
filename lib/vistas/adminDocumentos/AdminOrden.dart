@@ -276,7 +276,7 @@ class _AdministrarOrdenesTState extends State<AdministrarOrdenesT> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children:[
                       Container(
-                        padding: EdgeInsets.fromLTRB(110, 10, 56,0),
+                        padding: EdgeInsets.fromLTRB(95, 10, 56,0),
                         color:Colors.white,
                         child:boton(),
                       )
@@ -288,7 +288,7 @@ class _AdministrarOrdenesTState extends State<AdministrarOrdenesT> {
                     Container(
                     width: 400,
                     color:Colors.white,
-                    padding: EdgeInsets.fromLTRB(110, 30, 30, 10),
+                    padding: EdgeInsets.fromLTRB(95, 30, 30, 10),
                       child:Center(
                         child: DateTimeField(
                           controller: _startTimeController,

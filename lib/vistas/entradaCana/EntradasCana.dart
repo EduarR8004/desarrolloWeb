@@ -34,8 +34,8 @@ class _EntradasCanasState extends State<EntradasCanas> {
   bool sort;
   bool borrar = false;
   int contadorEntradaCana,contadorConsultas,contadorInfoProduccion,contadorLiqCana;
-  bool cambiar,tabla,detalle,mensaje,cambioFechaI,cambioFechaF,entradaTabla,guia,vehiculo,canasta,verCanasta,verVehiculo,verGuia;
-  String selectedRegion;
+  bool cambiar,tabla,detalle,mensaje,cambioFechaI,cambioFechaF,entradaTabla,guia,vehiculo,canasta,verCanasta,verVehiculo,verGuia,tablaDetalle;
+  String selectedRegion,llegaItexto,llegaFtexto,suerte;
   List<String> mostrarNotificacion=[];
   List <EntradaCana>_entrada=[];
   List<EntradaCana> _region = [];
@@ -45,8 +45,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
   List <EntradaCana>pasoParametro=[];
   List <EntradaCanaDetalle>entradaDetalle=[];
   List<String> objetos=[];
-  String llegaItexto;
-  String llegaFtexto;
+
   ProgressDialog ms;
   var validarFecha='Por favor ingresar la Fecha Inicial y la Fecha Final para realizar la consulta de información';
   var info='No se encontraron resultados para esta consulta';
@@ -57,6 +56,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
   final format = DateFormat("dd/MM/yyyy");
  @override
   void initState() {
+    tablaDetalle=false;
     sort = false;
     tabla = false;
     detalle = true;
@@ -244,19 +244,19 @@ class _EntradasCanasState extends State<EntradasCanas> {
     }
     var codParametro;
     pasoParametro.map((EntradaCana map) {
-    codParametro=map.cod_hda;
-    fecha_i=map.fch_ini_ent;
-    fecha_f=map.fch_ult_ent;
+      codParametro=map.cod_hda;
+      fecha_i=map.fch_ini_ent;
+      fecha_f=map.fch_ult_ent;
     }).toList();
-      DateTime llegaInicial = DateTime.parse(fecha_i);
-      DateTime llegaFinal = DateTime.parse(fecha_f);
-      String mapItexto=DateFormat('dd/MM/yyyy').format(llegaInicial);
-      String mapFtexto=DateFormat('dd/MM/yyyy').format( llegaFinal);
-      llegaItexto=mapItexto;
-      llegaFtexto=mapFtexto;
-      // inicial=mapItexto;
-      // fin=mapFtexto;
-      return codParametro;
+    DateTime llegaInicial = DateTime.parse(fecha_i);
+    DateTime llegaFinal = DateTime.parse(fecha_f);
+    String mapItexto=DateFormat('dd/MM/yyyy').format(llegaInicial);
+    String mapFtexto=DateFormat('dd/MM/yyyy').format( llegaFinal);
+    llegaItexto=mapItexto;
+    llegaFtexto=mapFtexto;
+    // inicial=mapItexto;
+    // fin=mapFtexto;
+    return codParametro;
   }
 
   @override
@@ -272,8 +272,10 @@ class _EntradasCanasState extends State<EntradasCanas> {
             backgroundColor: Colors.transparent,
           ),
           drawer: menu,
-          body: Center(child:dataBody()) 
-          
+          body: Container(
+            height:700,
+            child:Center(child:dataBody())
+          ) 
         ),
       ),
     );
@@ -288,11 +290,9 @@ class _EntradasCanasState extends State<EntradasCanas> {
           _endTimeController.text=llegaFtexto;
           cambiar?codParametro=entrada[0].cod_hda:codParametro=codRespeuesta;
           return 
-          Center(child:
             Column(
-              crossAxisAlignment:CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
               children:<Widget>[
+                SizedBox(height:30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:[         
@@ -308,28 +308,28 @@ class _EntradasCanasState extends State<EntradasCanas> {
                           var fechaicambio=_startTimeController.text.split('/');
                           var fechafcambio=_endTimeController.text.split('/');
                           var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                          var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                          var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
                           DateTime parseInicial = DateTime.parse(ini);
                           DateTime parseFinal = DateTime.parse(ffinal);
                           String nfechaI=DateFormat('dd/MM/yyyy').format(parseInicial);
                           String nfechaF=DateFormat('dd/MM/yyyy').format(parseFinal);
-                          //DateTime startDate = DateTime.parse(nfechaI);
-                          //DateTime endDate = DateTime.parse(nfechaF);
-                          if(parseInicial.isBefore(parseFinal))
-                          {
-                            setState(() {
+                          setState(() {
                               tabla = false;
-                              });
-                              //dataTable(_startTimeController.text,_endTimeController.text,codParametro);
-                          }else{
-                              _startTimeController.text='';
-                              errorDialog(
-                                context, 
-                                error,
-                                negativeAction: (){
-                                },
-                              );
-                            }
+                          });
+                          // if(parseInicial.isBefore(parseFinal))
+                          // {
+                          //   setState(() {
+                          //     tabla = false;
+                          //   });
+                          // }else{
+                          //   _startTimeController.text='';
+                          //   errorDialog(
+                          //     context, 
+                          //     error,
+                          //     negativeAction: (){
+                          //     },
+                          //   );
+                          // }
                         }else{
                           infoDialog(
                             context, 
@@ -342,10 +342,11 @@ class _EntradasCanasState extends State<EntradasCanas> {
                       format: format,
                       onShowPicker: (context, currentValue) {
                         return showDatePicker(
-                            context: context,
-                            firstDate: DateTime(1900),
-                            initialDate: currentValue ?? DateTime.now(),
-                            lastDate: DateTime(2100));
+                          context: context,
+                          firstDate: DateTime(1900),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate: DateTime(2100)
+                        );
                       },
                       decoration: InputDecoration(
                         prefixIcon: IconButton(
@@ -357,16 +358,16 @@ class _EntradasCanasState extends State<EntradasCanas> {
                           ),
                         ),
                         enabledBorder:
-                          UnderlineInputBorder(      
-                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                          ),  
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                          ),
-                          border: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                          ),
-                        labelText: 'Fecha Inicial',
+                        UnderlineInputBorder(      
+                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                        ),  
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                        ),
+                        border: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                        ),
+                      labelText: 'Fecha Inicial',
                       ),
                     ),
                   ),
@@ -383,7 +384,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
                         var fechaicambio=_startTimeController.text.split('/');
                         var fechafcambio=_endTimeController.text.split('/');
                         var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                        var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                        var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
                         DateTime parseInicial = DateTime.parse(ini);
                         DateTime parseFinal = DateTime.parse(ffinal);
                         String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
@@ -446,9 +447,10 @@ class _EntradasCanasState extends State<EntradasCanas> {
                     ),
                   ),
                   Container(
-                  width: 400,
+                  width: 300,
                   height: 40,
-                  //margin: const EdgeInsets.fromLTRB(38, 5, 38,10),
+                  //padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  margin: const EdgeInsets.fromLTRB(38, 20, 38,10),
                   decoration: BoxDecoration(
                     border: Border(bottom:BorderSide(width: 1,
                       color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -458,13 +460,15 @@ class _EntradasCanasState extends State<EntradasCanas> {
                     child: DropdownButtonHideUnderline(
                       child: new DropdownButton<String>(
                         hint: Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Center(
+                          padding: const EdgeInsets.all(0),
+                          child: Center(
                             child:Text(entrada[0].cod_hda.toString()+' - '+entrada[0].nm_hda.toString(), textAlign: TextAlign.center,style: TextStyle(
-                        fontSize: 15.0,
-                        fontFamily: 'Karla',
-                        
-                        ),),),),
+                              fontSize: 15.0,
+                              fontFamily: 'Karla',
+                            ),
+                            ),
+                          ),
+                        ),
                         value:selectedRegion,
                         isDense: true,
                         onChanged: (String newValue) {
@@ -489,6 +493,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
                               _endTimeController.text=fin;
                               cambiar = false;
                               detalle = true;
+                              tablaDetalle=false;
                               selectedRegion = newValue;
                             });
                           }else{
@@ -528,13 +533,68 @@ class _EntradasCanasState extends State<EntradasCanas> {
                   ), 
                 ]
                 ),
-                //SizedBox(height:15),
-                tabla?dataTotalVacia():dataTotal(_startTimeController.text,_endTimeController.text,codParametro),
-                tabla?tablaVacia():Expanded(child:dataTable(_startTimeController.text,_endTimeController.text,codParametro)),
-                
+                SizedBox(height:15),
+                Expanded(
+                  child:
+                  Center(
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:[
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0,10,0,5),
+                          child:Column(
+                            children:[
+                              tabla?dataTotalVacia():dataTotal(_startTimeController.text,_endTimeController.text,codParametro),
+                              SizedBox(height:15),
+                              tabla?tablaVacia():Expanded(child:dataTable(_startTimeController.text,_endTimeController.text,codParametro)),
+                            ]
+                          )
+                        ),
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0,80,0,5),
+                          child:Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children:[
+                              Container(
+                                padding:const EdgeInsets.fromLTRB(0, 0, 0,0),
+                                alignment: Alignment.bottomLeft,
+                                  child:Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children:[
+                                      RaisedButton(
+                                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                        color: Color.fromRGBO(56, 124, 43, 1.0),
+                                        child: Text('Más Info', style: TextStyle(
+                                          color: Colors.white,
+                                          //Color.fromRGBO(83, 86, 90, 1.0),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold
+                                        )),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(50.0),
+                                          //side: BorderSide(color: Colors.white)
+                                        ),
+                                        onPressed: () {
+                                          _showMultiSelect(context);
+                                        },
+                                      ),
+                                    ],
+                                  )
+                              ),
+                              SizedBox(height:5),
+                              tablaDetalle?Expanded(child:dataTableDetalle(_startTimeController.text,_endTimeController.text,codParametro,suerte,))
+                              :tablaVaciaDetalle(),
+                            ]
+                          )
+                        ),
+                      ]
+                    )
+                  ),
+                ),
               ],
-            )
-          ); 
+            );
         } else if (snapshot.hasError) {
           return  Column(children:[
             SizedBox(height: 150,),
@@ -628,21 +688,9 @@ class _EntradasCanasState extends State<EntradasCanas> {
     preEntrada=[]; 
     if(entradaDetalle.length > 0)
     { 
-      ms.hide();
       return entradaDetalle;
     }
-    else{
-      setState(() {
-        tabla = true;
-      });
-      warningDialog(
-        context, 
-        info,
-        negativeAction: (){
-        },
-      );
-    }
-}
+  }
 
   Future <Map> listar_total(ini,fin,cod_hda)async{
     var session= Conexion();
@@ -659,68 +707,68 @@ class _EntradasCanasState extends State<EntradasCanas> {
     return total=totales;
 }
 
-Widget  dataTotal(ini,fin,cod_hda) {
-  return FutureBuilder <Map>(
-  future:listar_total(ini,fin,cod_hda),
-  builder:(context,snapshot){
-    if(snapshot.hasData){
-      return  
-      Container(
-        alignment: Alignment.center,
-        width:500,
-        child:
-        Column(
-          crossAxisAlignment:CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:<Widget>[
-            Container(child: 
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Table(children: [  
-                  TableRow(
+  Widget  dataTotal(ini,fin,cod_hda) {
+    return FutureBuilder <Map>(
+    future:listar_total(ini,fin,cod_hda),
+    builder:(context,snapshot){
+      if(snapshot.hasData){
+        return  
+        Container(
+          alignment: Alignment.center,
+          width:400,
+          child:
+          Column(
+            crossAxisAlignment:CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:<Widget>[
+              Container(child: 
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Table(children: [  
+                    TableRow(
+                      children: [
+                        Text("Peso Neto",textAlign: TextAlign.center,style: TextStyle(
+                          color:Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),),
+                        Text("Total Canastas",textAlign: TextAlign.center,style: TextStyle(
+                          color:Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),),
+                      ]
+                    ),
+                    TableRow(
                     children: [
-                      Text("Peso Neto",textAlign: TextAlign.center,style: TextStyle(
+                      Text(total['TOTAL_GENERAL'].toString(),textAlign: TextAlign.center,
+                      style: TextStyle(
                         color:Colors.black,
                         fontSize: 15,
-                        fontWeight: FontWeight.bold
                       ),),
-                      Text("Total Canastas",textAlign: TextAlign.center,style: TextStyle(
+                      Text(total['TOTAL_CANASTAS'].toString(),textAlign: TextAlign.center,
+                      style: TextStyle(
                         color:Colors.black,
                         fontSize: 15,
-                        fontWeight: FontWeight.bold
                       ),),
                     ]
+                    ),
+                  ],
                   ),
-                  TableRow(
-                  children: [
-                    Text(total['TOTAL_GENERAL'].toString(),textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color:Colors.black,
-                      fontSize: 15,
-                    ),),
-                    Text(total['TOTAL_CANASTAS'].toString(),textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color:Colors.black,
-                      fontSize: 15,
-                    ),),
-                  ]
-                  ),
-                ],
                 ),
               ),
-            ),
-          ],
-        )
-      );
-    }else{
-      return
-      Center(
-        child:CircularProgressIndicator()
-      );
+            ],
+          )
+        );
+      }else{
+        return
+        Center(
+          child:CircularProgressIndicator()
+        );
+      }
     }
+  );
   }
-);
-}
 
 Widget dataTotalVacia(){
   return  
@@ -813,8 +861,13 @@ Widget dataTotalVacia(){
                               color: Color.fromRGBO(56, 124, 43, 1.0),
                               fontWeight: FontWeight.bold,)),),
                             onTap: () {
-                              Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => DetalleEntrada(data:widget.data,ini:ini,fin:fin,cod_hda:cod_hda,suerte:entradaG.suerte.toString(),)));
+                              setState(() {
+                                suerte=entradaG.suerte.toString();
+                                tablaDetalle=true;
+                              });
+                              
+                              //  Navigator.of(context).push(
+                              // MaterialPageRoute(builder: (context) => DetalleEntrada(data:widget.data,ini:ini,fin:fin,cod_hda:cod_hda,suerte:suerte,)));
                             },
                           ),
                           DataCell(
@@ -892,6 +945,186 @@ Widget dataTotalVacia(){
         ),
     );
   }
+
+  Widget tablaVaciaDetalle() {
+    var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
+    return  
+    SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+        child: SingleChildScrollView( 
+          scrollDirection: Axis.horizontal,
+          child: DataTable(
+            headingRowColor:
+            MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+            //Color.fromRGBO(136,139, 141, 1.0)
+            sortAscending: sort,
+            sortColumnIndex: 0,
+            horizontalMargin:10,
+            columnSpacing:10,
+            columns: [
+              DataColumn(
+                label: Expanded(child:Text("Suerte",textAlign: TextAlign.center,style:textStyle)),
+                numeric: false,
+                tooltip: "Suerte",
+              ),
+              DataColumn(
+                label: Expanded(child:Text("Fecha Entrada",textAlign: TextAlign.center,style:textStyle)),
+                numeric: false,
+                tooltip: "Fecha",
+              ),
+              DataColumn(
+                label: Expanded(child:Text("Hora",textAlign: TextAlign.center,style:textStyle)),
+                numeric: false,
+                tooltip: "Hora",
+              ),
+              DataColumn(
+                label: verGuia?Expanded(child:Text("Guía",textAlign: TextAlign.center,style:textStyle)):Container(),
+                numeric: false,
+                tooltip: "Guia",
+              ),
+              DataColumn(
+                label: verVehiculo?Expanded(child:Text("Cod. Vehículo",textAlign: TextAlign.center,style:textStyle)):Container(),
+                numeric: false,
+                tooltip: "Cod.Vehículo",
+              ),
+              DataColumn(
+                label: verCanasta?Expanded(child:Text("Cod. Canasta",textAlign: TextAlign.center,style:textStyle)):Container(),
+                numeric: false,
+                tooltip: "Canasta",
+              ),
+              DataColumn(
+                label: Expanded(child:Text("Peso Neto",textAlign: TextAlign.center,style:textStyle)),
+                numeric: false,
+                tooltip: "Peso Neto",
+              ),
+            ],
+            rows: entradaDetalle.map(
+              (entradaG) => DataRow(
+                cells: [
+                  DataCell(
+                    Center(child:Text("Sin Información"),
+                  ),),
+                  DataCell(
+                    Center(child:Text("Sin Información"),),
+                  ),
+                  DataCell(
+                    Center(child:Text("Sin Información"),),
+                  ),
+                  DataCell(
+                    verGuia?Center(child:Text("Sin Información"),):Container(),
+                  ),
+                  DataCell(
+                    verVehiculo?Center(child:Text("Sin Información"),):Container(),
+                  ),
+                  DataCell(
+                    verCanasta?Center(child:Text("Sin Información"),):Container(),
+                  ),
+                  DataCell(
+                    Center(child:Text("Sin Información"),),
+                  ),
+                ]
+              ),
+            ).toList(),
+          ),
+        ),
+    );
+  }
+
+  Widget  dataTableDetalle(ini,fin,cod_hda,suerte) {
+  return FutureBuilder <List<EntradaCanaDetalle>>(
+      future:listar_detalle(ini,fin,cod_hda,suerte),
+      builder:(context,snapshot){
+        if(snapshot.hasData){
+          var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
+          return
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+                child: SingleChildScrollView( 
+                  scrollDirection: Axis.horizontal,
+                  child:DataTable(
+                    headingRowColor:
+                    MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+                    //Color.fromRGBO(136,139, 141, 1.0)
+                    sortAscending: sort,
+                    sortColumnIndex: 0,
+                    horizontalMargin:10,
+                    columnSpacing:10,
+                    columns: [
+                      DataColumn(
+                        label: Expanded(child:Text("Suerte",textAlign: TextAlign.center,style:textStyle)),
+                        numeric: false,
+                        tooltip: "Suerte",
+                      ),
+                      DataColumn(
+                        label: Expanded(child:Text("Fecha Entrada",textAlign: TextAlign.center,style:textStyle)),
+                        numeric: false,
+                        tooltip: "Fecha",
+                      ),
+                      DataColumn(
+                        label: Expanded(child:Text("Hora",textAlign: TextAlign.center,style:textStyle)),
+                        numeric: false,
+                        tooltip: "Hora",
+                      ),
+                      DataColumn(
+                        label: verGuia?Expanded(child:Text("Guía",textAlign: TextAlign.center,style:textStyle)):Container(),
+                        numeric: false,
+                        tooltip: "Guia",
+                      ),
+                      DataColumn(
+                        label: verVehiculo?Expanded(child:Text("Cod. Vehículo",textAlign: TextAlign.center,style:textStyle)):Container(),
+                        numeric: false,
+                        tooltip: "Cod.Vehículo",
+                      ),
+                      DataColumn(
+                        label: verCanasta?Expanded(child:Text("Cod. Canasta",textAlign: TextAlign.center,style:textStyle)):Container(),
+                        numeric: false,
+                        tooltip: "Canasta",
+                      ),
+                      DataColumn(
+                        label: Expanded(child:Text("Peso Neto",textAlign: TextAlign.center,style:textStyle)),
+                        numeric: false,
+                        tooltip: "Peso Neto",
+                      ),
+                    ],
+                    rows: entradaDetalle.map(
+                      (entradaG) => DataRow(
+                        cells: [
+                          DataCell(
+                            Center(child:Text(suerte),
+                          ),),
+                          DataCell(
+                            Center(child:Text(entradaG.fch_entrada),),
+                          ),
+                          DataCell(
+                            Center(child:Text(entradaG.hr_entrada),),
+                          ),
+                          DataCell(
+                            verGuia?Center(child:Text(entradaG.guia),):Container(),
+                          ),
+                          DataCell(
+                            verVehiculo?Center(child:Text(entradaG.cod_vehiculo),):Container(),
+                          ),
+                          DataCell(
+                            verCanasta?Center(child:Text(entradaG.canasta),):Container(),
+                          ),
+                          DataCell(
+                            Center(child:Text(entradaG.peso_neto),),
+                          ),
+                        ]
+                      ),
+                    ).toList(),
+                  ),  
+                ),
+            );
+        }else{
+          return
+          Center(
+            child:CircularProgressIndicator()
+          );
+        }
+      },
+    );
+}
 
 }
 

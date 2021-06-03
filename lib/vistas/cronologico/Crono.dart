@@ -58,7 +58,7 @@ class _VerCronologicoState extends State<VerCronologico> {
  @override
   void initState() {
     sort = false;
-    tabla = false;
+    tabla = true;
     detalle = true;
     cambiar = true;
     zona=false;
@@ -75,6 +75,7 @@ class _VerCronologicoState extends State<VerCronologico> {
     mostrarSiembra=false;
     fechaSiembra=false;
     mostrarFechaSiembra=false;
+    codParametro='';
     otra=false;
     widget.data;
     contadorGeneral=0;
@@ -422,7 +423,7 @@ class _VerCronologicoState extends State<VerCronologico> {
                     ),
                   ), 
                   Container(
-                  padding:const EdgeInsets.fromLTRB(10, 0, 0,0),
+                  padding:const EdgeInsets.fromLTRB(400, 10, 0,0),
                   alignment: Alignment.bottomLeft,
                     child:Row(
                       children:[
@@ -444,12 +445,12 @@ class _VerCronologicoState extends State<VerCronologico> {
                             _showMultiSelect(context);
                           },
                         ),
-                        Flecha(),
                       ],
                     )
                   ),
                   SizedBox(height:5),
                   tabla?dataTableVacia():dataTable(codParametro),
+                  
               ],
             ),); 
         } else if (snapshot.hasError) {

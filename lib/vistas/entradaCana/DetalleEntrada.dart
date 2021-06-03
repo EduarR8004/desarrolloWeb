@@ -183,82 +183,42 @@ class _DetalleEntradaState extends State<DetalleEntrada> {
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Container(
-            //   // height: 60,
-            //   //   width: 600,
-            //   margin: EdgeInsets.only(top:21),
-            //   decoration: BoxDecoration(
-            //     color: Colors.white,  
-            //       //borderRadius: BorderRadius.circular(20),
-            //     image: DecorationImage(
-            //       image: AssetImage('images/titulop.png'),
-            //       fit: BoxFit.cover
-            //     ),
-            //   ),
-            //   child:Row(
-            //     children:<Widget>[
-            //       Container(
-            //         child:IconButton(
-            //           icon: Icon(
-            //             Icons.arrow_back,
-            //             color: Colors.white,
-            //           ),
-            //           onPressed: () {
-            //             Navigator.of(context).pop();
-            //           },
-            //         ),
-                    
-            //       ),
-            //       Center(
-            //         child:Text("Detalle de Entrada de Caña",
-            //           style: TextStyle(
-            //           color: Colors.white,
-            //           fontSize: 20,
-            //           fontWeight: FontWeight.bold
-            //           ),
-            //         ),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            Container(
-              padding:const EdgeInsets.fromLTRB(3, 2, 0,0),
-              alignment: Alignment.topLeft,
-              child:Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                RaisedButton(
-                  textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                  //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                  color: Color.fromRGBO(56, 124, 43, 1.0),
-                  child: Text('Más Info', style: TextStyle(
-                    color: Colors.white,
-                    //Color.fromRGBO(83, 86, 90, 1.0),
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold
-                  )),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                    //side: BorderSide(color: Colors.white)
-                  ),
-                  onPressed: () {
-                    setState(() {
-                    _showMultiSelect(context);
-                    //key_modal(context,ini,fin,cod_hda,suerte);
-                    });
-                  },
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            padding:const EdgeInsets.fromLTRB(3, 2, 0,0),
+            alignment: Alignment.topLeft,
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+              RaisedButton(
+                textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                color: Color.fromRGBO(56, 124, 43, 1.0),
+                child: Text('Más Info', style: TextStyle(
+                  color: Colors.white,
+                  //Color.fromRGBO(83, 86, 90, 1.0),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold
+                )),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0),
+                  //side: BorderSide(color: Colors.white)
                 ),
-                Flecha(),
-              ]),
-            ),
-            Expanded(child:dataTable(widget.ini,widget.fin,widget.cod_hda,widget.suerte),),
-          ],
-        ),
+                onPressed: () {
+                  setState(() {
+                  _showMultiSelect(context);
+                  //key_modal(context,ini,fin,cod_hda,suerte);
+                  });
+                },
+              ),
+              Flecha(),
+            ]),
+          ),
+          dataTable(widget.ini,widget.fin,widget.cod_hda,widget.suerte),
+        ],
       ),
     );
   }
@@ -357,5 +317,5 @@ Widget  dataTable(ini,fin,cod_hda,suerte) {
         }
       },
     );
-  }
+}
 }

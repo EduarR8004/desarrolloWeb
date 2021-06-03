@@ -377,9 +377,9 @@ class DataTableUsuariosState extends State<DataTableUsuarios> {
             Container(
             color:Colors.white ,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Padding(padding: EdgeInsets.fromLTRB(10,12,10,10),child:boton(),),
+                  Padding(padding: EdgeInsets.fromLTRB(40,12,10,10),child:boton(),),
                   Container(
                     width: 400,
                     alignment: Alignment.topLeft,

@@ -427,13 +427,14 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
     onWillPop: () {  },
     child:
     SafeArea(
-         child:Scaffold(
-          appBar: new AppBar(
-          flexibleSpace:encabezado,
+      child:Scaffold(
+      appBar: new AppBar(
+        flexibleSpace:encabezado,
         backgroundColor: Colors.transparent,
       ),
       drawer: menu,
       body: Container(
+        height: 700,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -441,7 +442,8 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
           ],
         ),
       ),
-    ),),);
+      ),),
+    );
   }
  
 
@@ -453,64 +455,62 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
           _entrada = (entrada).toList();
           cambiar?codParametro=entrada[0].cod_hda:codParametro=codRespeuesta;
           return 
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              verticalDirection: VerticalDirection.down,
-              children:<Widget>[
-                SizedBox(height:10),
+          Column(
+            children:<Widget>[
+              SizedBox(height:30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[         
                 Container(
-                  alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                  child:Center(
-                    child: DateTimeField(
+                width: 400,
+                padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  child: DateTimeField(
                     controller: _startTimeController,
                     onChanged: (text) {
-                     if(_endTimeController.text!='')
-                     {
+                      if(_endTimeController.text!='')
+                      {  
                         var fechaicambio=_startTimeController.text.split('/');
                         var fechafcambio=_endTimeController.text.split('/');
                         var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                        var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                        var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
                         DateTime parseInicial = DateTime.parse(ini);
-                        DateTime parseFinal = DateTime.parse(fin);
-                        String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
-                        String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
-                        DateTime startDate = DateTime.parse(nfechaI);
-                        DateTime endDate = DateTime.parse(nfechaF);
-                        if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
-                        {
+                        DateTime parseFinal = DateTime.parse(ffinal);
+                        String nfechaI=DateFormat('dd/MM/yyyy').format(parseInicial);
+                        String nfechaF=DateFormat('dd/MM/yyyy').format(parseFinal);
                         setState(() {
-                          tabla = false;
-                          });
-                        }else{
-                          _startTimeController.text='';
-                          errorDialog(
-                            context, 
-                            error,
-                            negativeAction: (){
-                            },
-                          );
-                        }
-                     }else{
-                       infoDialog(
-                        context, 
-                        validarFecha,
-                        negativeAction: (){
-                        },
-                      );
+                            tabla = false;
+                        });
+                        // if(parseInicial.isBefore(parseFinal))
+                        // {
+                        //   setState(() {
+                        //     tabla = false;
+                        //   });
+                        // }else{
+                        //   _startTimeController.text='';
+                        //   errorDialog(
+                        //     context, 
+                        //     error,
+                        //     negativeAction: (){
+                        //     },
+                        //   );
+                        // }
+                      }else{
+                        infoDialog(
+                          context, 
+                          validarFecha,
+                          negativeAction: (){
+                          },
+                        );
                       }
                     },
                     format: format,
                     onShowPicker: (context, currentValue) {
                       return showDatePicker(
-                          context: context,
-                          firstDate: DateTime(1900),
-                          initialDate: currentValue ?? DateTime.now(),
-                          lastDate: DateTime(2100));
+                        context: context,
+                        firstDate: DateTime(1900),
+                        initialDate: currentValue ?? DateTime.now(),
+                        lastDate: DateTime(2100)
+                      );
                     },
                     decoration: InputDecoration(
                       prefixIcon: IconButton(
@@ -522,112 +522,115 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
                         ),
                       ),
                       enabledBorder:
-                        UnderlineInputBorder(      
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                        ),  
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                        ),
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                        ),
-                      labelText: 'Fecha Inicial',
-                    )
-                  ),
+                      UnderlineInputBorder(      
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                      ),  
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                      ),
+                    labelText: 'Fecha Inicial',
+                    ),
                   ),
                 ),
                 Container(
-                padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                child:DateTimeField(
-                  controller:_endTimeController,
-                  onChanged: (text) {
+                  width: 400,
+                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  child:DateTimeField(
+                    controller:_endTimeController,
+                    onChanged: (text) { 
                     if(_startTimeController.text!="")
                     { 
-                    var fechaicambio=_startTimeController.text.split('/');
-                    var fechafcambio=_endTimeController.text.split('/');
-                    var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                    var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
-                    DateTime parseInicial = DateTime.parse(ini);
-                    DateTime parseFinal = DateTime.parse(fin);
-                    String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
-                    String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
-                    DateTime startDate = DateTime.parse(nfechaI);
-                    DateTime endDate = DateTime.parse(nfechaF);
-                    if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
-                    {
-                      setState(() {
-                      tabla = false;
-                      });
+                      var fechaicambio=_startTimeController.text.split('/');
+                      var fechafcambio=_endTimeController.text.split('/');
+                      var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
+                      var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
+                      DateTime parseInicial = DateTime.parse(ini);
+                      DateTime parseFinal = DateTime.parse(ffinal);
+                      String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
+                      String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
+                      //DateTime startDate = DateTime.parse(nfechaI);
+                      //DateTime endDate = DateTime.parse(nfechaF);
+                      if(parseInicial.isBefore(parseFinal))
+                      {
+                        setState(() {
+                          tabla = false;
+                        });
+                      }else{
+                        _endTimeController.text='';
+                        errorDialog(
+                          context, 
+                          error,
+                          negativeAction: (){
+                          },
+                        );
+                      }
                     }else{
-                      _endTimeController.text='';
-                      errorDialog(
+                      infoDialog(
                         context, 
-                        error,
+                        validarFecha,
                         negativeAction: (){
                         },
                       );
                     }
-                    }else{
-                    infoDialog(
-                      context, 
-                      validarFecha,
-                      negativeAction: (){
-                      },
-                    );
-                    }
-                  },
-                  format: format,
-                  onShowPicker: (context, currentValue) {
-                    return showDatePicker(
-                      context: context,
-                      firstDate: DateTime(1900),
-                      initialDate: currentValue ?? DateTime.now(),
-                      lastDate: DateTime(2100)
-                    );
-                  },
-                  decoration: InputDecoration(
-                    prefixIcon: IconButton(
-                      onPressed: (){
-                        },
-                      icon: Icon(
-                      Icons.calendar_today,
-                      color: Colors.grey,
+                    },
+                    format: format,
+                    onShowPicker: (context, currentValue) {
+                      return showDatePicker(
+                        context: context,
+                        firstDate: DateTime(1900),
+                        initialDate: currentValue ?? DateTime.now(),
+                        lastDate: DateTime(2100)
+                      );
+                    },
+                    decoration: InputDecoration(
+                      prefixIcon: IconButton(
+                        onPressed: (){
+                          },
+                        icon: Icon(
+                        Icons.calendar_today,
+                        color: Colors.grey,
+                        ),
                       ),
+                      enabledBorder:
+                      UnderlineInputBorder(      
+                      borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                      ),  
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                      ), 
+                      labelText: 'Fecha Final',
                     ),
-                    enabledBorder:
-                    UnderlineInputBorder(      
-                    borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                    ),  
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                    ),  
-                    labelText: 'Fecha Final',
                   ),
                 ),
-                ),
-                //SizedBox(height:5),
                 Container(
-                  height: 40,
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.fromLTRB(38, 5, 40,10),
-                  decoration: BoxDecoration(
-                    border: Border(bottom:BorderSide(width: 1,
-                        color: Color.fromRGBO(83, 86, 90, 1.0),),),
+                width: 300,
+                height: 40,
+                //padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                margin: const EdgeInsets.fromLTRB(38, 20, 38,10),
+                decoration: BoxDecoration(
+                  border: Border(bottom:BorderSide(width: 1,
+                    color: Color.fromRGBO(83, 86, 90, 1.0),
                   ),
+                  ),
+                ),
                   child: DropdownButtonHideUnderline(
                     child: new DropdownButton<String>(
                       hint: Padding(
-                      padding: EdgeInsets.fromLTRB(5, 2, 5,2),
-                      //child: Center(
+                        padding: const EdgeInsets.all(0),
+                        child: Center(
                           child:Text(entrada[0].cod_hda.toString()+' - '+entrada[0].nm_hda.toString(), textAlign: TextAlign.center,style: TextStyle(
-                      fontSize: 15.0,
-                      fontFamily: 'Karla',
-                      
-                      ),),),
-                      //),
+                            fontSize: 15.0,
+                            fontFamily: 'Karla',
+                          ),
+                          ),
+                        ),
+                      ),
                       value:selectedRegion,
                       isDense: true,
                       onChanged: (String newValue) {
@@ -636,22 +639,22 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
                         var fechaicambio=_startTimeController.text.split('/');
                         var fechafcambio=_endTimeController.text.split('/');
                         var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                        var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                        var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
                         DateTime parseInicial = DateTime.parse(ini);
-                        DateTime parseFinal = DateTime.parse(fin);
+                        DateTime parseFinal = DateTime.parse(ffinal);
                         String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
                         String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
                         DateTime startDate = DateTime.parse(nfechaI);
                         DateTime endDate = DateTime.parse(nfechaF);
                         if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
-                        {
-                            setState(() {
+                        {   
+                          setState(() {
                             parametro=entrada.where((a) => a.nm_hda==newValue);
                             codRespeuesta=parametros(parametro);
+                            _startTimeController.text=inicial;
+                            _endTimeController.text=fin;
                             cambiar = false;
                             detalle = true;
-                            tabla = false;
-                            contador=0;
                             selectedRegion = newValue;
                           });
                         }else{
@@ -678,47 +681,50 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
                           value: map.nm_hda,
                           //child: Center(
                           child:Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 5, 0,2),
-                      child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.center,
-                                          style: new TextStyle(color: Colors.black)),
-                      ),
+                          padding: const EdgeInsets.fromLTRB(0, 5, 2,2),
+                          child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.center,
+                            style: new TextStyle(color: Colors.black)
+                          ),
+                        ),
                       //),
                       );
-                      
                       }).toList(),
                     ),
                   ),
-                ),
-                Container(
-                padding:const EdgeInsets.fromLTRB(10, 0, 0,0),
+                ), 
+              ]
+              ),
+              Container(
+                padding:const EdgeInsets.fromLTRB(400, 5, 0,5),
                 alignment: Alignment.bottomLeft,
-                  child:Row(children:[
-                  RaisedButton(
-                    textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                    //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                    color: Color.fromRGBO(56, 124, 43, 1.0),
-                    child: Text('Más Info', style: TextStyle(
-                      color: Colors.white,
-                      //Color.fromRGBO(83, 86, 90, 1.0),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold
-                    )),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      //side: BorderSide(color: Colors.white)
-                    ),
-                    onPressed: () {
-                      _showMultiSelect(context);
-                    },
-                  ),
-                  Flecha(),
-                  ]),
-                ),
-                SizedBox(height:5),  
-                tabla?tablaVacia():dataTable(_startTimeController.text,_endTimeController.text,codParametro),
-              ],
-            ),
-          );  
+                  child:Row(
+                    children:[
+                      RaisedButton(
+                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                        color: Color.fromRGBO(56, 124, 43, 1.0),
+                        child: Text('Más Info', style: TextStyle(
+                          color: Colors.white,
+                          //Color.fromRGBO(83, 86, 90, 1.0),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold
+                        )),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                          //side: BorderSide(color: Colors.white)
+                        ),
+                        onPressed: () {
+                          _showMultiSelect(context);
+                        },
+                      ),
+                    ],
+                  )
+              ),
+              SizedBox(height:15),
+              tabla?tablaVacia():Expanded(child:dataTable(_startTimeController.text,_endTimeController.text,codParametro)),      
+
+            ],
+          );
         }else{
           return
           Center(

@@ -237,8 +237,9 @@ remover_rol(rolesa)async{
             padding: EdgeInsets.fromLTRB(10,10,10,0),
             child:
             Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children:[
-                Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Roles Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
+                //Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Roles Asignados',style:TextStyle(fontWeight:FontWeight.bold))],)),
                 Padding(
                   padding: EdgeInsets.all(5.0),
                   child:Container(
@@ -273,8 +274,9 @@ remover_rol(rolesa)async{
           Padding(
             padding: EdgeInsets.fromLTRB(10,10,10,0),
             child:Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Roles No Asignados',style:TextStyle(fontWeight:FontWeight.bold),)],)),
+                //Container(padding: EdgeInsets.all(5),child:Column(children: [Text('Roles No Asignados',style:TextStyle(fontWeight:FontWeight.bold),)],)),
                 Padding(
                   padding: EdgeInsets.all(5.0),
                   child:Container(
@@ -329,9 +331,9 @@ remover_rol(rolesa)async{
                   sortColumnIndex: 0,
                   columns: [
                     DataColumn(
-                      label: Text("Objeto",style: textStyle),
+                      label: Text("Roles\nAsignados",style: textStyle),
                       numeric: false,
-                      tooltip: "Objeto",
+                      tooltip: "Roles Asignados",
                       onSort: (columnIndex, ascending) {
                         setState(() {
                           sort = !sort;
@@ -404,9 +406,9 @@ remover_rol(rolesa)async{
                     sortColumnIndex: 0,
                     columns: [
                       DataColumn(
-                        label: Text("Objeto",style: textStyle),
+                        label: Text("Roles\nNo Asignados",style: textStyle),
                         numeric: false,
-                        tooltip: "Objeto",
+                        tooltip: "Roles No Asignados",
                         onSort: (columnIndexNo, ascending) {
                           setState(() {
                             sortNo = !sortNo;
