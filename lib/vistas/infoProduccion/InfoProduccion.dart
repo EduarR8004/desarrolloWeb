@@ -426,23 +426,32 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
     return WillPopScope(
     onWillPop: () {  },
     child:
-    SafeArea(
-      child:Scaffold(
-      appBar: new AppBar(
-        flexibleSpace:encabezado,
-        backgroundColor: Colors.transparent,
-      ),
-      drawer: menu,
-      body: Container(
-        height: 700,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(child:dataBody()),
-          ],
+      SafeArea(
+        child:Scaffold(
+        appBar: new AppBar(
+          flexibleSpace:encabezado,
+          backgroundColor: Colors.transparent,
+        ),
+        drawer: menu,
+        body: Container(
+          height: 700,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child:dataBody()),
+              
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showMultiSelect(context);
+          },
+          child: const Icon(Icons.add),
+          backgroundColor: Color.fromRGBO(56, 124, 43, 1.0),
+        ),
         ),
       ),
-      ),),
     );
   }
  
@@ -639,7 +648,7 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
                         var fechaicambio=_startTimeController.text.split('/');
                         var fechafcambio=_endTimeController.text.split('/');
                         var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                        var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                        var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
                         DateTime parseInicial = DateTime.parse(ini);
                         DateTime parseFinal = DateTime.parse(ffinal);
                         String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
@@ -694,35 +703,35 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
                 ), 
               ]
               ),
-              Container(
-                padding:const EdgeInsets.fromLTRB(400, 5, 0,5),
-                alignment: Alignment.bottomLeft,
-                  child:Row(
-                    children:[
-                      RaisedButton(
-                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                        child: Text('Más Info', style: TextStyle(
-                          color: Colors.white,
-                          //Color.fromRGBO(83, 86, 90, 1.0),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        )),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          //side: BorderSide(color: Colors.white)
-                        ),
-                        onPressed: () {
-                          _showMultiSelect(context);
-                        },
-                      ),
-                    ],
-                  )
-              ),
+              SizedBox(height:15),
+              // Container(
+              //   padding:const EdgeInsets.fromLTRB(400, 5, 0,5),
+              //   alignment: Alignment.bottomLeft,
+              //     child:Row(
+              //       children:[
+              //         RaisedButton(
+              //           textColor: Color.fromRGBO(83, 86, 90, 1.0),
+              //           //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+              //           color: Color.fromRGBO(56, 124, 43, 1.0),
+              //           child: Text('Más Info', style: TextStyle(
+              //             color: Colors.white,
+              //             //Color.fromRGBO(83, 86, 90, 1.0),
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.bold
+              //           )),
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(50.0),
+              //             //side: BorderSide(color: Colors.white)
+              //           ),
+              //           onPressed: () {
+              //             _showMultiSelect(context);
+              //           },
+              //         ),
+              //       ],
+              //     )
+              // ),
               SizedBox(height:15),
               tabla?tablaVacia():Expanded(child:dataTable(_startTimeController.text,_endTimeController.text,codParametro)),      
-
             ],
           );
         }else{
@@ -758,9 +767,9 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
                     columnSpacing:10,
                     columns: [
                       DataColumn(
-                          label: mostrarHacienda?Expanded(child:Text("Hacienda",textAlign: TextAlign.center,style: textStyle),):Container(),
-                          numeric: false,
-                          tooltip: "Hacienda",
+                        label: mostrarHacienda?Expanded(child:Text("Hacienda",textAlign: TextAlign.center,style: textStyle),):Container(),
+                        numeric: false,
+                        tooltip: "Hacienda",
                       ),
                       DataColumn(
                         label: Expanded(child:Text("Suerte",textAlign: TextAlign.center,style: textStyle),),
@@ -898,79 +907,77 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
   }
 
   Widget tablaVacia() {
+    var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
     return  
-        SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-            child: SingleChildScrollView( 
-              scrollDirection: Axis.horizontal,
-              child: DataTable(
-                  headingRowColor:
-                MaterialStateColor.resolveWith((states) =>Colors.white ),
-                //Color.fromRGBO(136,139, 141, 1.0)
-                sortAscending: sort,
-                sortColumnIndex: 0,
-                columns: [
-                  DataColumn(
-                          label: Expanded(child:Text("Suerte",textAlign: TextAlign.center),),
-                          numeric: false,
-                          tooltip: "Suerte",
-                        ),
-                        DataColumn(
-                          label: Expanded(child:Text("Fecha Corte",textAlign: TextAlign.center),),
-                          numeric: false,
-                          tooltip: "Fecha Corte",
-                        ),
-                        DataColumn(
-                          label: Expanded(child:Text("Área Cosechada",textAlign: TextAlign.center),),
-                          numeric: false,
-                          tooltip: "Área Cosecha",
-                        ),
-                       DataColumn(
-                          label: Expanded(child:Text("TCH",textAlign: TextAlign.center),),
-                          numeric: false,
-                          tooltip: "TCH",
-                        ),
-                        DataColumn(
-                            label: Expanded(child:Text("Rto",textAlign: TextAlign.center),),
-                            numeric: false,
-                            tooltip: "Rto",
-                            ),
-                        DataColumn(
-                          label: Expanded(child:Text("Estado de Corte",textAlign: TextAlign.center),),
-                          numeric: false,
-                          tooltip: "Estado de Corte",
-                        ),
-                ],
-                rows: entradaGeneral
-                    .map(
-                      (entradaG) => DataRow(
-                              cells: [
-                                DataCell(
-                                  Text('Sin info'),
-                                ),
-                                DataCell(
-                                  Text('disponible'),
-                                ),
-                                DataCell(
-                                  Text('para esta consulta'),
-                                ),
-                                DataCell(
-                                  Text(''),
-                                ),
-                                DataCell(
-                                  Text(''),
-                                ),
-                                DataCell(
-                                  Text(''),
-                                ),
-                              ]),
-                          )
-                          .toList(),
+      SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+          child: SingleChildScrollView( 
+            scrollDirection: Axis.horizontal,
+            child: DataTable(
+              headingRowColor:
+              MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+              //Color.fromRGBO(136,139, 141, 1.0)
+              sortAscending: sort,
+              sortColumnIndex: 0,
+              columns: [
+                DataColumn(
+                  label: Expanded(child:Text("Suerte",textAlign: TextAlign.center,style:textStyle),),
+                  numeric: false,
+                  tooltip: "Suerte",
+                ),
+                DataColumn(
+                  label: Expanded(child:Text("Fecha Corte",textAlign: TextAlign.center,style:textStyle),),
+                  numeric: false,
+                  tooltip: "Fecha Corte",
+                ),
+                DataColumn(
+                  label: Expanded(child:Text("Área Cosechada",textAlign: TextAlign.center,style:textStyle),),
+                  numeric: false,
+                  tooltip: "Área Cosecha",
+                ),
+                DataColumn(
+                  label: Expanded(child:Text("TCH",textAlign: TextAlign.center,style:textStyle),),
+                  numeric: false,
+                  tooltip: "TCH",
+                ),
+                DataColumn(
+                    label: Expanded(child:Text("Rto",textAlign: TextAlign.center,style:textStyle),),
+                    numeric: false,
+                    tooltip: "Rto",
                     ),
-                  ),
-              );
-        
-    
+                DataColumn(
+                  label: Expanded(child:Text("Estado de Corte",textAlign: TextAlign.center,style:textStyle),),
+                  numeric: false,
+                  tooltip: "Estado de Corte",
+                ),
+              ],
+              rows: entradaGeneral.map(
+                (entradaG) => DataRow(
+                  cells: [
+                    DataCell(
+                      Text('Sin info'),
+                    ),
+                    DataCell(
+                      Text('disponible'),
+                    ),
+                    DataCell(
+                      Text('para esta consulta'),
+                    ),
+                    DataCell(
+                      Text(''),
+                    ),
+                    DataCell(
+                      Text(''),
+                    ),
+                    DataCell(
+                      Text(''),
+                    ),
+                  ]
+                ),
+              ).toList(),
+            ),
+          ),
+      );   
   }
 }
 

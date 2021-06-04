@@ -477,7 +477,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
                           var fechaicambio=_startTimeController.text.split('/');
                           var fechafcambio=_endTimeController.text.split('/');
                           var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                          var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                          var ffinal=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
                           DateTime parseInicial = DateTime.parse(ini);
                           DateTime parseFinal = DateTime.parse(ffinal);
                           String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
@@ -551,12 +551,27 @@ class _EntradasCanasState extends State<EntradasCanas> {
                           )
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(0,80,0,5),
+                          padding: EdgeInsets.fromLTRB(0,30,0,5),
                           child:Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children:[
                               Container(
-                                padding:const EdgeInsets.fromLTRB(0, 0, 0,0),
+                                padding: EdgeInsets.fromLTRB(0,0,0,5),
+                                child:Row(
+                                crossAxisAlignment:CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                  children:[
+                                    Text("Detalle de Entrada de Caña",style: TextStyle(
+                                      color:Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold
+                                    ),textAlign:TextAlign.center
+                                    ),
+                                  ]
+                                ),
+                              ),
+                              Container(
+                                padding:const EdgeInsets.fromLTRB(0,4,0,5),
                                 alignment: Alignment.bottomLeft,
                                   child:Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -583,7 +598,6 @@ class _EntradasCanasState extends State<EntradasCanas> {
                                     ],
                                   )
                               ),
-                              SizedBox(height:5),
                               tablaDetalle?Expanded(child:dataTableDetalle(_startTimeController.text,_endTimeController.text,codParametro,suerte,))
                               :tablaVaciaDetalle(),
                             ]
@@ -715,7 +729,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
         return  
         Container(
           alignment: Alignment.center,
-          width:400,
+          width:350,
           child:
           Column(
             crossAxisAlignment:CrossAxisAlignment.center,
@@ -723,7 +737,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
             children:<Widget>[
               Container(child: 
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.fromLTRB(20,20,30,10),
                   child: Table(children: [  
                     TableRow(
                       children: [
@@ -788,25 +802,29 @@ Widget dataTotalVacia(){
                         fontSize: 15,
                         fontWeight: FontWeight.bold
                       ),),
-                      Text("Total Canastas",textAlign: TextAlign.center,style: TextStyle(
+                      Text("Total Canastas",textAlign: TextAlign.center,
+                        style: TextStyle(
                         color:Colors.black,
                         fontSize: 15,
                         fontWeight: FontWeight.bold
-                      ),),
+                        ),
+                      ),
                     ]
                   ),
                   TableRow(
                     children: [
                       Text('Sin info',textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color:Colors.black,
-                        fontSize: 15,
-                      ),),
+                        style: TextStyle(
+                          color:Colors.black,
+                          fontSize: 15,
+                        ),
+                      ),
                       Text('Sin info',textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color:Colors.black,
-                        fontSize: 15,
-                      ),),
+                        style: TextStyle(
+                          color:Colors.black,
+                          fontSize: 15,
+                        ),
+                      ),
                     ]
                   ),
                 ],
@@ -838,10 +856,10 @@ Widget dataTotalVacia(){
                     columnSpacing:10,
                     columns: [
                       DataColumn(
-                          label: Expanded(child:Text("Suerte",textAlign: TextAlign.center,style:textStyle)),
-                          numeric: false,
-                          tooltip: "Suerte",
-                          ),
+                        label: Expanded(child:Text("Suerte",textAlign: TextAlign.center,style:textStyle)),
+                        numeric: false,
+                        tooltip: "Clic en cada una de las Suertes para ver el Detalle",
+                      ),
                       DataColumn(
                         label: Expanded(child:Text("Peso Neto",textAlign: TextAlign.center,style:textStyle)),
                         numeric: false,

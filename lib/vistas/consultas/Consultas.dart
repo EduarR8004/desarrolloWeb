@@ -115,65 +115,81 @@ class _VerConsultasState extends State<VerConsultas> {
           mainAxisAlignment:MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children:[
-          Padding(
-            padding: const EdgeInsets.fromLTRB(50, 10, 10, 5),
-              child:Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  Container(
-                    padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
-                    width:20,
-                    child:
-                      IconButton(
-                        icon: Icon(
-                          Icons.calendar_today,
-                          color: Colors.grey,
-                          size:40,
-                        ),
-                        onPressed: () {
-                          //Navigator.of(context).pop();
-                        },
-                      ),
-                  ),
-                  Container(
-                    padding:const EdgeInsets.fromLTRB(50, 10, 5, 10) ,
-                    child:
-                    Text('Año Inicial'),
-                  ),
-                  listaAgnoInicial(),
-                ]
-              ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-            child:Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                Container(
-                  padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
-                  width:20,
-                  child:
-                    IconButton(
-                      icon: Icon(
-                      Icons.calendar_today,
-                      color: Colors.grey,
-                      size:40,
-                      ),
-                      onPressed: () {
-                            //Navigator.of(context).pop();
-                      },
-                  ),
-                ),
-                Container(
-                  padding:const EdgeInsets.fromLTRB(50, 10,15, 10) ,
-                  child:Text('Año Final'),
-                ),
-                listaAgnoFinal(),
+                SizedBox(height:30),
+                cambiar?Expanded(
+                  child:dataTable(fecha_inicial,fecha_final,tipo)
+                ):dataTableVacia(),
               ]
             ),
-          ),
-          boton(),
-        ]),
+            SizedBox(width:30),
+            Column(
+              children:[
+                SizedBox(height:30),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                    child:Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children:[
+                        Container(
+                          padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
+                          width:20,
+                          child:
+                            IconButton(
+                              icon: Icon(
+                                Icons.calendar_today,
+                                color: Colors.grey,
+                                size:40,
+                              ),
+                              onPressed: () {
+                                //Navigator.of(context).pop();
+                              },
+                            ),
+                        ),
+                        Container(
+                          padding:const EdgeInsets.fromLTRB(50, 10, 5, 10) ,
+                          child:
+                          Text('Año Inicial'),
+                        ),
+                        listaAgnoInicial(),
+                      ]
+                    ),
+                ),
+                Padding(
+                padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                  child:Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                    children:[
+                      Container(
+                        padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
+                        width:20,
+                        child:
+                          IconButton(
+                            icon: Icon(
+                            Icons.calendar_today,
+                            color: Colors.grey,
+                            size:40,
+                            ),
+                            onPressed: () {
+                                  //Navigator.of(context).pop();
+                            },
+                        ),
+                      ),
+                      Container(
+                        padding:const EdgeInsets.fromLTRB(50, 10,15, 10) ,
+                        child:Text('Año Final'),
+                      ),
+                      listaAgnoFinal(),
+                    ]
+                  ),
+                ),
+                boton(),
+              ]
+            ),
+          ]
+        ),
         // Container(
         //       padding: EdgeInsets.fromLTRB(56, 10, 56, 10),
         //       child:Center(
@@ -340,11 +356,6 @@ class _VerConsultasState extends State<VerConsultas> {
         //         ),
         //       ),
         //       ),
-        SizedBox(height:30),
-        cambiar?SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child:dataTable(fecha_inicial,fecha_final,tipo)
-        ):Container(),
       ],
       );
   }
@@ -714,5 +725,64 @@ Widget listaAgnoFinal(){
       },
     );
   }
+  Widget dataTableVacia() {
+    var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
+    return  
+      SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+        child: SingleChildScrollView( 
+          scrollDirection: Axis.horizontal,
+          child: DataTable(
+            headingRowColor:
+            MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+            //Color.fromRGBO(136,139, 141, 1.0)
+            sortAscending: sort,
+            sortColumnIndex: 0,
+            horizontalMargin:10,
+            columnSpacing:10,
+            columns: [
+              DataColumn(
+                label: Expanded(child:Text("Fecha",textAlign: TextAlign.center,style: textStyle)),
+                numeric: false,
+                tooltip: "Fecha",
+              ),
+              DataColumn(
+                label: Expanded(child:Text("Documento",textAlign: TextAlign.center,style:textStyle)),
+                numeric: false,
+                tooltip: "Documento",
+              ),
+            ],
+            rows: entradaGeneral.map(
+              (entradaG) => DataRow(
+              cells: [
+                DataCell(
+                  Center(child:Text(entradaG.fecha_distribucion.toString(),textAlign: TextAlign.center,)),
+                  onTap: () {
+        
+                  },
+                ),
+                DataCell(
+                    entradaG.documento_id==''?Center(child:Container(child: IconButton(icon: Icon(
+                    Icons.error,
+                    size:30,
+                    color: Color.fromRGBO(176, 188, 34, 1.0),
+                  ),),),):Center(child:Container(child: IconButton(icon: Icon(
+                    Icons.picture_as_pdf,
+                    size:30,
+                    color: Color.fromRGBO(56, 124, 43, 1.0),
+                  ),),),),
+                  //Text(entradaG.id),
+                  onTap: () {
+                    obtener_ruta(entradaG.documento_id);
+                  },
+                ),
+              ]
+            ),
+            ).toList(),
+        ),
+      ),
+    );
+  }
+    
 }
 

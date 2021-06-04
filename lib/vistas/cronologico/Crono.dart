@@ -262,19 +262,19 @@ class _VerCronologicoState extends State<VerCronologico> {
       }
     }else{
       setState(() {
-          x.remove(6);
-          x.remove(5);
-          x.remove(4);
-          x.remove(3);
-          x.remove(2);
-          x.remove(1);
-          mostrarTierra=false;
-          mostrarZona=false;
-          mostrarHacienda=false;
-          mostrarOcupacion=false;
-          mostrarEstimado=false;
-          mostrarSiembra=false;
-          //mostrarFechaSiembra=false;
+        x.remove(6);
+        x.remove(5);
+        x.remove(4);
+        x.remove(3);
+        x.remove(2);
+        x.remove(1);
+        mostrarTierra=false;
+        mostrarZona=false;
+        mostrarHacienda=false;
+        mostrarOcupacion=false;
+        mostrarEstimado=false;
+        mostrarSiembra=false;
+        //mostrarFechaSiembra=false;
       });
     }
   }
@@ -321,6 +321,7 @@ class _VerCronologicoState extends State<VerCronologico> {
           ),
           drawer: menu,
           body: Container(
+            height: 700,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -354,9 +355,6 @@ class _VerCronologicoState extends State<VerCronologico> {
           cambiar?codParametro=entrada[0].cod_hda:codParametro=codRespeuesta;
           //tabla = true;
           return 
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:
             Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -378,14 +376,14 @@ class _VerCronologicoState extends State<VerCronologico> {
                         hint: Padding(
                           padding: const EdgeInsets.all(8),
                           child: Center(
-                              child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,
-                                style: TextStyle(
-                                color: Colors.black,
-                                //fontWeight: FontWeight.bold,
-                                fontSize: 15.0,
-                                fontFamily: 'Karla',
-                                ),
+                            child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,
+                              style: TextStyle(
+                              color: Colors.black,
+                              //fontWeight: FontWeight.bold,
+                              fontSize: 15.0,
+                              fontFamily: 'Karla',
                               ),
+                            ),
                           ),
                         ),
                         value:selectedRegion,
@@ -449,10 +447,10 @@ class _VerCronologicoState extends State<VerCronologico> {
                     )
                   ),
                   SizedBox(height:5),
-                  tabla?dataTableVacia():dataTable(codParametro),
+                  tabla?Expanded(child:dataTableVacia()):Expanded(child:dataTable(codParametro)),
                   
               ],
-            ),); 
+            );
         } else if (snapshot.hasError) {
           return Column(
             children:[
@@ -682,84 +680,84 @@ Widget  dataTable(cod_hda) {
   }
 
   Widget  dataTableVacia() {
+    var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
     return  
       SingleChildScrollView(
         scrollDirection: Axis.vertical,
           child: SingleChildScrollView( 
             scrollDirection: Axis.horizontal,
             child: DataTable(
-                headingRowColor:
-              MaterialStateColor.resolveWith((states) =>Colors.white ),
+              headingRowColor:
+              MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
               //Color.fromRGBO(136,139, 141, 1.0)
               sortAscending: sort,
               sortColumnIndex: 0,
               columns:
               [
                 DataColumn(
-                    label: Text("Suerte"),
-                    numeric: false,
-                    tooltip: "Suerte",
-                    ),
+                label: Text("Suerte",style:textStyle),
+                numeric: false,
+                tooltip: "Suerte",
+                ),
                 DataColumn(
-                  label: Text("Área"),
+                  label: Text("Área",style:textStyle),
                   numeric: false,
                   tooltip: "Área",
                 ),
                 DataColumn(
-                  label: Text("Edad"),
+                  label: Text("Edad",style:textStyle),
                   numeric: false,
                   tooltip: "Edad",
                 ),
                 DataColumn(
-                    label: Text("Fecha de Corte"),
+                    label: Text("Fecha de Corte",style:textStyle),
                     numeric: false,
                     tooltip: "Fecha de Corte",
                     ),
                 DataColumn(
-                  label: Text("Variedad"),
+                  label: Text("Variedad",style:textStyle),
                   numeric: false,
                   tooltip: "Variedad",
                 ),
                 DataColumn(
-                    label: Text("No.Corte"),
+                    label: Text("No.Corte",style:textStyle),
                     numeric: false,
                     tooltip: "No.Corte",
                     ),
                 DataColumn(
-                  label: Text("Fecha de Siembra"),
+                  label: Text("Fecha de Siembra",style:textStyle),
                   numeric: false,
                   tooltip: "Fecha de Siembra",
                 ),
               ],
               rows:
-              entradaGeneral
-                  .map(
-                    (entradaCrono) => DataRow(
-                            cells:[
-                              DataCell(
-                                  Text('Sin info'),
-                                ),
-                                DataCell(
-                                  Text('disponible'),
-                                ),
-                                DataCell(
-                                  Text('para esta consulta'),
-                                ),
-                              DataCell(
-                                Text(''),
-                              ),
-                              DataCell(
-                                Text(''),
-                              ),
-                              DataCell(
-                                Text(''),
-                              ),
-                              DataCell(
-                                Text(''),
-                              ),
-                            ]),
-                                    
-                  ).toList(),
+              entradaGeneral.map(
+                (entradaCrono) => DataRow(
+                  cells:[
+                    DataCell(
+                        Text('Sin info'),
+                      ),
+                      DataCell(
+                        Text('disponible'),
+                      ),
+                      DataCell(
+                        Text('para esta consulta'),
+                      ),
+                    DataCell(
+                      Text(''),
+                    ),
+                    DataCell(
+                      Text(''),
+                    ),
+                    DataCell(
+                      Text(''),
+                    ),
+                    DataCell(
+                      Text(''),
+                    ),
+                  ]
+                ),   
+              ).toList(),
             ),
           ),
       );

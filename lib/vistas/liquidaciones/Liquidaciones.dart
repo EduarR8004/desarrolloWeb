@@ -483,6 +483,7 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
         ),
         drawer: menu,
         body: Container(
+          height: 700,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -509,143 +510,249 @@ parametros(parametro){
   Widget lista(){
     var token=widget.data.token;
     return Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.fromLTRB(38, 5, 38,10),
-              decoration: BoxDecoration(
-              border: Border(bottom:BorderSide(width: 1,
-                        color: Color.fromRGBO(83, 86, 90, 1.0),),
-              ),
-              // borderRadius: BorderRadius.circular(10), 
-              //color: Color.fromRGBO(83, 86, 90, 1.0),
-              ),
-              child:
-              DropdownButtonHideUnderline(
-              child:DropdownButton<String>(
-                hint: Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 1, 10,5),
-                      child: Center(
-                        child:Text('Seleccione una Liquidación', textAlign: TextAlign.center,style: TextStyle(
-                        fontSize: 15.0,
-                        fontFamily: 'Karla',
-                      ),),),),
-                value: dropdownValue,
-                //icon: Icon(Icons.arrow_circle_down_rounded),
-                iconSize: 24,
-                elevation: 16,
-                style: TextStyle(color: Colors.black,fontSize: 15),
-                underline: Container(
-                  height: 2,
-                  color: Colors.green,
-                ),
-                onChanged: (newValueLiq) {
-                  if(newValueLiq!='Ajuste de Mercado Excedentario')
-                  {   
-                    if(_endTimeController.text!=''&& _startTimeController.text!="")
-                    {  
-                      var fechaicambio=_startTimeController.text.split('/');
-                      var fechafcambio=_endTimeController.text.split('/');
-                      var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                      var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
-                      DateTime parseInicial = DateTime.parse(ini);
-                      DateTime parseFinal = DateTime.parse(fin);
-                      String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
-                      String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
-                      DateTime startDate = DateTime.parse(nfechaI);
-                      DateTime endDate = DateTime.parse(nfechaF);
-                      if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
-                      {
-                        if(newValueLiq=='Liquidación Caña')
-                        { 
-                          setState(() {
-                            anticipo= false;
-                            liquidacion= true;
-                            tabla=false;
-                            botonCana=true;
-                            contador=0;
-                          });
-                        }
-
-                          if(newValueLiq=='Anticipos')
-                          {
-                            setState(() {
-                              anticipo= true;
-                              liquidacion= false;
-                              tabla=false;
-                              botonCana=false;
-                              contador=0;
-                            });
-                          }
-                          setState(() {
-                            dropdownValue = newValueLiq;
-                          });
-                      }else{
-                        errorDialog(
-                          context, 
-                          error,
-                          negativeAction: (){
-                          },
-                        );
-                      }
-                    }else
-                    {
-                      infoDialog(
-                        context, 
-                        validarFecha,
-                        negativeAction: (){
-                        },
-                      );
-                    }
-                  }else
-                  {
-                    setState(() {
-                      tabla=true;
-                    }); 
-                    WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                        Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => VerMercado (data:widget.data),)); });
-                  }
+      alignment: Alignment.centerLeft,
+      margin: const EdgeInsets.fromLTRB(38, 5, 38,10),
+      decoration: BoxDecoration(
+      border: Border(bottom:BorderSide(width: 1,
+        color: Color.fromRGBO(83, 86, 90, 1.0),
+      ),
+      ),
+      // borderRadius: BorderRadius.circular(10), 
+      //color: Color.fromRGBO(83, 86, 90, 1.0),
+      ),
+      child:
+      DropdownButtonHideUnderline(
+      child:DropdownButton<String>(
+        hint: Padding(
+          padding: const EdgeInsets.fromLTRB(10, 1, 10,5),
+          child: Center(
+            child:Text('Seleccione una Liquidación', textAlign: TextAlign.center,style: TextStyle(
+              fontSize: 15.0,
+              fontFamily: 'Karla',
+            ),
+            ),
+          ),
+        ),
+        value: dropdownValue,
+        //icon: Icon(Icons.arrow_circle_down_rounded),
+        iconSize: 24,
+        elevation: 16,
+        style: TextStyle(color: Colors.black,fontSize: 15),
+        underline: Container(
+          height: 2,
+          color: Colors.green,
+        ),
+        onChanged: (newValueLiq) {
+          if(newValueLiq!='Ajuste de Mercado Excedentario')
+          {   
+            if(_endTimeController.text!=''&& _startTimeController.text!="")
+            {  
+              var fechaicambio=_startTimeController.text.split('/');
+              var fechafcambio=_endTimeController.text.split('/');
+              var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
+              var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+              DateTime parseInicial = DateTime.parse(ini);
+              DateTime parseFinal = DateTime.parse(fin);
+              String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
+              String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
+              DateTime startDate = DateTime.parse(nfechaI);
+              DateTime endDate = DateTime.parse(nfechaF);
+              if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
+              {
+                if(newValueLiq=='Liquidación Caña')
+                { 
+                  setState(() {
+                    anticipo= false;
+                    liquidacion= true;
+                    tabla=false;
+                    botonCana=true;
+                    contador=0;
+                  });
+                }
+                if(newValueLiq=='Anticipos')
+                {
+                  setState(() {
+                    anticipo= true;
+                    liquidacion= false;
+                    tabla=false;
+                    botonCana=false;
+                    contador=0;
+                  });
+                }
+                setState(() {
+                  dropdownValue = newValueLiq;
+                });
+              }else{
+                errorDialog(
+                  context, 
+                  error,
+                  negativeAction: (){
+                  },
+                );
+              }
+            }else
+            {
+              infoDialog(
+                context, 
+                validarFecha,
+                negativeAction: (){
                 },
-                items: <String>['Seleccione una Liquidación','Anticipos', 'Liquidación Caña', 'Ajuste de Mercado Excedentario']
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    //child: Center(
-                          child:Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 5,40,10),
-                          child:new Text(value,textAlign: TextAlign.center,
-                                              style: new TextStyle(color: Colors.black)),
-                          ),
-                          //),
-                  );
-                }).toList(),
-            ),),);
+              );
+            }
+          }else
+          {
+            setState(() {
+              tabla=true;
+            }); 
+            WidgetsBinding.instance.addPostFrameCallback((_) { 
+              Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => VerMercado (data:widget.data),)); });
+          }
+        },
+        items: <String>['Seleccione una Liquidación','Anticipos', 'Liquidación Caña', 'Ajuste de Mercado Excedentario']
+        .map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child:Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5,40,10),
+            child:new Text(value,textAlign: TextAlign.center,
+              style: new TextStyle(color: Colors.black)
+            ),
+            ),
+          );
+        }).toList(),
+    ),),
+    );
   }
 
 
   Widget  dataBody() {
-     return FutureBuilder<List<EntradaCana>>(
-      future:listar_haciendas(),
-      builder:(context,snapshot){
-        if(snapshot.hasData){
-          _entrada = (entrada).toList();
-          cambiar?codParametro='':codParametro=codRespeuesta;
-          return 
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              verticalDirection: VerticalDirection.down,
-              children:<Widget>[
-              SizedBox(height:10),
-                Container(
-                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                  child:Center(
-                    child: DateTimeField(
-                    controller: _startTimeController,
+    return FutureBuilder<List<EntradaCana>>(
+    future:listar_haciendas(),
+    builder:(context,snapshot){
+      if(snapshot.hasData){
+        _entrada = (entrada).toList();
+        cambiar?codParametro='':codParametro=codRespeuesta;
+        return 
+          Column(
+            children:<Widget>[
+              SizedBox(height:30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:[
+                  Container(
+                    width:300,
+                    padding: EdgeInsets.fromLTRB(20, 0,20, 10),
+                    child:Center(
+                      child: DateTimeField(
+                      controller: _startTimeController,
+                      onChanged: (text) {
+                      if(_endTimeController.text!='')
+                      {
+                        var fechaicambio=_startTimeController.text.split('/');
+                        var fechafcambio=_endTimeController.text.split('/');
+                        var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
+                        var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                        DateTime parseInicial = DateTime.parse(ini);
+                        DateTime parseFinal = DateTime.parse(fin);
+                        String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
+                        String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
+                        DateTime startDate = DateTime.parse(nfechaI);
+                        DateTime endDate = DateTime.parse(nfechaF);
+                        if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
+                        {
+                          if(dropdownValue != 'Seleccione una Liquidación')
+                          {
+                            if(dropdownValue=='Liquidación Caña')
+                              { 
+                                setState(() {
+                                  anticipo= false;
+                                  liquidacion= true;
+                                  tabla=false;
+                                  contador=0;
+                                });
+                              }
+                            if(dropdownValue=='Anticipos')
+                            {
+                              setState(() {
+                                anticipo= true;
+                                liquidacion= false;
+                                tabla=false;
+                                contador=0;
+                              });
+                            }
+                          }else{
+                            infoDialog(
+                              context, 
+                              opcion,
+                              negativeAction: (){
+                              },
+                            );
+                            setState(() {
+                              tabla = true;
+                            });
+                          }
+                        }else{
+                          _startTimeController.text='';
+                          setState(() {
+                            tabla = true;
+                            });
+                          errorDialog(
+                            context, 
+                            error,
+                            negativeAction: (){
+                            },
+                          );
+                        }
+                      }else{
+                        infoDialog(
+                          context, 
+                          validarFecha,
+                          negativeAction: (){
+                          },
+                        );
+                        }
+                      },
+                      format: format,
+                      onShowPicker: (context, currentValue) {
+                        return showDatePicker(
+                          context: context,
+                          firstDate: DateTime(1900),
+                          initialDate: currentValue ?? DateTime.now(),
+                          lastDate: DateTime(2100)
+                        );
+                      },
+                      decoration: InputDecoration(
+                        prefixIcon: IconButton(
+                          onPressed: (){
+                            },
+                          icon: Icon(
+                          Icons.calendar_today,
+                          color: Colors.grey,
+                          ),
+                        ),
+                        enabledBorder:
+                          UnderlineInputBorder(      
+                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                          ),  
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                          ),
+                          border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                          ),
+                          labelText: 'Fecha Inicial',
+                      ),
+                    ),
+                    ),
+                  ),
+                  Container(
+                  width:300,
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
+                  child:DateTimeField(
+                    controller:_endTimeController,
                     onChanged: (text) {
-                    if(_endTimeController.text!='')
-                    {
+                      if(_startTimeController.text!="")
+                      { 
                       var fechaicambio=_startTimeController.text.split('/');
                       var fechafcambio=_endTimeController.text.split('/');
                       var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
@@ -661,14 +768,15 @@ parametros(parametro){
                         if(dropdownValue != 'Seleccione una Liquidación')
                         {
                           if(dropdownValue=='Liquidación Caña')
-                            { 
-                              setState(() {
-                                anticipo= false;
-                                liquidacion= true;
-                                tabla=false;
-                                contador=0;
-                              });
-                            }
+                              { 
+                                setState(() {
+                                  anticipo= false;
+                                  liquidacion= true;
+                                  tabla=false;
+                                  contador=0;
+                                });
+                              }
+
                           if(dropdownValue=='Anticipos')
                           {
                             setState(() {
@@ -680,20 +788,20 @@ parametros(parametro){
                           }
                         }else{
                           infoDialog(
-                            context, 
-                            opcion,
-                            negativeAction: (){
-                            },
-                          );
+                              context, 
+                              opcion,
+                              negativeAction: (){
+                              },
+                            );
                           setState(() {
                             tabla = true;
                           });
                         }
                       }else{
-                        _startTimeController.text='';
                         setState(() {
-                          tabla = true;
-                          });
+                        tabla = true;
+                        });
+                        _endTimeController.text='';
                         errorDialog(
                           context, 
                           error,
@@ -701,7 +809,7 @@ parametros(parametro){
                           },
                         );
                       }
-                    }else{
+                      }else{
                       infoDialog(
                         context, 
                         validarFecha,
@@ -722,241 +830,139 @@ parametros(parametro){
                     decoration: InputDecoration(
                       prefixIcon: IconButton(
                         onPressed: (){
-                          },
+                              },
                         icon: Icon(
                         Icons.calendar_today,
                         color: Colors.grey,
-                        ),
                       ),
-                      enabledBorder:
-                        UnderlineInputBorder(      
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                        ),  
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                        ),
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                        ),
-                        labelText: 'Fecha Inicial',
+                      ),
+                      enabledBorder: UnderlineInputBorder(      
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                      ),  
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                      ),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                      ),
+                      labelText: 'Fecha Final',
                     ),
                   ),
                   ),
-                ),
-                Container(
-                padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                child:DateTimeField(
-                  controller:_endTimeController,
-                  onChanged: (text) {
-                    if(_startTimeController.text!="")
-                    { 
-                    var fechaicambio=_startTimeController.text.split('/');
-                    var fechafcambio=_endTimeController.text.split('/');
-                    var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                    var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
-                    DateTime parseInicial = DateTime.parse(ini);
-                    DateTime parseFinal = DateTime.parse(fin);
-                    String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
-                    String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
-                    DateTime startDate = DateTime.parse(nfechaI);
-                    DateTime endDate = DateTime.parse(nfechaF);
-                    if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
-                    {
-                      if(dropdownValue != 'Seleccione una Liquidación')
-                      {
-                        if(dropdownValue=='Liquidación Caña')
-                            { 
-                              setState(() {
-                                anticipo= false;
-                                liquidacion= true;
-                                tabla=false;
-                                contador=0;
-                              });
-                            }
-
-                        if(dropdownValue=='Anticipos')
-                        {
-                          setState(() {
-                            anticipo= true;
-                            liquidacion= false;
-                            tabla=false;
-                            contador=0;
-                          });
-                        }
-                      }else{
-                        infoDialog(
-                            context, 
-                            opcion,
-                            negativeAction: (){
-                            },
-                          );
-                        setState(() {
-                          tabla = true;
-                        });
-                      }
-                    }else{
-                      setState(() {
-                      tabla = true;
-                      });
-                      _endTimeController.text='';
-                      errorDialog(
-                        context, 
-                        error,
-                        negativeAction: (){
-                        },
-                      );
-                    }
-                    }else{
-                    infoDialog(
-                      context, 
-                      validarFecha,
-                      negativeAction: (){
-                      },
-                    );
-                    }
-                  },
-                  format: format,
-                  onShowPicker: (context, currentValue) {
-                    return showDatePicker(
-                      context: context,
-                      firstDate: DateTime(1900),
-                      initialDate: currentValue ?? DateTime.now(),
-                      lastDate: DateTime(2100)
-                    );
-                  },
-                  decoration: InputDecoration(
-                    prefixIcon: IconButton(
-                      onPressed: (){
-                            },
-                      icon: Icon(
-                      Icons.calendar_today,
-                      color: Colors.grey,
-                    ),
-                    ),
-                    enabledBorder: UnderlineInputBorder(      
-                      borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                    ),  
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                    ),
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                    ),
-                    labelText: 'Fecha Final',
-                  ),
-                ),
-                ),
-                SizedBox(height:8),
-                lista(),
-                SizedBox(height:8),
-                Container(
-                  height: 40,
+                  //SizedBox(height:8),
+                  lista(),
+                  //SizedBox(height:8),
+                  Container(
+                    width:300,
+                    height: 40,
                     //width:148,
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.fromLTRB(38, 5, 38,10),
-                  decoration: BoxDecoration(
-                  border: Border(bottom:BorderSide(width: 1,
-                    color: Color.fromRGBO(83, 86, 90, 1.0),),),
-                      // borderRadius: BorderRadius.circular(10), 
-                      //color: Color.fromRGBO(83, 86, 90, 1.0)
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: new DropdownButton<String>(
-                      hint: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Center(
-                        child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15.0,
-                          fontFamily: 'Karla',
-                        ),),),),
-                        value:selectedRegion,
-                        style: TextStyle(color: Colors.black,fontSize: 15),
-                        isDense: true,
-                        onChanged: (String newValue) {
-                        if(_endTimeController.text!=''&& _startTimeController.text!="")
-                        {  
-                          var fechaicambio=_startTimeController.text.split('/');
-                          var fechafcambio=_endTimeController.text.split('/');
-                          var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                          var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
-                          DateTime parseInicial = DateTime.parse(ini);
-                          DateTime parseFinal = DateTime.parse(fin);
-                          String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
-                          String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
-                          DateTime startDate = DateTime.parse(nfechaI);
-                          DateTime endDate = DateTime.parse(nfechaF);
-                          if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
-                          {
-                            setState(() {
-                              parametro=entrada.where((a) => a.nm_hda==newValue);
-                              codRespeuesta=parametros(parametro);
-                              cambiar = false;
-                              detalle = true;
-                              if(dropdownValue=='Liquidación Caña')
-                              { 
-                                setState(() {
-                                  anticipo= false;
-                                  liquidacion= true;
-                                  mercado= false;
-                                  tabla=false;
-                                  contador=0;
-                                });
-                              }
-                              if(dropdownValue=='Anticipos')
-                              {
-                                setState(() {
-                                  anticipo= true;
-                                  liquidacion= false;
-                                  mercado= false;
-                                  tabla=false;
-                                  contador=0;
-                                });
-                              }
-                                selectedRegion = newValue;
-                            });
-                          }else{
-                            setState(() {
-                              tabla = true;
-                            });
-                            errorDialog(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.fromLTRB(20, 12,20,10),
+                    decoration: BoxDecoration(
+                    border: Border(bottom:BorderSide(width: 1,
+                      color: Color.fromRGBO(83, 86, 90, 1.0),),),
+                        // borderRadius: BorderRadius.circular(10), 
+                        //color: Color.fromRGBO(83, 86, 90, 1.0)
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: new DropdownButton<String>(
+                        hint: Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: Center(
+                          child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15.0,
+                            fontFamily: 'Karla',
+                          ),),),),
+                          value:selectedRegion,
+                          style: TextStyle(color: Colors.black,fontSize: 15),
+                          isDense: true,
+                          onChanged: (String newValue) {
+                          if(_endTimeController.text!=''&& _startTimeController.text!="")
+                          {  
+                            var fechaicambio=_startTimeController.text.split('/');
+                            var fechafcambio=_endTimeController.text.split('/');
+                            var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
+                            var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                            DateTime parseInicial = DateTime.parse(ini);
+                            DateTime parseFinal = DateTime.parse(fin);
+                            String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
+                            String nfechaF=DateFormat('yyyy-mm-dd').format(parseFinal);
+                            DateTime startDate = DateTime.parse(nfechaI);
+                            DateTime endDate = DateTime.parse(nfechaF);
+                            if(startDate.isBefore(endDate) || _startTimeController.text==_endTimeController.text)
+                            {
+                              setState(() {
+                                parametro=entrada.where((a) => a.nm_hda==newValue);
+                                codRespeuesta=parametros(parametro);
+                                cambiar = false;
+                                detalle = true;
+                                if(dropdownValue=='Liquidación Caña')
+                                { 
+                                  setState(() {
+                                    anticipo= false;
+                                    liquidacion= true;
+                                    mercado= false;
+                                    tabla=false;
+                                    contador=0;
+                                  });
+                                }
+                                if(dropdownValue=='Anticipos')
+                                {
+                                  setState(() {
+                                    anticipo= true;
+                                    liquidacion= false;
+                                    mercado= false;
+                                    tabla=false;
+                                    contador=0;
+                                  });
+                                }
+                                  selectedRegion = newValue;
+                              });
+                            }else{
+                              setState(() {
+                                tabla = true;
+                              });
+                              errorDialog(
+                                context, 
+                                error,
+                                negativeAction: (){
+                                },
+                              );
+                            }
+                          }else
+                          { 
+                            infoDialog(
                               context, 
-                              error,
+                              validarFecha,
                               negativeAction: (){
                               },
                             );
                           }
-                        }else
-                        { 
-                          infoDialog(
-                            context, 
-                            validarFecha,
-                            negativeAction: (){
-                            },
-                          );
-                        }
-                          print(selectedRegion);
-                        },
-                        items: _entrada.map((EntradaCana map) {
-                          return new DropdownMenuItem<String>(
-                            value: map.nm_hda,
-                            //child: Center(
-                        child:Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 5, 18,2),
-                        child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.left,
-                                            style: new TextStyle(color: Colors.black)),
+                            print(selectedRegion);
+                          },
+                          items: _entrada.map((EntradaCana map) {
+                            return new DropdownMenuItem<String>(
+                              value: map.nm_hda,
+                              child:Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 5, 18,2),
+                                child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.left,
+                                  style: new TextStyle(color: Colors.black)
+                                ),
+                              ),
+                            );
+                          }).toList(),
                         ),
-                        //),
-                        );
-                        
-                        }).toList(),
-                      ),
+                    ),
                   ),
-                ),
-                SizedBox(height:2),
-                Container(
-                  padding:const EdgeInsets.fromLTRB(10, 0, 0,0),
-                  alignment: Alignment.bottomLeft,
+                  //SizedBox(height:2),
+                  //SizedBox(height:8),
+              ]
+              ),
+              SizedBox(height:15),
+              Container(
+                padding:const EdgeInsets.fromLTRB(400, 5, 0,5),
+                alignment: Alignment.bottomLeft,
                   child:Row(
                     children:[
                       RaisedButton(
@@ -974,49 +980,47 @@ parametros(parametro){
                           //side: BorderSide(color: Colors.white)
                         ),
                         onPressed: () {
-                        botonCana?_showMultiSelect(context):_showMultiSelectAnticipo(context);
+                          _showMultiSelect(context);
                         },
                       ),
-                      Flecha(),
-                    ]
-                  ),
-                ),
-                SizedBox(height:8),
-                mostrar(),
-                  //listaAgnoInicial(),
-              ],
-            ),
-          );  
-        }else if (snapshot.hasError) {
-          return  Column(children:[
-            SizedBox(height: 150,),
-            Container(
-              padding: EdgeInsets.all(20),
-              child:Text("Ha superado el tiempo de espera para comunicarse con el servidor",
-                textAlign:TextAlign.center,
-                style:  TextStyle(
-                  color: Color.fromRGBO(83, 86, 90, 1.0),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),
-              )
-            ),
-            Center(child: 
-              const Icon(
-              Icons.error_outline,
-              color: Colors.red,
-              size: 120,
+                    ],
+                  )
+              ),
+              SizedBox(height:15),
+              Expanded(child:mostrar(),),
+                //listaAgnoInicial(),
+            ],
+          );
+      }else if (snapshot.hasError) {
+        return  Column(children:[
+          SizedBox(height: 150,),
+          Container(
+            padding: EdgeInsets.all(20),
+            child:Text("Ha superado el tiempo de espera para comunicarse con el servidor",
+              textAlign:TextAlign.center,
+              style:  TextStyle(
+                color: Color.fromRGBO(83, 86, 90, 1.0),
+                fontSize: 20,
+                fontWeight: FontWeight.bold
               ),
             )
-          ]);
-        }else{
-          return
-          Center(
-            child:CircularProgressIndicator()
-          );
-        }
-      },
-    );
+          ),
+          Center(child: 
+            const Icon(
+            Icons.error_outline,
+            color: Colors.red,
+            size: 120,
+            ),
+          )
+        ]);
+      }else{
+        return
+        Center(
+          child:CircularProgressIndicator()
+        );
+      }
+    },
+  );
   }
 
   Widget  dataTable(ini,fin,cod_hda) {
@@ -1255,14 +1259,15 @@ parametros(parametro){
 
 
   Widget tablaVacia() {
-  return  
+    var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
+    return  
     SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: SingleChildScrollView( 
         scrollDirection: Axis.horizontal,
         child: DataTable(
           headingRowColor:
-          MaterialStateColor.resolveWith((states) =>Colors.white ),
+          MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
           //Color.fromRGBO(136,139, 141, 1.0)
           sortAscending: sort,
           sortColumnIndex: 0,
@@ -1270,17 +1275,17 @@ parametros(parametro){
           columnSpacing:10,
             columns: [
               DataColumn(
-                label: Text("Fecha Liquidación"),
+                label: Text("Fecha Liquidación",style:textStyle),
                 numeric: false,
                 tooltip: "Fecha Liquidación",
               ),
               DataColumn(
-                label: Text("Valor"),
+                label: Text("Valor",style:textStyle),
                 numeric: false,
                 tooltip: "Valor",
               ),
               DataColumn(
-                label: Text("Detalle Liquidación"),
+                label: Text("Detalle Liquidación",style:textStyle),
                 numeric: false,
                 tooltip: "Detalle Liquidación",
               ),
@@ -1290,16 +1295,17 @@ parametros(parametro){
               (entradaG) => DataRow(
                 cells: [
                   DataCell(
-                    Text(entradaG.fecha,textAlign: TextAlign.center,),
+                    Text(entradaG.fecha,textAlign: TextAlign.center),
                   ),
                   DataCell(
-                    Text(entradaG.ton_cana,textAlign: TextAlign.center,),
+                    Text(entradaG.ton_cana,textAlign: TextAlign.center,style:textStyle),
                   ),
                   DataCell(
-                    Text(entradaG.rto_real_ing,textAlign: TextAlign.center,),
+                    Text(entradaG.rto_real_ing,textAlign: TextAlign.center,style:textStyle),
                   ), 
                                      
-                ]),
+                ]
+              ),
             ).toList(),
         ),
       ),

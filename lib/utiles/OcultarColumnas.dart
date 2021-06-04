@@ -60,49 +60,51 @@ class _MultiSelectDialogState<V> extends State<MultiSelectDialog<V>> {
       ),
       actions: <Widget>[
         Container(
-          width:150,
-          height:35,
-          alignment: Alignment.bottomLeft,
+          width: 100,
+          height: 35,
           decoration: BoxDecoration(
-          //color: Colors.white,
+            color: Colors.white,
             borderRadius: BorderRadius.circular(14),
           ),
-          child:RaisedButton(
+          child: RaisedButton(
             textColor: Color.fromRGBO(83, 86, 90, 1.0),
-            color: Color.fromRGBO(56, 124, 43, 1.0),
-            child: Text('Cancelar', style: TextStyle(
-              color: Colors.white,
-              fontSize: 15,
-              fontWeight: FontWeight.bold
-            )
-            ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
-          ),
-          onPressed: _onCancelTap,
-          ),
-        ),
-        Container(
-          width:150,
-          height:35,
-          alignment: Alignment.bottomLeft,
-          decoration: BoxDecoration(
-          //color: Colors.white,
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child:RaisedButton(
-            textColor: Color.fromRGBO(83, 86, 90, 1.0),
+            //textColor: Color.fromRGBO(255, 210, 0, 1.0),
             color: Color.fromRGBO(56, 124, 43, 1.0),
             child: Text('Aceptar', style: TextStyle(
               color: Colors.white,
-              fontSize: 15,
+              //Color.fromRGBO(83, 86, 90, 1.0),
+              fontSize: 13,
               fontWeight: FontWeight.bold
-            )
+            )),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50.0),
+              //side: BorderSide(color: Colors.white)
             ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50.0),
+            onPressed: _onSubmitTap,
           ),
-          onPressed: _onSubmitTap,
+        ),
+        Container(
+          width: 100,
+          height: 35,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(14),
+          ),
+          child: RaisedButton(
+            textColor: Color.fromRGBO(83, 86, 90, 1.0),
+            //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+            color: Color.fromRGBO(56, 124, 43, 1.0),
+            child: Text('Cancelar', style: TextStyle(
+              color: Colors.white,
+              //Color.fromRGBO(83, 86, 90, 1.0),
+              fontSize: 13,
+              fontWeight: FontWeight.bold
+            )),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50.0),
+              //side: BorderSide(color: Colors.white)
+            ),
+            onPressed: _onCancelTap,
           ),
         ),
       ],
