@@ -268,193 +268,186 @@ validar()async{
             key: _formKey,
             child: ListView(
               children: <Widget>[
-                    Container(
-                        color:Colors.white,
-                        height:800,
-                        //MediaQuery.of(context).size.height,
-                        //width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: <Widget>[
-                              //SizedBox(height: 5),
-                              Container(
-                                color:Colors.white,
-                                //child:FadeInUp(
-                                  child: Container(
-                                    height: 180,
-                                    width: 250,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,  
-                                        //borderRadius: BorderRadius.circular(20),
-                                      image: DecorationImage(
-                                        image: AssetImage("images/logo_principal.JPG"),
-                                          fit: BoxFit.fitWidth),
-                                      ),
-                                      margin: EdgeInsets.all(10),
-                                      padding: EdgeInsets.symmetric(horizontal:10),
-                                          // child: Row(
-                                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          //   crossAxisAlignment: CrossAxisAlignment.start,
-                                          //   children: <Widget>[
-                                          //   Container(
-                                          //     color:Color.fromARGB(255,255,255, 0),
-                                                
-                                          //     ),
-                                          //   ],
-                                          // ),
-                                  ), 
-                                  //duration: Duration(seconds:2),
-                                //),
-                                //,
+                Container(
+                color:Colors.white,
+                width: 600,
+                height:800,
+                //MediaQuery.of(context).size.height,
+                //width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Column(
+                        children:[
+                          Container(
+                          padding: EdgeInsets.fromLTRB(20,10,10,10),
+                            height:770,
+                            width: 1000,
+                            child:Image.asset(
+                              "images/login1.jpg",
+                              fit: BoxFit.cover,
+                            )
+                          ),
+                        ]
+                      ),
+                      SizedBox(width:70),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children:[
+                          Container(
+                            color:Colors.white,
+                            child: Container(
+                              height: 180,
+                              width: 250,
+                              decoration: BoxDecoration(
+                                color: Colors.white,  
+                                  //borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                  image: AssetImage("images/logo_principal.JPG"),
+                                    fit: BoxFit.fitWidth),
                               ),
-                              Container(
-                                color:Colors.white,
-                                padding: EdgeInsets.symmetric(horizontal:10,vertical:0),
-                                height: 500,//MediaQuery.of(context).size.height * 0.70,
-                                width:MediaQuery.of(context).size.width,
-                                decoration: BoxDecoration(
-                                  // gradient: LinearGradient(
-                                  //   begin: Alignment.topLeft,
-                                  //   end: Alignment.bottomRight,
-                                  //   colors: [Color.fromRGBO(56, 124, 43, 1.0), Color.fromRGBO(176, 188, 34, 1.0)],
-                                  //   tileMode: TileMode.repeated,
-                                  // ),         
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(1),
-                                    topRight: Radius.circular(1)
-                                  )
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.symmetric(horizontal:10),
+                            ), 
+                          ),
+                          SizedBox(height:70),
+                          Container(
+                            color:Colors.white,
+                            //padding: EdgeInsets.symmetric(horizontal:10,vertical:0),
+                            height: 500,//MediaQuery.of(context).size.height * 0.70,
+                            width:400,
+                            decoration: BoxDecoration(
+                              // gradient: LinearGradient(
+                              //   begin: Alignment.topLeft,
+                              //   end: Alignment.bottomRight,
+                              //   colors: [Color.fromRGBO(56, 124, 43, 1.0), Color.fromRGBO(176, 188, 34, 1.0)],
+                              //   tileMode: TileMode.repeated,
+                              // ),         
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(1),
+                                topRight: Radius.circular(1)
+                              )
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                SizedBox(height: 10),
+                                Text("Proveedores Caña",textAlign:TextAlign.center,style: TextStyle(
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold
+                                )
                                 ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                  SizedBox(height: 10),
-                                    Text("Proveedores Caña",style: TextStyle(
-                                      color: Color.fromRGBO(83, 86, 90, 1.0),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold
-                                    )),
-                                    
-                                    SizedBox(height: 40),
-                                      Container(
-                                        width: 400,
-                                        padding: EdgeInsets.all(30),
-                                        child: Column(
-                                          children: <Widget>[
-                                            TextFormField(
-                                              controller:nameController ,
-                                              validator: (value){
-                                              if (value.isEmpty) {
-                                                    return 'Por favor Ingrese su Usuario';
-                                              }
-                                              },
-                                              style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold), 
-                                              //TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-                                              obscureText:false,
-                                              decoration: InputDecoration(
-                                                 enabledBorder: UnderlineInputBorder(      
-                                                  borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                                                ),  
-                                                focusedBorder: UnderlineInputBorder(
-                                                  borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                                                ),
-                                                border: UnderlineInputBorder(
-                                                  borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                                                ),
-                                                // focusedBorder: OutlineInputBorder(
-                                                //   borderSide: BorderSide(color:Color.fromRGBO(83, 86, 90, 1.0),width: 1.0)
-                                                // ),
-                                                // enabledBorder: OutlineInputBorder(
-                                                //   borderSide: BorderSide(color: Colors.white, width: 1.0)
-                                                // ),
-                                                labelText:"Usuario",
-                                                labelStyle: TextStyle(color:Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold),
-                                                suffixIcon: Icon(Icons.people_alt_rounded, size: 27,color: Color.fromRGBO(83, 86, 90, 1.0),),
-                                              ),
-                                              
-                                          ),
-                                          SizedBox(height: 10),
-                                          TextFormField(
-                                              controller:passwordController ,
-                                              validator: (value){
-                                              if (value.isEmpty) {
-                                                    return 'Por favor Ingrese su Contraseña';
-                                              }
-                                              },
-                                              style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold), 
-                                              //style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-                                              obscureText:true,
-                                              decoration: InputDecoration(
-                                                enabledBorder: UnderlineInputBorder(      
-                                                  borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                                                ),  
-                                                focusedBorder: UnderlineInputBorder(
-                                                  borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                                                ),
-                                                border: UnderlineInputBorder(
-                                                  borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                                                ),
-                                                // focusedBorder: OutlineInputBorder(
-                                                //   borderSide: BorderSide(color: Colors.white,width: 1.0)
-                                                // ),
-                                                // enabledBorder: OutlineInputBorder(
-                                                //   borderSide: BorderSide(color: Colors.white, width: 1.0)
-                                                // ),
-                                                labelText:"Contraseña",
-                                                labelStyle: TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold),
-                                                suffixIcon: Icon(Icons.https, size: 27,color: Color.fromRGBO(83, 86, 90, 1.0),),
-                                              ),
-                                              
+                                SizedBox(height: 70),
+                                  Container(
+                                    width: 400,
+                                    padding: EdgeInsets.all(30),
+                                    child: Column(
+                                      children: <Widget>[
+                                        TextFormField(
+                                          controller:nameController ,
+                                          validator: (value){
+                                          if (value.isEmpty) {
+                                                return 'Por favor Ingrese su Usuario';
+                                          }
+                                          },
+                                          style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold), 
+                                          //TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                                          obscureText:false,
+                                          decoration: InputDecoration(
+                                              enabledBorder: UnderlineInputBorder(      
+                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                                            ),  
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                            ),
+                                            border: UnderlineInputBorder(
+                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                            ),
+                                            // focusedBorder: OutlineInputBorder(
+                                            //   borderSide: BorderSide(color:Color.fromRGBO(83, 86, 90, 1.0),width: 1.0)
+                                            // ),
+                                            // enabledBorder: OutlineInputBorder(
+                                            //   borderSide: BorderSide(color: Colors.white, width: 1.0)
+                                            // ),
+                                            labelText:"Usuario",
+                                            labelStyle: TextStyle(color:Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold),
+                                            suffixIcon: Icon(Icons.people_alt_rounded, size: 27,color: Color.fromRGBO(83, 86, 90, 1.0),),
                                           ),
                                           
-                                          SizedBox(height:15),
-                                          // ButtonLoginAnimation(
-                                          //   label: "Ingresar",
-                                          //   fontColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                          //   background: Colors.white,
-                                          //   borderColor: Colors.white,
-                                          //   child: validar(),
-                                          // ),
-                                          // Text("¿Olvidó su Contraseña?",style: TextStyle(
-                                          //   color: Color.fromRGBO(255, 255, 255, 1.0),
-                                          //   fontSize: 20,
-                                          //   fontWeight: FontWeight.bold
-                                          // )),
-                                          SizedBox(height:30),
-                                           Container(
-                                            height: 50,
-                                            width: 250,
-                                              //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.circular(14),
-                                              ),
-                                              child: RaisedButton(
-                                                textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                                color: Colors.white,
-                                                child: Text('Ingresar', style: TextStyle(
-                                                  color:  Color.fromRGBO(83, 86, 90, 1.0),
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold
-                                                )),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(50.0),
-                                                  side: BorderSide(color: Colors.white)
-                                                ),
-                                                onPressed: () {
-                                                  if (!_formKey.currentState.validate()){
-                                                          Scaffold.of(context).showSnackBar(
-                                                            SnackBar(content: Text('Processing Data'))
-                                                          );
-                                                  }else{
-                                                    validar();   
-                                                  }
-                                                },
-                                              )),
-                                          SizedBox(height:30),
-                                          FlatButton(
+                                        ),
+                                        SizedBox(height: 20),
+                                        TextFormField(
+                                          controller:passwordController ,
+                                          validator: (value){
+                                          if (value.isEmpty) {
+                                                return 'Por favor Ingrese su Contraseña';
+                                          }
+                                          },
+                                          style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold), 
+                                          //style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                                          obscureText:true,
+                                          decoration: InputDecoration(
+                                            enabledBorder: UnderlineInputBorder(      
+                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                                            ),  
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                            ),
+                                            border: UnderlineInputBorder(
+                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                            ),
+                                            // focusedBorder: OutlineInputBorder(
+                                            //   borderSide: BorderSide(color: Colors.white,width: 1.0)
+                                            // ),
+                                            // enabledBorder: OutlineInputBorder(
+                                            //   borderSide: BorderSide(color: Colors.white, width: 1.0)
+                                            // ),
+                                            labelText:"Contraseña",
+                                            labelStyle: TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold),
+                                            suffixIcon: Icon(Icons.https, size: 27,color: Color.fromRGBO(83, 86, 90, 1.0),),
+                                          ),
+                                          
+                                        ),
+                                        SizedBox(height:15),
+                                        SizedBox(height:30),
+                                        Container(
+                                        height: 50,
+                                        width: 250,
+                                          //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(14),
+                                          ),
+                                          child: RaisedButton(
+                                            textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                                            //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                            color: Colors.white,
+                                            child: Text('Ingresar', style: TextStyle(
+                                              color:  Color.fromRGBO(83, 86, 90, 1.0),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold
+                                            )),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(50.0),
+                                              side: BorderSide(color: Colors.white)
+                                            ),
+                                            onPressed: () {
+                                              if (!_formKey.currentState.validate()){
+                                                      Scaffold.of(context).showSnackBar(
+                                                        SnackBar(content: Text('Processing Data'))
+                                                      );
+                                              }else{
+                                                validar();   
+                                              }
+                                            },
+                                          )
+                                        ),
+                                        SizedBox(height:60),
+                                        FlatButton(
                                           onPressed: (){
                                             Navigator.of(context).push(
                                             MaterialPageRoute(builder: (context) => SolicitarRecuperar()));
@@ -466,17 +459,21 @@ validar()async{
                                             fontWeight: FontWeight.bold
                                           ),),
                                         ),
-                                          SizedBox(height:10),
-                                          ],
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        
-                    ),
+                                        SizedBox(height:10),
+                                      ],
+                                    ),
+                                  ),
+                              ],
+                            ),
+                          )
+                        ]
+                      ),
+                      //SizedBox(height: 5),
+                      
+                    ],
+                  ),
+                    
+                ),
                     
               ],
             ),
