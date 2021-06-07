@@ -243,19 +243,26 @@ class _VerMercadoState extends State<VerMercado> {
     onWillPop: () {  },
       child:SafeArea(
         child:Scaffold(
-        appBar: new AppBar(
-          flexibleSpace:encabezado,
-          backgroundColor: Colors.transparent,
-        ),
-        drawer: menu,
-        body: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(child:dataBody()),
-            ],
+          appBar: new AppBar(
+            flexibleSpace:encabezado,
+            backgroundColor: Colors.transparent,
           ),
-        ),
+          drawer: menu,
+          body: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(child:dataBody()),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _showMultiSelect(context);
+            },
+            child: const Icon(Icons.add),
+            backgroundColor: Color.fromRGBO(56, 124, 43, 1.0),
+          ),
         ),
       ),
     );
@@ -264,9 +271,10 @@ class _VerMercadoState extends State<VerMercado> {
   Widget lista(){
     var token=widget.data.token;
     return Container(
+      width: 300,
       height: 40,
       alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.fromLTRB(38, 5, 40,10),
+      margin: const EdgeInsets.fromLTRB(35, 5, 10,10),
       decoration: BoxDecoration(
         border: Border(
           bottom:BorderSide(
@@ -481,180 +489,193 @@ Widget dataBody() {
     future:listar_haciendas(),
     builder:(context,snapshot){
       if(snapshot.hasData){
-          _entrada = (entrada).toList();
-          cambiar?codParametro='':codParametro=codRespeuesta;
-          return 
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              verticalDirection: VerticalDirection.down,
-              children:<Widget>[
-                SizedBox(height:10),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 10, 5),
-                    child:Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children:[
-                        Container(
-                          padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
-                          width:20,
-                          child:
-                            IconButton(
-                              icon: Icon(
-                                Icons.calendar_today,
-                                color: Colors.grey,
-                                size:40,
-                              ),
-                              onPressed: () {
-                                //Navigator.of(context).pop();
-                              },
-                            ),
-                        ),
-                        Container(
-                          padding:const EdgeInsets.fromLTRB(40, 10, 5, 10) ,
-                          child:
-                          Text('Año Inicial'),
-                        ),
-                        listaAgnoInicial(),
-                      ]),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 5, 10, 10),
-                    child:Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                      children:[
-                        Container(
-                          padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
-                          width:20,
-                          child:
-                            IconButton(
-                              icon: Icon(
-                              Icons.calendar_today,
-                              color: Colors.grey,
-                              size:40,
-                              ),
-                              onPressed: () {
+        _entrada = (entrada).toList();
+        cambiar?codParametro='':codParametro=codRespeuesta;
+        return 
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children:<Widget>[
+              SizedBox(height:20),
+              Row(
+              mainAxisAlignment:MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  Column(
+                  mainAxisAlignment:MainAxisAlignment.start,
+                  children:[
+                    SizedBox(height:30),
+                    mostrar(),
+                  ]
+                  ),
+                  SizedBox(width:30),
+                  Column(
+                    mainAxisAlignment:MainAxisAlignment.start,
+                    children:[
+                      SizedBox(height:20),
+                      Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+                        child:Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children:[
+                            Container(
+                              padding:const EdgeInsets.fromLTRB(10, 0, 10, 10) ,
+                              width:20,
+                              child:
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.calendar_today,
+                                    color: Colors.grey,
+                                    size:40,
+                                  ),
+                                  onPressed: () {
                                     //Navigator.of(context).pop();
-                              },
-                          ),
-                        ),
-                        Container(
-                          padding:const EdgeInsets.fromLTRB(40, 10,15, 10) ,
-                          child:Text('Año Final'),
-                        ),
-                        listaAgnoFinal(),
-                      ]),
-                ),
-                lista(),
-                Container(
-                  height: 40,
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.fromLTRB(38, 5, 38,10),
-                  decoration: BoxDecoration(
-                  border: Border(bottom:BorderSide(width: 1,
-                            color: Color.fromRGBO(83, 86, 90, 1.0),),),
-                  ),
-                  child: DropdownButtonHideUnderline(
-                    child: new DropdownButton<String>(
-                      hint: Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: Center(
-                        child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15.0,
-                        fontFamily: 'Karla',
-                      ),),),
+                                  },
+                                ),
+                            ),
+                            Container(
+                              padding:const EdgeInsets.fromLTRB(40, 10, 5, 10) ,
+                              child:
+                              Text('Año Inicial'),
+                            ),
+                            listaAgnoInicial(),
+                          ]),
                       ),
-                      value:selectedRegion,
-                      isDense: true,
-                      onChanged: (String newValue) {
-                        if(dropdownAgnoInicial!=''&& dropdownAgnoFinal!="")
-                        {  
-                          int numeroFi=int.parse(dropdownAgnoInicial);
-                          int numeroFf=int.parse(dropdownAgnoFinal);
-                          if(numeroFi < numeroFf || numeroFi == numeroFf )
-                          {
-                            setState(() {
-                              parametro=entrada.where((a) => a.nm_hda==newValue);
-                              codRespeuesta=parametros(parametro);
-                              cambiar = false;
-                              detalle = true;
-                              contador=0;
-                              selectedRegion = newValue;
-                            });
-                          }
-                          else
-                          {
-                            errorDialog(
-                            context, 
-                            error,
-                            negativeAction: (){
-                            },
-                          );
-                          }
-                        }else{
-                          setState(() {
-                            tabla = true;
-                          });
-                          errorDialog(
-                            context, 
-                            error,
-                            negativeAction: (){
-                            },
-                          );
-                        }
-                         
-                      print(selectedRegion);
-                      },
-                      items: _entrada.map((EntradaCana map) {
-                        return new DropdownMenuItem<String>(
-                          value: map.nm_hda,
-                          //child: Center(
-                          child:Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 2,2,2),
-                              child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.left,
-                                                    style: new TextStyle(color: Colors.black)),
-                             //),
-                          ),
-                          );
-                          
-                          }).toList(),
-                    ),
-                  ),
-                  ),
-                  SizedBox(height:2),
-                  Container(
-                  padding:const EdgeInsets.fromLTRB(10, 0, 0,0),
-                  alignment: Alignment.bottomLeft,
-                  child:Row(children:[
-                    RaisedButton(
-                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                        child: Text('Más Info', style: TextStyle(
-                          color: Colors.white,
-                          //Color.fromRGBO(83, 86, 90, 1.0),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        )),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          //side: BorderSide(color: Colors.white)
+                      Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                        child:Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                          children:[
+                            Container(
+                              padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
+                              width:20,
+                              child:
+                                IconButton(
+                                  icon: Icon(
+                                  Icons.calendar_today,
+                                  color: Colors.grey,
+                                  size:40,
+                                  ),
+                                  onPressed: () {
+                                        //Navigator.of(context).pop();
+                                  },
+                              ),
+                            ),
+                            Container(
+                              padding:const EdgeInsets.fromLTRB(40, 10,15, 10) ,
+                              child:Text('Año Final'),
+                            ),
+                            listaAgnoFinal(),
+                          ]),
+                      ),
+                      lista(),
+                      Container(
+                        width: 300,
+                        height: 40,
+                        alignment: Alignment.centerLeft,
+                        margin: const EdgeInsets.fromLTRB(30, 10, 0,10),
+                        decoration: BoxDecoration(
+                        border: Border(bottom:BorderSide(width: 1,
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),),),
                         ),
-                        onPressed: () {
-                          _showMultiSelect(context);
-                        },
-                    ),
-                  Flecha(),
-                  ]),
-                  ),
-                  mostrar(),
-              ],
-            ),
-          ); 
+                        child: DropdownButtonHideUnderline(
+                          child: new DropdownButton<String>(
+                            hint: Padding(
+                            padding: const EdgeInsets.all(0),
+                            child: Center(
+                              child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.0,
+                              fontFamily: 'Karla',
+                            ),),),
+                            ),
+                            value:selectedRegion,
+                            isDense: true,
+                            onChanged: (String newValue) {
+                              if(dropdownAgnoInicial!=''&& dropdownAgnoFinal!="")
+                              {  
+                                int numeroFi=int.parse(dropdownAgnoInicial);
+                                int numeroFf=int.parse(dropdownAgnoFinal);
+                                if(numeroFi < numeroFf || numeroFi == numeroFf )
+                                {
+                                  setState(() {
+                                    parametro=entrada.where((a) => a.nm_hda==newValue);
+                                    codRespeuesta=parametros(parametro);
+                                    cambiar = false;
+                                    detalle = true;
+                                    contador=0;
+                                    selectedRegion = newValue;
+                                  });
+                                }
+                                else
+                                {
+                                  errorDialog(
+                                  context, 
+                                  error,
+                                  negativeAction: (){
+                                  },
+                                );
+                                }
+                              }else{
+                                setState(() {
+                                  tabla = true;
+                                });
+                                errorDialog(
+                                  context, 
+                                  error,
+                                  negativeAction: (){
+                                  },
+                                );
+                              }
+                                
+                            print(selectedRegion);
+                            },
+                            items: _entrada.map((EntradaCana map) {
+                              return new DropdownMenuItem<String>(
+                                value: map.nm_hda,
+                                child:Padding(
+                                  padding: const EdgeInsets.fromLTRB(10, 5, 18,2),
+                                  child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.left,
+                                    style: new TextStyle(color: Colors.black)
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ]
+              ),
+                // SizedBox(height:2),
+                // Container(
+                // padding:const EdgeInsets.fromLTRB(10, 0, 0,0),
+                // alignment: Alignment.bottomLeft,
+                // child:Row(children:[
+                //   RaisedButton(
+                //       textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                //       //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                //       color: Color.fromRGBO(56, 124, 43, 1.0),
+                //       child: Text('Más Info', style: TextStyle(
+                //         color: Colors.white,
+                //         //Color.fromRGBO(83, 86, 90, 1.0),
+                //         fontSize: 16,
+                //         fontWeight: FontWeight.bold
+                //       )),
+                //       shape: RoundedRectangleBorder(
+                //         borderRadius: BorderRadius.circular(50.0),
+                //         //side: BorderSide(color: Colors.white)
+                //       ),
+                //       onPressed: () {
+                //         _showMultiSelect(context);
+                //       },
+                //   ),
+                // ]),
+                // ),
+                
+            ],
+          );
+
       }else if (snapshot.hasError) {
         return  Column(
           children:[
@@ -753,6 +774,11 @@ Widget dataBody() {
                     columnSpacing:10,
                     columns: [
                       DataColumn(
+                        label: mostrarhacienda?Expanded(child:Text("Hacienda",textAlign: TextAlign.center,style: textStyle)):Container(),
+                        numeric: false,
+                        tooltip: "Hacienda",
+                      ),
+                      DataColumn(
                         label:Expanded(child: Text("Fecha Liquidación",textAlign: TextAlign.center,style: textStyle)),
                         numeric: false,
                         tooltip: "Fecha Liquidación",
@@ -767,15 +793,13 @@ Widget dataBody() {
                         numeric: false,
                         tooltip: "Detalle Liquidación",
                       ),
-                      DataColumn(
-                        label: mostrarhacienda?Expanded(child:Text("Hacienda",textAlign: TextAlign.center,style: textStyle)):Container(),
-                        numeric: false,
-                        tooltip: "Hacienda",
-                      ),
                     ],
                     rows: entradaAjuste.map(
                       (entradaG) => DataRow(
                         cells: [
+                          DataCell(
+                            mostrarhacienda?Center(child:Text(entradaG.predio,textAlign: TextAlign.center,)):Container(),
+                          ),
                           DataCell(
                             Center(child:Text(entradaG.fecha,textAlign: TextAlign.center,)),
                             //Text(entradaG.fecha,textAlign: TextAlign.center,),
@@ -797,9 +821,6 @@ Widget dataBody() {
                             onTap: () {
                                 obtener_ruta(entradaG.id);
                             },
-                          ),
-                          DataCell(
-                            mostrarhacienda?Center(child:Text(entradaG.predio,textAlign: TextAlign.center,)):Container(),
                           ),
                         ]
                       ),

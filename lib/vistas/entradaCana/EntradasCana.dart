@@ -44,6 +44,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
   List <EntradaCanaGeneral>selectedEntrada=[];
   List <EntradaCana>pasoParametro=[];
   List <EntradaCanaDetalle>entradaDetalle=[];
+  List <EntradaCanaDetalle>entradaDetalleVacio=[];
   List<String> objetos=[];
 
   ProgressDialog ms;
@@ -275,7 +276,14 @@ class _EntradasCanasState extends State<EntradasCanas> {
           body: Container(
             height:700,
             child:Center(child:dataBody())
-          ) 
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _showMultiSelect(context);
+            },
+            child: const Icon(Icons.add),
+            backgroundColor: Color.fromRGBO(56, 124, 43, 1.0),
+          ), 
         ),
       ),
     );
@@ -297,8 +305,8 @@ class _EntradasCanasState extends State<EntradasCanas> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:[         
                   Container(
-                  width: 400,
-                  padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  width: 330,
+                  padding: EdgeInsets.fromLTRB(50, 10, 40, 10),
                     child: DateTimeField(
                       controller: _startTimeController,
                       onChanged: (text) {
@@ -372,7 +380,7 @@ class _EntradasCanasState extends State<EntradasCanas> {
                     ),
                   ),
                   Container(
-                    width: 400,
+                    width: 330,
                     padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
                     child:DateTimeField(
                       controller:_endTimeController,
@@ -447,10 +455,10 @@ class _EntradasCanasState extends State<EntradasCanas> {
                     ),
                   ),
                   Container(
-                  width: 300,
+                  width: 230,
                   height: 40,
                   //padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
-                  margin: const EdgeInsets.fromLTRB(38, 20, 38,10),
+                  margin: const EdgeInsets.fromLTRB(38, 20, 0,10),
                   decoration: BoxDecoration(
                     border: Border(bottom:BorderSide(width: 1,
                       color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -570,34 +578,35 @@ class _EntradasCanasState extends State<EntradasCanas> {
                                   ]
                                 ),
                               ),
-                              Container(
-                                padding:const EdgeInsets.fromLTRB(0,4,0,5),
-                                alignment: Alignment.bottomLeft,
-                                  child:Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children:[
-                                      RaisedButton(
-                                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                                        child: Text('Más Info', style: TextStyle(
-                                          color: Colors.white,
-                                          //Color.fromRGBO(83, 86, 90, 1.0),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold
-                                        )),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(50.0),
-                                          //side: BorderSide(color: Colors.white)
-                                        ),
-                                        onPressed: () {
-                                          _showMultiSelect(context);
-                                        },
-                                      ),
-                                    ],
-                                  )
-                              ),
+                              SizedBox(height:36),
+                              // Container(
+                              //   padding:const EdgeInsets.fromLTRB(0,4,0,5),
+                              //   alignment: Alignment.bottomLeft,
+                              //     child:Row(
+                              //       mainAxisAlignment: MainAxisAlignment.start,
+                              //       crossAxisAlignment: CrossAxisAlignment.start,
+                              //       children:[
+                              //         RaisedButton(
+                              //           textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                              //           //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                              //           color: Color.fromRGBO(56, 124, 43, 1.0),
+                              //           child: Text('Más Info', style: TextStyle(
+                              //             color: Colors.white,
+                              //             //Color.fromRGBO(83, 86, 90, 1.0),
+                              //             fontSize: 16,
+                              //             fontWeight: FontWeight.bold
+                              //           )),
+                              //           shape: RoundedRectangleBorder(
+                              //             borderRadius: BorderRadius.circular(50.0),
+                              //             //side: BorderSide(color: Colors.white)
+                              //           ),
+                              //           onPressed: () {
+                              //             _showMultiSelect(context);
+                              //           },
+                              //         ),
+                              //       ],
+                              //     )
+                              // ),
                               tablaDetalle?Expanded(child:dataTableDetalle(_startTimeController.text,_endTimeController.text,codParametro,suerte,))
                               :tablaVaciaDetalle(),
                             ]
@@ -924,8 +933,8 @@ Widget dataTotalVacia(){
             //Color.fromRGBO(136,139, 141, 1.0)
             sortAscending: sort,
             sortColumnIndex: 0,
-            horizontalMargin:10,
-            columnSpacing:10,
+            horizontalMargin:15,
+            columnSpacing:15,
             columns: [
               DataColumn(
                   label: Text("Suerte",style:textStyle),
@@ -1016,7 +1025,7 @@ Widget dataTotalVacia(){
                 tooltip: "Peso Neto",
               ),
             ],
-            rows: entradaDetalle.map(
+            rows: entradaDetalleVacio.map(
               (entradaG) => DataRow(
                 cells: [
                   DataCell(

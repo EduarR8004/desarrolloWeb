@@ -116,10 +116,10 @@ class _InfoProduccionState extends State<InfoProduccion> {
     }
   }
     var x=[0].toSet();
-    void _showMultiSelect(BuildContext context) async {
-      multiItem = [];
-      populateMultiselect();
-      final items = multiItem;
+  void _showMultiSelect(BuildContext context) async {
+    multiItem = [];
+    populateMultiselect();
+    final items = multiItem;
     final selectedValues = await showDialog<Set<int>>(
       context: context,
       builder: (BuildContext context) {
@@ -428,28 +428,27 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
     child:
       SafeArea(
         child:Scaffold(
-        appBar: new AppBar(
-          flexibleSpace:encabezado,
-          backgroundColor: Colors.transparent,
-        ),
-        drawer: menu,
-        body: Container(
-          height: 700,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(child:dataBody()),
-              
-            ],
+          appBar: new AppBar(
+            flexibleSpace:encabezado,
+            backgroundColor: Colors.transparent,
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            _showMultiSelect(context);
-          },
-          child: const Icon(Icons.add),
-          backgroundColor: Color.fromRGBO(56, 124, 43, 1.0),
-        ),
+          drawer: menu,
+          body: Container(
+            height: 700,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(child:dataBody()),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _showMultiSelect(context);
+            },
+            child: const Icon(Icons.add),
+            backgroundColor: Color.fromRGBO(56, 124, 43, 1.0),
+          ),
         ),
       ),
     );

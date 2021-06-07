@@ -5,9 +5,9 @@ import 'package:proveedores_manuelita/utiles/locator.dart';
 import 'package:proveedores_manuelita/vistas/consultas/Consultas.dart';
 import 'package:proveedores_manuelita/utiles/Conexion.dart';
 import 'package:proveedores_manuelita/vistas/index.dart';
+import 'package:proveedores_manuelita/vistas/login/login.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:proveedores_manuelita/utiles/Splash.dart';
 import 'package:proveedores_manuelita/utiles/Notificaciones.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:proveedores_manuelita/router.dart'as router;
@@ -41,14 +41,14 @@ class _MyAppState extends State<MyApp> {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Proveedores Caña Manuelita',
-          initialRoute: 'splash',
+          initialRoute: 'login',
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),
           onGenerateRoute: router.generateRoute,
           navigatorKey: locator<NavigatorService>().navigatorKey,
           routes:{
-            'splash' :(BuildContext context)=>Splash(),
+            'login' :(BuildContext context)=>Login(false),
             'consultas' :(BuildContext context)=>VerConsultas(),
           },
           //home: Splash(),

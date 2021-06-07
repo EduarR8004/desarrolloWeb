@@ -18,7 +18,6 @@ import 'package:proveedores_manuelita/utiles/Informacion.dart';
 import 'package:proveedores_manuelita/vistas/encabezado/Encabezado.dart';
 import 'package:proveedores_manuelita/utiles/Conexion.dart';
 import 'package:proveedores_manuelita/vistas/menu.dart';
-import 'package:proveedores_manuelita/vistas/verPdf/PdfViewPage.dart';
 
 
 class VerConsultas extends StatefulWidget {
@@ -113,15 +112,18 @@ class _VerConsultasState extends State<VerConsultas> {
         SizedBox(height:20),
         Row(
           mainAxisAlignment:MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children:[
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment:MainAxisAlignment.start,
               children:[
-                SizedBox(height:30),
-                cambiar?Expanded(
-                  child:dataTable(fecha_inicial,fecha_final,tipo)
-                ):dataTableVacia(),
+                SizedBox(height:55),
+                cambiar?
+                // Expanded(
+                //   child:
+                  dataTable(fecha_inicial,fecha_final,tipo)
+                //)
+                :dataTableVacia(),
               ]
             ),
             SizedBox(width:30),
@@ -129,12 +131,12 @@ class _VerConsultasState extends State<VerConsultas> {
               children:[
                 SizedBox(height:30),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 5),
+                  padding: const EdgeInsets.fromLTRB(5, 10, 10, 5),
                     child:Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children:[
                         Container(
-                          padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
+                          padding:const EdgeInsets.fromLTRB(0, 10, 20, 10) ,
                           width:20,
                           child:
                             IconButton(
@@ -151,19 +153,23 @@ class _VerConsultasState extends State<VerConsultas> {
                         Container(
                           padding:const EdgeInsets.fromLTRB(50, 10, 5, 10) ,
                           child:
-                          Text('Año Inicial'),
+                          Text('Año Inicial',style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                          )),
                         ),
                         listaAgnoInicial(),
                       ]
                     ),
                 ),
                 Padding(
-                padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                padding: const EdgeInsets.fromLTRB(5, 5, 10, 10),
                   child:Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                     children:[
                       Container(
-                        padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
+                        padding:const EdgeInsets.fromLTRB(0, 10, 20, 10) ,
                         width:20,
                         child:
                           IconButton(
@@ -179,7 +185,11 @@ class _VerConsultasState extends State<VerConsultas> {
                       ),
                       Container(
                         padding:const EdgeInsets.fromLTRB(50, 10,15, 10) ,
-                        child:Text('Año Final'),
+                        child:Text('Año Final',style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                        )),
                       ),
                       listaAgnoFinal(),
                     ]
@@ -608,11 +618,10 @@ Widget listaAgnoFinal(){
       height: 40,
       margin: const EdgeInsets.fromLTRB(32, 10, 38,10),
       decoration: BoxDecoration(
-      border: Border(bottom:BorderSide(width: 1,
-                    color: Color.fromRGBO(83, 86, 90, 1.0),),
-      ),
-      // borderRadius: BorderRadius.circular(10), 
-          //color: Color.fromRGBO(83, 86, 90, 1.0),
+        border: Border(bottom:BorderSide(width: 1,
+          color: Color.fromRGBO(83, 86, 90, 1.0),
+        ),
+        ),
       ),
       child:DropdownButton<String>(
         value: dropdownValue,
@@ -621,7 +630,7 @@ Widget listaAgnoFinal(){
           style: TextStyle(color: Colors.black,fontSize: 16),
           underline: Container(
             height: 2,
-              color: Colors.transparent,
+            color: Colors.transparent,
           ),
           onChanged: (newValueDoc) {
             setState(() {
@@ -672,8 +681,8 @@ Widget listaAgnoFinal(){
                   //Color.fromRGBO(136,139, 141, 1.0)
                   sortAscending: sort,
                   sortColumnIndex: 0,
-                  horizontalMargin:10,
-                  columnSpacing:10,
+                  horizontalMargin:15,
+                  columnSpacing:15,
                   columns: [
                     DataColumn(
                       label: Expanded(child:Text("Fecha",textAlign: TextAlign.center,style: textStyle)),
@@ -696,11 +705,14 @@ Widget listaAgnoFinal(){
                         },
                       ),
                       DataCell(
-                          entradaG.documento_id==''?Center(child:Container(child: IconButton(icon: Icon(
-                          Icons.error,
-                          size:30,
-                          color: Color.fromRGBO(176, 188, 34, 1.0),
-                        ),),),):Center(child:Container(child: IconButton(icon: Icon(
+                        entradaG.documento_id==''?
+                        Center(child:Container(
+                          child: IconButton(icon: Icon(
+                            Icons.error,
+                            size:30,
+                            color: Color.fromRGBO(176, 188, 34, 1.0),
+                          ),
+                          ),),):Center(child:Container(child: IconButton(icon: Icon(
                           Icons.picture_as_pdf,
                           size:30,
                           color: Color.fromRGBO(56, 124, 43, 1.0),
@@ -738,8 +750,8 @@ Widget listaAgnoFinal(){
             //Color.fromRGBO(136,139, 141, 1.0)
             sortAscending: sort,
             sortColumnIndex: 0,
-            horizontalMargin:10,
-            columnSpacing:10,
+            horizontalMargin:15,
+            columnSpacing:15,
             columns: [
               DataColumn(
                 label: Expanded(child:Text("Fecha",textAlign: TextAlign.center,style: textStyle)),
@@ -756,24 +768,15 @@ Widget listaAgnoFinal(){
               (entradaG) => DataRow(
               cells: [
                 DataCell(
-                  Center(child:Text(entradaG.fecha_distribucion.toString(),textAlign: TextAlign.center,)),
+                  Center(child:Text("Sin info",textAlign: TextAlign.center,style: textStyle)),
                   onTap: () {
         
                   },
                 ),
                 DataCell(
-                    entradaG.documento_id==''?Center(child:Container(child: IconButton(icon: Icon(
-                    Icons.error,
-                    size:30,
-                    color: Color.fromRGBO(176, 188, 34, 1.0),
-                  ),),),):Center(child:Container(child: IconButton(icon: Icon(
-                    Icons.picture_as_pdf,
-                    size:30,
-                    color: Color.fromRGBO(56, 124, 43, 1.0),
-                  ),),),),
-                  //Text(entradaG.id),
+                  Center(child:Text("Sin info",textAlign: TextAlign.center,style: textStyle)),
                   onTap: () {
-                    obtener_ruta(entradaG.documento_id);
+        
                   },
                 ),
               ]
@@ -785,4 +788,3 @@ Widget listaAgnoFinal(){
   }
     
 }
-

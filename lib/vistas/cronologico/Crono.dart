@@ -101,11 +101,11 @@ class _VerCronologicoState extends State<VerCronologico> {
       multiItem.add(MultiSelectDialogItem(v, valuestopopulate[v]));
     }
   }
-    var x=[0].toSet();
-    void _showMultiSelect(BuildContext context) async {
-      multiItem = [];
-      populateMultiselect();
-      final items = multiItem;
+  var x=[0].toSet();
+  void _showMultiSelect(BuildContext context) async {
+    multiItem = [];
+    populateMultiselect();
+    final items = multiItem;
     final selectedValues = await showDialog<Set<int>>(
       context: context,
       builder: (BuildContext context) {
@@ -219,21 +219,6 @@ class _VerCronologicoState extends State<VerCronologico> {
           mostrarOcupacion=false;
         });
       }
-
-      // if(fechaSiembra==true)
-      // {
-      //   setState(() {
-      //     x.add(3);
-      //     mostrarFechaSiembra=true;
-      //   });
-      // }else
-      // {
-      //   setState(() {
-      //     x.remove(3);
-      //     mostrarFechaSiembra=false;
-      //   });
-      // }
-
       if(estimado==true)
       {
         setState(() {
@@ -274,7 +259,7 @@ class _VerCronologicoState extends State<VerCronologico> {
         mostrarOcupacion=false;
         mostrarEstimado=false;
         mostrarSiembra=false;
-        //mostrarFechaSiembra=false;
+          //mostrarFechaSiembra=false;
       });
     }
   }
@@ -329,6 +314,13 @@ class _VerCronologicoState extends State<VerCronologico> {
               ],
             ),
           ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              _showMultiSelect(context);
+            },
+            child: const Icon(Icons.add),
+            backgroundColor: Color.fromRGBO(56, 124, 43, 1.0),
+          ),
         ),
       ),
     );
@@ -355,102 +347,102 @@ class _VerCronologicoState extends State<VerCronologico> {
           cambiar?codParametro=entrada[0].cod_hda:codParametro=codRespeuesta;
           //tabla = true;
           return 
+          Center(child:
             Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              verticalDirection: VerticalDirection.down,
               children:<Widget>[
                 SizedBox(height:15),
-                  Container(
-                    height: 40,
-                    margin: const EdgeInsets.all(20.0),
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom:BorderSide(width: 1,
-                          color: Color.fromRGBO(83, 86, 90, 1.0),
-                        ),
+                Container(
+                  height: 40,
+                  margin: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom:BorderSide(width: 1,
+                        color: Color.fromRGBO(83, 86, 90, 1.0),
                       ),
                     ),
-                    child: DropdownButtonHideUnderline(
-                      child: new DropdownButton<String>(
-                        hint: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: Center(
-                            child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,
-                              style: TextStyle(
-                              color: Colors.black,
-                              //fontWeight: FontWeight.bold,
-                              fontSize: 15.0,
-                              fontFamily: 'Karla',
-                              ),
-                            ),
-                          ),
-                        ),
-                        value:selectedRegion,
-                        isDense: true,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            contador=0;
-                            parametro=entrada.where((a) => a.nm_hda==newValue);
-                            codRespeuesta=parametros(parametro);
-                            cambiar = false;
-                            detalle = true;
-                            tabla = false;
-                            selectedRegion = newValue;
-                          });
-                          print(selectedRegion);
-                        },
-                        items: _entrada.map((EntradaCana map) {
-                          return new DropdownMenuItem<String>(
-                            value: map.nm_hda,
-                            //child: Center(
-                            child:Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 5, 38,2),
-                            child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.left,
-                              style: new TextStyle(
-                                //fontWeight: FontWeight.bold,
-                                color: Colors.black
-                              )
-                            ),
-                          ),
-                          //),
-                          );
-                        }
-                        ).toList(),
-                      ),
-                    ),
-                  ), 
-                  Container(
-                  padding:const EdgeInsets.fromLTRB(400, 10, 0,0),
-                  alignment: Alignment.bottomLeft,
-                    child:Row(
-                      children:[
-                        RaisedButton(
-                          textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                          //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                          color: Color.fromRGBO(56, 124, 43, 1.0),
-                          child: Text('Más Info', style: TextStyle(
-                            color: Colors.white,
-                            //Color.fromRGBO(83, 86, 90, 1.0),
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold
-                          )),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                            //side: BorderSide(color: Colors.white)
-                          ),
-                          onPressed: () {
-                            _showMultiSelect(context);
-                          },
-                        ),
-                      ],
-                    )
                   ),
-                  SizedBox(height:5),
-                  tabla?Expanded(child:dataTableVacia()):Expanded(child:dataTable(codParametro)),
-                  
+                  child: DropdownButtonHideUnderline(
+                    child: new DropdownButton<String>(
+                      hint: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Center(
+                          child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,
+                            style: TextStyle(
+                            color: Colors.black,
+                            //fontWeight: FontWeight.bold,
+                            fontSize: 15.0,
+                            fontFamily: 'Karla',
+                            ),
+                          ),
+                        ),
+                      ),
+                      value:selectedRegion,
+                      isDense: true,
+                      onChanged: (String newValue) {
+                        setState(() {
+                          contador=0;
+                          parametro=entrada.where((a) => a.nm_hda==newValue);
+                          codRespeuesta=parametros(parametro);
+                          cambiar = false;
+                          detalle = true;
+                          tabla = false;
+                          selectedRegion = newValue;
+                        });
+                        print(selectedRegion);
+                      },
+                      items: _entrada.map((EntradaCana map) {
+                        return new DropdownMenuItem<String>(
+                          value: map.nm_hda,
+                          //child: Center(
+                          child:Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 5, 38,2),
+                          child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.left,
+                            style: new TextStyle(
+                              //fontWeight: FontWeight.bold,
+                              color: Colors.black
+                            )
+                          ),
+                        ),
+                        //),
+                        );
+                      }
+                      ).toList(),
+                    ),
+                  ),
+                ),
+                SizedBox(height:15), 
+                // Container(
+                // padding:const EdgeInsets.fromLTRB(400, 10, 0,0),
+                // alignment: Alignment.bottomLeft,
+                //   child:Row(
+                //     children:[
+                //       RaisedButton(
+                //         textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                //         //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                //         color: Color.fromRGBO(56, 124, 43, 1.0),
+                //         child: Text('Más Info', style: TextStyle(
+                //           color: Colors.white,
+                //           //Color.fromRGBO(83, 86, 90, 1.0),
+                //           fontSize: 16,
+                //           fontWeight: FontWeight.bold
+                //         )),
+                //         shape: RoundedRectangleBorder(
+                //           borderRadius: BorderRadius.circular(50.0),
+                //           //side: BorderSide(color: Colors.white)
+                //         ),
+                //         onPressed: () {
+                //           _showMultiSelect(context);
+                //         },
+                //       ),
+                //     ],
+                //   )
+                // ),
+                SizedBox(height:5),
+                tabla?Expanded(child:dataTableVacia()):Expanded(child:dataTable(codParametro)),
+                
               ],
-            );
+            )
+          );
         } else if (snapshot.hasError) {
           return Column(
             children:[
@@ -532,151 +524,150 @@ class _VerCronologicoState extends State<VerCronologico> {
     }        
 }
 
-Widget  dataTable(cod_hda) {
-  return FutureBuilder <List<Cronologico>>(
-    future:listar_informe(cod_hda),
-      builder:(context,snapshot){
-        if(snapshot.hasData){
-          var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
-          return  
-            SingleChildScrollView(
-               scrollDirection: Axis.vertical,
-                child: SingleChildScrollView( 
-                  scrollDirection: Axis.horizontal,
-                    child: DataTable(
-                      headingRowColor:
-                      MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
-                      //Color.fromRGBO(136,139, 141, 1.0)
-                      sortAscending: sort,
-                      sortColumnIndex: 0,
-                      horizontalMargin:10,
-                      columnSpacing:10,
-                      columns:
-                      [
-                        DataColumn(
-                          label: mostrarHacienda?Expanded(child:Text("Hacienda",textAlign: TextAlign.center,style: textStyle),):Container(),
-                          numeric: false,
-                          tooltip: "Hacienda",
-                        ),
-                        DataColumn(
-                            label: Expanded(child:Text("Suerte",textAlign: TextAlign.center,style: textStyle),),
+  Widget  dataTable(cod_hda) {
+    return FutureBuilder <List<Cronologico>>(
+      future:listar_informe(cod_hda),
+        builder:(context,snapshot){
+          if(snapshot.hasData){
+            var textStyle = TextStyle(color:Colors.white,fontWeight: FontWeight.bold,fontSize:15,);
+            return  
+              SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                  child: SingleChildScrollView( 
+                    scrollDirection: Axis.horizontal,
+                      child: DataTable(
+                        headingRowColor:
+                        MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+                        //Color.fromRGBO(136,139, 141, 1.0)
+                        sortAscending: sort,
+                        sortColumnIndex: 0,
+                        horizontalMargin:10,
+                        columnSpacing:10,
+                        columns:
+                        [
+                          DataColumn(
+                            label: mostrarHacienda?Expanded(child:Text("Hacienda",textAlign: TextAlign.center,style: textStyle),):Container(),
                             numeric: false,
-                            tooltip: "Suerte",
-                        ),
-                        DataColumn(
-                            label:  mostrarOcupacion?Expanded(child:Text("Ocupación",textAlign: TextAlign.center,style: textStyle),):Container(),
+                            tooltip: "Hacienda",
+                          ),
+                          DataColumn(
+                              label: Expanded(child:Text("Suerte",textAlign: TextAlign.center,style: textStyle),),
+                              numeric: false,
+                              tooltip: "Suerte",
+                          ),
+                          DataColumn(
+                              label:  mostrarOcupacion?Expanded(child:Text("Ocupación",textAlign: TextAlign.center,style: textStyle),):Container(),
+                              numeric: false,
+                              tooltip: mostrarOcupacion?"Ocupación":'',
+                          ),
+                          DataColumn(
+                            label: Expanded(child:Text("Área",textAlign: TextAlign.center,style: textStyle),),
                             numeric: false,
-                            tooltip: mostrarOcupacion?"Ocupación":'',
-                        ),
-                        DataColumn(
-                          label: Expanded(child:Text("Área",textAlign: TextAlign.center,style: textStyle),),
-                          numeric: false,
-                          tooltip: "Área",
-                        ),
-                        DataColumn(
-                          label: Expanded(child:Text("Edad",textAlign: TextAlign.center,style: textStyle),),
-                          numeric: false,
-                          tooltip: "Edad",
-                        ),
-                        DataColumn(
-                            label: Expanded(child:Text("Fecha de Corte",textAlign: TextAlign.center,style: textStyle),),
+                            tooltip: "Área",
+                          ),
+                          DataColumn(
+                            label: Expanded(child:Text("Edad",textAlign: TextAlign.center,style: textStyle),),
                             numeric: false,
-                            tooltip: "Fecha de Corte",
-                            ),
-                        DataColumn(
-                          label: Expanded(child:Text("Variedad",textAlign: TextAlign.center,style: textStyle),),
-                          numeric: false,
-                          tooltip: "Variedad",
-                        ),
-                        DataColumn(
-                          label: mostrarEstimado?Expanded(child:Text("TCH Estimado",textAlign: TextAlign.center,style: textStyle),):Container(),
-                          numeric: false,
-                          tooltip: mostrarEstimado?"TCH Estimado":'',
-                        ),
-                        DataColumn(
-                            label: Expanded(child:Text("No. Cortes",textAlign: TextAlign.center,style: textStyle),),
+                            tooltip: "Edad",
+                          ),
+                          DataColumn(
+                              label: Expanded(child:Text("Fecha de Corte",textAlign: TextAlign.center,style: textStyle),),
+                              numeric: false,
+                              tooltip: "Fecha de Corte",
+                              ),
+                          DataColumn(
+                            label: Expanded(child:Text("Variedad",textAlign: TextAlign.center,style: textStyle),),
                             numeric: false,
-                            tooltip: "No.Cortes",
-                            ),
-                        DataColumn(
-                          label:Expanded(child:Text("Fecha de Siembra",textAlign: TextAlign.center,style: textStyle),),
-                          numeric: false,
-                          tooltip: "Fecha de Siembra",
-                        ),
-                        DataColumn(
-                            label: mostrarTierra?Expanded(child:Text("Dist. Tierra",textAlign: TextAlign.center,style: textStyle),):Container(),
+                            tooltip: "Variedad",
+                          ),
+                          DataColumn(
+                            label: mostrarEstimado?Expanded(child:Text("TCH Estimado",textAlign: TextAlign.center,style: textStyle),):Container(),
                             numeric: false,
-                            tooltip: mostrarTierra?"Dist.Tierra":'',
-                        ),
-                        DataColumn(
-                          label: mostrarSiembra?Expanded(child:Text("Dist. Siembra",textAlign: TextAlign.center,style: textStyle),):Container(),
-                          numeric: false,
-                          tooltip: mostrarSiembra?"Dist.Siembra":'',
-                        ),
-                        DataColumn(
-                          label: mostrarZona?Expanded(child:Text("Zona Agroecológica",textAlign: TextAlign.center,style: textStyle),):Container(),
-                          numeric: false,
-                          tooltip:"Zona Agroecológica",
-                        ),
-                      ],
-                      rows:
-                      entradaGeneral.map(
-                        (entradaCrono) => DataRow(
-                          cells:[
-                            DataCell(
-                                mostrarHacienda?Center(child:Text(entradaCrono.hacienda_cod),):Container(),
-                            ),
-                            DataCell(
-                              Center(child:Text(entradaCrono.suerte_cod),),
-                            ),
-                            DataCell(
-                              mostrarOcupacion?Center(child:Text(entradaCrono.ocup),):Container(),
-                            ),
-                            DataCell(
-                              Center(child:Text(entradaCrono.area),),
-                            ),
-                            DataCell(
-                              Center(child:Text(entradaCrono.edad),),
-                            ),
-                            DataCell(
-                              Center(child:Text(entradaCrono.fecha_uc),),
-                            ),
-                            DataCell(
-                              Center(child:Text(entradaCrono.variedad),),
-                            ),
-                            DataCell(
-                              mostrarEstimado?Center(child:Text(entradaCrono.tch_est),):Container(),
-                            ),
-                            DataCell(
-                              Center(child:Text(entradaCrono.ncorte),),
-                            ),
-                            DataCell(
-                            
-                              Center(child:Text(entradaCrono.fecha_siembra),),
-                            ),
-                            DataCell(
-                              mostrarSiembra?Center(child:Text(entradaCrono.distancia),):Container(),
-                            ),
-                            DataCell(
-                              mostrarTierra?Center(child:Text(entradaCrono.dist_surc),):Container(),
-                            ),
-                            DataCell(
-                              mostrarZona?Center(child:Text(entradaCrono.zona_agroc),):Container(),
-                            ),
-                          ]
-                        ),
-                      ).toList(),
-                    ),
-                ),
-              );
-        }else{
-          return
-          Center(
-            child:CircularProgressIndicator()
-          );
-        }
-      },
-    );
+                            tooltip: mostrarEstimado?"TCH Estimado":'',
+                          ),
+                          DataColumn(
+                              label: Expanded(child:Text("No. Cortes",textAlign: TextAlign.center,style: textStyle),),
+                              numeric: false,
+                              tooltip: "No.Cortes",
+                              ),
+                          DataColumn(
+                            label:Expanded(child:Text("Fecha de Siembra",textAlign: TextAlign.center,style: textStyle),),
+                            numeric: false,
+                            tooltip: "Fecha de Siembra",
+                          ),
+                          DataColumn(
+                              label: mostrarTierra?Expanded(child:Text("Dist. Tierra",textAlign: TextAlign.center,style: textStyle),):Container(),
+                              numeric: false,
+                              tooltip: mostrarTierra?"Dist.Tierra":'',
+                          ),
+                          DataColumn(
+                            label: mostrarSiembra?Expanded(child:Text("Dist. Siembra",textAlign: TextAlign.center,style: textStyle),):Container(),
+                            numeric: false,
+                            tooltip: mostrarSiembra?"Dist.Siembra":'',
+                          ),
+                          DataColumn(
+                            label: mostrarZona?Expanded(child:Text("Zona Agroecológica",textAlign: TextAlign.center,style: textStyle),):Container(),
+                            numeric: false,
+                            tooltip:"Zona Agroecológica",
+                          ),
+                        ],
+                        rows:
+                        entradaGeneral.map(
+                          (entradaCrono) => DataRow(
+                            cells:[
+                              DataCell(
+                                  mostrarHacienda?Center(child:Text(entradaCrono.hacienda_cod),):Container(),
+                              ),
+                              DataCell(
+                                Center(child:Text(entradaCrono.suerte_cod),),
+                              ),
+                              DataCell(
+                                mostrarOcupacion?Center(child:Text(entradaCrono.ocup),):Container(),
+                              ),
+                              DataCell(
+                                Center(child:Text(entradaCrono.area),),
+                              ),
+                              DataCell(
+                                Center(child:Text(entradaCrono.edad),),
+                              ),
+                              DataCell(
+                                Center(child:Text(entradaCrono.fecha_uc),),
+                              ),
+                              DataCell(
+                                Center(child:Text(entradaCrono.variedad),),
+                              ),
+                              DataCell(
+                                mostrarEstimado?Center(child:Text(entradaCrono.tch_est),):Container(),
+                              ),
+                              DataCell(
+                                Center(child:Text(entradaCrono.ncorte),),
+                              ),
+                              DataCell(
+                                Center(child:Text(entradaCrono.fecha_siembra),),
+                              ),
+                              DataCell(
+                                mostrarTierra?Center(child:Text(entradaCrono.dist_surc),):Container(),
+                              ),
+                              DataCell(
+                                mostrarSiembra?Center(child:Text(entradaCrono.distancia),):Container(),
+                              ),
+                              DataCell(
+                                mostrarZona?Center(child:Text(entradaCrono.zona_agroc),):Container(),
+                              ),
+                            ]
+                          ),
+                        ).toList(),
+                      ),
+                  ),
+                );
+          }else{
+            return
+            Center(
+              child:CircularProgressIndicator()
+            );
+          }
+        },
+      );
   }
 
   Widget  dataTableVacia() {

@@ -52,6 +52,7 @@ class _VerLiquidacionesState extends State<VerLiquidaciones> {
   List<EntradaCana> _region = [];
   List <EntradaCana>entrada=[];
   List <Liquidacion>entradaGeneral=[];
+  List <Liquidacion>entradaGeneralVacio=[];
   List <Ajuste>entradaAjuste=[];
   List <Ajuste>entradaAnticipo=[];
   List <EntradaCana>pasoParametro=[];
@@ -491,6 +492,13 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showMultiSelect(context);
+          },
+          child: const Icon(Icons.add),
+          backgroundColor: Color.fromRGBO(56, 124, 43, 1.0),
+        ),
       ),
       ),
     );
@@ -510,8 +518,9 @@ parametros(parametro){
   Widget lista(){
     var token=widget.data.token;
     return Container(
+      width: 250,
       alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.fromLTRB(38, 5, 38,10),
+      margin: const EdgeInsets.fromLTRB(20, 5, 20,10),
       decoration: BoxDecoration(
       border: Border(bottom:BorderSide(width: 1,
         color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -550,7 +559,7 @@ parametros(parametro){
               var fechaicambio=_startTimeController.text.split('/');
               var fechafcambio=_endTimeController.text.split('/');
               var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-              var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+              var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
               DateTime parseInicial = DateTime.parse(ini);
               DateTime parseFinal = DateTime.parse(fin);
               String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
@@ -613,7 +622,7 @@ parametros(parametro){
           return DropdownMenuItem<String>(
             value: value,
             child:Padding(
-            padding: const EdgeInsets.fromLTRB(0, 5,40,10),
+            padding: const EdgeInsets.fromLTRB(0, 5,20,10),
             child:new Text(value,textAlign: TextAlign.center,
               style: new TextStyle(color: Colors.black)
             ),
@@ -623,7 +632,6 @@ parametros(parametro){
     ),),
     );
   }
-
 
   Widget  dataBody() {
     return FutureBuilder<List<EntradaCana>>(
@@ -640,8 +648,8 @@ parametros(parametro){
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:[
                   Container(
-                    width:300,
-                    padding: EdgeInsets.fromLTRB(20, 0,20, 10),
+                    width:290,
+                    padding: EdgeInsets.fromLTRB(0, 0,20, 10),
                     child:Center(
                       child: DateTimeField(
                       controller: _startTimeController,
@@ -651,7 +659,7 @@ parametros(parametro){
                         var fechaicambio=_startTimeController.text.split('/');
                         var fechafcambio=_endTimeController.text.split('/');
                         var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                        var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                        var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
                         DateTime parseInicial = DateTime.parse(ini);
                         DateTime parseFinal = DateTime.parse(fin);
                         String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
@@ -746,7 +754,7 @@ parametros(parametro){
                     ),
                   ),
                   Container(
-                  width:300,
+                  width:290,
                   padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
                   child:DateTimeField(
                     controller:_endTimeController,
@@ -756,7 +764,7 @@ parametros(parametro){
                       var fechaicambio=_startTimeController.text.split('/');
                       var fechafcambio=_endTimeController.text.split('/');
                       var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                      var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                      var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
                       DateTime parseInicial = DateTime.parse(ini);
                       DateTime parseFinal = DateTime.parse(fin);
                       String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
@@ -853,11 +861,10 @@ parametros(parametro){
                   lista(),
                   //SizedBox(height:8),
                   Container(
-                    width:300,
-                    height: 40,
-                    //width:148,
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.fromLTRB(20, 12,20,10),
+                  width: 230,
+                  height: 40,
+                  //padding: EdgeInsets.fromLTRB(40, 10, 40, 10),
+                  margin: const EdgeInsets.fromLTRB(20, 10, 0,10),
                     decoration: BoxDecoration(
                     border: Border(bottom:BorderSide(width: 1,
                       color: Color.fromRGBO(83, 86, 90, 1.0),),),
@@ -883,7 +890,7 @@ parametros(parametro){
                             var fechaicambio=_startTimeController.text.split('/');
                             var fechafcambio=_endTimeController.text.split('/');
                             var ini=fechaicambio[2]+'-'+fechaicambio[1]+'-'+fechaicambio[0]+' 00:00:00';
-                            var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 00:00:00';
+                            var fin=fechafcambio[2]+'-'+fechafcambio[1]+'-'+fechafcambio[0]+' 23:59:00';
                             DateTime parseInicial = DateTime.parse(ini);
                             DateTime parseFinal = DateTime.parse(fin);
                             String nfechaI=DateFormat('yyyy-mm-dd').format(parseInicial);
@@ -959,33 +966,33 @@ parametros(parametro){
                   //SizedBox(height:8),
               ]
               ),
-              SizedBox(height:15),
-              Container(
-                padding:const EdgeInsets.fromLTRB(400, 5, 0,5),
-                alignment: Alignment.bottomLeft,
-                  child:Row(
-                    children:[
-                      RaisedButton(
-                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                        child: Text('Más Info', style: TextStyle(
-                          color: Colors.white,
-                          //Color.fromRGBO(83, 86, 90, 1.0),
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold
-                        )),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          //side: BorderSide(color: Colors.white)
-                        ),
-                        onPressed: () {
-                          _showMultiSelect(context);
-                        },
-                      ),
-                    ],
-                  )
-              ),
+              SizedBox(height:40),
+              // Container(
+              //   padding:const EdgeInsets.fromLTRB(400, 5, 0,5),
+              //   alignment: Alignment.bottomLeft,
+              //     child:Row(
+              //       children:[
+              //         RaisedButton(
+              //           textColor: Color.fromRGBO(83, 86, 90, 1.0),
+              //           //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+              //           color: Color.fromRGBO(56, 124, 43, 1.0),
+              //           child: Text('Más Info', style: TextStyle(
+              //             color: Colors.white,
+              //             //Color.fromRGBO(83, 86, 90, 1.0),
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.bold
+              //           )),
+              //           shape: RoundedRectangleBorder(
+              //             borderRadius: BorderRadius.circular(50.0),
+              //             //side: BorderSide(color: Colors.white)
+              //           ),
+              //           onPressed: () {
+              //             _showMultiSelect(context);
+              //           },
+              //         ),
+              //       ],
+              //     )
+              // ),
               SizedBox(height:15),
               Expanded(child:mostrar(),),
                 //listaAgnoInicial(),
@@ -1290,18 +1297,18 @@ parametros(parametro){
                 tooltip: "Detalle Liquidación",
               ),
             ],
-            rows: entradaGeneral
+            rows: entradaGeneralVacio
             .map(
               (entradaG) => DataRow(
                 cells: [
                   DataCell(
-                    Text(entradaG.fecha,textAlign: TextAlign.center),
+                    Text("",textAlign: TextAlign.center),
                   ),
                   DataCell(
-                    Text(entradaG.ton_cana,textAlign: TextAlign.center,style:textStyle),
+                    Text("",textAlign: TextAlign.center,style:textStyle),
                   ),
                   DataCell(
-                    Text(entradaG.rto_real_ing,textAlign: TextAlign.center,style:textStyle),
+                    Text("",textAlign: TextAlign.center,style:textStyle),
                   ), 
                                      
                 ]
