@@ -271,80 +271,83 @@ validar()async{
                 Container(
                 color:Colors.white,
                 width: 600,
-                height:800,
+                height:750,
                 //MediaQuery.of(context).size.height,
                 //width: MediaQuery.of(context).size.width,
-                  child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
-                        children:[
-                          Container(
-                          padding: EdgeInsets.fromLTRB(20,10,10,10),
-                            height:770,
-                            width: 1000,
-                            child:Image.asset(
-                              "images/login1.jpg",
-                              fit: BoxFit.cover,
-                            )
-                          ),
-                        ]
-                      ),
-                      SizedBox(width:70),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children:[
-                          Container(
-                            color:Colors.white,
-                            child: Container(
-                              height: 180,
-                              width: 250,
-                              decoration: BoxDecoration(
-                                color: Colors.white,  
-                                  //borderRadius: BorderRadius.circular(20),
-                                image: DecorationImage(
-                                  image: AssetImage("images/logo_principal.JPG"),
-                                    fit: BoxFit.fitWidth),
-                              ),
-                                margin: EdgeInsets.all(10),
-                                padding: EdgeInsets.symmetric(horizontal:10),
-                            ), 
-                          ),
-                          SizedBox(height:70),
-                          Container(
-                            color:Colors.white,
-                            //padding: EdgeInsets.symmetric(horizontal:10,vertical:0),
-                            height: 500,//MediaQuery.of(context).size.height * 0.70,
-                            width:400,
-                            decoration: BoxDecoration(
-                              // gradient: LinearGradient(
-                              //   begin: Alignment.topLeft,
-                              //   end: Alignment.bottomRight,
-                              //   colors: [Color.fromRGBO(56, 124, 43, 1.0), Color.fromRGBO(176, 188, 34, 1.0)],
-                              //   tileMode: TileMode.repeated,
-                              // ),         
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(1),
-                                topRight: Radius.circular(1)
+                
+                  child: Column(
+                    children: [
+                      Row(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Column(
+                          children:[
+                            Container(
+                            padding: EdgeInsets.fromLTRB(0,0,0,10),
+                              height:800,
+                              width: 1000,
+                              child:Image.asset(
+                                "images/login1.jpg",
+                                fit: BoxFit.cover,
                               )
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                SizedBox(height: 10),
-                                Text("Proveedores Caña",textAlign:TextAlign.center,style: TextStyle(
-                                  color: Color.fromRGBO(83, 86, 90, 1.0),
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold
-                                )
+                          ]
+                        ),
+                        SizedBox(width:70),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children:[
+                            Container(
+                              color:Colors.white,
+                              child: Container(
+                                height: 180,
+                                width: 250,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,  
+                                    //borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    image: AssetImage("images/logo_principal.JPG"),
+                                      fit: BoxFit.fitWidth),
                                 ),
-                                SizedBox(height: 70),
+                                  margin: EdgeInsets.all(10),
+                                  padding: EdgeInsets.symmetric(horizontal:5),
+                              ), 
+                            ),
+                            SizedBox(height:10),
+                            Container(
+                              color:Colors.white,
+                              //padding: EdgeInsets.symmetric(horizontal:10,vertical:0),
+                              height:500,//MediaQuery.of(context).size.height * 0.70,
+                              width:400,
+                              decoration: BoxDecoration(
+                                // gradient: LinearGradient(
+                                //   begin: Alignment.topLeft,
+                                //   end: Alignment.bottomRight,
+                                //   colors: [Color.fromRGBO(56, 124, 43, 1.0), Color.fromRGBO(176, 188, 34, 1.0)],
+                                //   tileMode: TileMode.repeated,
+                                // ),         
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(1),
+                                  topRight: Radius.circular(1)
+                                )
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  SizedBox(height: 10),
+                                  Text("Proveedores Caña",textAlign:TextAlign.center,style: TextStyle(
+                                    color: Color.fromRGBO(83, 86, 90, 1.0),
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold
+                                  )
+                                  ),
+                                  SizedBox(height:70),
                                   Container(
-                                    width: 400,
-                                    padding: EdgeInsets.all(30),
+                                    width: 450,
+                                    padding: EdgeInsets.fromLTRB(30,5,30,30),
                                     child: Column(
                                       children: <Widget>[
                                         TextFormField(
@@ -379,7 +382,7 @@ validar()async{
                                           ),
                                           
                                         ),
-                                        SizedBox(height: 20),
+                                        SizedBox(height: 10),
                                         TextFormField(
                                           controller:passwordController ,
                                           validator: (value){
@@ -412,7 +415,7 @@ validar()async{
                                           ),
                                           
                                         ),
-                                        SizedBox(height:15),
+                                        //SizedBox(height:15),
                                         SizedBox(height:30),
                                         Container(
                                         height: 50,
@@ -425,9 +428,9 @@ validar()async{
                                           child: RaisedButton(
                                             textColor: Color.fromRGBO(83, 86, 90, 1.0),
                                             //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                            color: Colors.white,
+                                            color: Color.fromRGBO(56, 124, 43, 1.0),
                                             child: Text('Ingresar', style: TextStyle(
-                                              color:  Color.fromRGBO(83, 86, 90, 1.0),
+                                              color:  Colors.white,
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold
                                             )),
@@ -446,7 +449,7 @@ validar()async{
                                             },
                                           )
                                         ),
-                                        SizedBox(height:60),
+                                        SizedBox(height:50),
                                         FlatButton(
                                           onPressed: (){
                                             Navigator.of(context).push(
@@ -459,20 +462,29 @@ validar()async{
                                             fontWeight: FontWeight.bold
                                           ),),
                                         ),
-                                        SizedBox(height:10),
+                                        SizedBox(height:50),
                                       ],
                                     ),
                                   ),
-                              ],
+                                ],
+                              ),
                             ),
-                          )
-                        ]
+                          ]
+                        ),
+                      ],
                       ),
-                      //SizedBox(height: 5),
-                      
+                      // Row(
+                      //   children:[
+                      //     Container(
+                      //       height:100,
+                      //       width: 1800,
+                      //       color:Color.fromRGBO(83, 86, 90, 1.0)
+                      //     ),
+                      //   ]
+                      // )
                     ],
-                  ),
-                    
+                  )
+                  ,
                 ),
                     
               ],

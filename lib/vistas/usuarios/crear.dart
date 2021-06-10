@@ -74,7 +74,7 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
  TextEditingController  roles = new TextEditingController();
 
  
- crear_usuario()async{
+  crear_usuario()async{
     List nits=[];
     nits=nit.text.split(",");
     List roles=[];
@@ -85,58 +85,56 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
     //await pr.show();
 
     session.crear_usuario(user.text,nombre_completo.text,telefono1.text,telefono2.text,telefono3.text,email.text,email_alternativo.text,nits,roles).then((_) {
-        successDialog(
-        context, 
-        creacion,
-        negativeText: "Si",
-        negativeAction: (){
-          user.text =''; 
-          nombre_completo.text =''; 
-          nit.text =''; 
-          telefono1.text =''; 
-          clave_acceso.text='';
-          telefono2.text =''; 
-          telefono3.text =''; 
-          email.text =''; 
-          usuario_id='';
-          email_alternativo.text =''; 
-        },
-        neutralText: "No",
-        neutralAction: (){
-          var session= Conexion();
-          session.set_token(widget.data.token);
-          var usuario= Usuarios(session);
-          var token=widget.data.token;
-          Navigator.of(context).push(
-           MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));
-        },
+      successDialog(
+      context, 
+      creacion,
+      negativeText: "Si",
+      negativeAction: (){
+        user.text =''; 
+        nombre_completo.text =''; 
+        nit.text =''; 
+        telefono1.text =''; 
+        clave_acceso.text='';
+        telefono2.text =''; 
+        telefono3.text =''; 
+        email.text =''; 
+        usuario_id='';
+        email_alternativo.text =''; 
+      },
+      neutralText: "No",
+      neutralAction: (){
+        var session= Conexion();
+        session.set_token(widget.data.token);
+        var usuario= Usuarios(session);
+        var token=widget.data.token;
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));
+      },
     );
-  if(session.validar == true){
-    //token=session.get_session();
-  }else{
-    String mensaje=session.mensaje; 
-    if (mensaje!=null)
-    {
-      //confirm (mensaje); 
-                              
+    if(session.validar == true){
+      //token=session.get_session();
     }else{
-      //confirm ("Sin conexión al servidor");
-    }                        
-  }
+      String mensaje=session.mensaje; 
+      if (mensaje!=null)
+      {
+        //confirm (mensaje); 
+                                
+      }else{
+        //confirm ("Sin conexión al servidor");
+      }                        
+    }
                         
   }).catchError( (onError){
-
-  if(onError is SessionNotFound){
-  return 'Usuario o Contraseña Incorrecta';
-                          
-  }else if(onError is ConnectionError){
+    if(onError is SessionNotFound){
+    return 'Usuario o Contraseña Incorrecta';
                             
-  }else{
-                          
-  }
-                                                  
+    }else if(onError is ConnectionError){
+                              
+    }else{
+                            
+    }                                             
   });
-}
+  }
 
 editar_usuario()async{
   List nits=[];
