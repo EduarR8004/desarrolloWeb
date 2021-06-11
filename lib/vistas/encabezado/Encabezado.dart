@@ -167,13 +167,16 @@ class _EncabezadoState extends State<Encabezado> {
               },
             ),
           ),
-          Center(child: Text(widget.titulo,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold
+          Center(
+            child: 
+            Text(
+              widget.titulo,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold
+              ),
             ),
-          ),
           ),
           Padding(
           padding: EdgeInsets.only(right:2),

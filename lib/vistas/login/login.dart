@@ -274,13 +274,15 @@ validar()async{
                 height:750,
                 //MediaQuery.of(context).size.height,
                 //width: MediaQuery.of(context).size.width,
-                
                   child: Column(
                     children: [
                       Row(
                       //mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Column(
+                        Expanded(
+                          flex:2,
+                          child: 
+                          Column(
                           children:[
                             Container(
                             padding: EdgeInsets.fromLTRB(0,0,0,10),
@@ -292,184 +294,189 @@ validar()async{
                               )
                             ),
                           ]
+                        )
                         ),
-                        SizedBox(width:70),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children:[
-                            Container(
-                              color:Colors.white,
-                              child: Container(
-                                height: 180,
-                                width: 250,
-                                decoration: BoxDecoration(
-                                  color: Colors.white,  
-                                    //borderRadius: BorderRadius.circular(20),
-                                  image: DecorationImage(
-                                    image: AssetImage("images/logo_principal.JPG"),
-                                      fit: BoxFit.fitWidth),
-                                ),
-                                  margin: EdgeInsets.all(10),
-                                  padding: EdgeInsets.symmetric(horizontal:5),
-                              ), 
-                            ),
-                            SizedBox(height:10),
-                            Container(
-                              color:Colors.white,
-                              //padding: EdgeInsets.symmetric(horizontal:10,vertical:0),
-                              height:500,//MediaQuery.of(context).size.height * 0.70,
-                              width:400,
-                              decoration: BoxDecoration(
-                                // gradient: LinearGradient(
-                                //   begin: Alignment.topLeft,
-                                //   end: Alignment.bottomRight,
-                                //   colors: [Color.fromRGBO(56, 124, 43, 1.0), Color.fromRGBO(176, 188, 34, 1.0)],
-                                //   tileMode: TileMode.repeated,
-                                // ),         
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(1),
-                                  topRight: Radius.circular(1)
-                                )
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  SizedBox(height: 10),
-                                  Text("Proveedores Caña",textAlign:TextAlign.center,style: TextStyle(
-                                    color: Color.fromRGBO(83, 86, 90, 1.0),
-                                    fontSize: 30,
-                                    fontWeight: FontWeight.bold
-                                  )
+                        SizedBox(width:10),
+                        Expanded(
+                          flex: 1,
+                          child:
+                            Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children:[
+                              Container(
+                                color:Colors.white,
+                                child: Container(
+                                  height: 180,
+                                  width: 250,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,  
+                                      //borderRadius: BorderRadius.circular(20),
+                                    image: DecorationImage(
+                                      image: AssetImage("images/logo_principal.JPG"),
+                                        fit: BoxFit.fitWidth),
                                   ),
-                                  SizedBox(height:70),
-                                  Container(
-                                    width: 450,
-                                    padding: EdgeInsets.fromLTRB(30,5,30,30),
-                                    child: Column(
-                                      children: <Widget>[
-                                        TextFormField(
-                                          controller:nameController ,
-                                          validator: (value){
-                                          if (value.isEmpty) {
-                                                return 'Por favor Ingrese su Usuario';
-                                          }
-                                          },
-                                          style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold), 
-                                          //TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-                                          obscureText:false,
-                                          decoration: InputDecoration(
+                                    margin: EdgeInsets.all(10),
+                                    padding: EdgeInsets.symmetric(horizontal:5),
+                                ), 
+                              ),
+                              SizedBox(height:10),
+                              Container(
+                                color:Colors.white,
+                                //padding: EdgeInsets.symmetric(horizontal:10,vertical:0),
+                                height:500,//MediaQuery.of(context).size.height * 0.70,
+                                width:400,
+                                decoration: BoxDecoration(
+                                  // gradient: LinearGradient(
+                                  //   begin: Alignment.topLeft,
+                                  //   end: Alignment.bottomRight,
+                                  //   colors: [Color.fromRGBO(56, 124, 43, 1.0), Color.fromRGBO(176, 188, 34, 1.0)],
+                                  //   tileMode: TileMode.repeated,
+                                  // ),         
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(1),
+                                    topRight: Radius.circular(1)
+                                  )
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: <Widget>[
+                                    SizedBox(height: 10),
+                                    Text("Proveedores Caña",textAlign:TextAlign.center,style: TextStyle(
+                                      color: Color.fromRGBO(83, 86, 90, 1.0),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold
+                                    )
+                                    ),
+                                    SizedBox(height:70),
+                                    Container(
+                                      width: 450,
+                                      padding: EdgeInsets.fromLTRB(30,5,30,30),
+                                      child: Column(
+                                        children: <Widget>[
+                                          TextFormField(
+                                            controller:nameController ,
+                                            validator: (value){
+                                            if (value.isEmpty) {
+                                                  return 'Por favor Ingrese su Usuario';
+                                            }
+                                            },
+                                            style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold), 
+                                            //TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                                            obscureText:false,
+                                            decoration: InputDecoration(
+                                                enabledBorder: UnderlineInputBorder(      
+                                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                                              ),  
+                                              focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                              ),
+                                              border: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                              ),
+                                              // focusedBorder: OutlineInputBorder(
+                                              //   borderSide: BorderSide(color:Color.fromRGBO(83, 86, 90, 1.0),width: 1.0)
+                                              // ),
+                                              // enabledBorder: OutlineInputBorder(
+                                              //   borderSide: BorderSide(color: Colors.white, width: 1.0)
+                                              // ),
+                                              labelText:"Usuario",
+                                              labelStyle: TextStyle(color:Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold),
+                                              suffixIcon: Icon(Icons.people_alt_rounded, size: 27,color: Color.fromRGBO(83, 86, 90, 1.0),),
+                                            ),
+                                            
+                                          ),
+                                          SizedBox(height: 10),
+                                          TextFormField(
+                                            controller:passwordController ,
+                                            validator: (value){
+                                            if (value.isEmpty) {
+                                                  return 'Por favor Ingrese su Contraseña';
+                                            }
+                                            },
+                                            style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold), 
+                                            //style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                                            obscureText:true,
+                                            decoration: InputDecoration(
                                               enabledBorder: UnderlineInputBorder(      
-                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                                            ),  
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                                              ),  
+                                              focusedBorder: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                              ),
+                                              border: UnderlineInputBorder(
+                                                borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                              ),
+                                              // focusedBorder: OutlineInputBorder(
+                                              //   borderSide: BorderSide(color: Colors.white,width: 1.0)
+                                              // ),
+                                              // enabledBorder: OutlineInputBorder(
+                                              //   borderSide: BorderSide(color: Colors.white, width: 1.0)
+                                              // ),
+                                              labelText:"Contraseña",
+                                              labelStyle: TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold),
+                                              suffixIcon: Icon(Icons.https, size: 27,color: Color.fromRGBO(83, 86, 90, 1.0),),
                                             ),
-                                            border: UnderlineInputBorder(
-                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                                            ),
-                                            // focusedBorder: OutlineInputBorder(
-                                            //   borderSide: BorderSide(color:Color.fromRGBO(83, 86, 90, 1.0),width: 1.0)
-                                            // ),
-                                            // enabledBorder: OutlineInputBorder(
-                                            //   borderSide: BorderSide(color: Colors.white, width: 1.0)
-                                            // ),
-                                            labelText:"Usuario",
-                                            labelStyle: TextStyle(color:Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold),
-                                            suffixIcon: Icon(Icons.people_alt_rounded, size: 27,color: Color.fromRGBO(83, 86, 90, 1.0),),
+                                            
                                           ),
-                                          
-                                        ),
-                                        SizedBox(height: 10),
-                                        TextFormField(
-                                          controller:passwordController ,
-                                          validator: (value){
-                                          if (value.isEmpty) {
-                                                return 'Por favor Ingrese su Contraseña';
-                                          }
-                                          },
-                                          style:TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold), 
-                                          //style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-                                          obscureText:true,
-                                          decoration: InputDecoration(
-                                            enabledBorder: UnderlineInputBorder(      
-                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                                            ),  
-                                            focusedBorder: UnderlineInputBorder(
-                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                                          //SizedBox(height:15),
+                                          SizedBox(height:30),
+                                          Container(
+                                          height: 50,
+                                          width: 250,
+                                            //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius: BorderRadius.circular(14),
                                             ),
-                                            border: UnderlineInputBorder(
-                                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                                            ),
-                                            // focusedBorder: OutlineInputBorder(
-                                            //   borderSide: BorderSide(color: Colors.white,width: 1.0)
-                                            // ),
-                                            // enabledBorder: OutlineInputBorder(
-                                            //   borderSide: BorderSide(color: Colors.white, width: 1.0)
-                                            // ),
-                                            labelText:"Contraseña",
-                                            labelStyle: TextStyle(color: Color.fromRGBO(83, 86, 90, 1.0),fontWeight: FontWeight.bold),
-                                            suffixIcon: Icon(Icons.https, size: 27,color: Color.fromRGBO(83, 86, 90, 1.0),),
+                                            child: RaisedButton(
+                                              textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                              color: Color.fromRGBO(56, 124, 43, 1.0),
+                                              child: Text('Ingresar', style: TextStyle(
+                                                color:  Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold
+                                              )),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(50.0),
+                                                side: BorderSide(color: Colors.white)
+                                              ),
+                                              onPressed: () {
+                                                if (!_formKey.currentState.validate()){
+                                                        Scaffold.of(context).showSnackBar(
+                                                          SnackBar(content: Text('Processing Data'))
+                                                        );
+                                                }else{
+                                                  validar();   
+                                                }
+                                              },
+                                            )
                                           ),
-                                          
-                                        ),
-                                        //SizedBox(height:15),
-                                        SizedBox(height:30),
-                                        Container(
-                                        height: 50,
-                                        width: 250,
-                                          //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.circular(14),
-                                          ),
-                                          child: RaisedButton(
-                                            textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                            //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                            color: Color.fromRGBO(56, 124, 43, 1.0),
-                                            child: Text('Ingresar', style: TextStyle(
-                                              color:  Colors.white,
+                                          SizedBox(height:50),
+                                          FlatButton(
+                                            onPressed: (){
+                                              Navigator.of(context).push(
+                                              MaterialPageRoute(builder: (context) => SolicitarRecuperar()));
+                                            },
+                                            textColor:Color.fromRGBO(83, 86, 90, 1.0),
+                                            child: Text("¿Olvidó su Contraseña?",style: TextStyle(
+                                              color: Color.fromRGBO(83, 86, 90, 1.0),
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold
-                                            )),
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(50.0),
-                                              side: BorderSide(color: Colors.white)
-                                            ),
-                                            onPressed: () {
-                                              if (!_formKey.currentState.validate()){
-                                                      Scaffold.of(context).showSnackBar(
-                                                        SnackBar(content: Text('Processing Data'))
-                                                      );
-                                              }else{
-                                                validar();   
-                                              }
-                                            },
-                                          )
-                                        ),
-                                        SizedBox(height:50),
-                                        FlatButton(
-                                          onPressed: (){
-                                            Navigator.of(context).push(
-                                            MaterialPageRoute(builder: (context) => SolicitarRecuperar()));
-                                          },
-                                          textColor:Color.fromRGBO(83, 86, 90, 1.0),
-                                          child: Text("¿Olvidó su Contraseña?",style: TextStyle(
-                                            color: Color.fromRGBO(83, 86, 90, 1.0),
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold
-                                          ),),
-                                        ),
-                                        SizedBox(height:50),
-                                      ],
+                                            ),),
+                                          ),
+                                          SizedBox(height:50),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ]
+                            ]
+                          ),
                         ),
                       ],
                       ),
