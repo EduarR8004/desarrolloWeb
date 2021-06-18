@@ -22,7 +22,10 @@ class Usuarios with ChangeNotifier{
     List<Usuario> usuarios=[];
     for ( var usuario in map)
     {
-      usuarios.add(Usuario.fromJson(usuario));
+      if (usuario['eliminado'] == null){
+        usuarios.add(Usuario.fromJson(usuario));
+      }
+      
     }
     this._usuarios= usuarios;
   }
@@ -45,6 +48,8 @@ class Usuarios with ChangeNotifier{
     Map map;
     var params={
       "usuario_id": id.toString(),
+      "eliminado" : "eliminado",
+      "email" : id.toString()+'@',
     };
     map=await this.session.callMethodOne('/api/usuarios/eliminar_usuario',params);
   }
@@ -86,13 +91,23 @@ class Usuarios with ChangeNotifier{
     var map=await this.session.callMethodOne('/api/establecer_aceptacion_politica_admin_datos',params);
   }
 
-  Future <Map>obtener_ruta_documento(ini,fin)async{
+  Future <Map>obtener_ruta_reporte_usuarios(ini,fin)async{
     Map map;
     var params={
       "ini":ini,
       "fin":fin
     };
     map = await this.session.callMethodOne('/api/usuarios/reporte_trazabilidad_acciones_usuarios',params);
+    this._ruta=map;
+  }
+
+  Future <Map>obtener_ruta_reporte_log(ini,fin)async{
+    Map map;
+    var params={
+      "ini":ini,
+      "fin":fin
+    };
+    map = await this.session.callMethodOne('/api/usuarios/reporte_politica',params);
     this._ruta=map;
   }
 

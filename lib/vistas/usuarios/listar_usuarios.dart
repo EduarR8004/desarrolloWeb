@@ -362,68 +362,107 @@ class DataTableUsuariosState extends State<DataTableUsuarios> {
     onWillPop: () {  },
       child: SafeArea(
         child:Scaffold(
-        appBar: new AppBar(
-          flexibleSpace:encabezado, 
-          backgroundColor: Colors.transparent,
-        ),
-        drawer: menu,
-        body:Container(
-          color:Colors.white,
-          child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          verticalDirection: VerticalDirection.down,
-          children: <Widget>[
-            Container(
-            color:Colors.white ,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(padding: EdgeInsets.fromLTRB(40,12,10,10),child:boton(),),
-                  Container(
-                    width: 400,
-                    alignment: Alignment.topLeft,
-                    color:Colors.white ,
-                    padding: EdgeInsets.fromLTRB(30,0,30,20),
-                    child: TextField(
-                      controller: _controller,
-                      autofocus: false,
-                      autocorrect: true,
-                      decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(      
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                        ),  
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                        ),
-                        border: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                        ),
-                        labelText: 'Buscar',
-                        prefixIcon: Icon(Icons.search)
-                      ),
-                    ), 
-                  ),
-                  Container(
-                    color:Colors.white,
-                    padding: EdgeInsets.fromLTRB(30,22,30,20),
-                    child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          appBar: new AppBar(
+            flexibleSpace:encabezado, 
+            backgroundColor: Colors.transparent,
+          ),
+          drawer: menu,
+          body:Container(
+            color:Colors.white,
+            child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            verticalDirection: VerticalDirection.down,
+              children: <Widget>[
+                Container(
+                color:Colors.white ,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child:Container(
-                          width: 280,
-                          height: 35,
-                          decoration: BoxDecoration(
-                          //color: Colors.white,
+                      Padding(padding: EdgeInsets.fromLTRB(40,12,10,10),child:boton(),),
+                      Container(
+                        width: 400,
+                        alignment: Alignment.topLeft,
+                        color:Colors.white ,
+                        padding: EdgeInsets.fromLTRB(30,0,30,20),
+                        child: TextField(
+                          controller: _controller,
+                          autofocus: false,
+                          autocorrect: true,
+                          decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(      
+                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                            ),  
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                            ),
+                            labelText: 'Buscar',
+                            prefixIcon: Icon(Icons.search)
+                          ),
+                        ), 
+                      ),
+                      Container(
+                        color:Colors.white,
+                        padding: EdgeInsets.fromLTRB(30,22,30,20),
+                        child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child:Container(
+                              width: 280,
+                              height: 35,
+                              decoration: BoxDecoration(
+                              //color: Colors.white,
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                              child: RaisedButton(
+                                textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                color: Color.fromRGBO(56, 124, 43, 1.0),
+                                child: Text('Buscar', style: TextStyle(
+                                  color: Colors.white,
+                                  //Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                                )),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  //side: BorderSide(color: Colors.white)
+                                ),
+                                onPressed: () {
+                                  if(_controller.text==null || _controller.text=="")
+                                  {
+                                    infoDialog(context,'Por favor ingrese un parámetro para realizar la búsqueda',
+                                    negativeAction: (){}, 
+                                    );
+                                  }else
+                                  {
+                                    texto=_controller.text==null?'':_controller.text;
+                                    Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:texto)));
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                          padding: EdgeInsets.fromLTRB(30,25,30,20),
+                          child:Container(
+                            width: 280,
+                            height: 35,
+                            decoration: BoxDecoration(
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(14),
                           ),
                           child: RaisedButton(
                             textColor: Color.fromRGBO(83, 86, 90, 1.0),
                             //textColor: Color.fromRGBO(255, 210, 0, 1.0),
                             color: Color.fromRGBO(56, 124, 43, 1.0),
-                            child: Text('Buscar', style: TextStyle(
+                            child: Text('Limpiar filtro', style: TextStyle(
                               color: Colors.white,
                               //Color.fromRGBO(83, 86, 90, 1.0),
                               fontSize: 18,
@@ -434,63 +473,25 @@ class DataTableUsuariosState extends State<DataTableUsuarios> {
                               //side: BorderSide(color: Colors.white)
                             ),
                             onPressed: () {
-                              if(_controller.text==null || _controller.text=="")
-                              {
-                                infoDialog(context,'Por favor ingrese un parámetro para realizar la búsqueda',
-                                negativeAction: (){}, 
-                                );
-                              }else
-                              {
-                                texto=_controller.text==null?'':_controller.text;
-                                Navigator.of(context).push(
-                                MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:texto)));
-                              }
+                              texto='';
+                              Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:texto)));
                             },
                           ),
+                          ),
+                          )
+                        ],
                         ),
                       ),
-                      Padding(
-                      padding: EdgeInsets.fromLTRB(30,25,30,20),
-                      child:Container(
-                        width: 280,
-                        height: 35,
-                        decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: RaisedButton(
-                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                        child: Text('Limpiar filtro', style: TextStyle(
-                          color: Colors.white,
-                          //Color.fromRGBO(83, 86, 90, 1.0),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                        )),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0),
-                          //side: BorderSide(color: Colors.white)
-                        ),
-                        onPressed: () {
-                          texto='';
-                          Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:texto)));
-                        },
-                      ),
-                      ),
-                      )
                     ],
-                    ),
                   ),
-                ],
-              ),
+                ),
+                Expanded(
+                  child:dataBody(texto),
+                ),
+              ],
             ),
-            Expanded(
-              child:dataBody(texto),
-            ),
-          ],
-        ),),
+          ),
         ),
       ),
     );
@@ -500,8 +501,6 @@ class DataTableUsuariosState extends State<DataTableUsuarios> {
     var token=widget.data.token;
     return DropdownButton<String>(
       value: dropdownValue,
-      // icon: Icon(Icons.arrow_circle_down_rounded),
-      // iconSize: 24,
       elevation: 16,
       style: TextStyle(color: Colors.black,fontSize: 16),
       underline: Container(
@@ -534,13 +533,17 @@ class DataTableUsuariosState extends State<DataTableUsuarios> {
         }else if(newValue=='Reporte Usuarios')
         {
           Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ReporteUsuarios(data:widget.data))); 
+            .push(MaterialPageRoute(builder: (context) => ReporteUsuarios(data:widget.data,reporte:true,))); 
+        }else if(newValue=='Reporte Política')
+        {
+          Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => ReporteUsuarios(data:widget.data,reporte:false,))); 
         }
         setState(() {
           dropdownValue = newValue;
         });
       },
-      items: <String>['Opciones','Crear', 'Editar', 'Eliminar','Reporte Usuarios']
+      items: <String>['Opciones','Crear', 'Editar', 'Eliminar','Reporte Usuarios','Reporte Política']
       .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,

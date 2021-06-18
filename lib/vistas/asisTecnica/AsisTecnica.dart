@@ -857,35 +857,35 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                       Column(
                         children: <Widget>[
                           Container(
-                          alignment: Alignment.center,
-                          height: tSoca,
-                          width: tSoca,
-                          decoration: BoxDecoration(
-                          color: Colors.white,
-                          border:Border.all(
-                            color: Color.fromRGBO(56, 124, 43, 1.0),
-                            width:4,
-                          ),
-                          borderRadius: BorderRadius.circular(50),
-                          // boxShadow: [BoxShadow(
-                          //    color: Colors.black45,
-                          //     offset: Offset(6,6),
-                          //     blurRadius: 6,  
-                          // ),
-                          // ],
-                          ),
-                          child:Center(
-                            child: Container(
-                              height: iSoca,
-                              width: iSoca,
-                              padding: new EdgeInsets.all(30.0),
-                              decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('images/RESIEMBRA.png'),
-                              fit: BoxFit.contain)),
-                                    
-                            ) ,
-                          ),
+                            alignment: Alignment.center,
+                            height: tSoca,
+                            width: tSoca,
+                            decoration: BoxDecoration(
+                            color: Colors.white,
+                            border:Border.all(
+                              color: Color.fromRGBO(56, 124, 43, 1.0),
+                              width:4,
+                            ),
+                            borderRadius: BorderRadius.circular(50),
+                            // boxShadow: [BoxShadow(
+                            //    color: Colors.black45,
+                            //     offset: Offset(6,6),
+                            //     blurRadius: 6,  
+                            // ),
+                            // ],
+                            ),
+                            child:Center(
+                              child: Container(
+                                height: iSoca,
+                                width: iSoca,
+                                padding: new EdgeInsets.all(30.0),
+                                decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('images/RESIEMBRA.png'),
+                                fit: BoxFit.contain)),
+                                      
+                              ) ,
+                            ),
                           ),
                           SizedBox(height:espacio),
                           Text('Resiembra',style: TextStyle(
@@ -1066,13 +1066,6 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
               width: 800,
               height: 110,
               margin: EdgeInsets.fromLTRB(22, 10, 20, 10),
-	                      // decoration: BoxDecoration(
-	                      //   borderRadius: BorderRadius.only(
-	                      //     topLeft: Radius.circular(40),
-                      //     topRight: Radius.circular(40),
-	                      //   ),
-	                      //   color: Color.fromRGBO(31, 58, 47, 1.0),
-	                      // ),
 	            child: 
 	              Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1082,54 +1075,55 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                         recuperar_texto(categoria:categoria,subcategoria:'RiegoDLevante',titulo: 'Riego de Levante',icono:'images/RIEGOLEVANTE.png');
                       }, 
                       child:
-                        Column(
+                        Column( 
                           children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.fromLTRB(10, 0, 0, 4),
-                            alignment: Alignment.center,
-                            height: tPlantilla,
-                            width: tPlantilla,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border:Border.all(
-                              color: Color.fromRGBO(56, 124, 43, 1.0),
-                              width:4,
-                            ),
-                            borderRadius: BorderRadius.circular(50),
-                            // boxShadow: [BoxShadow(
-                            //   color: Colors.black45,
-                            //   offset: Offset(6,6),
-                            //   blurRadius: 6,  
-                            // ),
-                            // ],
-                            ),
-                            child:Center(
-                              child: 
-                              Container(
-                              height: iPlantilla,
-                              width: iPlantilla,
-                              padding: new EdgeInsets.all(30.0),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 0, 0, 4),
+                              alignment: Alignment.center,
+                              height: tPlantilla,
+                              width: tPlantilla,
                               decoration: BoxDecoration(
-                                image: DecorationImage(
-                                image: AssetImage('images/RIEGOLEVANTE.png'),
-                                fit: BoxFit.contain)),
-                                
-                            ) ,
-                          ),
-                          ),
-                          SizedBox(height:espacio),
-                          Text('Riego de',style: TextStyle(
-                            color: Color.fromRGBO(83, 86, 90, 1.0),
-                            fontSize: texto,
-                            fontWeight: FontWeight.bold
-                          ),),
-                          Text('Levante',style: TextStyle(
-                            color: Color.fromRGBO(83, 86, 90, 1.0),
-                            fontSize: texto,
-                            fontWeight: FontWeight.bold
-                          ),)
-                      ]
-                      ),
+                                color: Colors.white,
+                                border:Border.all(
+                                color: Color.fromRGBO(56, 124, 43, 1.0),
+                                width:4,
+                              ),
+                              borderRadius: BorderRadius.circular(50),
+                              // boxShadow: [BoxShadow(
+                              //   color: Colors.black45,
+                              //   offset: Offset(6,6),
+                              //   blurRadius: 6,  
+                              // ),
+                              // ],
+                              ),
+                              child:Center(
+                                child: 
+                                Container(
+                                  height: iPlantilla,
+                                  width: iPlantilla,
+                                  padding: new EdgeInsets.all(30.0),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage('images/RIEGOLEVANTE.png'),
+                                      fit: BoxFit.contain
+                                    )
+                                  ),
+                                ) ,
+                              ),
+                            ),
+                            SizedBox(height:espacio),
+                            Text('Riego de',style: TextStyle(
+                              color: Color.fromRGBO(83, 86, 90, 1.0),
+                              fontSize: texto,
+                              fontWeight: FontWeight.bold
+                            ),),
+                            Text('Levante',style: TextStyle(
+                              color: Color.fromRGBO(83, 86, 90, 1.0),
+                              fontSize: texto,
+                              fontWeight: FontWeight.bold
+                            ),)
+                          ]
+                        ),
                     ),
                     SizedBox(height:30,width:45),
                     InkWell(

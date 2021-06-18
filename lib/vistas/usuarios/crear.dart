@@ -74,7 +74,7 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
  TextEditingController  roles = new TextEditingController();
 
  
-  crear_usuario()async{
+ crear_usuario()async{
     List nits=[];
     nits=nit.text.split(",");
     List roles=[];
@@ -85,70 +85,23 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
     //await pr.show();
 
     session.crear_usuario(user.text,nombre_completo.text,telefono1.text,telefono2.text,telefono3.text,email.text,email_alternativo.text,nits,roles).then((_) {
-      successDialog(
-      context, 
-      creacion,
-      negativeText: "Si",
-      negativeAction: (){
-        user.text =''; 
-        nombre_completo.text =''; 
-        nit.text =''; 
-        telefono1.text =''; 
-        clave_acceso.text='';
-        telefono2.text =''; 
-        telefono3.text =''; 
-        email.text =''; 
-        usuario_id='';
-        email_alternativo.text =''; 
-      },
-      neutralText: "No",
-      neutralAction: (){
-        var session= Conexion();
-        session.set_token(widget.data.token);
-        var usuario= Usuarios(session);
-        var token=widget.data.token;
-        Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));
-      },
-    );
-    if(session.validar == true){
-      //token=session.get_session();
-    }else{
-      String mensaje=session.mensaje; 
-      if (mensaje!=null)
-      {
-        //confirm (mensaje); 
-                                
-      }else{
-        //confirm ("Sin conexión al servidor");
-      }                        
-    }
-                        
-  }).catchError( (onError){
-    if(onError is SessionNotFound){
-    return 'Usuario o Contraseña Incorrecta';
-                            
-    }else if(onError is ConnectionError){
-                              
-    }else{
-                            
-    }                                             
-  });
-  }
-
-editar_usuario()async{
-  List nits=[];
-    nits=nit.text.split(",");
-    List roles=[];
-    var session= Conexion();
-    session.set_token(widget.data.token);
-    var seguridad= Seguridad(session);
-
-    session.editar_usuario(usuario_id,user.text,nombre_completo.text,telefono1.text,telefono2.text,telefono3.text,email.text,email_alternativo.text,nits,roles,dropdownInicial).then((_){
-    successDialog(
+        successDialog(
         context, 
-        'Usuario Editado con Éxito',
-        neutralText: "Aceptar",
+        creacion,
+        negativeText: "Si",
+        negativeAction: (){
+          user.text =''; 
+          nombre_completo.text =''; 
+          nit.text =''; 
+          telefono1.text =''; 
+          clave_acceso.text='';
+          telefono2.text =''; 
+          telefono3.text =''; 
+          email.text =''; 
+          usuario_id='';
+          email_alternativo.text =''; 
+        },
+        neutralText: "No",
         neutralAction: (){
           var session= Conexion();
           session.set_token(widget.data.token);
@@ -158,38 +111,82 @@ editar_usuario()async{
            MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));
         },
     );
+  if(session.validar == true){
+    //token=session.get_session();
+  }else{
+    String mensaje=session.mensaje; 
+    if (mensaje!=null)
+    {
+      //confirm (mensaje); 
+                              
+    }else{
+      //confirm ("Sin conexión al servidor");
+    }                        
+  }
+                        
+  }).catchError( (onError){
+
+  if(onError is SessionNotFound){
+  return 'Usuario o Contraseña Incorrecta';
+                          
+  }else if(onError is ConnectionError){
+                            
+  }else{
+                          
+  }
+                                                  
   });
-  
 }
 
- listar_usuario()async{
+  editar_usuario()async{
+    List nits=[];
+    nits=nit.text.split(",");
+    List roles=[];
+    var session= Conexion();
+    session.set_token(widget.data.token);
+    var seguridad= Seguridad(session);
+    session.editar_usuario(usuario_id,user.text,nombre_completo.text,telefono1.text,telefono2.text,telefono3.text,email.text,email_alternativo.text,nits,roles,dropdownInicial).then((_){
+      successDialog(
+        context, 
+        'Usuario Editado con Éxito',
+        neutralText: "Aceptar",
+        neutralAction: (){
+          var session= Conexion();
+          session.set_token(widget.data.token);
+          var usuario= Usuarios(session);
+          var token=widget.data.token;
+          Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));
+        },
+      );
+    });
+  }
+
+  listar_usuario()async{
     var session= Conexion();
     session.set_token(widget.data.token);
     var usuario= Usuarios(session);
-
     var token=widget.data.token;
-    
-      usuario.descargar_usuarios('').then((_){
+    usuario.descargar_usuarios('').then((_){
       List usuarios=usuario.obtener_usuarios();
 
       final data = Data.usuarios(
-            token:token ,
-            usuarios: usuario.obtener_usuarios(),
-            parametro:'');
-            Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));          
+        token:token ,
+        usuarios: usuario.obtener_usuarios(),
+        parametro:''
+      );
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));          
     });
-}
+  }
 
-@override
+  @override
   void dispose() {
-    // Clean up the focus node when the Form is disposed.
     nombre.dispose();
     usuario.dispose();
     correo.dispose();
     documento.dispose();
     telefono.dispose();
-
     super.dispose();
   }
 
@@ -231,6 +228,7 @@ editar_usuario()async{
     );
   }
 
+
  formItemsDesign(icon, item) {
    return Padding(
      padding: EdgeInsets.symmetric(vertical:4),
@@ -270,11 +268,9 @@ editar_usuario()async{
                 session.set_token(widget.data.token);
                 var usuario= Usuarios(session);
                 var token=widget.data.token;
-                
-                  Navigator.of(context).push(
-                   MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));
-                                    
-               },
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));                  
+              },
             )
           ],
         );
@@ -307,7 +303,7 @@ editar_usuario()async{
     );
   }
 
-   void _showAlert(titulo,text) {
+  void _showAlert(titulo,text) {
     showDialog(
       context: context,
       builder: (buildcontext) {
@@ -318,8 +314,8 @@ editar_usuario()async{
             RaisedButton(
               child: Text("Aceptar", style: TextStyle(color: Colors.green),),
               onPressed: (){ 
-                   Navigator.pop(context);
-               },
+                Navigator.pop(context);
+              },
             )
           ],
         );
@@ -328,60 +324,62 @@ editar_usuario()async{
   }
 
   Widget estado(){
-  return Container(
-    height: 40,
-    width: 150,
-    //alignment: Alignment.topLeft,
-    margin: const EdgeInsets.fromLTRB(20, 10, 0, 10),
-    //margin: const EdgeInsets.all(5.0),
-    decoration: BoxDecoration(
-      border: Border(bottom:BorderSide(width: 1,
-      color: Color.fromRGBO(83, 86, 90, 1.0),),),
-    ),
-    child:
-      DropdownButtonHideUnderline(
-        child:DropdownButton<String>(
-          hint: Padding(
-            padding: const EdgeInsets.all(0),
-            child:Text(dropdownInicial, textAlign: TextAlign.left,style: TextStyle(
-                color: Colors.black,
-                fontSize: 15.0,
-                fontFamily: 'Karla',
-            ),
-            ),
-          ),
-          value: dropdownInicial,
-          // icon: Icon(Icons.arrow_circle_down_rounded),
-          // iconSize: 24,
-          elevation: 16,
-          style: TextStyle(color: Colors.black,fontSize: 15),
-          underline: Container(
-            height: 2,
-            color: Colors.green,
-          ),
-          onChanged: (String newValue) {
-            setState(() {
-              dropdownInicial= newValue;
-            });
-          },
-          items:activo.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child:Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 2,2,2),
-                    child:new Text(value,textAlign: TextAlign.left,
-                    style: new TextStyle(color: Colors.black)),
-              ),
-            );
-          }).toList(),
+    return Container(
+      height: 40,
+      width: 150,
+      //alignment: Alignment.topLeft,
+      margin: const EdgeInsets.fromLTRB(20, 10, 0, 10),
+      //margin: const EdgeInsets.all(5.0),
+      decoration: BoxDecoration(
+        border: Border(bottom:BorderSide(width: 1,
+          color: Color.fromRGBO(83, 86, 90, 1.0),
+        ),
         ),
       ),
-  );
+      child:
+        DropdownButtonHideUnderline(
+          child:DropdownButton<String>(
+            hint: Padding(
+              padding: const EdgeInsets.all(0),
+              child:Text(dropdownInicial, 
+                textAlign: TextAlign.left,style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15.0,
+                  fontFamily: 'Karla',
+                ),
+              ),
+            ),
+            value: dropdownInicial,
+            // icon: Icon(Icons.arrow_circle_down_rounded),
+            // iconSize: 24,
+            elevation: 16,
+            style: TextStyle(color: Colors.black,fontSize: 15),
+            underline: Container(
+              height: 2,
+              color: Colors.green,
+            ),
+            onChanged: (String newValue) {
+              setState(() {
+                dropdownInicial= newValue;
+              });
+            },
+            items:activo.map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child:Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2,2,2),
+                  child:new Text(value,textAlign: TextAlign.left,
+                  style: new TextStyle(color: Colors.black)),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+    );
   }
-
   Widget formUI() {
-   return  Column(
-     children: <Widget>[
+    return  Column(
+      children: <Widget>[
         formItemsDesign(
           Icons.person,
           TextFormField(
@@ -393,10 +391,9 @@ editar_usuario()async{
             ),
             validator: (value){
               if (value.isEmpty) {
-              return 'Por favor Ingrese el Usuario';
-            }
-          },
-            //validator: validateName,
+                return 'Por favor Ingrese el Usuario';
+              }
+            },
           )
         ),
         formItemsDesign(
@@ -412,39 +409,28 @@ editar_usuario()async{
                 return 'Por favor Ingrese el Nombre';
               }
             },
-            //validator: validateName,
           )
         ),
-      // formItemsDesign(
-      //      Icons.remove_red_eye,
-      //      TextFormField(
-      //        controller: clave_acceso,
-      //        obscureText: true,
-      //        decoration: InputDecoration(
-      //          labelText: 'Contraseña',
-      //        ),
-      //        validator: validatePass,
-      //      )),
-      formItemsDesign(
-        Icons.person,
-        TextFormField(
-          controller: nit,
-          focusNode: documento,
-          decoration: new InputDecoration(
-            labelText: 'Documento',
-          ),
-          validator: (value){
-            if (value.isEmpty) {
-              
-            return 'Por favor Ingrese el Documento';
-          }
-        },
-        )
-      ),
-      formItemsDesign(
-        Icons.phone,
-        TextFormField(
-          controller: telefono1,
+        formItemsDesign(
+          Icons.person,
+          TextFormField(
+            controller: nit,
+            focusNode: documento,
+            decoration: new InputDecoration(
+              labelText: 'Documento',
+            ),
+            validator: (value){
+              if (value.isEmpty) {
+                
+                return 'Por favor Ingrese el Documento';
+              }
+            },
+          )
+        ),
+        formItemsDesign(
+          Icons.phone,
+          TextFormField(
+            controller: telefono1,
             focusNode: telefono,
             decoration: new InputDecoration(
               labelText: 'Número de teléfono',
@@ -452,131 +438,123 @@ editar_usuario()async{
             keyboardType: TextInputType.phone,
             maxLength: 10,
             validator: validateMobile,
-        )
-      ),
-      formItemsDesign(
-        Icons.phone,
-        TextFormField(
-          controller: telefono2,
+          )
+        ),
+        formItemsDesign(
+          Icons.phone,
+          TextFormField(
+            controller: telefono2,
             decoration: new InputDecoration(
               labelText: 'Número de teléfono',
             ),
             keyboardType: TextInputType.phone,
             maxLength: 10,
             validator: validateMobileOptional,
-        )
-      ),
-      formItemsDesign(
-        Icons.email,
-        TextFormField(
-          controller: email,
-          focusNode: correo,
+          )
+        ),
+        formItemsDesign(
+          Icons.email,
+          TextFormField(
+            controller: email,
+            focusNode: correo,
             decoration: new InputDecoration(
               labelText: 'Email',
             ),
             keyboardType: TextInputType.emailAddress,
             maxLength: 60,
-            validator: validateEmail,)
-      ),
-      widget.editar?formItemsDesign(
-          Icons.check,
-          widget.editar?estado():Container(),
-      ):Container(),
-       
-      //  formItemsDesign(
-      //      Icons.remove_red_eye,
-      //      TextFormField(
-      //        controller: repeatPassCtrl,
-      //        obscureText: true,
-      //        decoration: InputDecoration(
-      //          labelText: 'Repetir la Contraseña',
-      //        ),
-      //        validator: validatePassword,
-      //      )),
-    Padding(
-    padding: EdgeInsets.all(10.0),
-    child:Container(
-      decoration: BoxDecoration(
-      //color: Colors.white,
-      borderRadius: BorderRadius.circular(14),
-    ),
-    child: RaisedButton(
-      textColor: Color.fromRGBO(83, 86, 90, 1.0),
-      //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-      color: Color.fromRGBO(56, 124, 43, 1.0),
-      child: Text(widget.editar?"Editar Usuario":'Crear Usuario',
-             style: TextStyle(
-                 color: Colors.white,
-                 fontSize: 18,
-                 fontWeight: FontWeight.w500)),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50.0),
-        //side: BorderSide(color: Colors.white)
-      ),
-      onPressed: () {
-        if(user.text==''){
-          usuario.requestFocus();
-            warningDialog(
-              context, 
-              validarUsuario,
-              negativeAction: (){
+            validator: validateEmail,
+          )
+        ),
+        widget.editar?formItemsDesign(
+            Icons.check,
+            widget.editar?estado():Container(),
+        ):Container(),
+        Padding(
+        padding: EdgeInsets.all(10.0),
+          child:Container(
+            decoration: BoxDecoration(
+            //color: Colors.white,
+            borderRadius: BorderRadius.circular(14),
+            ),
+            child: RaisedButton(
+              textColor: Color.fromRGBO(83, 86, 90, 1.0),
+              color: Color.fromRGBO(56, 124, 43, 1.0),
+              child: Text(widget.editar?"Editar Usuario":'Crear Usuario',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500
+                )
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50.0),
+                //side: BorderSide(color: Colors.white)
+              ),
+              onPressed: () {
+                if(user.text==''){
+                  usuario.requestFocus();
+                    warningDialog(
+                      context, 
+                      validarUsuario,
+                      negativeAction: (){
+                      },
+                    );
+                    return;
+                }
+                if(nombre_completo.text==''){
+                  nombre.requestFocus();
+                  warningDialog(
+                    context, 
+                    nombreUsuario,
+                    negativeAction: (){
+                    },
+                  );
+                  return;
+                }
+                if(nit.text==''){
+                  documento.requestFocus();
+                  warningDialog(
+                    context, 
+                    documentoUsuario,
+                    negativeAction: (){
+                    },
+                  );
+                  return;
+                }
+                if(telefono1.text==''){
+                  correo.requestFocus();
+                  warningDialog(
+                    context, 
+                    telefonoUsuario,
+                    negativeAction: (){
+                    },
+                  );
+                  return;
+                }
+                if(email.text==''){
+                  correo.requestFocus();
+                  warningDialog(
+                    context, 
+                    emailUsuario,
+                    negativeAction: (){
+                    },
+                  );
+                  return;
+                }
+                if (!keyForm.currentState.validate()){
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(content: Text('Processing Data'))
+                  );                            
+                }else{
+                  save();
+                } 
               },
-            );
-          return;
-        }
-         if(nombre_completo.text==''){
-          nombre.requestFocus();
-          warningDialog(
-              context, 
-              nombreUsuario,
-              negativeAction: (){
-              },
-            );
-          return;
-        }
-        if(nit.text==''){
-          documento.requestFocus();
-          warningDialog(
-            context, 
-            documentoUsuario,
-            negativeAction: (){
-            },
-          );
-          return;
-        }
-        if(telefono1.text==''){
-          correo.requestFocus();
-          warningDialog(
-              context, 
-              telefonoUsuario,
-              negativeAction: (){
-              },
-          );
-          return;
-        }
-        if(email.text==''){
-          correo.requestFocus();
-          warningDialog(
-              context, 
-              emailUsuario,
-              negativeAction: (){
-              },
-          );
-          return;
-        }
-        if (!keyForm.currentState.validate()){
-            Scaffold.of(context).showSnackBar(SnackBar(content: Text('Processing Data'))
-            );                            
-        }else{
-          save();
-        } 
-      },
-    ),
-    ),
-    ),                            
-  ],
-  );
-}
+            ),
+          ),
+        ),                            
+      ],
+    );
+  }
 //flutter build apk --release --target-platform=android-arm64
 //  String validatePassword(String value) {
 //    print("valorrr $value passsword ${passwordCtrl.text}");
@@ -586,31 +564,31 @@ editar_usuario()async{
 //    return null;
 //  }
 
- String validateName(String value) {
-   String pattern = r'(^[a-zA-Z ]*$)';
-   RegExp regExp = new RegExp(pattern);
-   if (value.length == 0) {
-     return "Este es un campo obligatorio";
-   } else if (!regExp.hasMatch(value)) {
-     return "El nombre debe de ser a-z y A-Z";
-   }
-   return null;
- }
+  String validateName(String value) {
+    String pattern = r'(^[a-zA-Z ]*$)';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return "Este es un campo obligatorio";
+    } else if (!regExp.hasMatch(value)) {
+      return "El nombre debe de ser a-z y A-Z";
+    }
+    return null;
+  }
 
- String validateMobile(String value) {
-   String patttern = r'(^[0-9]*$)';
-   RegExp regExp = new RegExp(patttern);
-   if (value.length == 0) {
-     return "Por favor ingrese el número de teléfono";
-   } else if (value.length != 10) {
-     return "El número debe tener 10 digitos";
-   }
-   return null;
- }
+  String validateMobile(String value) {
+    String patttern = r'(^[0-9]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length == 0) {
+      return "Por favor ingrese el número de teléfono";
+    } else if (value.length != 10) {
+      return "El número debe tener 10 digitos";
+    }
+    return null;
+  }
 
- String validatePass(String value) {
-   String patttern = r'(^[0-9]*$)';
-   RegExp regExp = new RegExp(patttern);
+  String validatePass(String value) {
+    String patttern = r'(^[0-9]*$)';
+    RegExp regExp = new RegExp(patttern);
     if (value.length == 0 && widget.editar==false) {
       return "La contraseña es necesaria";
     }else{
@@ -620,33 +598,33 @@ editar_usuario()async{
         return null;
       }
     }
- }
+  }
 
- String validateMobileOptional(String value) {
-   String patttern = r'(^[0-9]*$)';
-   RegExp regExp = new RegExp(patttern);
-   if (value.length > 0) {
-      if (value.length < 7) {
-       return "El número debe tener 7 o más digitos";
-      }
-   } else{
-     return null;
-   }
-   
- }
+  String validateMobileOptional(String value) {
+    String patttern = r'(^[0-9]*$)';
+    RegExp regExp = new RegExp(patttern);
+    if (value.length > 0) {
+        if (value.length < 7) {
+        return "El número debe tener 7 o más digitos";
+        }
+    } else{
+      return null;
+    }
+    
+  }
 
- String validateEmail(String value) {
-   String pattern =
-       r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-   RegExp regExp = new RegExp(pattern);
-   if (value.length == 0) {
-     return "Por favor ingrese el email";
-   } else if (!regExp.hasMatch(value)) {
-     return "Correo inválido";
-   } else {
-     return null;
-   }
- }
+  String validateEmail(String value) {
+    String pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regExp = new RegExp(pattern);
+    if (value.length == 0) {
+      return "Por favor ingrese el email";
+    } else if (!regExp.hasMatch(value)) {
+      return "Correo inválido";
+    } else {
+      return null;
+    }
+  }
 
   String validateEmailOptional(String value) {
    String pattern =
@@ -661,16 +639,15 @@ editar_usuario()async{
    } else {
      return null;
    }
- }
+  }
 
- save() {
-   if(widget.editar == true){
-     editar_usuario();
-   }else{
-     crear_usuario();
-   } 
- }
+  save() {
+    if(widget.editar == true){
+      editar_usuario();
+    }else{
+      crear_usuario();
+    } 
+  }
 }
-
 
 

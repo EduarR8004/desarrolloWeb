@@ -8,6 +8,7 @@ class Usuario {
   String email;
   String email_alternativo;
   List   nits;
+  DateTime eliminado;
   DateTime modification_stamp;
   String modified_by;
   String nombre_completo;
@@ -39,27 +40,27 @@ class Usuario {
     this.telefono3,
     this.usuario,
     this.usuario_id,
+    this.eliminado,
   });
   
 
   factory Usuario.fromJson(Map<String, dynamic> json){
     return new Usuario(
       bloqueo:json['bloqueo'],
-      clave_acceso:json['clave_acceso'],
+      //clave_acceso:json['clave_acceso'],
       created_by:json['created_by'],
-      creation_stamp:DateTime.fromMillisecondsSinceEpoch( json['creation_stamp']*1000,isUtc:false),
+      creation_stamp:DateTime.fromMicrosecondsSinceEpoch( json['creation_stamp'],isUtc:false),
       email:json['email'],
-      email_alternativo:json['email_alternativo'],
+      eliminado:json['eliminado'],
+      //email_alternativo:json['email_alternativo'],
       nits:json['nits'],
       // modification_stamp:DateTime.fromMillisecondsSinceEpoch(json['modification_stamp']*1000,isUtc: false),
-      modified_by:json['modified_by'],
+      //modified_by:json['modified_by'],
       nombre_completo:json['nombre_completo'],
-      propietario_id:json['propietario_id'],
-      reintentos_acceso:json['reintentos_acceso'],
-      roles:json['roles'],
+      //propietario_id:json['propietario_id'],
+      //reintentos_acceso:json['reintentos_acceso'],
+      //roles:json['roles'],
       telefono1:json['telefono1'],
-      telefono2:json['telefono2'],
-      telefono3:json['telefono3'],
       usuario:json['usuario'],
       usuario_id:json['usuario_id'],
     );
