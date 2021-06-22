@@ -47,25 +47,27 @@ crear_rol()async{
   var session= Conexion();
   session.set_token(widget.data.token);
   var rol= Roles(session);
-   await rol.crear_rol(role.text,descp.text).then((_){
-     successDialog(
-        context, 
-        creacion,
-        negativeText: "Si",
-        negativeAction: (){
-          role.text =''; 
-          descp.text ='';
-        },
-        neutralText: "No",
-        neutralAction: (){
-          final data = Data(
-                            token:widget.data.token ,
-                            obj: widget.data.obj,
-                            usuario_actual:widget.data.usuario_actual, 
-                            parametro:'');
-                Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) => ProfilePage(data:data))); 
-        },
+  await rol.crear_rol(role.text,descp.text).then((_){
+    successDialog(
+      context, 
+      creacion,
+      negativeText: "Si",
+      negativeAction: (){
+        role.text =''; 
+        descp.text ='';
+      },
+      neutralText: "No",
+      neutralAction: (){
+        final data = Data(
+          token:widget.data.token ,
+          obj: widget.data.obj,
+          usuario_actual:widget.data.usuario_actual, 
+          parametro:''
+        );
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => ProfilePage(data:data))
+        ); 
+      },
     );
     //_showAlertDialog("Crear Rol","Rol creado correctamente\n""Desea crear un nuevo Rol?");
   }).catchError( (onError){
@@ -99,13 +101,14 @@ editar_rol()async{
       neutralText: "Aceptar",
       neutralAction: (){
       final data = Data(
-                    token:widget.data.token ,
-                    obj: widget.data.obj,
-                    usuario_actual:widget.data.usuario_actual, 
-                    parametro:'');
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => ProfilePage(data:data))); 
-        },
+        token:widget.data.token ,
+        obj: widget.data.obj,
+        usuario_actual:widget.data.usuario_actual, 
+        parametro:''
+      );
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => ProfilePage(data:data))); 
+      },
     );
   }).catchError( (onError){
      'Error interno '+ onError.toString();
@@ -140,14 +143,24 @@ editar_rol()async{
       //    title: new Text('Registrarse'),
       //  ),
        body: new SingleChildScrollView(
-         child: new Container(
-           margin: new EdgeInsets.all(4.0),
-           child: new Form(
-             key: keyForm,
-             child: formUI(),
-           ),
-         ),
-       ),
+            child:
+            Container(
+              color: Colors.white,
+              child:new Center(
+              //margin: new EdgeInsets.fromLTRB(100,0,100,0),
+                child: new Form(
+                key: keyForm,
+                  child:Container(
+                    width: 600,
+                    height: 800,
+                    margin: new EdgeInsets.fromLTRB(0,20,0,0),
+                    color:Colors.white,
+                    child:formUI(),
+                  ) 
+                ),
+              )
+            )
+          ),
      ),
    );
  }

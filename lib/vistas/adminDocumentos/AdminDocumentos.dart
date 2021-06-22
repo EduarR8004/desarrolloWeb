@@ -250,19 +250,19 @@ descargar()async{
 }
 
 crear_orden(String tipo)async{
-  if(tipo =='Fondo Social')
+  if(tipo =='Donación Fondo Social')
   {
     tipo='FondoSocial';
   }
-  if(tipo =='Donaciones Cenicaña')
+  if(tipo =='Donación Cenicaña')
   {
     tipo='DonacionesCenicana';
   }
-  if(tipo =='Retenciones')
+  if(tipo =='Retención en la Fuente')
   {
     tipo='Retenciones';
   }
-  if(tipo =='Ingresos y Costos')
+  if(tipo =='Certificados de Ingresos y Costos')
   {
     tipo='IngresosYCostos';
   }
@@ -317,99 +317,102 @@ mostrar(String texto,context,nuevaOrden){
         border: Border(bottom:BorderSide(width: 1,
           color: Color.fromRGBO(83, 86, 90, 1.0),
         ),
-      ),
+        ),
       ),
       child:
         DropdownButtonHideUnderline(
-        child:DropdownButton<String>(
-          hint: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 1, 10,5),
-                child: Center(
-                  child:Text('Seleccione un tipo de Documento', textAlign: TextAlign.center,style: TextStyle(
+          child:DropdownButton<String>(
+            hint: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 1, 10,5),
+              child: Center(
+                child:Text('Seleccione un tipo de Documento', textAlign: TextAlign.center,style: TextStyle(
                   fontSize: 15.0,
                   fontFamily: 'Karla',
-                ),),),),
-          value: dropdownValue,
-                //icon: Icon(Icons.arrow_circle_down_rounded),
-          iconSize: 24,
-          elevation: 16,
-          style: TextStyle(color: Colors.black,fontSize: 15),
-          underline: Container(
-            height: 2,
-            color: Colors.green,
-          ),
-          onChanged: (newValueLiq) {
-          if(newValueLiq!='Seleccione un tipo de Documento')
-          {  
-            crear_orden(newValueLiq).then((_){
-              setState(() {
-                dropdownValue = newValueLiq;
-                nuevaOrden=orden['id'].toString();
-                if(newValueLiq =='Fondo Social')
-                {
-                  tipo='FondoSocial';
-                }
-                if(newValueLiq =='Donaciones Cenicaña')
-                {
-                  tipo='DonacionesCenicana';
-                }
-                if(newValueLiq =='Retención')
-                {
-                  tipo='Retenciones';
-                }
-                if(newValueLiq =='Ingresos y Costos')
-                {
-                  tipo='IngresosYCostos';
-                }
-                if(newValueLiq =='ICA')
-                {
-                  tipo='Ica';
-                }
-                if(newValueLiq =='Anticipos')
-                {
-                  tipo='LiquidacionAnticipos';
-                }
-                if(newValueLiq =='Liquidación Caña')
-                {
-                  tipo='LiquidacionCana';
-                }    
-                if(newValueLiq =='Ajuste de Mercado Excedentario')
-                {
-                  tipo='LiquidacionMercadoExcedentario';
-                }         
-                  adjuntar=true;
-              }); 
-            });
-                    
-          }else
-          { 
-            setState(() {
-              dropdownValue = newValueLiq;
-              adjuntar=false;
-              procesar=false;
-              warningDialog(
-              context, 
-              error,
-              negativeAction: (){
-              },
-            );
-            }); 
-          }
-        },
-        items: <String>['Seleccione un tipo de Documento','Anticipos', 'Liquidación Caña', 'Ajuste de Mercado Excedentario','Donaciones Cenicaña','Fondo Social','Retenciones','Ingresos y Costos','ICA']
-        .map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child:Padding(
-              padding: const EdgeInsets.fromLTRB(0, 5,40,10),
-              child:new Text(value,textAlign: TextAlign.center,
-                style: new TextStyle(color: Colors.black)
+                ),
+                ),
               ),
             ),
-          );
-        }).toList(),
-      ),
-      ),
+            value: dropdownValue,
+                  //icon: Icon(Icons.arrow_circle_down_rounded),
+            iconSize: 24,
+            elevation: 16,
+            style: TextStyle(color: Colors.black,fontSize: 15),
+            underline: Container(
+              height: 2,
+              color: Colors.green,
+            ),
+            onChanged: (newValueLiq) {
+            if(newValueLiq!='Seleccione un tipo de Documento')
+            {  
+              crear_orden(newValueLiq).then((_){
+                setState(() {
+                  dropdownValue = newValueLiq;
+                  nuevaOrden=orden['id'].toString();
+                  if(tipo =='Donación Fondo Social')
+                  {
+                    tipo='FondoSocial';
+                  }
+                  if(tipo =='Donación Cenicaña')
+                  {
+                    tipo='DonacionesCenicana';
+                  }
+                  if(tipo =='Retención en la Fuente')
+                  {
+                    tipo='Retenciones';
+                  }
+                  if(tipo =='Certificados de Ingresos y Costos')
+                  {
+                    tipo='IngresosYCostos';
+                  }
+                  if(tipo =='ICA')
+                  {
+                    tipo='Ica';
+                  }
+                  if(tipo =='Anticipos')
+                  {
+                    tipo='LiquidacionAnticipos';
+                  }
+                  if(tipo =='Liquidación Caña')
+                  {
+                    tipo='LiquidacionCana';
+                  }
+                  if(tipo =='Ajuste de Mercado Excedentario')
+                  {
+                    tipo='LiquidacionMercadoExcedentario';
+                  }      
+                    adjuntar=true;
+                }); 
+              });
+                      
+            }else
+            { 
+              setState(() {
+                dropdownValue = newValueLiq;
+                adjuntar=false;
+                procesar=false;
+                warningDialog(
+                context, 
+                error,
+                negativeAction: (){
+                },
+              );
+              }); 
+            }
+          },
+          items: <String>['Seleccione un tipo de Documento','Anticipos', 'Liquidación Caña', 'Ajuste de Mercado Excedentario','Donación Cenicaña', 'Donación Fondo Social', 'Retención en la Fuente','Certificados de Ingresos y Costos','ICA']
+          .map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child:Padding(
+                padding: const EdgeInsets.fromLTRB(0, 5,40,10),
+                child:new Text(value,textAlign: TextAlign.center,
+                  style: new TextStyle(color: Colors.black)
+                ),
+              ),
+            );
+          }).toList(),
+          ),
+        ),
     );
   }
 
@@ -443,11 +446,11 @@ mostrar(String texto,context,nuevaOrden){
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: 
-                    <Widget>[
-                      Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child:Container(),),
-                    ],
+                  <Widget>[
+                    Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child:Container(),),
+                  ],
                 ),
               ),
               SingleChildScrollView(
@@ -611,31 +614,32 @@ mostrar(String texto,context,nuevaOrden){
         Container(
         width: 200,
         color:Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Table(children: [
-            TableRow(
-              children: [
-                Text("Total Registros",textAlign: TextAlign.center,style: TextStyle(
-                  color:Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold
-                ),),
-              ]
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Table(
+              children: [ 
+                TableRow(
+                  children: [
+                    Text("Total Registros",textAlign: TextAlign.center,style: TextStyle(
+                      color:Colors.black,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold
+                    ),),
+                  ]
+                ),
+                TableRow(
+                  children: [
+                    Text(totalRegistros.toString(),textAlign: TextAlign.center,
+                      style: TextStyle(
+                      color:Colors.black,
+                      fontSize: 15,
+                    ),),
+                  ]
+                ),
+              ],
             ),
-            TableRow(
-            children: [
-              Text(totalRegistros.toString(),textAlign: TextAlign.center,
-                style: TextStyle(
-                color:Colors.black,
-                fontSize: 15,
-              ),),
-            ]
-            ),
-          ],
           ),
         ),
-      ),
       ],
     );
   }
@@ -714,7 +718,7 @@ mostrar(String texto,context,nuevaOrden){
                         ).toList(),
                       ),
                     ],
-                  ),
+                    ),
                   ),
               );
         }else{

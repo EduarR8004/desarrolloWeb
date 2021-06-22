@@ -85,7 +85,7 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
     //await pr.show();
 
     session.crear_usuario(user.text,nombre_completo.text,telefono1.text,telefono2.text,telefono3.text,email.text,email_alternativo.text,nits,roles).then((_) {
-        successDialog(
+      successDialog(
         context, 
         creacion,
         negativeText: "Si",
@@ -110,7 +110,7 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
           Navigator.of(context).push(
            MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));
         },
-    );
+      );
   if(session.validar == true){
     //token=session.get_session();
   }else{

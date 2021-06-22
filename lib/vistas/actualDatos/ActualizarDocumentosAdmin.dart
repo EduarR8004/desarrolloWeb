@@ -25,59 +25,55 @@ class _ActualizarDocuemntoAdminState extends State<ActualizarDocuemntoAdmin> {
   String nombreArchivoN="",nombreArchivoJ="",nombreArchivoA="";
   ProgressDialog ms;
    
-   @override
+  @override
   void initState() {
     natural=false;
     juridica=false;
     politica=false;
     super.initState();
   }
-   Future getFile(String evaluar,context)async{
-      dynamic file = await FilePicker.platform.pickFiles(
-        type: FileType.custom,allowedExtensions: ['pdf'], 
-      );
-      var name_file = file.files.first.name;
-      var ext=name_file.split(".");
-      var finalExt=ext[1];
-      setState(() {
-        if(finalExt=='pdf')
-        { 
-          if(evaluar=='natural')
-          {
-            setState(() {
-              nombreArchivoN=name_file;
-              natural=true;
-            });
-            
-          }
-          if(evaluar=='juridica')
-          {
-            setState(() {
-              nombreArchivoJ=name_file;
-              juridica=true;
-            });
-            
-          }
-          if(evaluar=='politica')
-          {
-            setState(() {
-              nombreArchivoA=name_file;
-              politica=true;
-            });
-            
-          }
-          _file = file;
-
-        }else{
-          warningDialog(
+  Future getFile(String evaluar,context)async{
+    dynamic file = await FilePicker.platform.pickFiles(
+      type: FileType.custom,allowedExtensions: ['pdf'], 
+    );
+    var name_file = file.files.first.name;
+    var ext=name_file.split(".");
+    var finalExt=ext[1];
+    setState(() {
+      if(finalExt=='pdf')
+      { 
+        if(evaluar=='natural')
+        {
+          setState(() {
+            nombreArchivoN=name_file;
+            natural=true;
+          });
+        }
+        if(evaluar=='juridica')
+        {
+          setState(() {
+            nombreArchivoJ=name_file;
+            juridica=true;
+          });
+        }
+        if(evaluar=='politica')
+        {
+          setState(() {
+            nombreArchivoA=name_file;
+            politica=true;
+          });
+        }
+        _file = file;
+      }else{
+        warningDialog(
           context, 
           'Por favor adjuntar un archivo PDF',
           negativeAction: (){
           },
-          );
-        }
-      });
- }
+        );
+      }
+    });
+  }
  
 void _uploadFile(filePath,context,webservice) async {
   ms = new ProgressDialog(context);
@@ -108,324 +104,328 @@ void _uploadFile(filePath,context,webservice) async {
     var encabezado= new Encabezado(data:widget.data,titulo:'Admin. Actualizar Datos',);
     return WillPopScope(
     onWillPop: () {  },
-    child:SafeArea(
-         child:Scaffold(
+      child:SafeArea(
+        child:Scaffold(
           appBar: new AppBar(
-          flexibleSpace: encabezado,
-          backgroundColor: Colors.transparent,
-        ),
-        drawer: menu,
-        body:SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child:
-                Container(
-                height: 800,
-                color:Colors.white,
-                child:Column(
-                      mainAxisSize: MainAxisSize.min,
+            flexibleSpace: encabezado,
+            backgroundColor: Colors.transparent,
+          ),
+          drawer: menu,
+          body:SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child:
+            Container(
+            height: 800,
+            color:Colors.white,
+              child:Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
+                verticalDirection: VerticalDirection.down,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(50,50,5,0),
+                        child:
+                        Text('Persona Natural',textAlign: TextAlign.left,style: TextStyle(
+                          color:Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Container(
+                    color:Colors.white,
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      verticalDirection: VerticalDirection.down,
                       children: <Widget>[
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                  padding: EdgeInsets.fromLTRB(50,50,5,0),
-                                  child:
-                                  Text('Persona Natural',textAlign: TextAlign.left,style: TextStyle(
-                                                  color:Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold
-                                  ),
-                                  ),
-                                  )
-                              ],
-                            ),
-                            Container(
-                              color:Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                            Column(children:[
-                                              Padding(
-                                              padding: EdgeInsets.fromLTRB(50,10,5,0),
-                                              child:Container(
-                                                decoration: BoxDecoration(
-                                                //color: Colors.white,
-                                                borderRadius: BorderRadius.circular(14),
-                                              ),
-                                              child: RaisedButton.icon(
-                                                textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                                color: Color.fromRGBO(56, 124, 43, 1.0),
-                                                icon: Icon(Icons.attach_file_outlined,color:Colors.white ,),
-                                                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                                label: Text('Adjuntar', style: TextStyle(
-                                                  color: Colors.white,
-                                                  //Color.fromRGBO(83, 86, 90, 1.0),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.bold
-                                                )),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(50.0),
-                                                  //side: BorderSide(color: Colors.white)
-                                                ),
-                                                onPressed:() {
-                                                  getFile('natural',context);
-                                                }
-                                              ),
-                                              ),
-                                            ),
-                                            ]),
-                                            natural?Padding(
-                                            padding: EdgeInsets.fromLTRB(2,17,5,10),
-                                            child:Container(
-                                              decoration: BoxDecoration(
-                                              //color: Colors.white,
-                                              borderRadius: BorderRadius.circular(14),
-                                            ),
-                                            child:RaisedButton.icon(
-                                              textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                              color: Color.fromRGBO(56, 124, 43, 1.0),
-                                              icon: Icon(Icons.cloud_upload_sharp,color:Colors.white ,),
-                                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                              label: Text('Subir Archivo', style: TextStyle(
-                                                color: Colors.white,
-                                                //Color.fromRGBO(83, 86, 90, 1.0),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold
-                                              )),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(50.0),
-                                                //side: BorderSide(color: Colors.white)
-                                              ),
-                                              onPressed:() {
-                                                _uploadFile(_file,context,'/api/formato_vinculacion_natural/cargar_pdf');
-                                              }
-                                            ),
-                                            ),
-                                            ):Container(),  
-
-                                ],
-                                ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                          Padding(
-                                          padding: EdgeInsets.fromLTRB(50,10,5,0),
-                                          child:Text(nombreArchivoN,style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 15,
-                                                        fontWeight: FontWeight.bold
-                                          ),
-                                          ),),
-                              ],
-                            ),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                  padding: EdgeInsets.fromLTRB(50,50,5,0),
-                                  child:
-                                  Text('Persona Juridica',textAlign: TextAlign.left,style: TextStyle(
-                                                  color:Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold
-                                  ),
-                                  ),
-                                  )
-                              ],
-                            ),
-                            Container(
-                                color:Colors.white,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Column(
-                                      children:[
-                                            Padding(
-                                            padding: EdgeInsets.fromLTRB(50,10,5,0),
-                                            child:Container(
-                                              decoration: BoxDecoration(
-                                              //color: Colors.white,
-                                              borderRadius: BorderRadius.circular(14),
-                                            ),
-                                            child: RaisedButton.icon(
-                                              textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                              color: Color.fromRGBO(56, 124, 43, 1.0),
-                                              icon: Icon(Icons.attach_file_outlined,color:Colors.white ,),
-                                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                              label: Text('Adjuntar', style: TextStyle(
-                                                color: Colors.white,
-                                                //Color.fromRGBO(83, 86, 90, 1.0),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold
-                                              )),
-                                              shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(50.0),
-                                                //side: BorderSide(color: Colors.white)
-                                              ),
-                                              onPressed:() {
-                                                getFile('juridica',context);
-                                              }
-                                            ),
-                                            ),
-                                            ),
-                                      ],
-                                    ),
-                                    juridica?Padding(
-                                    padding: EdgeInsets.fromLTRB(2,17,5,10),
-                                    child:Container(
-                                      decoration: BoxDecoration(
-                                      //color: Colors.white,
-                                      borderRadius: BorderRadius.circular(14),
-                                    ),
-                                    child: RaisedButton.icon(
-                                      textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                      //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                      color: Color.fromRGBO(56, 124, 43, 1.0),
-                                      icon: Icon(Icons.cloud_upload_sharp,color:Colors.white ,),
-                                      //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                      label: Text('Subir Archivo', style: TextStyle(
-                                        color: Colors.white,
-                                        //Color.fromRGBO(83, 86, 90, 1.0),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold
-                                      )),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(50.0),
-                                        //side: BorderSide(color: Colors.white)
-                                      ),
-                                      onPressed:() {
-                                        _uploadFile(_file,context,'/api/formato_vinculacion_juridica/cargar_pdf');
-                                      }
-                                    ),
-                                    ),
-                                    ):Container(),  
-
-                                  ],
-                                ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                          Padding(
-                                          padding: EdgeInsets.fromLTRB(50,10,5,0),
-                                          child:Text(nombreArchivoJ,style: TextStyle(
-                                                        color: Colors.black,
-                                                        fontSize: 15,
-                                                        fontWeight: FontWeight.bold
-                                          ),
-                                          ),),
-                              ],
-                            ),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Padding(
-                                  padding: EdgeInsets.fromLTRB(50,50,5,0),
-                                  child:
-                                  Text('Autorización de Datos Personales',textAlign: TextAlign.left,style: TextStyle(
-                                                  color:Colors.black,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.bold
-                                  ),
-                                  ),
-                                  )
-                              ],
-                            ),
-                          Container(
-                              color:Colors.white,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Column(
-                                    children:[
-                                        Padding(
-                                        padding: EdgeInsets.fromLTRB(50,10,5,0),
-                                        child:Container(
-                                          decoration: BoxDecoration(
-                                          //color: Colors.white,
-                                          borderRadius: BorderRadius.circular(14),
-                                        ),
-                                        child:  RaisedButton.icon(
-                                          textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                          //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                          color: Color.fromRGBO(56, 124, 43, 1.0),
-                                          icon: Icon(Icons.attach_file_outlined,color:Colors.white ,),
-                                          //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                          label: Text('Adjuntar', style: TextStyle(
-                                            color: Colors.white,
-                                            //Color.fromRGBO(83, 86, 90, 1.0),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold
-                                          )),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(50.0),
-                                            //side: BorderSide(color: Colors.white)
-                                          ),
-                                          onPressed:() {
-                                            getFile('politica',context);
-                                          }
-                                        ),
-                                        ),
-                                        ),
-                                    ],
-                                  ),
-                                  politica?Padding(
-                                  padding: EdgeInsets.fromLTRB(2,17,5,10),
-                                  child:Container(
-                                    decoration: BoxDecoration(
-                                    //color: Colors.white,
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  child: RaisedButton.icon(
-                                    textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                    //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                    color: Color.fromRGBO(56, 124, 43, 1.0),
-                                    icon: Icon(Icons.cloud_upload_sharp,color:Colors.white ,),
-                                    //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                    label: Text('Subir Archivo', style: TextStyle(
-                                      color: Colors.white,
-                                      //Color.fromRGBO(83, 86, 90, 1.0),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold
-                                    )),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(50.0),
-                                      //side: BorderSide(color: Colors.white)
-                                    ),
-                                    onPressed:() {
-                                      _uploadFile(_file,context,'/api/formato_autorizacion_tratamiento/cargar_pdf');
-                                    }
-                                  ),
-                                  ),
-                                  ):Container(),  
-                                ],
+                        Column(
+                          children:[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(50,10,5,0),
+                              child:Container(
+                                decoration: BoxDecoration(
+                                //color: Colors.white,
+                                borderRadius: BorderRadius.circular(14),
                               ),
+                              child: RaisedButton.icon(
+                                textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                color: Color.fromRGBO(56, 124, 43, 1.0),
+                                icon: Icon(Icons.attach_file_outlined,color:Colors.white ,),
+                                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                label: Text('Adjuntar', style: TextStyle(
+                                  color: Colors.white,
+                                  //Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold
+                                )),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  //side: BorderSide(color: Colors.white)
+                                ),
+                                onPressed:() {
+                                  getFile('natural',context);
+                                }
+                              ),
+                              ),
+                            ),
+                          ]
+                        ),
+                        natural?Padding(
+                        padding: EdgeInsets.fromLTRB(2,17,5,10),
+                          child:Container(
+                            decoration: BoxDecoration(
+                            //color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child:RaisedButton.icon(
+                              textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                              color: Color.fromRGBO(56, 124, 43, 1.0),
+                              icon: Icon(Icons.cloud_upload_sharp,color:Colors.white ,),
+                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                              label: Text('Subir Archivo', style: TextStyle(
+                                color: Colors.white,
+                                //Color.fromRGBO(83, 86, 90, 1.0),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold
+                              )),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                                //side: BorderSide(color: Colors.white)
+                              ),
+                              onPressed:() {
+                                _uploadFile(_file,context,'/api/formato_vinculacion_natural/cargar_pdf');
+                              }
+                            ),
                           ),
-                          Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                                Padding(
-                                                padding: EdgeInsets.fromLTRB(50,10,5,0),
-                                                child:Text(nombreArchivoA,style: TextStyle(
-                                                              color: Colors.black,
-                                                              fontSize: 15,
-                                                              fontWeight: FontWeight.bold
-                                                ),
-                                                ),),
-                                    ],
-                                  ),
-                          
+                        ):Container(),  
                       ],
-                ),
-            )
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                      padding: EdgeInsets.fromLTRB(50,10,5,0),
+                        child:Text(nombreArchivoN,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                      padding: EdgeInsets.fromLTRB(50,50,5,0),
+                      child:
+                      Text('Persona Juridica',textAlign: TextAlign.left,style: TextStyle(
+                        color:Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold
+                      ),
+                      ),
+                      )
+                    ],
+                  ),
+                  Container(
+                    color:Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Column(
+                          children:[
+                            Padding(
+                            padding: EdgeInsets.fromLTRB(50,10,5,0),
+                              child:Container(
+                                decoration: BoxDecoration(
+                                //color: Colors.white,
+                                borderRadius: BorderRadius.circular(14),
+                                ),
+                                child: RaisedButton.icon(
+                                  textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                                  //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                  color: Color.fromRGBO(56, 124, 43, 1.0),
+                                  icon: Icon(Icons.attach_file_outlined,color:Colors.white ,),
+                                  //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                  label: Text('Adjuntar', style: TextStyle(
+                                    color: Colors.white,
+                                    //Color.fromRGBO(83, 86, 90, 1.0),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold
+                                  )),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    //side: BorderSide(color: Colors.white)
+                                  ),
+                                  onPressed:() {
+                                    getFile('juridica',context);
+                                  }
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        juridica?Padding(
+                          padding: EdgeInsets.fromLTRB(2,17,5,10),
+                          child:Container(
+                            decoration: BoxDecoration(
+                            //color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child: RaisedButton.icon(
+                              textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                              color: Color.fromRGBO(56, 124, 43, 1.0),
+                              icon: Icon(Icons.cloud_upload_sharp,color:Colors.white ,),
+                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                              label: Text('Subir Archivo', style: TextStyle(
+                                color: Colors.white,
+                                //Color.fromRGBO(83, 86, 90, 1.0),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold
+                              )),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                                //side: BorderSide(color: Colors.white)
+                              ),
+                              onPressed:() {
+                                _uploadFile(_file,context,'/api/formato_vinculacion_juridica/cargar_pdf');
+                              }
+                            ),
+                          ),
+                        ):Container(),  
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(50,10,5,0),
+                        child:Text(nombreArchivoJ,style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(50,50,5,0),
+                        child:
+                        Text('Autorización de Datos Personales',textAlign: TextAlign.left,style: TextStyle(
+                          color:Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),
+                        ),
+                      )
+                    ],
+                  ),
+                  Container(
+                    color:Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Column(
+                          children:[
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(50,10,5,0),
+                              child:Container(
+                                decoration: BoxDecoration(
+                                //color: Colors.white,
+                                  borderRadius: BorderRadius.circular(14),
+                                ),
+                                child:  RaisedButton.icon(
+                                  textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                                  //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                  color: Color.fromRGBO(56, 124, 43, 1.0),
+                                  icon: Icon(Icons.attach_file_outlined,color:Colors.white ,),
+                                  //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                  label: Text('Adjuntar', style: TextStyle(
+                                    color: Colors.white,
+                                    //Color.fromRGBO(83, 86, 90, 1.0),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold
+                                  )),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    //side: BorderSide(color: Colors.white)
+                                  ),
+                                  onPressed:() {
+                                    getFile('politica',context);
+                                  }
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        politica?Padding(
+                          padding: EdgeInsets.fromLTRB(2,17,5,10),
+                          child:Container(
+                            decoration: BoxDecoration(
+                            //color: Colors.white,
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child: RaisedButton.icon(
+                              textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                              color: Color.fromRGBO(56, 124, 43, 1.0),
+                              icon: Icon(Icons.cloud_upload_sharp,color:Colors.white ,),
+                              //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                              label: Text('Subir Archivo', style: TextStyle(
+                                color: Colors.white,
+                                //Color.fromRGBO(83, 86, 90, 1.0),
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold
+                              )),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50.0),
+                                //side: BorderSide(color: Colors.white)
+                              ),
+                              onPressed:() {
+                                _uploadFile(_file,context,'/api/formato_autorizacion_tratamiento/cargar_pdf');
+                              }
+                            ),
+                          ),
+                        ):Container(),  
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(50,10,5,0),
+                        child:Text(nombreArchivoA,style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold
+                        ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ), 
+        ),
       ),
-        
-    ),),);
+    );
   }
 }

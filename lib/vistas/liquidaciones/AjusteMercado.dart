@@ -184,6 +184,13 @@ class _VerMercadoState extends State<VerMercado> {
       }
   }
 
+  Widget convertirMoneda( String valor){
+    double flutterBalance=double.parse(valor);
+    var oCcy = new NumberFormat.currency(locale: 'eu', customPattern: '\u0024 #,##.#');
+    String formatted = oCcy.format(flutterBalance);
+    return  Text(formatted,textAlign: TextAlign.center);
+  }
+
   mostrar(){
     if(mercado==true)
     { 
@@ -805,7 +812,7 @@ Widget dataBody() {
                             //Text(entradaG.fecha,textAlign: TextAlign.center,),
                           ),
                           DataCell(
-                            Center(child:Text(entradaG.valor,textAlign: TextAlign.center,)),
+                            Center(child:convertirMoneda(entradaG.valor),),
                           ),
                           DataCell(
                               entradaG.id==''?Center(child:Container(child: IconButton(icon: Icon(

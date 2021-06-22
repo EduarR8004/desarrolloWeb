@@ -503,18 +503,24 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
       ),
     );
   }
+  Widget convertirMoneda( String valor){
+    double flutterBalance=double.parse(valor);
+    var oCcy = new NumberFormat.currency(locale: 'eu', customPattern: '\u0024 #,##.#');
+    String formatted = oCcy.format(flutterBalance);
+     return  Text(formatted,textAlign: TextAlign.center);
+   }
  
-parametros(parametro){
-  for ( var par in parametro)
-  {
-    pasoParametro.add(par);
+  parametros(parametro){
+    for ( var par in parametro)
+    {
+      pasoParametro.add(par);
+    }
+    var codParametro;
+    pasoParametro.map((EntradaCana map) {
+    codParametro=map.cod_hda;
+    }).toList();
+      return codParametro;
   }
-  var codParametro;
-  pasoParametro.map((EntradaCana map) {
-  codParametro=map.cod_hda;
-  }).toList();
-    return codParametro;
-}
   Widget lista(){
     var token=widget.data.token;
     return Container(
@@ -1118,10 +1124,10 @@ parametros(parametro){
                             mostrarbonificacionTotal?Center(child:Text(entradaG.rend_bonif,textAlign: TextAlign.center,),):Container(),
                           ),
                           DataCell(
-                            Center(child:Text(entradaG.valor_total,textAlign: TextAlign.center,),),
+                            Center(child:convertirMoneda(entradaG.valor_total),),
                           ),
                           DataCell(
-                            Center(child:Text(entradaG.valor_desc,textAlign: TextAlign.center,),),
+                            Center(child:convertirMoneda(entradaG.valor_desc),),
                           ),
                           
                           DataCell(
@@ -1230,7 +1236,7 @@ parametros(parametro){
                               mostrarHaciendaCana?Center(child:Text(entradaG.predio,textAlign: TextAlign.center,),):Container(),
                             ),
                             DataCell(
-                              Center(child:Text(entradaG.valor,textAlign: TextAlign.center,),),
+                              Center(child:convertirMoneda(entradaG.valor),),
                             ),
                             DataCell(
                               entradaG.id==''?Center(child:Container(child: IconButton(icon: Icon(
