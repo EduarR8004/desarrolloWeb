@@ -86,23 +86,6 @@ class _VerConsultasState extends State<VerConsultas> {
     dropdownAgnoFinal=fomatoAgno;
     super.initState();
   }
-  void _showAlertDialog(text,titulo) {
-    showDialog(
-      context: context,
-      builder: (buildcontext) {
-        return AlertDialog(
-          title: Text(titulo),
-          content: Text(text),
-          actions: <Widget>[
-            RaisedButton(
-              child: Text("Aceptar", style: TextStyle(color: Colors.green),),
-              onPressed: (){ Navigator.of(context).pop(); },
-            ),
-          ],
-        );
-      }
-    );
-  }
 
   Widget dataBody(){
     return 
@@ -114,19 +97,6 @@ class _VerConsultasState extends State<VerConsultas> {
           mainAxisAlignment:MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children:[
-            Column(
-              mainAxisAlignment:MainAxisAlignment.start,
-              children:[
-                SizedBox(height:55),
-                cambiar?
-                // Expanded(
-                //   child:
-                  dataTable(fecha_inicial,fecha_final,tipo)
-                //)
-                :dataTableVacia(),
-              ]
-            ),
-            SizedBox(width:30),
             Column(
               children:[
                 SizedBox(height:30),
@@ -196,6 +166,19 @@ class _VerConsultasState extends State<VerConsultas> {
                   ),
                 ),
                 boton(),
+              ]
+            ),
+            SizedBox(width:30),
+            Column(
+              mainAxisAlignment:MainAxisAlignment.start,
+              children:[
+                SizedBox(height:55),
+                cambiar?
+                // Expanded(
+                //   child:
+                  dataTable(fecha_inicial,fecha_final,tipo)
+                //)
+                :dataTableVacia(),
               ]
             ),
           ]
@@ -633,18 +616,38 @@ Widget listaAgnoFinal(){
             color: Colors.transparent,
           ),
           onChanged: (newValueDoc) {
-            setState(() {
-              if(newValueDoc!='Seleccione un Documento')
-              {
-                contador=0;
-                cambiar = true;
-                dropdownValue = newValueDoc;
-                tipo=newValueDoc;
+            if(newValueDoc !='Seleccione un Documento')
+            {
+              if(newValueDoc =='Certificados de Ingresos y Costos')
+              {   
+                infoDialog(
+                  context, 
+                  '*Solo para Cuentas en Participación',
+                  negativeText: "Aceptar",
+                  negativeAction: (){
+                    setState(() {
+                      contador=0;
+                      cambiar = true;
+                      dropdownValue = newValueDoc;
+                      tipo=newValueDoc;
+                    });
+                    
+                  },
+                  neutralText: "Cancelar",
+                  neutralAction: (){
+                  },
+                );
               }else{
-                dropdownValue = newValueDoc;
+                setState(() {
+                  contador=0;
+                  cambiar = true;
+                  dropdownValue = newValueDoc;
+                  tipo=newValueDoc;
+                });
               }
-              
-            });
+            }else{
+              dropdownValue = newValueDoc;
+            }            
           },
           items: <String>['Seleccione un Documento','Donación Cenicaña', 'Donación Fondo Social', 'Retención en la Fuente','Certificados de Ingresos y Costos','ICA']
           .map<DropdownMenuItem<String>>((String value) {

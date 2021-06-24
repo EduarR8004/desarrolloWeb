@@ -33,69 +33,90 @@ class ActualizarDatospState extends State<ActualizarDatosp>with SingleTickerProv
     var menu = new Menu(data:widget.data,retorno:'');
     var encabezado= new Encabezado(data:widget.data,titulo:'Actualización Datos',);
     return WillPopScope(
-    onWillPop: () {  },
-    child: SafeArea(
-          child:Scaffold(
+      onWillPop: () {  },
+      child: SafeArea(
+        child:Scaffold(
+          backgroundColor: Colors.white,
           appBar: new AppBar(
-          flexibleSpace:encabezado,
-          backgroundColor: Colors.transparent,
+            flexibleSpace:encabezado,
+            backgroundColor: Colors.transparent,
           ),
           drawer: menu,
           body: Container(
+            width: 1700,
+            height: 700,
+            alignment: Alignment.center,
+            color:Colors.white ,
             margin: EdgeInsets.fromLTRB(1,1, 1, 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                margin: const EdgeInsets.fromLTRB(10,20, 10,1),
-                height: 150,
-                width: 400,
-                child:Text('Señor Proveedor, a continuación encontrará la información para realizar el proceso de vinculación y/o actualización de documentos para personas Jurídicas y Naturales. Una vez cuente con la documentación completa, por favor enviarla al correo:',
-                textAlign: TextAlign.justify,style: TextStyle(
-                  color:Colors.black,
-                  fontSize: 16,
-                  height:1.5,
-                                          //fontWeight: FontWeight.bold
-                ),),),
-                Container(
-                margin: const EdgeInsets.fromLTRB(10,5, 10,10),
-                height: 20,
-                width: 400,
-                child:Text('auxiliar.proveedores@manuelita.com',
-                textAlign: TextAlign.center,style: TextStyle(
-                  color:Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold
-                ),),),
-                TabBar(
-                  unselectedLabelColor: Colors.black,
-                  labelColor: Colors.red,
-                  tabs: [
-                    Tab(
-                      child: Text('Personas Jurídicas',style:TextStyle(
+            child:
+            Container(
+              width: 900,
+              alignment: Alignment.center,
+              color:Colors.white ,
+              child:
+              Center(
+                child:
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.fromLTRB(10,20, 10,1),
+                      height: 150,
+                      width: 400,
+                      child:Text('Señor Proveedor, a continuación encontrará la información para realizar el proceso de vinculación y/o actualización de documentos para personas Jurídicas y Naturales. Una vez cuente con la documentación completa, por favor enviarla al correo:',
+                      textAlign: TextAlign.justify,style: TextStyle(
                         color:Colors.black,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold
-                      )),
+                        height:1.5,
+                      //fontWeight: FontWeight.bold
+                      ),),
                     ),
-                    Tab(
-                      child: Text('Personas Naturales',style:TextStyle(
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(10,5, 10,10),
+                      height: 20,
+                      width: 400,
+                      child:Text('auxiliar.proveedores@manuelita.com',
+                      textAlign: TextAlign.center,style: TextStyle(
                         color:Colors.black,
-                        fontSize: 16,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold
-                      )),
-                    )
+                      ),),
+                    ),
+                    TabBar(
+                      unselectedLabelColor: Colors.black,
+                      labelColor: Colors.red,
+                      tabs: [
+                        Tab(
+                          child: Text('Personas Jurídicas',style:TextStyle(
+                            color:Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold
+                          )),
+                        ),
+                        Tab(
+                          child: Text('Personas Naturales',style:TextStyle(
+                            color:Colors.black,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold
+                          )),
+                        )
+                      ],
+                      controller: _tabController,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                    ),
+                    TabBarView(
+                      children: [PersonaJuridica(data: widget.data,),PersonaNatuarl(data: widget.data,) ],
+                      controller: _tabController,
+                    ),
                   ],
-                  controller: _tabController,
-                  indicatorSize: TabBarIndicatorSize.tab,
                 ),
-                TabBarView(
-                  children: [PersonaJuridica(data: widget.data,),PersonaNatuarl(data: widget.data,) ],
-                  controller: _tabController,
-                ),
-              ],
+              ), 
             ),
           ),
-    ),),);
+        ),
+      ),
+    );
   }
 }

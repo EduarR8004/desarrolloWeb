@@ -18,7 +18,7 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
   String _url='https://proveedores-cana.manuelita.com/';
   String urlPDFPath = "";
   ProgressDialog ms;
-  double letra=16;
+  double letra=18;
 
   obtener_ruta_natural() async{
     var session= Conexion();
@@ -63,9 +63,11 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
           Column(
           //mainAxisAlignment:MainAxisAlignment.center,
             children:<Widget>[
+              SizedBox(height:50),
               Container(
-                margin: const EdgeInsets.fromLTRB(5, 8, 5,5),
-                child:Text("1. Diligenciar el documento Formato Vinculación Cliente o Proveedor 2020 VF P. NATURAL.Sólo diligenciar las secciones resaltadas en color amarillo."
+                width: 600,
+                margin: const EdgeInsets.fromLTRB(5, 20, 5,5),
+                child:Text('1. Para descargar el Formato de Vinculación Proveedor, por favor haga clic en el botón "Descargar Archivo". Al final del formato se encuentra el listado de documentos que deben ser enviados para la vincuación'
                 ,textAlign: TextAlign.justify,
                 style: TextStyle(
                   color:Colors.black,
@@ -75,7 +77,7 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
               ),
               Container(
                 alignment: Alignment.center,
-                margin: const EdgeInsets.fromLTRB(5,2, 5,5),
+                margin: const EdgeInsets.fromLTRB(5,20, 5,5),
                 decoration: BoxDecoration(
                         //color: Colors.white,
                 borderRadius: BorderRadius.circular(14),
@@ -107,9 +109,10 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
                 ),
               ),
               Container(
-                alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.fromLTRB(5, 5, 5,5),
-                child:Text("2. Leer y diligenciar el documento Autorización de Datos Proveedores."
+                width: 600,
+                //alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.fromLTRB(5, 20, 5,5),
+                child:Text('2. Para descargar el documento de Autorización de Datos Personales, por favor haga clic en el botón "Descargar Archivo".'
                 ,textAlign: TextAlign.justify,
                 style: TextStyle(
                   color:Colors.black,
@@ -117,7 +120,7 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
                 )),
               ),
               Container(
-                margin: const EdgeInsets.fromLTRB(5,2, 5,5),
+                margin: const EdgeInsets.fromLTRB(5,20, 5,5),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                         //color: Colors.white,
@@ -149,20 +152,20 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
                   },
                 ),
               ),
-              Container(
-                alignment: Alignment.centerLeft,
-                margin: const EdgeInsets.fromLTRB(5, 5, 5,5),
-                child:Text("3. Adjuntar los siguientes documentos:"
-                ,textAlign: TextAlign.justify,
-                style: TextStyle(
-                  color:Colors.black,
-                  fontSize: letra
-                )),
-              ),
-              textoLargo('a',"Copia de la cédula de ciudadanía del representante legal,representante legal suplente o persona natural, según sea el caso, de quien suscribe el presente documento."),
-              texto('b',"RUT actualizado con fecha de generación al año de vinculación o actualización."),
-              textoLargo('c',"Certificado de cuenta bancaria en donde se realizará el pago por transferencia no mayor a 45 días calendario (El proveedor debe ser el titular de la cuenta bancaria). Sólo aplica para proveedores."),
-              textoLargo('d',"Autorización para el tratamiento de datos personales de clientes o proveedores según corresponda."),
+              // Container(
+              //   alignment: Alignment.centerLeft,
+              //   margin: const EdgeInsets.fromLTRB(5, 5, 5,5),
+              //   child:Text("3. Adjuntar los siguientes documentos:"
+              //   ,textAlign: TextAlign.justify,
+              //   style: TextStyle(
+              //     color:Colors.black,
+              //     fontSize: letra
+              //   )),
+              // ),
+              // textoLargo('a',"Copia de la cédula de ciudadanía del representante legal,representante legal suplente o persona natural, según sea el caso, de quien suscribe el presente documento."),
+              // texto('b',"RUT actualizado con fecha de generación al año de vinculación o actualización."),
+              // textoLargo('c',"Certificado de cuenta bancaria en donde se realizará el pago por transferencia no mayor a 45 días calendario (El proveedor debe ser el titular de la cuenta bancaria). Sólo aplica para proveedores."),
+              // textoLargo('d',"Autorización para el tratamiento de datos personales de clientes o proveedores según corresponda."),
             ],
           ),
     );

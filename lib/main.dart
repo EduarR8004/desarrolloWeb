@@ -6,6 +6,7 @@ import 'package:proveedores_manuelita/vistas/consultas/Consultas.dart';
 import 'package:proveedores_manuelita/utiles/Conexion.dart';
 import 'package:proveedores_manuelita/vistas/index.dart';
 import 'package:proveedores_manuelita/vistas/login/login.dart';
+import 'package:proveedores_manuelita/vistas/login/login_prueba.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:proveedores_manuelita/utiles/Notificaciones.dart';
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
           onGenerateRoute: router.generateRoute,
           navigatorKey: locator<NavigatorService>().navigatorKey,
           routes:{
-            'login' :(BuildContext context)=>Login(false),
+            'login' :(BuildContext context)=>Login_prueba(false),
             'consultas' :(BuildContext context)=>VerConsultas(),
           },
           //home: Splash(),

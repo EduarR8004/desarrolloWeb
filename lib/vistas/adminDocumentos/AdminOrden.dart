@@ -73,41 +73,42 @@ class _AdministrarOrdenesTState extends State<AdministrarOrdenesT> {
     cambiar=true;
     if(widget.orden!=null)
     { 
-      if(tipo =='Donación Fondo Social')
+      if(widget.orden!=null)
+    { 
+      if(widget.orden.tipo =='FondoSocial')
       {
-        tipo='FondoSocial';
+        dropdownDoc='Donación Fondo Social';
       }
-      if(tipo =='Donación Cenicaña')
+      if(widget.orden.tipo =='DonacionesCenicana')
       {
-        tipo='DonacionesCenicana';
+        dropdownDoc='Donación Cenicaña';
       }
-      if(tipo =='Retención en la Fuente')
+      if(widget.orden.tipo =='Retenciones')
       {
-        tipo='Retenciones';
+        dropdownDoc='Retención en la Fuente';
       }
-      if(tipo =='Certificados de Ingresos y Costos')
+      if(widget.orden.tipo =='IngresosYCostos')
       {
-        tipo='IngresosYCostos';
+        dropdownDoc='Certificados de Ingresos y Costos';
       }
-      if(tipo =='ICA')
+      if(widget.orden.tipo =='Ica')
       {
-        tipo='Ica';
+        dropdownValue='ICA';
       }
-      if(tipo =='Anticipos')
+      if(widget.orden.tipo =='LiquidacionAnticipos')
       {
-        tipo='LiquidacionAnticipos';
+        dropdownDoc='Anticipos';
       }
-      if(tipo =='Liquidación Caña')
+      if(widget.orden.tipo =='LiquidacionCana')
       {
-        tipo='LiquidacionCana';
-      }
-      if(tipo =='Ajuste de Mercado Excedentario')
-      {
-        tipo='LiquidacionMercadoExcedentario';
+        dropdownDoc='Liquidación Caña';
       } 
-
+      if(widget.orden.tipo == 'LiquidacionMercadoExcedentario')
+      {
+        dropdownDoc='Ajuste de Mercado Excedentario';
+      } 
     }
-    
+   }
   }
   super.initState();
 }
@@ -209,7 +210,7 @@ class _AdministrarOrdenesTState extends State<AdministrarOrdenesT> {
     if(tipo =='Ajuste de Mercado Excedentario')
     {
       tipo='LiquidacionMercadoExcedentario';
-    }  
+    } 
 
     if(selectedOrders.length > 0){
         return ordenes;
@@ -272,10 +273,9 @@ class _AdministrarOrdenesTState extends State<AdministrarOrdenesT> {
             backgroundColor: Colors.transparent,
           ),
           drawer: menu,
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child:Container(
-              height:1500,
+          body: 
+            Container(
+              height:700,
               color:Colors.white,
               child:Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -546,11 +546,11 @@ class _AdministrarOrdenesTState extends State<AdministrarOrdenesT> {
                   // ]
                   // ),
                   SizedBox(height:30),
-                  cambiar?dataTable(tipo,marcaInicial,marcaFinal):Container(color:Colors.white,),
+                  cambiar?Expanded(child:dataTable(tipo,marcaInicial,marcaFinal)):Container(color:Colors.white,),  
                 ],
               ),
             ),
-          ),
+          //),
         ),
       ),
     );
@@ -728,38 +728,38 @@ Widget tipoDoc(context){
             if(newValueLiq!='Seleccione un tipo de Documento' ||( _startTimeController.text!='' && _endTimeController.text!='')) {  
               setState(() {
                 dropdownDoc = newValueLiq;
-                if(tipo =='Donación Fondo Social')
-                  {
-                    tipo='FondoSocial';
-                  }
-                  if(tipo =='Donación Cenicaña')
-                  {
-                    tipo='DonacionesCenicana';
-                  }
-                  if(tipo =='Retención en la Fuente')
-                  {
-                    tipo='Retenciones';
-                  }
-                  if(tipo =='Certificados de Ingresos y Costos')
-                  {
-                    tipo='IngresosYCostos';
-                  }
-                  if(tipo =='ICA')
-                  {
-                    tipo='Ica';
-                  }
-                  if(tipo =='Anticipos')
-                  {
-                    tipo='LiquidacionAnticipos';
-                  }
-                  if(tipo =='Liquidación Caña')
-                  {
-                    tipo='LiquidacionCana';
-                  }
-                  if(tipo =='Ajuste de Mercado Excedentario')
-                  {
-                    tipo='LiquidacionMercadoExcedentario';
-                  }          
+                if(newValueLiq =='Donación Fondo Social')
+                {
+                  tipo='FondoSocial';
+                }
+                if(newValueLiq =='Donación Cenicaña')
+                {
+                  tipo='DonacionesCenicana';
+                }
+                if(newValueLiq =='Retención en la Fuente')
+                {
+                  tipo='Retenciones';
+                }
+                if(newValueLiq =='Certificados de Ingresos y Costos')
+                {
+                  tipo='IngresosYCostos';
+                }
+                if(newValueLiq =='ICA')
+                {
+                  tipo='Ica';
+                }
+                if(newValueLiq =='Anticipos')
+                {
+                  tipo='LiquidacionAnticipos';
+                }
+                if(newValueLiq =='Liquidación Caña')
+                {
+                  tipo='LiquidacionCana';
+                }
+                if(newValueLiq =='Ajuste de Mercado Excedentario')
+                {
+                  tipo='LiquidacionMercadoExcedentario';
+                }           
               }); 
             } else { 
               setState(() {

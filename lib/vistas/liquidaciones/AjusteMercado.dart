@@ -507,18 +507,10 @@ Widget dataBody() {
               mainAxisAlignment:MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
-                  Column(
-                  mainAxisAlignment:MainAxisAlignment.start,
-                  children:[
-                    SizedBox(height:30),
-                    mostrar(),
-                  ]
-                  ),
                   SizedBox(width:30),
                   Column(
                     mainAxisAlignment:MainAxisAlignment.start,
                     children:[
-                      SizedBox(height:20),
                       Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
                         child:Row(
@@ -651,7 +643,15 @@ Widget dataBody() {
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  SizedBox(height:20),
+                  Column(
+                  mainAxisAlignment:MainAxisAlignment.start,
+                  children:[
+                    SizedBox(height:30),
+                    mostrar(),
+                  ]
+                  ),
                 ]
               ),
                 // SizedBox(height:2),

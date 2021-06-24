@@ -44,9 +44,11 @@ class _PersonaJuridicaState extends State<PersonaJuridica> {
         Column(
           //mainAxisAlignment:MainAxisAlignment.center,
           children:<Widget>[
+            SizedBox(height:50),
             Container(
-              margin: const EdgeInsets.fromLTRB(5, 8, 5,5),
-              child:Text("1. Diligenciar el documento Formato Vinculación Cliente o Proveedor 2020 VF P. JURÍDICO. Sólo diligenciar las secciones resaltadas en color amarillo.",
+              width: 600,
+              margin: const EdgeInsets.fromLTRB(5, 20, 5,5),
+              child:Text('1. Para descargar el Formato de Vinculación Proveedor, por favor haga clic en el botón "Descargar Archivo". Al final del formato se encuentra el listado de documentos que deben ser enviados para la vincuación',
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color:Colors.black,
@@ -56,7 +58,7 @@ class _PersonaJuridicaState extends State<PersonaJuridica> {
               Container(
                 width: 300,
                 alignment: Alignment.center,
-                margin: const EdgeInsets.fromLTRB(7,2, 5,5),
+                margin: const EdgeInsets.fromLTRB(7,40, 5,5),
                 decoration: BoxDecoration(
                         //color: Colors.white,
                 borderRadius: BorderRadius.circular(14),
@@ -87,20 +89,20 @@ class _PersonaJuridicaState extends State<PersonaJuridica> {
                   },
                 ),
               ),
-              Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.fromLTRB(7, 5, 7,5),
-              child:Text("2. Adjuntar los siguientes documentos:",
-              textAlign: TextAlign.justify,
-              style: TextStyle(
-                            color:Colors.black,
-                            fontSize:letra
-              )),),
-              textoMediano('a',"Certificado de Existencia y Representación Legal de la Cámara de Comercio local no mayor a 45 días calendario."),
-              texto('b',"Copia de la cédula de ciudadanía del representante legal, representante legal suplente o persona natural, según sea el caso, de quien suscribe el presente documento."),
-              texto('c',"RUT actualizado con fecha de generación al año de vinculación o actualización."),
-              textoLargo('d',"Certificado de cuenta bancaria en donde se realizará el pago por transferencia no mayor a 45 días calendario (El proveedor debe ser el titular de la cuenta bancaria). Sólo aplica para proveedores."),
-              textoExtraLargo('e',"Certificado de composición accionaria firmada por el contador público, revisor fiscal u oficial de cumplimiento que incluyan solamente aquellos socios o accionistas que posean el 25% o más del capital de la sociedad incluyendo beneficiarios finales con una participación directa o indirecta superior al 25%, con vigencia de 45 días calendario."),
+              // Container(
+              // alignment: Alignment.centerLeft,
+              // margin: const EdgeInsets.fromLTRB(7, 5, 7,5),
+              // child:Text("2. Adjuntar los siguientes documentos:",
+              // textAlign: TextAlign.justify,
+              // style: TextStyle(
+              //               color:Colors.black,
+              //               fontSize:letra
+              // )),),
+              // textoMediano('a',"Certificado de Existencia y Representación Legal de la Cámara de Comercio local no mayor a 45 días calendario."),
+              // texto('b',"Copia de la cédula de ciudadanía del representante legal, representante legal suplente o persona natural, según sea el caso, de quien suscribe el presente documento."),
+              // texto('c',"RUT actualizado con fecha de generación al año de vinculación o actualización."),
+              // textoLargo('d',"Certificado de cuenta bancaria en donde se realizará el pago por transferencia no mayor a 45 días calendario (El proveedor debe ser el titular de la cuenta bancaria). Sólo aplica para proveedores."),
+              // textoExtraLargo('e',"Certificado de composición accionaria firmada por el contador público, revisor fiscal u oficial de cumplimiento que incluyan solamente aquellos socios o accionistas que posean el 25% o más del capital de la sociedad incluyendo beneficiarios finales con una participación directa o indirecta superior al 25%, con vigencia de 45 días calendario."),
           ],
         )
     );

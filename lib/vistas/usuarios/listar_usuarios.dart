@@ -180,6 +180,174 @@ class DataTableUsuariosState extends State<DataTableUsuarios> {
     });
   }
  
+  
+
+  void confirm (dialog){
+    Alert(
+      context: context,
+      type: AlertType.error,
+      title: "Faltan Permisos",
+      desc: dialog,
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Aceptar",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          width: 120,
+        )
+      ],
+    ).show();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var menu = new Menu(data:widget.data,retorno:'');
+    texto=widget.parametro;
+    var encabezado= new Encabezado(data:widget.data,titulo:'Gestión de Usuarios',);
+    return WillPopScope(
+    onWillPop: () {  },
+      child: SafeArea(
+        child:Scaffold(
+          appBar: new AppBar(
+            flexibleSpace:encabezado, 
+            backgroundColor: Colors.transparent,
+          ),
+          drawer: menu,
+          body:Container(
+            height:700,
+            color:Colors.white,
+            child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            verticalDirection: VerticalDirection.down,
+              children: <Widget>[
+                Container(
+                color:Colors.white ,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.fromLTRB(40,12,10,10),child:boton(),),
+                      Container(
+                        width: 400,
+                        alignment: Alignment.topLeft,
+                        color:Colors.white ,
+                        padding: EdgeInsets.fromLTRB(30,0,30,20),
+                        child: TextField(
+                          controller: _controller,
+                          autofocus: false,
+                          autocorrect: true,
+                          decoration: InputDecoration(
+                            enabledBorder: UnderlineInputBorder(      
+                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
+                            ),  
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                            ),
+                            border: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
+                            ),
+                            labelText: 'Buscar',
+                            prefixIcon: Icon(Icons.search)
+                          ),
+                        ), 
+                      ),
+                      Container(
+                        color:Colors.white,
+                        padding: EdgeInsets.fromLTRB(30,22,30,20),
+                        child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(10.0),
+                            child:Container(
+                              width: 280,
+                              height: 35,
+                              decoration: BoxDecoration(
+                              //color: Colors.white,
+                                borderRadius: BorderRadius.circular(14),
+                              ),
+                              child: RaisedButton(
+                                textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                                color: Color.fromRGBO(56, 124, 43, 1.0),
+                                child: Text('Buscar', style: TextStyle(
+                                  color: Colors.white,
+                                  //Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold
+                                )),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  //side: BorderSide(color: Colors.white)
+                                ),
+                                onPressed: () {
+                                  if(_controller.text==null || _controller.text=="")
+                                  {
+                                    infoDialog(context,'Por favor ingrese un parámetro para realizar la búsqueda',
+                                    negativeAction: (){}, 
+                                    );
+                                  }else
+                                  {
+                                    texto=_controller.text==null?'':_controller.text;
+                                    Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:texto)));
+                                  }
+                                },
+                              ),
+                            ),
+                          ),
+                          Padding(
+                          padding: EdgeInsets.fromLTRB(30,25,30,20),
+                          child:Container(
+                            width: 280,
+                            height: 35,
+                            decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: RaisedButton(
+                            textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                            //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                            color: Color.fromRGBO(56, 124, 43, 1.0),
+                            child: Text('Limpiar filtro', style: TextStyle(
+                              color: Colors.white,
+                              //Color.fromRGBO(83, 86, 90, 1.0),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold
+                            )),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                              //side: BorderSide(color: Colors.white)
+                            ),
+                            onPressed: () {
+                              texto='';
+                              Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:texto)));
+                            },
+                          ),
+                          ),
+                          )
+                        ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child:dataBody(texto),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget  dataBody(texto) {
     return FutureBuilder <List<Usuario>>(
       future:listar_usuario(texto),
@@ -329,171 +497,6 @@ class DataTableUsuariosState extends State<DataTableUsuarios> {
           );
         }
       },
-    );
-  }
-
-  void confirm (dialog){
-    Alert(
-      context: context,
-      type: AlertType.error,
-      title: "Faltan Permisos",
-      desc: dialog,
-      buttons: [
-        DialogButton(
-          child: Text(
-            "Aceptar",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          width: 120,
-        )
-      ],
-    ).show();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    var menu = new Menu(data:widget.data,retorno:'');
-    texto=widget.parametro;
-    var encabezado= new Encabezado(data:widget.data,titulo:'Gestión de Usuarios',);
-    return WillPopScope(
-    onWillPop: () {  },
-      child: SafeArea(
-        child:Scaffold(
-          appBar: new AppBar(
-            flexibleSpace:encabezado, 
-            backgroundColor: Colors.transparent,
-          ),
-          drawer: menu,
-          body:Container(
-            color:Colors.white,
-            child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            verticalDirection: VerticalDirection.down,
-              children: <Widget>[
-                Container(
-                color:Colors.white ,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(padding: EdgeInsets.fromLTRB(40,12,10,10),child:boton(),),
-                      Container(
-                        width: 400,
-                        alignment: Alignment.topLeft,
-                        color:Colors.white ,
-                        padding: EdgeInsets.fromLTRB(30,0,30,20),
-                        child: TextField(
-                          controller: _controller,
-                          autofocus: false,
-                          autocorrect: true,
-                          decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(      
-                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),   
-                            ),  
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                            ),
-                            border: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color.fromRGBO(83, 86, 90, 1.0)),
-                            ),
-                            labelText: 'Buscar',
-                            prefixIcon: Icon(Icons.search)
-                          ),
-                        ), 
-                      ),
-                      Container(
-                        color:Colors.white,
-                        padding: EdgeInsets.fromLTRB(30,22,30,20),
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child:Container(
-                              width: 280,
-                              height: 35,
-                              decoration: BoxDecoration(
-                              //color: Colors.white,
-                                borderRadius: BorderRadius.circular(14),
-                              ),
-                              child: RaisedButton(
-                                textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                                //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                                color: Color.fromRGBO(56, 124, 43, 1.0),
-                                child: Text('Buscar', style: TextStyle(
-                                  color: Colors.white,
-                                  //Color.fromRGBO(83, 86, 90, 1.0),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                                )),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0),
-                                  //side: BorderSide(color: Colors.white)
-                                ),
-                                onPressed: () {
-                                  if(_controller.text==null || _controller.text=="")
-                                  {
-                                    infoDialog(context,'Por favor ingrese un parámetro para realizar la búsqueda',
-                                    negativeAction: (){}, 
-                                    );
-                                  }else
-                                  {
-                                    texto=_controller.text==null?'':_controller.text;
-                                    Navigator.of(context).push(
-                                    MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:texto)));
-                                  }
-                                },
-                              ),
-                            ),
-                          ),
-                          Padding(
-                          padding: EdgeInsets.fromLTRB(30,25,30,20),
-                          child:Container(
-                            width: 280,
-                            height: 35,
-                            decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: RaisedButton(
-                            textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                            //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                            color: Color.fromRGBO(56, 124, 43, 1.0),
-                            child: Text('Limpiar filtro', style: TextStyle(
-                              color: Colors.white,
-                              //Color.fromRGBO(83, 86, 90, 1.0),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold
-                            )),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50.0),
-                              //side: BorderSide(color: Colors.white)
-                            ),
-                            onPressed: () {
-                              texto='';
-                              Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:texto)));
-                            },
-                          ),
-                          ),
-                          )
-                        ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child:dataBody(texto),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 

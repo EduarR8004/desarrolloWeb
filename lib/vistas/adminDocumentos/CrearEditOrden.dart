@@ -30,37 +30,41 @@ class _EditarOrdenState extends State<EditarOrden> {
   String dropdownValue;
   bool pruebaTipo;
   @override
-  void initState() {
+   void initState() {
     super.initState();
     pruebaTipo=false;
     widget.parametros;
-    if(tipo =='Fondo Social')
+    if(widget.orden.tipo =='FondoSocial')
     {
-      this.tipo='FondoSocial';
+      dropdownValue='Donación Fondo Social';
     }
-    if(tipo =='Donaciones Cenicana')
+    if(widget.orden.tipo =='DonacionesCenicana')
     {
-      tipo='DonacionesCenicana';
+      dropdownValue='Donación Cenicaña';
     }
-    if(tipo =='Retención')
+    if(widget.orden.tipo =='Retenciones')
     {
-      tipo='Retenciones';
+      dropdownValue='Retención en la Fuente';
     }
-    if(tipo =='Ingr.Cost')
+    if(widget.orden.tipo =='IngresosYCostos')
     {
-      tipo='IngresosYCostos';
+      dropdownValue='Certificados de Ingresos y Costos';
     }
-    if(tipo =='ICA')
+    if(widget.orden.tipo =='Ica')
     {
-      tipo='Ica';
+      dropdownValue='ICA';
     }
-    if(tipo =='Anticipos')
+    if(widget.orden.tipo =='LiquidacionAnticipos')
     {
-      tipo='LiquidacionAnticipos';
+      dropdownValue='Anticipos';
     }
-    if(tipo =='Liquidación Caña')
+    if(widget.orden.tipo =='LiquidacionCana')
     {
-      tipo='LiquidacionCana';
+      dropdownValue='Liquidación Caña';
+    } 
+    if(widget.orden.tipo =='LiquidacionMercadoExcedentario')
+    {
+      dropdownValue='Ajuste de Mercado Excedentario';
     }
     not = FocusNode();
     widget.data;
@@ -69,11 +73,9 @@ class _EditarOrdenState extends State<EditarOrden> {
     }
   }
  
- GlobalKey<FormState> keyForm = new GlobalKey();
- TextEditingController  orden = new TextEditingController();
- TextEditingController  notas = new TextEditingController();
-
-
+  GlobalKey<FormState> keyForm = new GlobalKey();
+  TextEditingController  orden = new TextEditingController();
+  TextEditingController  notas = new TextEditingController();
 
   editar_orden()async{
     var session= Conexion();
@@ -170,8 +172,9 @@ class _EditarOrdenState extends State<EditarOrden> {
    Widget lista(context){
     var token=widget.data.token;
     return Container(
+      width:300,
       alignment: Alignment.centerLeft,
-      margin: const EdgeInsets.fromLTRB(30, 5, 30,10),
+      margin: const EdgeInsets.fromLTRB(10, 5, 10,10),
       decoration: BoxDecoration(
       border: Border(bottom:BorderSide(width: 1,
                 color: Color.fromRGBO(83, 86, 90, 1.0),),
@@ -183,7 +186,7 @@ class _EditarOrdenState extends State<EditarOrden> {
       DropdownButtonHideUnderline(
         child:DropdownButton<String>(
           hint: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 1, 10,5),
+            padding: const EdgeInsets.fromLTRB(2, 1, 2,5),
             child: Center(
               child:Text(dropdownValue, textAlign: TextAlign.center,style: TextStyle(
                 fontSize: 15.0,
@@ -204,35 +207,35 @@ class _EditarOrdenState extends State<EditarOrden> {
             setState(() {
               dropdownValue = newValueLiq;
               pruebaTipo=true;
-              if(tipo =='Donación Fondo Social')
+              if(newValueLiq =='Donación Fondo Social')
               {
                 tipo='FondoSocial';
               }
-              if(tipo =='Donación Cenicaña')
+              if(newValueLiq =='Donación Cenicaña')
               {
                 tipo='DonacionesCenicana';
               }
-              if(tipo =='Retención en la Fuente')
+              if(newValueLiq =='Retención en la Fuente')
               {
                 tipo='Retenciones';
               }
-              if(tipo =='Certificados de Ingresos y Costos')
+              if(newValueLiq =='Certificados de Ingresos y Costos')
               {
                 tipo='IngresosYCostos';
               }
-              if(tipo =='ICA')
+              if(newValueLiq =='ICA')
               {
                 tipo='Ica';
               }
-              if(tipo =='Anticipos')
+              if(newValueLiq =='Anticipos')
               {
                 tipo='LiquidacionAnticipos';
               }
-              if(tipo =='Liquidación Caña')
+              if(newValueLiq =='Liquidación Caña')
               {
                 tipo='LiquidacionCana';
               }
-              if(tipo =='Ajuste de Mercado Excedentario')
+              if(newValueLiq =='Ajuste de Mercado Excedentario')
               {
                 tipo='LiquidacionMercadoExcedentario';
               }            
@@ -243,7 +246,7 @@ class _EditarOrdenState extends State<EditarOrden> {
             return DropdownMenuItem<String>(
               value: value,
               child:Padding(
-                padding: const EdgeInsets.fromLTRB(0, 5,40,10),
+                padding: const EdgeInsets.fromLTRB(0, 5,5,10),
                 child:new Text(value,textAlign: TextAlign.center,
                   style: new TextStyle(color: Colors.black)
                 ),
@@ -258,8 +261,10 @@ class _EditarOrdenState extends State<EditarOrden> {
   Widget formUI() {
     return  Column(
       children: <Widget>[
+        SizedBox(height:50),
         lista(context),
         Container(
+          width:300,
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.fromLTRB(30, 5, 30,10),
           child:TextFormField(
