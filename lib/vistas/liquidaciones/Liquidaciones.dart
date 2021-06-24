@@ -292,16 +292,16 @@ class _VerLiquidacionesState extends State<VerLiquidaciones> {
       });
     }
   }
-sinRespuesta(){
-  Timer(Duration(seconds:5), () {
-    return warningDialog(
-      context, 
-      "Sin conexión al servidor",
-      negativeAction: (){
-    },
-  );
-  });
-}
+  sinRespuesta(){
+    Timer(Duration(seconds:5), () {
+      return warningDialog(
+        context, 
+        "Sin conexión al servidor",
+        negativeAction: (){
+      },
+    );
+    });
+  }
 Future <List<EntradaCana>> listar_haciendas()async{
   var session= Conexion();
   session.set_token(widget.data.token);
@@ -494,7 +494,7 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            _showMultiSelect(context);
+            botonCana?_showMultiSelect(context):_showMultiSelectAnticipo(context);
           },
           child: const Icon(Icons.add),
           backgroundColor: Color.fromRGBO(56, 124, 43, 1.0),
@@ -504,10 +504,16 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
     );
   }
   Widget convertirMoneda( String valor){
+    final oCcy = new NumberFormat("#,##0.00", "en_US");
     double flutterBalance=double.parse(valor);
-    var oCcy = new NumberFormat.currency(locale: 'eu', customPattern: '\u0024 #,##.#');
-    String formatted = oCcy.format(flutterBalance);
-     return  Text(formatted,textAlign: TextAlign.center);
+    String formatted = oCcy.format(flutterBalance/100);
+     return  Text("\$ "+formatted,textAlign: TextAlign.center);
+  }
+
+  Widget convertirFecha( String valor){
+    var parte= valor.split("00");
+    var respuesta = parte[0];
+     return  Text(respuesta ,textAlign: TextAlign.center);
    }
  
   parametros(parametro){
@@ -1106,7 +1112,7 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
                       (entradaG) => DataRow(
                         cells: [
                           DataCell(
-                            Center(child:Text(entradaG.fecha,textAlign: TextAlign.center,),),
+                            Center(child:convertirFecha(entradaG.fecha),),
                           ),
                           DataCell(
                             mostrarhacienda?Center(child:Text(entradaG.predio,textAlign: TextAlign.center,),):Container(),
@@ -1230,7 +1236,7 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
                         (entradaG) => DataRow(
                           cells: [
                             DataCell(
-                              Center(child:Text(entradaG.fecha,textAlign: TextAlign.center,),),
+                              Center(child:convertirFecha(entradaG.fecha),),
                             ),
                             DataCell(
                               mostrarHaciendaCana?Center(child:Text(entradaG.predio,textAlign: TextAlign.center,),):Container(),

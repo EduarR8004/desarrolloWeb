@@ -185,10 +185,10 @@ class _VerMercadoState extends State<VerMercado> {
   }
 
   Widget convertirMoneda( String valor){
+    final oCcy = new NumberFormat("#,##0.00", "en_US");
     double flutterBalance=double.parse(valor);
-    var oCcy = new NumberFormat.currency(locale: 'eu', customPattern: '\u0024 #,##.#');
-    String formatted = oCcy.format(flutterBalance);
-    return  Text(formatted,textAlign: TextAlign.center);
+    String formatted = oCcy.format(flutterBalance/100);
+     return  Text("\$ "+formatted,textAlign: TextAlign.center);
   }
 
   mostrar(){

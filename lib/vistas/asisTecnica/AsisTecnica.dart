@@ -31,27 +31,27 @@ class _AsitenciaTecnicaState extends State<AsitenciaTecnica> {
 
  @override
   void initState() {
-  tPlantilla=105;
-  iPlantilla=70;
-  tSoca=105;
-  iSoca=70;
-  anchoContenedor=650;
-  soca=false;
-  plantilla=false;
-  mostrarPlantilla=false;
-  texto=14;
-  textoSeleccionado=18;
-  espacio=5;
-  mostrarSoca=false;
-  contadorGeneral=0;
-  guardaContador=0;
-  contadorEntradaCana=entradaCana.length;
-  contadorConsultas=consultas.length;
-  contadorInfoProduccion=infoProduccion.length;
-  contadorLiqCana=liqCana.length;
-  widget.data;
-  super.initState();
-}
+    tPlantilla=105;
+    iPlantilla=70;
+    tSoca=105;
+    iSoca=70;
+    anchoContenedor=650;
+    soca=false;
+    plantilla=false;
+    mostrarPlantilla=false;
+    texto=14;
+    textoSeleccionado=18;
+    espacio=5;
+    mostrarSoca=false;
+    contadorGeneral=0;
+    guardaContador=0;
+    contadorEntradaCana=entradaCana.length;
+    contadorConsultas=consultas.length;
+    contadorInfoProduccion=infoProduccion.length;
+    contadorLiqCana=liqCana.length;
+    widget.data;
+    super.initState();
+  }
 
 
 Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
@@ -92,7 +92,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                   Container(
                   alignment: Alignment.center,
                   width: 650,
-                  height: 120,
+                  height: 130,
                   margin: EdgeInsets.fromLTRB(50, 10, 50, 10),
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.only(
@@ -108,10 +108,10 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                         InkWell(
                           onTap: () {
                             setState(() {
-                              tPlantilla=85;
-                              iPlantilla=55;
-                              tSoca=85;
-                              iSoca=55;
+                              tPlantilla=80;
+                              iPlantilla=50;
+                              tSoca=80;
+                              iSoca=50;
                               plantilla=true;
                               soca=false;
                               mostrarPlantilla=true;
@@ -167,10 +167,10 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                         InkWell(
                           onTap: () {
                             setState(() {
-                              tPlantilla=85;
-                              iPlantilla=55;
-                              tSoca=85;
-                              iSoca=55;
+                              tPlantilla=80;
+                              iPlantilla=50;
+                              tSoca=80;
+                              iSoca=50;
                               mostrarPlantilla=false;
                               mostrarSoca=true;
                               plantilla=false;
@@ -227,8 +227,8 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                   mostrarPlantilla?Container(
                   alignment: Alignment.center,
                   width: anchoContenedor,
-                  height: 110,
-                  margin: EdgeInsets.fromLTRB(20, 10, 25, 10),
+                  height: 135,
+                  //margin: EdgeInsets.all(8),
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.only(
                       //     topLeft: Radius.circular(40),
@@ -248,7 +248,6 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             Column(
                               children: <Widget>[ 
                                 Container(
-                                  alignment: Alignment.center,
                                   height: tPlantilla,
                                   width: tPlantilla,
                                   decoration: BoxDecoration(
@@ -289,6 +288,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               ]
                             ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30),
                         InkWell(
                           onTap: () {
@@ -298,7 +298,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                           Column(
                             children: <Widget>[
                               Container(
-                                alignment: Alignment.center,
+                                //alignment: Alignment.center,
                                 //margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 height: tSoca,
                                 width: tSoca,
@@ -318,7 +318,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                                 ),
                                 child:Center(
                                   child: Container(
-                                    margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                    //margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                     height: iSoca,
                                     width: iSoca,
                                     padding: new EdgeInsets.all(30.0),
@@ -341,6 +341,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                           ),
                         ),
                         //SizedBox(height:30,width:espacio),
+                        //Spacer(),
                         InkWell(
                           onTap: () {
                             recuperar_texto(categoria:categoria,subcategoria:'Siembra',titulo: 'Siembra',icono:'images/SIEMBRA.png');
@@ -349,7 +350,6 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                           Column(
                             children: <Widget>[
                               Container(
-                                margin: EdgeInsets.fromLTRB(5, 0, 5, 4),
                                 alignment: Alignment.center,
                                 height: tSoca,
                                 width: tSoca,
@@ -396,8 +396,8 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                   mostrarPlantilla?Container(
                   alignment: Alignment.center,
                   width: anchoContenedor,
-                  height: 110,
-                  margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  height: 135,
+                  //margin: EdgeInsets.all(8),
                   child: 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -456,6 +456,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             ]
                           ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:espacio),
                         InkWell(
                           onTap: () {
@@ -466,7 +467,6 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             children: <Widget>[
                               Container(
                                 alignment: Alignment.center,
-                                //margin: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                 height: tSoca,
                                 width: tSoca,
                                 decoration: BoxDecoration(
@@ -507,6 +507,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             ]
                           ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:espacio),
                         InkWell(
                           onTap: () {
@@ -562,8 +563,8 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                   mostrarPlantilla?Container(
                   alignment: Alignment.center,
                   width: anchoContenedor,
-                  height: 110,
-                  margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  height: 135,
+                  //margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.only(
                       //     topLeft: Radius.circular(40),
@@ -584,7 +585,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               children: <Widget>[
                                 Container(
                                   alignment: Alignment.center,
-                                  //margin: EdgeInsets.fromLTRB(20, 0, 15, 4),
+                                  margin: EdgeInsets.fromLTRB(8, 0, 0,0),
                                   height: tPlantilla,
                                   width: tPlantilla,
                                   decoration: BoxDecoration(
@@ -609,7 +610,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                                       padding: new EdgeInsets.all(30.0),
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image: AssetImage('images/RIEGOLEVANTE.png'),
+                                          image: AssetImage('images/RIEGOGERMINACION.png'),
                                           fit: BoxFit.contain
                                         )
                                       ),
@@ -630,6 +631,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               ]
                             ),
                         ),
+                        //Spacer(),
                         InkWell(
                           onTap: () {
                             recuperar_texto(categoria:categoria,subcategoria:'ControlPlagasYEnfermedades',titulo: 'Plagas y Enfermedades',icono:'images/PLAGASYENFERMEDADES.png');
@@ -639,7 +641,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             children: <Widget>[
                               Container(
                                 alignment: Alignment.center,
-                                margin: EdgeInsets.fromLTRB(5, 0, 0, 4),
+                                //margin: EdgeInsets.fromLTRB(5, 0, 0, 4),
                                 height: tSoca,
                                 width: tSoca,
                                 decoration: BoxDecoration(
@@ -672,7 +674,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               ),
                               SizedBox(height:espacio),
                               Container(
-                                margin: EdgeInsets.fromLTRB(5, 0, 0, 4),
+                                //margin: EdgeInsets.fromLTRB(5, 0, 0, 4),
                                 child:
                                 Text('Plagas',style: TextStyle(
                                   color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -681,7 +683,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                                 ),),
                               ),
                               Container(
-                                margin: EdgeInsets.fromLTRB(5, 0, 0, 4),
+                                //margin: EdgeInsets.fromLTRB(5, 0, 0, 4),
                                 child:Text(' y Enfermedades',style: TextStyle(
                                   color: Color.fromRGBO(83, 86, 90, 1.0),
                                   fontSize: texto,
@@ -691,6 +693,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             ]
                           ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:2),
                         InkWell(
                           onTap: () {
@@ -700,7 +703,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                           Column(
                             children: <Widget>[
                               Container(
-                              margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              //margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
                               alignment: Alignment.center,
                               height: tSoca,
                               width: tSoca,
@@ -733,7 +736,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               ),
                               SizedBox(height:espacio),
                               Container(
-                                margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                                //margin: EdgeInsets.fromLTRB(8, 0, 0, 0),
                                 child:
                                 Text('Agostamiento',style: TextStyle(
                                   color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -750,8 +753,8 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                   mostrarSoca?Container(
                   alignment: Alignment.center,
                   width: anchoContenedor,
-                  height: 110,
-                  margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  height: 135,
+                  //margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.only(
                       //     topLeft: Radius.circular(40),
@@ -813,6 +816,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               ]
                             ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:15),
                         InkWell(
                           onTap: () {
@@ -863,6 +867,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             ]
                           ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:espacio),
                         InkWell(
                           onTap: () {
@@ -896,7 +901,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                                   padding: new EdgeInsets.all(30.0),
                                   decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage('images/RESIEMBRA.png'),
+                                    image: AssetImage('images/SIEMBRA.png'),
                                   fit: BoxFit.contain)),
                                 ) ,
                               ),
@@ -917,7 +922,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                   mostrarSoca?Container(
                   alignment: Alignment.center,
                   width: anchoContenedor,
-                  height: 110,
+                  height: 135,
                   //margin: EdgeInsets.fromLTRB(10, 10, 20, 10),
                   child: 
                     Row(
@@ -972,6 +977,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               ]
                             ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:espacio),
                         InkWell(
                           onTap: () {
@@ -981,7 +987,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                           Column(
                             children: <Widget>[
                               Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                              //margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
                               alignment: Alignment.center,
                               height: tSoca,
                               width: tSoca,
@@ -1015,7 +1021,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               ),
                               SizedBox(height:espacio),
                               Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                                //margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
                                 child:
                                   Text('Control',style: TextStyle(
                                     color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -1024,7 +1030,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                                   ),),
                               ),
                               Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
+                               // margin: EdgeInsets.fromLTRB(0, 0, 18, 0),
                                 child:
                                 Text('Malezas',style: TextStyle(
                                   color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -1036,6 +1042,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             ]
                           ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:espacio),
                         InkWell(
                           onTap: () {
@@ -1045,35 +1052,35 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                           Column(
                             children: <Widget>[
                               Container(
-                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              alignment: Alignment.center,
-                              height: tSoca,
-                              width: tSoca,
-                              decoration: BoxDecoration(
-                              color: Colors.white,
-                              border:Border.all(
-                                color: Color.fromRGBO(56, 124, 43, 1.0),
-                                width:4,
-                              ),
-                              borderRadius: BorderRadius.circular(50),
-                              // boxShadow: [BoxShadow(
-                              //    color: Colors.black45,
-                              //     offset: Offset(6,6),
-                              //     blurRadius: 6,  
-                              // ),
-                              // ],
-                              ),
-                              child:Center(
-                                child: Container(
-                                  height: iSoca,
-                                  width: iSoca,
-                                  padding: new EdgeInsets.all(30.0),
-                                  decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('images/APORQUE.png'),
-                                  fit: BoxFit.contain)),
-                                ) ,
-                              ),
+                              //margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                alignment: Alignment.center,
+                                height: tSoca,
+                                width: tSoca,
+                                decoration: BoxDecoration(
+                                color: Colors.white,
+                                border:Border.all(
+                                  color: Color.fromRGBO(56, 124, 43, 1.0),
+                                  width:4,
+                                ),
+                                borderRadius: BorderRadius.circular(50),
+                                // boxShadow: [BoxShadow(
+                                //    color: Colors.black45,
+                                //     offset: Offset(6,6),
+                                //     blurRadius: 6,  
+                                // ),
+                                // ],
+                                ),
+                                child:Center(
+                                  child: Container(
+                                    height: iSoca,
+                                    width: iSoca,
+                                    padding: new EdgeInsets.all(30.0),
+                                    decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage('images/APORQUE.png'),
+                                    fit: BoxFit.contain)),
+                                  ) ,
+                                ),
                               ),
                               SizedBox(height:espacio),
                               Text('Aporque',style: TextStyle(
@@ -1092,8 +1099,8 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                   mostrarSoca?Container(
                   alignment: Alignment.center,
                   width: anchoContenedor,
-                  height: 110,
-                  margin: EdgeInsets.fromLTRB(22, 10, 20, 10),
+                  height: 135,
+                  //margin: EdgeInsets.fromLTRB(22, 10, 20, 10),
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.only(
                       //     topLeft: Radius.circular(40),
@@ -1107,16 +1114,16 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                       children:<Widget>[
                         InkWell(
                           onTap: () {
-                            recuperar_texto(categoria:categoria,subcategoria:'RiegoDLevante',titulo: 'Riego.Levante',icono:'images/RIEGOLEVANTE.png');
+                            recuperar_texto(categoria:categoria,subcategoria:'RiegoDeLevante',titulo: 'Riego.levante',icono:'images/RIEGOLEVANTE.png');
                           }, 
                           child:
                             Column(
                               children: <Widget>[
                                 Container(
-                                  margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
                                   alignment: Alignment.center,
-                                  height: tSoca,
-                                  width: tSoca,
+                                  margin: EdgeInsets.fromLTRB(10, 0, 0,0),
+                                  height: tPlantilla,
+                                  width: tPlantilla,
                                   decoration: BoxDecoration(
                                   color: Colors.white,
                                   border:Border.all(
@@ -1134,20 +1141,20 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                                   child:Center(
                                     child: 
                                     Container(
-                                      margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                      height: iSoca,
-                                      width: iSoca,
+                                      height: iPlantilla,
+                                      width: iPlantilla,
                                       padding: new EdgeInsets.all(30.0),
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
-                                        image: AssetImage('images/RIEGOLEVANTE.png'),
-                                        fit: BoxFit.contain)
+                                          image: AssetImage('images/RIEGOGERMINACION.png'),
+                                          fit: BoxFit.contain
+                                        )
                                       ),
                                     ) ,
                                   ),
                                 ),
                                 SizedBox(height:espacio),
-                                Text('Riego',style: TextStyle(
+                                Text('Riego de',style: TextStyle(
                                   color: Color.fromRGBO(83, 86, 90, 1.0),
                                   fontSize: texto,
                                   fontWeight: FontWeight.bold
@@ -1156,11 +1163,11 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                                   color: Color.fromRGBO(83, 86, 90, 1.0),
                                   fontSize: texto,
                                   fontWeight: FontWeight.bold
-                                ),
-                              )
+                                ),)
                               ]
                             ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:45),
                         InkWell(
                           onTap: () {
@@ -1171,7 +1178,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             children: <Widget>[
                               Container(
                                 alignment: Alignment.center,
-                                margin: EdgeInsets.fromLTRB(10, 0, 0, 4),
+                                //margin: EdgeInsets.fromLTRB(10, 0, 0, 4),
                                 height: tSoca,
                                 width: tSoca,
                                 decoration: BoxDecoration(
@@ -1204,7 +1211,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                               ),
                               SizedBox(height:espacio),
                               Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 0, 4),
+                                //margin: EdgeInsets.fromLTRB(0, 0, 0, 4),
                                 child:
                                 Text('Plagas',style: TextStyle(
                                   color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -1213,7 +1220,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                                 ),),
                               ),
                               Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 0, 4),
+                                //margin: EdgeInsets.fromLTRB(0, 0, 0, 4),
                                 child:Text(' y Enfermedades',style: TextStyle(
                                   color: Color.fromRGBO(83, 86, 90, 1.0),
                                   fontSize: texto,
@@ -1223,6 +1230,7 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                             ]
                           ),
                         ),
+                        //Spacer(),
                         //SizedBox(height:30,width:2),
                         InkWell(
                           onTap: () {
@@ -1232,40 +1240,41 @@ Future <String> recuperar_texto({categoria,subcategoria,titulo,icono})async{
                           Column(
                             children: <Widget>[
                               Container(
-                              margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                              alignment: Alignment.center,
-                              height: tSoca,
-                              width: tSoca,
-                              decoration: BoxDecoration(
-                              color: Colors.white,
-                              border:Border.all(
-                                color: Color.fromRGBO(56, 124, 43, 1.0),
-                                width:4,
-                              ),
-                              borderRadius: BorderRadius.circular(50),
-                              // boxShadow: [BoxShadow(
-                              //    color: Colors.black45,
-                              //     offset: Offset(6,6),
-                              //     blurRadius: 6,  
-                              // ),
-                              // ],
-                              ),
-                              child:Center(
-                                child: Container(
-                                  height: iSoca,
-                                  width: iSoca,
-                                  padding: new EdgeInsets.all(30.0),
-                                  decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('images/AGOSTAMIENTO.png'),
-                                  fit: BoxFit.contain)),
-                                        
-                                ) ,
-                              ),
+                              //margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                alignment: Alignment.center,
+                                height: tSoca,
+                                width: tSoca,
+                                decoration: BoxDecoration(
+                                color: Colors.white,
+                                border:Border.all(
+                                  color: Color.fromRGBO(56, 124, 43, 1.0),
+                                  width:4,
+                                ),
+                                borderRadius: BorderRadius.circular(50),
+                                // boxShadow: [BoxShadow(
+                                //    color: Colors.black45,
+                                //     offset: Offset(6,6),
+                                //     blurRadius: 6,  
+                                // ),
+                                // ],
+                                ),
+                                child:Center(
+                                  child: Container(
+                                    height: iSoca,
+                                    width: iSoca,
+                                    padding: new EdgeInsets.all(30.0),
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('images/AGOSTAMIENTO.png'),
+                                        fit: BoxFit.contain
+                                      )
+                                    ),   
+                                  ) ,
+                                ),
                               ),
                               SizedBox(height:espacio),
                               Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 2, 0),
+                                //margin: EdgeInsets.fromLTRB(0, 0, 2, 0),
                                 child:
                                 Text('Agostamiento',style: TextStyle(
                                   color: Color.fromRGBO(83, 86, 90, 1.0),

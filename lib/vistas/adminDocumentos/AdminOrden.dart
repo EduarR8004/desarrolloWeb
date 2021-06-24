@@ -73,33 +73,37 @@ class _AdministrarOrdenesTState extends State<AdministrarOrdenesT> {
     cambiar=true;
     if(widget.orden!=null)
     { 
-      if(widget.orden.tipo =='FondoSocial')
+      if(tipo =='Donación Fondo Social')
       {
-        dropdownDoc='Fondo Social';
+        tipo='FondoSocial';
       }
-      if(widget.orden.tipo =='DonacionesCenicana')
+      if(tipo =='Donación Cenicaña')
       {
-        dropdownDoc='Donaciones Cenicaña';
+        tipo='DonacionesCenicana';
       }
-      if(widget.orden.tipo =='Retenciones')
+      if(tipo =='Retención en la Fuente')
       {
-        dropdownDoc='Retención';
+        tipo='Retenciones';
       }
-      if(widget.orden.tipo =='IngresosYCostos')
+      if(tipo =='Certificados de Ingresos y Costos')
       {
-        dropdownDoc='Ingr.Cost';
+        tipo='IngresosYCostos';
       }
-      if(widget.orden.tipo =='Ica')
+      if(tipo =='ICA')
       {
-        dropdownValue='ICA';
+        tipo='Ica';
       }
-      if(widget.orden.tipo =='LiquidacionAnticipos')
+      if(tipo =='Anticipos')
       {
-        dropdownDoc='Anticipos';
+        tipo='LiquidacionAnticipos';
       }
-      if(widget.orden.tipo =='LiquidacionCana')
+      if(tipo =='Liquidación Caña')
       {
-        dropdownDoc='Liquidación Caña';
+        tipo='LiquidacionCana';
+      }
+      if(tipo =='Ajuste de Mercado Excedentario')
+      {
+        tipo='LiquidacionMercadoExcedentario';
       } 
 
     }
@@ -171,58 +175,62 @@ class _AdministrarOrdenesTState extends State<AdministrarOrdenesT> {
   }
 
   Future <List<Orden>> listar_ordenes(tipo,ini,fin)async{
-  var session= Conexion();
-  session.set_token(widget.data.token);
-  var orden= Ordenes(session);
-  if(tipo =='Fondo Social')
-  {
-    tipo='FondoSocial';
-  }
-  if(tipo =='Donaciones Cenicaña')
-  {
-    tipo='DonacionesCenicana';
-  }
-  if(tipo =='Retenciones')
-  {
-    tipo='Retenciones';
-  }
-  if(tipo =='Ingresos y Costos')
-  {
-    tipo='IngresosYCostos';
-  }
-  if(tipo =='ICA')
-  {
-    tipo='Ica';
-  }
-  if(tipo =='Anticipos')
-  {
-    tipo='LiquidacionAnticipos';
-  }
-  if(tipo =='Liquidación Caña')
-  {
-    tipo='LiquidacionCana';
-  }   
+    var session= Conexion();
+    session.set_token(widget.data.token);
+    var orden= Ordenes(session);
+    if(tipo =='Donación Fondo Social')
+    {
+      tipo='FondoSocial';
+    }
+    if(tipo =='Donación Cenicaña')
+    {
+      tipo='DonacionesCenicana';
+    }
+    if(tipo =='Retención en la Fuente')
+    {
+      tipo='Retenciones';
+    }
+    if(tipo =='Certificados de Ingresos y Costos')
+    {
+      tipo='IngresosYCostos';
+    }
+    if(tipo =='ICA')
+    {
+      tipo='Ica';
+    }
+    if(tipo =='Anticipos')
+    {
+      tipo='LiquidacionAnticipos';
+    }
+    if(tipo =='Liquidación Caña')
+    {
+      tipo='LiquidacionCana';
+    }
+    if(tipo =='Ajuste de Mercado Excedentario')
+    {
+      tipo='LiquidacionMercadoExcedentario';
+    }  
 
-  if(selectedOrders.length > 0){
+    if(selectedOrders.length > 0){
+        return ordenes;
+    }else if(borrar==true)
+    {
       return ordenes;
-  }else if(borrar==true)
-  {
-    return ordenes;
-  }
-  else
-  {//1618894800.0 1618981199.0
-    ordenes=[];
-    await orden.listar_ordenes(tipo,ini.toInt(),fin.toInt()).then((_){
-    var preOrdenes=orden.obtener_ordenes();
-      for ( var usuario in preOrdenes)
-      {
-      ordenes.add(usuario);
-      } 
-      print(preOrdenes);
-      preOrdenes=[];       
-    });
-    return ordenes;
-  }
+    }
+    else
+    {//1618894800.0 1618981199.0
+      ordenes=[];
+      await orden.listar_ordenes(tipo,ini.toInt(),fin.toInt()).then((_){
+      var preOrdenes=orden.obtener_ordenes();
+        for ( var usuario in preOrdenes)
+        {
+        ordenes.add(usuario);
+        } 
+        print(preOrdenes);
+        preOrdenes=[];       
+      });
+      return ordenes;
+    }
   
   }
 
@@ -720,38 +728,38 @@ Widget tipoDoc(context){
             if(newValueLiq!='Seleccione un tipo de Documento' ||( _startTimeController.text!='' && _endTimeController.text!='')) {  
               setState(() {
                 dropdownDoc = newValueLiq;
-                if(newValueLiq =='Fondo Social')
-                {
-                  tipo='FondoSocial';
-                }
-                if(newValueLiq =='Donaciones Cenicaña')
-                {
-                  tipo='DonacionesCenicana';
-                }
-                if(newValueLiq =='Retenciones')
-                {
-                  tipo='Retenciones';
-                }
-                if(newValueLiq =='Ingresos y Costos')
-                {
-                  tipo='IngresosYCostos';
-                }
-                if(newValueLiq =='ICA')
-                {
-                  tipo='Ica';
-                }
-                if(newValueLiq =='Anticipos')
-                {
-                  tipo='LiquidacionAnticipos';
-                }
-                if(newValueLiq =='Liquidación Caña')
-                {
-                  tipo='LiquidacionCana';
-                }
-                if(newValueLiq =='Ajuste de Mercado Excedentario')
-                {
-                  tipo='LiquidacionMercadoExcedentario';
-                }          
+                if(tipo =='Donación Fondo Social')
+                  {
+                    tipo='FondoSocial';
+                  }
+                  if(tipo =='Donación Cenicaña')
+                  {
+                    tipo='DonacionesCenicana';
+                  }
+                  if(tipo =='Retención en la Fuente')
+                  {
+                    tipo='Retenciones';
+                  }
+                  if(tipo =='Certificados de Ingresos y Costos')
+                  {
+                    tipo='IngresosYCostos';
+                  }
+                  if(tipo =='ICA')
+                  {
+                    tipo='Ica';
+                  }
+                  if(tipo =='Anticipos')
+                  {
+                    tipo='LiquidacionAnticipos';
+                  }
+                  if(tipo =='Liquidación Caña')
+                  {
+                    tipo='LiquidacionCana';
+                  }
+                  if(tipo =='Ajuste de Mercado Excedentario')
+                  {
+                    tipo='LiquidacionMercadoExcedentario';
+                  }          
               }); 
             } else { 
               setState(() {
@@ -765,7 +773,7 @@ Widget tipoDoc(context){
               }); 
             }
           },
-          items: <String>['Seleccione un tipo de Documento','Anticipos', 'Liquidación Caña', 'Ajuste de Mercado Excedentario','Donaciones Cenicaña','Fondo Social','Retenciones','Ingresos y Costos','ICA']
+          items: <String>['Seleccione un tipo de Documento','Anticipos', 'Liquidación Caña', 'Ajuste de Mercado Excedentario','Donación Cenicaña', 'Donación Fondo Social', 'Retención en la Fuente','Certificados de Ingresos y Costos','ICA']
           .map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,

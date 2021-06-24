@@ -138,7 +138,7 @@ class _EncabezadoState extends State<Encabezado> {
       color: Colors.black, fontSize: 19.0, fontWeight: FontWeight.w600)
     );
     return Container(
-      //height: 60,
+      height: 120,
       //width: 700,
       margin: EdgeInsets.only(top:3),
       decoration: BoxDecoration(

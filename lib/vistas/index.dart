@@ -41,6 +41,7 @@ class _InicioState extends State<Inicio> {
   List<String> mensaje=[];
   List<String> mostrarNotificacion=[];
   ProgressDialog pr;
+  double letra=16;
   var session;
   String token;
   List cana=[];
@@ -336,448 +337,218 @@ void confirm (dialog){
       ),
     );
   }
-Widget menuNo(imagen,texto){
+
+  Widget menuNo(imagen,texto,texto2){
   return 
   Column(
     children: <Widget>[
       new Container(width:20,height:20,),
       InkWell(
-      onTap: () {
-        warningDialog(
-          context, 
-          "No tiene los permisos para ingresar a la funcionalidad",
-          negativeAction: (){
-          },
-        );
-      },
-      child:
-        Column(
-        children: <Widget>[
-        Container(
-          height: 85,
-          width: 85,
-          decoration: BoxDecoration(
-          color: Colors.white,
-          border:Border.all(
-            color: Color.fromRGBO(136,139,141, 1.0),
-            width:4,
-          ),
-          borderRadius: BorderRadius.circular(50),
-          // boxShadow: [BoxShadow(
-          //   color: Colors.black45,
-          //   offset: Offset(6,6),
-          //   blurRadius: 6,  
-          // ),
-          // ],
-          ),
-          child:Center(
-            child: Container(
-            height: 50,
-            width: 50,
-            padding: new EdgeInsets.all(30.0),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-              image: AssetImage(imagen),
-              fit: BoxFit.contain)),
-                                              
-            ) ,
-          ),
+        onTap: () {
+          warningDialog(
+            context, 
+            "No tiene los permisos para ingresar a la funcionalidad",
+            negativeAction: (){
+            },
+          );
+        },
+        child:
+        Column( 
+          children: <Widget>[
+            Container(
+              height: 85,
+              width: 85,
+              decoration: BoxDecoration(
+              color: Colors.white,
+              border:Border.all(
+                color: Color.fromRGBO(136,139,141, 1.0),
+                width:4,
+              ),
+              borderRadius: BorderRadius.circular(50),
+              // boxShadow: [BoxShadow(
+              //   color: Colors.black45,
+              //   offset: Offset(6,6),
+              //   blurRadius: 6,  
+              // ),
+              // ],
+              ),
+              child:Center(
+                child: Container(
+                height: 50,
+                width: 50,
+                padding: new EdgeInsets.all(30.0),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                  image: AssetImage(imagen),
+                  fit: BoxFit.contain)),                             
+                ) ,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(texto,style: TextStyle(
+              color: Color.fromRGBO(83, 86, 90, 1.0),
+              fontSize: letra,
+              fontWeight: FontWeight.bold
+            ),     
+            ),
+            Text(texto2,style: TextStyle(
+              color: Color.fromRGBO(83, 86, 90, 1.0),
+              fontSize: letra,
+              fontWeight: FontWeight.bold
+            ),     
+            ),
+          ]
         ),
-          SizedBox(height: 20),
-          Text(texto,style: TextStyle(
-                color: Color.fromRGBO(83, 86, 90, 1.0),
-                fontSize: 12,
-                fontWeight: FontWeight.bold
-          ),        
-          ),
-      ]
-    ),
-    )
-  ],
+      )
+    ],
   ); 
 }
-  Widget dataBody() {
+  Widget  dataBody() {
     return FutureBuilder <List<String>>(
       future:objetos_menu(),
       builder:(context,snapshot){
         if(snapshot.hasData){
           return  
             SingleChildScrollView(
-            scrollDirection: Axis.vertical,
+              scrollDirection: Axis.vertical,
               child:Center(child:
-                Container(
-                  width: 600,
-                  height: 800,
-                  color:Colors.white,
-                    child:Column(
-                    children: <Widget>[
-                      Container(
-                        height: 120,
-                        width: 180,
-                        decoration: BoxDecoration(
-                          color: Colors.white,  
-                            //borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                            image: AssetImage('images/logo_principal.JPG'),
-                              fit: BoxFit.fitWidth),
-                          ),
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.symmetric(horizontal:10),                            
-                      ), 
-                      SizedBox(height:10),
-                      Container(
+              Container(
+                width: 600,
+                height: 800,
+                color:Colors.white,
+                child:Column(
+                  children: <Widget>[
+                    Container(
+                      height: 120,
+                      width: 180,
+                      decoration: BoxDecoration(
+                        color: Colors.white,  
+                          //borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                          image: AssetImage('images/logo_principal.JPG'),
+                            fit: BoxFit.fitWidth
+                        ),
+                      ),
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.symmetric(horizontal:10),                             
+                    ), 
+                    SizedBox(height:5),
+                    Container(
                       width: MediaQuery.of(context).size.width,
-                      height: 145,
-                      margin: EdgeInsets.all(8),
+                      height: 163,
+                      margin: EdgeInsets.fromLTRB(8,8, 8,0),
                       // decoration: BoxDecoration(
                       //   borderRadius: BorderRadius.only(
                       //     topLeft: Radius.circular(40),
-                      //     topRight: Radius.circular(40),
+                    //     topRight: Radius.circular(40),
                       //   ),
                       //   color: Color.fromRGBO(31, 58, 47, 1.0),
                       // ),
-	                    child: 
-	                      Row(
-	                        children:<Widget>[
-                              obj_menu.contains("CO001") || obj_menu.contains("ZZ999")?
-                              InkWell(
-                                onTap: () {
-                                  consultas=[];
-                                  mensaConsultas.clear();
-                                  mensajeNotificacion.clear();
-                                  //mensajeNotificacion.removeWhere((element) => (element =='liquidaciones' ));
-                                  WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                    Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  VerConsultas (data:widget.data))); });
-                              }, 
-                              child:
-                                Column(
-	                                children: <Widget>[
-                                    contadorConsultas != 0 ? Container(
-                                      margin: EdgeInsets.fromLTRB(5, 0, 10, 4),
-                                      padding: EdgeInsets.all(2),
-                                      decoration: new BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      constraints: BoxConstraints(
-                                        minWidth: 20,
-                                        minHeight: 20,
-                                      ),
-                                      child: Text(
-                                        '$contadorConsultas',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ) : new Container(width:20,height:20,),
-                                    Container(
-                                      height: 85,
-                                      width: 85,
-                                      decoration: BoxDecoration(
+                      child: 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children:<Widget>[
+                          obj_menu.contains("CO001") || obj_menu.contains("ZZ999")?
+                          InkWell(
+                            onTap: () {
+                              consultas=[];
+                              mensaConsultas.clear();
+                              mensajeNotificacion.clear();
+                              //mensajeNotificacion.removeWhere((element) => (element =='liquidaciones' ));
+                              WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  VerConsultas (data:widget.data))); });
+                            }, 
+                            child:
+                            Column(
+                              children: <Widget>[
+                                contadorConsultas != 0 ? Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 10, 4),
+                                  padding: EdgeInsets.all(2),
+                                  decoration: new BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  constraints: BoxConstraints(
+                                    minWidth: 20,
+                                    minHeight: 20,
+                                  ),
+                                  child: Text(
+                                    '$contadorConsultas',
+                                    style: TextStyle(
                                       color: Colors.white,
-                                      border:Border.all(
-                                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                                        width:4,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50),
-                                      // boxShadow: [BoxShadow(
-                                      //   color: Colors.black45,
-                                      //   offset: Offset(6,6),
-                                      //   blurRadius: 6,  
-                                      // ),
-                                      // ],
-                                      ),
-                                      child:Center(
-                                        child: 
-                                        Container(
-                                        height: 50,
-                                        width: 50,
-                                        padding: new EdgeInsets.all(30.0),
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                          image: AssetImage('images/lupa.png'),
-                                          fit: BoxFit.contain)),
-                                          
-                                      ) ,
+                                      fontSize: 15,
                                     ),
-                                    ),
-                                    SizedBox(height: 20),
-                                    Text('Consultas',style: TextStyle(
-                                      color: Color.fromRGBO(83, 86, 90, 1.0),
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold
-                                    ),
-                                    ),
-	                                ]
-	                            ),
-                            ):
-                            menuNo('images/CONSULTAS.png','Consulta'),
-                            SizedBox(width:20),
-	                          Spacer(),
-                            obj_menu.contains("EC001") || obj_menu.contains("ZZ999")?
-                               InkWell(
-                                  onTap: () {
-                                    if(widget.data.entrada==true)
-                                    { 
-                                      entradaCana=[];
-                                      mensajeEntradaCana.clear();
-                                      mensajeNotificacion.clear();
-                                      //mensajeNotificacion.removeWhere((element) => (element =='EntradaDeCana'));
-                                      WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                        Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  Mensaje (data:widget.data,titulo:'Entrada Caña',mensaje:'entrada',), )); });
-                                    }else{
-                                      entradaCana=[];
-                                      //mensajeNotificacion.removeWhere((element) => (element =='EntradaDeCana'));
-                                      mensajeEntradaCana.clear();
-                                      mensajeNotificacion.clear();
-                                      WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                        Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => EntradasCanas (data:widget.data),)); });
-                                    }
-                                  }, 
-                                  child:
-                                    Column(
-                                    children: <Widget>[
-                                    contadorEntradaCana != 0 ?Container(
-                                      margin: EdgeInsets.fromLTRB(5, 0, 10, 4),
-                                      padding: EdgeInsets.all(2),
-                                      decoration: new BoxDecoration(
-                                        color: Colors.red,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      constraints: BoxConstraints(
-                                        minWidth: 20,
-                                        minHeight: 20,
-                                      ),
-                                      child: Text(
-                                        '$contadorEntradaCana',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ): new Container(width:20,height:20,),
-                                    Container(
-                                      height: 85,
-                                      width: 85,
-                                      decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border:Border.all(
-                                        color: Color.fromRGBO(56, 124, 43, 1.0),
-                                        width:4,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50),
-                                      // boxShadow: [BoxShadow(
-                                      //   color: Colors.black45,
-                                      //   offset: Offset(6,6),
-                                      //   blurRadius: 6,  
-                                      // ),
-                                      // ],
-                                      ),
-                                      child:Center(
-                                        child: Container(
-                                        height: 50,
-                                        width: 50,
-                                        padding: new EdgeInsets.all(30.0),
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                          image: AssetImage('images/tractor_verde.png'),
-                                          fit: BoxFit.contain)),
-                                          
-                                      ) ,
-                                    ),
-                                    ),
-                                      SizedBox(height: 20),
-                                      Text('Entrada de Caña',style: TextStyle(
-                                            color: Color.fromRGBO(83, 86, 90, 1.0),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold
-                                ),),
-                                ]
-                                ),
-                                ):Row(children:[
-                                  SizedBox(width:3),
-                                  menuNo('images/vagon-gris.png','Entrada de Caña'),
-                                ]),
-                                SizedBox(width:26),
-                                Spacer(),
-                                obj_menu.contains("LC001") || obj_menu.contains("ZZ999")?
-                                InkWell(
-                                  onTap: () {
-                                    liqCana=[];
-                                    mensajeLiqCana.clear();
-                                    mensajeNotificacion.clear();
-                                    //mensajeNotificacion.removeWhere((element) => (element =='LiquidacionCana'));
-                                    WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                       Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  VerLiquidaciones (data:widget.data))); });
-                                  }, 
-                                  child:
-                                      Column(
-                                      children: <Widget>[
-                                      contadorLiqCana != 0 ?Container(
-                                        margin: EdgeInsets.fromLTRB(5, 0, 10, 4),
-                                        padding: EdgeInsets.all(2),
-                                        decoration: new BoxDecoration(
-                                          color: Colors.red,
-                                          borderRadius: BorderRadius.circular(10),
-                                        ),
-                                        constraints: BoxConstraints(
-                                          minWidth: 20,
-                                          minHeight: 20,
-                                        ),
-                                        child: Text(
-                                          '$contadorLiqCana',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                          ),
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ): new Container(width:20,height:20,),
-                                      Container(
-                                        height: 85,
-                                        width: 85,
-                                        decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        border:Border.all(
-                                          color: Color.fromRGBO(56, 124, 43, 1.0),
-                                          width:4,
-                                        ),
-                                        borderRadius: BorderRadius.circular(50),
-                                        // boxShadow: [BoxShadow(
-                                        //   color: Colors.black45,
-                                        //   offset: Offset(6,6),
-                                        //   blurRadius: 6,  
-                                        // ),
-                                        // ],
-                                        ),
-                                        child:Center(
-                                          child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          padding: new EdgeInsets.all(30.0),
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                            image: AssetImage('images/bolsa-de-dinero.png'),
-                                            fit: BoxFit.contain)),
-                                            
-                                        ) ,
-                                      ),
-                                      ),
-                                        SizedBox(height: 20),
-                                        Text('Liquidaciones',style: TextStyle(
-                                              color: Color.fromRGBO(83, 86, 90, 1.0),
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold
-                                  ),),
-                                  ]
-                                  ),):
-                                  menuNo('images/LIQUIDACIÓN CAÑA.png','Liquidaciones'),
-	                        ],
-	                      ),
-	                    ),
-                      //SizedBox(height: 30),
-                      Container(
-	                      width: MediaQuery.of(context).size.width,
-	                      height: 160,
-	                      //margin: EdgeInsets.all(8),
-	                      // decoration: BoxDecoration(
-	                      //   borderRadius: BorderRadius.only(
-	                      //     topLeft: Radius.circular(40),
-                      //     topRight: Radius.circular(40),
-	                      //   ),
-	                      //   color: Color.fromRGBO(31, 58, 47, 1.0),
-	                      // ),
-	                      child: 
-	                      Row(
-	                        children:<Widget>[
-                               obj_menu.contains("CR001") || obj_menu.contains("ZZ999")?
-                               InkWell(
-                                  onTap: () {
-                                    if(widget.data.crono==true)
-                                    {
-                                      WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                       Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  Mensaje (data:widget.data,titulo:'Cronológico',mensaje:'crono'))); });
-                                    }else{
-                                      WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                       Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  VerCronologico (data:widget.data))); });
-                                    }
-                                  }, 
-                                child:
-                                Column(
-	                              children: <Widget>[
-                                new Container(width:20,height:20,),
-	                              Container(
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ) : new Container(width:20,height:20,),
+                                Container(
+                                  height: 85,
+                                  width: 85,
                                   margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-	                                height: 85,
-	                                width: 85,
-	                                decoration: BoxDecoration(
-	                                color: Colors.white,
-	                                border:Border.all(
-	                                  color: Color.fromRGBO(56, 124, 43, 1.0),
-	                                  width:4,
-	                                ),
-	                                borderRadius: BorderRadius.circular(50),
-	                                // boxShadow: [BoxShadow(
-	                                //   color: Colors.black45,
-	                                //   offset: Offset(6,6),
-	                                //   blurRadius: 6,  
-	                                // ),
-	                                // ],
-	                                ),
-	                                child:Center(
-	                                  child: 
+                                  decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:Border.all(
+                                    color: Color.fromRGBO(56, 124, 43, 1.0),
+                                    width:4,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50),
+                                  // boxShadow: [BoxShadow(
+                                  //   color: Colors.black45,
+                                  //   offset: Offset(6,6),
+                                  //   blurRadius: 6,  
+                                  // ),
+                                  // ],
+                                  ),
+                                  child:Center(
+                                    child: 
                                     Container(
-	                                  height: 50,
-	                                  width: 50,
-	                                  padding: new EdgeInsets.all(30.0),
-	                                  decoration: BoxDecoration(
-	                                    image: DecorationImage(
-	                                    image: AssetImage('images/calendario.png'),
-	                                    fit: BoxFit.contain)),
-	                                    
-	                                ) ,
-	                              ),
-	                              ),
-	                                SizedBox(height: 20),
-	                                Text('Cronológico',style: TextStyle(
-	                                      color: Color.fromRGBO(83, 86, 90, 1.0),
-	                                      fontSize: 12,
-	                                      fontWeight: FontWeight.bold
-                            ),),
-	                          ]
-	                          ),):Container(
-                               margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                              child:menuNo('images/CRONOLÓGICO.png','Cronológico'),),
-                            
-                            SizedBox(width:40),
-	                          Spacer(),
-                            obj_menu.contains("IP001") || obj_menu.contains("ZZ999")?
-                               InkWell(
-                                onTap: () {
-                                  if(widget.data.produccion==true)
-                                  { 
-                                    infoProduccion=[];
-                                    mensajeNotificacion.clear();
-                                    mensajeInfoProduccion.clear();
-                                    //mensajeNotificacion.removeWhere((element) => (element =='InformeDeProduccion'));
-                                    for(int i=0;i <= mensajeNotificacion.length;i++ )
-                                    WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                      Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  Mensaje (data:widget.data,titulo:'Informe de Producción',mensaje:'informe')));});
-                                  }else{
-                                    infoProduccion=[];
-                                    mensajeInfoProduccion.clear();
-                                    mensajeNotificacion.clear();
-                                    //mensajeNotificacion.removeWhere((element) => (element =='InformeDeProduccion'));
-                                    WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                      Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  InfoProduccion (data:widget.data)));});
-                                  }
-                                }, 
-                              child:
-                              Column(
-	                              children: <Widget>[
+                                    height: 50,
+                                    width: 50,
+                                    padding: new EdgeInsets.all(30.0),
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                      image: AssetImage('images/lupa.png'),
+                                      fit: BoxFit.contain)),
+                                    ) ,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Text('Consultas',
+                                  style: TextStyle(
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: letra,
+                                  fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ]
+                            ),
+                          ):
+                          menuNo('images/CONSULTAS.png','Consulta',''),
+                          SizedBox(width:25),
+                          //Spacer(),
+                          obj_menu.contains("EC001") || obj_menu.contains("ZZ999")?
+                          InkWell(
+                            onTap: () {
+                              if(widget.data.entrada==true)
+                              { 
+                                entradaCana=[];
+                                mensajeEntradaCana.clear();
+                                mensajeNotificacion.clear();
+                                //mensajeNotificacion.removeWhere((element) => (element =='EntradaDeCana'));
+                                WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  Mensaje (data:widget.data,titulo:'Entrada Caña',mensaje:'entrada',), )); });
+                              }else{
+                                entradaCana=[];
+                                //mensajeNotificacion.removeWhere((element) => (element =='EntradaDeCana'));
+                                mensajeEntradaCana.clear();
+                                mensajeNotificacion.clear();
+                                WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => EntradasCanas (data:widget.data),)); });
+                              }
+                            }, 
+                            child:
+                            Column(
+                              children: <Widget>[
                                 contadorInfoProduccion != 0 ? Container(
                                   margin: EdgeInsets.fromLTRB(5, 0, 10, 4),
                                   padding: EdgeInsets.all(2),
@@ -790,7 +561,7 @@ Widget menuNo(imagen,texto){
                                     minHeight: 20,
                                   ),
                                   child: Text(
-                                    '$contadorInfoProduccion',
+                                    '$contadorEntradaCana',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 15,
@@ -798,141 +569,6 @@ Widget menuNo(imagen,texto){
                                     textAlign: TextAlign.center,
                                   ),
                                 ): new Container(width:20,height:20,),
-	                              Container(
-	                                height: 85,
-	                                width: 85,
-	                                decoration: BoxDecoration(
-	                                color: Colors.white,
-	                                border:Border.all(
-	                                  color: Color.fromRGBO(56, 124, 43, 1.0),
-	                                  width:4,
-	                                ),
-	                                borderRadius: BorderRadius.circular(50),
-	                                // boxShadow: [BoxShadow(
-	                                //   color: Colors.black45,
-	                                //   offset: Offset(6,6),
-	                                //   blurRadius: 6,  
-	                                // ),
-	                                // ],
-	                                ),
-	                                child:Center(
-	                                  child: Container(
-	                                  height: 50,
-	                                  width: 50,
-	                                  padding: new EdgeInsets.all(30.0),
-	                                  decoration: BoxDecoration(
-	                                    image: DecorationImage(
-	                                    image: AssetImage('images/estadisticas.png'),
-	                                    fit: BoxFit.contain)),
-	                                    
-	                                ) ,
-	                              ),
-	                              ),
-	                                SizedBox(height: 20),
-	                                Text('Informe',style: TextStyle(
-	                                      color: Color.fromRGBO(83, 86, 90, 1.0),
-	                                      fontSize: 12,
-	                                      fontWeight: FontWeight.bold
-                                ),),
-                                Text('Producción',style: TextStyle(
-	                                      color: Color.fromRGBO(83, 86, 90, 1.0),
-	                                      fontSize: 12,
-	                                      fontWeight: FontWeight.bold
-                                ),),
-	                            ]
-	                          ),):Row(children:[
-                              SizedBox(width:3),
-                              menuNo('images/INFORME DE PRODUCCIÓN.png','Info.Producción'),
-                            ]),
-                          SizedBox(width:26),
-	                        Spacer(),
-                          obj_menu.contains("AT001") || obj_menu.contains("ZZ999")?
-                          InkWell(
-                            onTap: () {
-                              WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                   Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  AsitenciaTecnica (data:widget.data)));});  
-                            }, 
-                            child:
-                            Column(
-	                            children: <Widget>[
-                                Container(width:103,height:20,),
-	                              Container(
-	                                height: 85,
-	                                width: 85,
-	                                decoration: BoxDecoration(
-	                                color: Colors.white,
-	                                border:Border.all(
-	                                  color: Color.fromRGBO(56, 124, 43, 1.0),
-	                                  width:4,
-	                                ),
-	                                borderRadius: BorderRadius.circular(50),
-	                                // boxShadow: [BoxShadow(
-	                                //   color: Colors.black45,
-	                                //   offset: Offset(6,6),
-	                                //   blurRadius: 6,  
-	                                // ),
-	                                // ],
-	                                ),
-	                                child:Center(
-	                                  child: Container(
-	                                  height: 50,
-	                                  width: 50,
-	                                  padding:EdgeInsets.fromLTRB(30, 30, 5, 30),
-	                                  decoration: BoxDecoration(
-	                                    image: DecorationImage(
-	                                    image: AssetImage('images/cultivos.png'),
-	                                    fit: BoxFit.contain)),
-	                                    
-	                                ) ,
-	                              ),
-	                              ),
-	                                SizedBox(height: 20),
-	                                Text('Asistencia',style: TextStyle(
-	                                      color: Color.fromRGBO(83, 86, 90, 1.0),
-	                                      fontSize: 12,
-	                                      fontWeight: FontWeight.bold
-                            ),),
-                            Text('Técnica',style: TextStyle(
-	                                      color: Color.fromRGBO(83, 86, 90, 1.0),
-	                                      fontSize: 12,
-	                                      fontWeight: FontWeight.bold
-                            ),),
-	                          ]
-	                          ,),
-                          ):
-                            menuNo('images/RECOMENDACIÓN.png','Asistencia Técnica'),
-	                        ],
-	                      ),
-	                    ),
-                      obj_menu.contains("AO001") || obj_menu.contains("ZZ999")?
-                      InkWell(
-                      onTap: () {
-                          WidgetsBinding.instance.addPostFrameCallback((_) { 
-                                       Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  ActualizarDatosp (data:widget.data)));});
-
-                          // WidgetsBinding.instance.addPostFrameCallback((_) { 
-                          //              Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  FileWeb()));});
-                      },
-                      child:
-                      Center(child:
-                        Container(
-                        color: Colors.white,
-                        width: MediaQuery.of(context).size.width,
-                        height: 120,
-                        margin: EdgeInsets.all(8),
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.only(
-                        //     topLeft: Radius.circular(40),
-                        //     topRight: Radius.circular(40),
-                        //   ),
-                        //   color: Color.fromRGBO(31, 58, 47, 1.0),
-                        // ),
-                        child: 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:<Widget>[
-                            Column(
-                                children: <Widget>[
                                 Container(
                                   height: 85,
                                   width: 85,
@@ -957,61 +593,239 @@ Widget menuNo(imagen,texto){
                                     padding: new EdgeInsets.all(30.0),
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                      image: AssetImage('images/actualizar_datos.png'),
+                                      image: AssetImage('images/tractor_verde.png'),
                                       fit: BoxFit.contain)),
-                                      
                                   ) ,
+                                  ),
                                 ),
-                                ),
-                                  Spacer(),
-                                  Text('Actualización\n''    De Datos',style: TextStyle(
-                                        color: Color.fromRGBO(83, 86, 90, 1.0),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold
-                            ),),
-                            ]
+                                SizedBox(height: 20),
+                                Text('Entrada',style: TextStyle(  
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: letra,
+                                  fontWeight: FontWeight.bold
+                                ),),
+                                Text('De Caña',style: TextStyle(  
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: letra,
+                                  fontWeight: FontWeight.bold
+                                ),),
+                              ]
                             ),
-                          ],
-                        ),
-                        
-                      ),
-                  ),):
-                  InkWell(
-                  onTap: () {
-                      warningDialog(
-                      context, 
-                      "No tiene los permisos para ingresar a la funcionalidad",
-                      negativeAction: (){
-                      },
-                    );
-                  },
-                  child:
-                  Center(child:
-                        Container(
-                        color:Colors.white,
-                        width: MediaQuery.of(context).size.width,
-                        height: 120,
-                        margin: EdgeInsets.all(15),
-                        // decoration: BoxDecoration(
-                        //   borderRadius: BorderRadius.only(
-                        //     topLeft: Radius.circular(40),
-                        //     topRight: Radius.circular(40),
-                        //   ),
-                        //   color: Color.fromRGBO(31, 58, 47, 1.0),
-                        // ),
-                        child: 
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:<Widget>[
+                          )
+                          :Row(children:[
+                            SizedBox(width:3),
+                            menuNo('images/vagon-gris.png','Entrada','De Caña'),
+                          ]
+                          ),
+                          SizedBox(width:20),
+                          //Spacer(),
+                          obj_menu.contains("LC001") || obj_menu.contains("ZZ999")?
+                          InkWell(
+                            onTap: () {
+                              liqCana=[];
+                              mensajeLiqCana.clear();
+                              mensajeNotificacion.clear();
+                              //mensajeNotificacion.removeWhere((element) => (element =='LiquidacionCana'));
+                              WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  VerLiquidaciones (data:widget.data))); });
+                            }, 
+                            child:
                             Column(
-                                children: <Widget>[
+                              children: <Widget>[ 
+                                contadorLiqCana != 0 ?Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 10, 4),
+                                  padding: EdgeInsets.all(2),
+                                  decoration: new BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  constraints: BoxConstraints(
+                                    minWidth: 20,
+                                    minHeight: 20,
+                                  ),
+                                  child: Text(
+                                    '$contadorLiqCana',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ): new Container(width:20,height:20,),
                                 Container(
                                   height: 85,
                                   width: 85,
                                   decoration: BoxDecoration(
                                   color: Colors.white,
                                   border:Border.all(
-                                    color: Color.fromRGBO(136,139,141, 1.0),
+                                    color: Color.fromRGBO(56, 124, 43, 1.0),
+                                    width:4,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50),
+                                  // boxShadow: [BoxShadow(
+                                  //   color: Colors.black45,
+                                  //   offset: Offset(6,6),
+                                  //   blurRadius: 6,  
+                                  // ),
+                                  // ],
+                                  ),
+                                  child:Center(
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      padding: new EdgeInsets.all(30.0),
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                        image: AssetImage('images/bolsa-de-dinero.png'),
+                                        fit: BoxFit.contain)),
+                                    ) ,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Text('Liquidaciones',
+                                  style: TextStyle(
+                                    color: Color.fromRGBO(83, 86, 90, 1.0),
+                                    fontSize: letra,
+                                    fontWeight: FontWeight.bold
+                                  ),
+                                ),
+                              ]
+                            ),
+                          ):
+                          menuNo('images/LIQUIDACIÓN CAÑA.png','Liquidaciones',''),
+                        ],
+                      ),
+                    ),
+                    //SizedBox(height: 30),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      height: 163,
+                      margin: EdgeInsets.fromLTRB(8,0, 8,8),
+                      // decoration: BoxDecoration(
+                      //   borderRadius: BorderRadius.only(
+                      //     topLeft: Radius.circular(40),
+                    //     topRight: Radius.circular(40),
+                      //   ),
+                      //   color: Color.fromRGBO(31, 58, 47, 1.0),
+                      // ),
+                      child: 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children:<Widget>[
+                          obj_menu.contains("CR001") || obj_menu.contains("ZZ999")?
+                          InkWell(
+                            onTap: () {
+                              if(widget.data.crono==true)
+                              {
+                                WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  Mensaje (data:widget.data,titulo:'Cronológico',mensaje:'crono'))); });
+                              }else{
+                                WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  VerCronologico (data:widget.data))); });
+                              }
+                            }, 
+                            child:
+                              Column(
+                              children: <Widget>[
+                                new Container(width:20,height:20,),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                                  height: 85,
+                                  width: 85,
+                                  decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:Border.all(
+                                    color: Color.fromRGBO(56, 124, 43, 1.0),
+                                    width:4,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50),
+                                  // boxShadow: [BoxShadow(
+                                  //   color: Colors.black45,
+                                  //   offset: Offset(6,6),
+                                  //   blurRadius: 6,  
+                                  // ),
+                                  // ],
+                                  ),
+                                  child:Center(
+                                    child: 
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      padding: new EdgeInsets.all(30.0),
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                        image: AssetImage('images/calendario.png'),
+                                        fit: BoxFit.contain)
+                                      ),  
+                                    ) ,
+                                  ),
+                                ),
+                                SizedBox(height: 20),
+                                Text('Cronológico',style: TextStyle(
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: letra,
+                                  fontWeight: FontWeight.bold
+                                ),),
+                              ]
+                            ),
+                          ):Container(
+                              //margin: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                              child:menuNo('images/CRONOLÓGICO.png','Cronológico',''
+                            ),
+                          ),
+                          SizedBox(width:8),
+                          //Spacer(),
+                          obj_menu.contains("IP001") || obj_menu.contains("ZZ999")?
+                          InkWell(
+                            onTap: () {
+                              if(widget.data.produccion==true)
+                              { 
+                                infoProduccion=[];
+                                mensajeNotificacion.clear();
+                                mensajeInfoProduccion.clear();
+                                //mensajeNotificacion.removeWhere((element) => (element =='InformeDeProduccion'));
+                                for(int i=0;i <= mensajeNotificacion.length;i++ )
+                                WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  Mensaje (data:widget.data,titulo:'Informe de Producción',mensaje:'informe')));});
+                              }else{
+                                infoProduccion=[];
+                                mensajeInfoProduccion.clear();
+                                mensajeNotificacion.clear();
+                                //mensajeNotificacion.removeWhere((element) => (element =='InformeDeProduccion'));
+                                WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  InfoProduccion (data:widget.data)));});
+                              }
+                            }, 
+                            child:
+                            Column(
+                              children: <Widget>[
+                                contadorInfoProduccion != 0 ? Container(
+                                  margin: EdgeInsets.fromLTRB(5, 0, 10, 4),
+                                  padding: EdgeInsets.all(2),
+                                  decoration: new BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  constraints: BoxConstraints(
+                                    minWidth: 20,
+                                    minHeight: 20,
+                                  ),
+                                  child: Text(
+                                    '$contadorInfoProduccion',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ): new Container(width:20,height:20,),
+                                Container(
+                                  height: 85,
+                                  width: 85,
+                                  decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:Border.all(
+                                    color: Color.fromRGBO(56, 124, 43, 1.0),
                                     width:4,
                                   ),
                                   borderRadius: BorderRadius.circular(50),
@@ -1029,40 +843,248 @@ Widget menuNo(imagen,texto){
                                     padding: new EdgeInsets.all(30.0),
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
-                                      image: AssetImage('images/ACTUALIZAR DATOS.png'),
+                                      image: AssetImage('images/estadisticas.png'),
                                       fit: BoxFit.contain)),
-                                      
                                   ) ,
+                                  ),
                                 ),
+                                SizedBox(height: 20),
+                                Text('Informe',style: TextStyle(  
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: letra,
+                                  fontWeight: FontWeight.bold
+                                ),),
+                                Text('Producción',style: TextStyle(
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: letra,
+                                  fontWeight: FontWeight.bold
+                                ),),
+                              ]
+                            ),
+                          ):
+                          Row(
+                            children:[
+                            SizedBox(width:3),
+                            menuNo('images/INFORME DE PRODUCCIÓN.png','Informe','Producción'),
+                            ]
+                          ),
+                          SizedBox(width:20),
+                          //Spacer(),
+                          obj_menu.contains("AT001") || obj_menu.contains("ZZ999")?
+                          InkWell(
+                            onTap: () {
+                              WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  AsitenciaTecnica (data:widget.data)));});  
+                            }, 
+                            child:
+                            Column(
+                              children: <Widget>[
+                                Container(width:20,height:20,),
+                                Container(
+                                  height: 85,
+                                  width: 85,
+                                  decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border:Border.all(
+                                    color: Color.fromRGBO(56, 124, 43, 1.0),
+                                    width:4,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50),
+                                  // boxShadow: [BoxShadow(
+                                  //   color: Colors.black45,
+                                  //   offset: Offset(6,6),
+                                  //   blurRadius: 6,  
+                                  // ),
+                                  // ],
+                                  ),
+                                  child:Center(
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      padding:EdgeInsets.fromLTRB(30, 30, 5, 30),
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                        image: AssetImage('images/cultivos.png'),
+                                        fit: BoxFit.contain)
+                                      ),
+                                    ) ,
+                                  ),
                                 ),
+                                SizedBox(height: 20),
+                                Text('Asistencia',style: TextStyle(
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: letra,
+                                  fontWeight: FontWeight.bold
+                                ),),
+                                Text('Técnica',style: TextStyle(
+                                  color: Color.fromRGBO(83, 86, 90, 1.0),
+                                  fontSize: letra,
+                                  fontWeight: FontWeight.bold
+                                ),),
+                              ],
+                            ),
+                          ):
+                        menuNo('images/RECOMENDACIÓN.png','Asistencia','Técnica'),
+                        ],
+                      ),
+                    ),
+                    obj_menu.contains("AO001") || obj_menu.contains("ZZ999")?
+                    InkWell(
+                      onTap: () {
+                          WidgetsBinding.instance.addPostFrameCallback((_) { 
+                            Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  ActualizarDatosp (data:widget.data)));
+                          });
+
+                          // WidgetsBinding.instance.addPostFrameCallback((_) { 
+                          //              Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  FileWeb()));});
+                      },
+                      child:
+                      Center(child:
+                        Container(
+                          color: Colors.white,
+                          width: MediaQuery.of(context).size.width,
+                          height: 123,
+                          margin: EdgeInsets.all(8),
+                          // decoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.only(
+                          //     topLeft: Radius.circular(40),
+                          //     topRight: Radius.circular(40),
+                          //   ),
+                          //   color: Color.fromRGBO(31, 58, 47, 1.0),
+                          // ),
+                          child: 
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:<Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    height: 85,
+                                    width: 85,
+                                    decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border:Border.all(
+                                      color: Color.fromRGBO(56, 124, 43, 1.0),
+                                      width:4,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50),
+                                    // boxShadow: [BoxShadow(
+                                    //   color: Colors.black45,
+                                    //   offset: Offset(6,6),
+                                    //   blurRadius: 6,  
+                                    // ),
+                                    // ],
+                                    ),
+                                    child:Center(
+                                      child: Container(
+                                        height: 50,
+                                        width: 50,
+                                        padding: new EdgeInsets.all(30.0),
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                          image: AssetImage('images/actualizar_datos.png'),
+                                          fit: BoxFit.contain)),
+                                      ) ,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Text('Actualización\n''    De Datos',
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(83, 86, 90, 1.0),
+                                      fontSize: letra,
+                                      fontWeight: FontWeight.bold
+                                    ),
+                                  ),
+                                ]
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ):
+                    InkWell(
+                      onTap: () {
+                        warningDialog(
+                          context, 
+                          "No tiene los permisos para ingresar a la funcionalidad",
+                          negativeAction: (){
+                          },
+                        );
+                      },
+                      child:
+                      Center(child:
+                        Container(
+                          color:Colors.white,
+                          width: MediaQuery.of(context).size.width,
+                          height: 123,
+                          margin: EdgeInsets.all(15),
+                          // decoration: BoxDecoration(
+                          //   borderRadius: BorderRadius.only(
+                          //     topLeft: Radius.circular(40),
+                          //     topRight: Radius.circular(40),
+                          //   ),
+                          //   color: Color.fromRGBO(31, 58, 47, 1.0),
+                          // ),
+                          child: 
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:<Widget>[
+                              Column(
+                                children: <Widget>[
+                                  Container(
+                                    height: 85,
+                                    width: 85,
+                                    decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    border:Border.all(
+                                      color: Color.fromRGBO(136,139,141, 1.0),
+                                      width:4,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50),
+                                    // boxShadow: [BoxShadow(
+                                    //   color: Colors.black45,
+                                    //   offset: Offset(6,6),
+                                    //   blurRadius: 6,  
+                                    // ),
+                                    // ],
+                                    ),
+                                    child:Center(
+                                      child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      padding: new EdgeInsets.all(30.0),
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                          image: AssetImage('images/ACTUALIZAR DATOS.png'),
+                                          fit: BoxFit.contain)
+                                        ),
+                                      ) ,
+                                    ),
+                                  ),
                                   Spacer(),
                                   Text('Actualización\n''    De Datos',style: TextStyle(
-                                        color: Color.fromRGBO(83, 86, 90, 1.0),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold
-                            ),),
-                            ]
-                            ),
-                      
-                          ],
+                                    color: Color.fromRGBO(83, 86, 90, 1.0),
+                                    fontSize: letra,
+                                    fontWeight: FontWeight.bold
+                                  ),),
+                                ]
+                              ),
+                            ],
+                          ),
                         ),
-                        
                       ),
-                  ),
-                  ),
+                    ),
                   ],
-                  ),
                 ),
-                )
-                  
-              );
+              ),
+              ) 
+            );
         }else{
           return
           Center(
             child:CircularProgressIndicator()
             //Splash1(),
           );
-          
         }
       },
     );
@@ -1083,13 +1105,3 @@ Widget menuNo(imagen,texto){
 
       return listItems;
     }
-
-//   class MyAppBar extends AppBar {
-//   MyAppBar(
-//     { 
-//       Key key,
-//       Widget title, 
-//       List<Widget> actions 
-//     }) : super(key: key, title: title, actions: actions);
-
-// }
