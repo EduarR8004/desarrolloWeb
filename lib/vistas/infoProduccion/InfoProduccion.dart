@@ -343,81 +343,86 @@ class _InfoProduccionState extends State<InfoProduccion> {
   }
 
 
-Future <List<EntradaCana>> listar_haciendas()async{
-  var session= Conexion();
-  session.set_token(widget.data.token);
-  var usuario= EntradasCana(session);
-  var token=widget.data.token;
-  if(entrada.length > 0)
-  {
-    return entrada;
-  }else{
-    await usuario.listar_haciendas(false).then((_){
-    var preUsuarios=usuario.obtener_haciendas();
-    for ( var user in preUsuarios)
+  Future <List<EntradaCana>> listar_haciendas()async{
+    var session= Conexion();
+    session.set_token(widget.data.token);
+    var usuario= EntradasCana(session);
+    var token=widget.data.token;
+    if(entrada.length > 0)
     {
-      entrada.add(user);
-    }        
-    });
-    if(entrada.length==1)
-    { 
-      setState(() {
-        haciendaUnica=entrada[0].cod_hda+" - "+entrada[0].nm_hda;
+      return entrada;
+    }else{
+      await usuario.listar_haciendas(false).then((_){
+      var preUsuarios=usuario.obtener_haciendas();
+      for ( var user in preUsuarios)
+      {
+        entrada.add(user);
+      }        
       });
+      if(entrada.length==1)
+      { 
+        setState(() {
+          haciendaUnica=entrada[0].cod_hda+" - "+entrada[0].nm_hda;
+        });
+      }
+      return entrada;
     }
-    return entrada;
   }
-}
 
-parametros(parametro){
-  for ( var par in parametro)
-    {
-      pasoParametro.add(par);
-    }
-    var codParametro;
-    pasoParametro.map((EntradaCana map) {
-    codParametro=map.cod_hda;
-    }).toList();
-     return codParametro;
-}
-Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
-  var session= Conexion();
-  session.set_token(widget.data.token);
-  var informes= InformesProduccion(session);
-  var token=widget.data.token;
-  var preEntrada;
-  await informes.listar_informes(ini,fin,cod_hda).then((_){
-    entradaGeneral=[];
-    preEntrada=informes.obtener_informes();
-    for ( var tabla_informe in preEntrada)
-    {
-        entradaGeneral.add(tabla_informe );
-    }   
-    preEntrada=[]; 
-    informes.limpiar_informes();    
-  });
-  preEntrada=[]; 
-  if(entradaGeneral.length > 0)
-  {  
-     return entradaGeneral;
+  parametros(parametro){
+    for ( var par in parametro)
+      {
+        pasoParametro.add(par);
+      }
+      var codParametro;
+      pasoParametro.map((EntradaCana map) {
+      codParametro=map.cod_hda;
+      }).toList();
+      return codParametro;
   }
-  else{
-    contador++;
-    setState(() {
-      tabla = true;
+  Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
+    var session= Conexion();
+    session.set_token(widget.data.token);
+    var informes= InformesProduccion(session);
+    var token=widget.data.token;
+    var preEntrada;
+    await informes.listar_informes(ini,fin,cod_hda).then((_){
+      entradaGeneral=[];
+      preEntrada=informes.obtener_informes();
+      for ( var tabla_informe in preEntrada)
+      {
+          entradaGeneral.add(tabla_informe );
+      }   
+      preEntrada=[]; 
+      informes.limpiar_informes();    
     });
-    if(contador==1)
-    {
-      warningDialog(
-        context, 
-        info,
-        negativeAction: (){
-        },
-      );
+    preEntrada=[]; 
+    if(entradaGeneral.length > 0)
+    {  
+      return entradaGeneral;
     }
-   }
-             
-}
+    else{
+      contador++;
+      setState(() {
+        tabla = true;
+      });
+      if(contador==1)
+      {
+        warningDialog(
+          context, 
+          info,
+          negativeAction: (){
+          },
+        );
+      }
+    }
+              
+  }
+   Widget convertirFecha( String valor){
+    var parte= valor.split("00");
+    var respuesta = parte[0];
+      return  Text(respuesta ,textAlign: TextAlign.center);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -851,7 +856,7 @@ Future <List<InformeProduccion>> listar_informe(ini,fin,cod_hda)async{
                             Center(child:Text(entradaG.suerte),),
                           ),
                           DataCell(
-                            Center(child:Text(entradaG.fecha_ultco),),
+                            Center(child:Center(child:convertirFecha(entradaG.fecha_ultco),),),
                           ),
                           DataCell(
                             mostrarArea?Center(child:Text(entradaG.area_total),):Container(),

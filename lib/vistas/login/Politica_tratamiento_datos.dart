@@ -15,7 +15,8 @@ class PoliticaTratamientoDatos extends StatefulWidget {
 }
 
 class _PoliticaTratamientoDatosState extends State<PoliticaTratamientoDatos> {
-@override
+  double anchoContainer=700;
+  @override
   void initState() {
     super.initState();
   }
@@ -34,133 +35,240 @@ class _PoliticaTratamientoDatosState extends State<PoliticaTratamientoDatos> {
  }
   @override
   Widget build(BuildContext context) {
-  return WillPopScope(
-    onWillPop: () {  },
-      child:SafeArea(
-        child: Scaffold(
-          body:dataBody(),
-        ),
-      ),
-  );
-}
-Widget dataBody() {
-  return Container(
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Container(
-        //margin: EdgeInsets.only(top:21),
-        decoration: BoxDecoration(
-          color: Colors.white,  
-            //borderRadius: BorderRadius.circular(20),
-          image: DecorationImage(
-            image: AssetImage('images/titulop.png'),
-            fit: BoxFit.cover
+    return WillPopScope(
+      onWillPop: () {  },
+        child:SafeArea(
+          child: Scaffold(
+            body:dataBody(),
           ),
         ),
-        child:Row(
-          mainAxisAlignment : MainAxisAlignment.center,
-          children:<Widget>[
-            Center(
-              child:Text("Política de Tratamiento de Datos Personales",textAlign: TextAlign.center,style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold
-              ),),
-            )
-          ],
-        ) ,
-            //padding: EdgeInsets.symmetric(horizontal:10),
-      ),
-      Expanded(
-        child: SizedBox(
-          child:texto(),)
-      ),
-      Container(
-        height: 60,
-          width: 700,
-          margin: EdgeInsets.only(top:21),
-          child:Row(
-            mainAxisAlignment : MainAxisAlignment.center,
-            children:<Widget>[
-              Container(
-              height: 50,
-                width: 120,
-                  //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: RaisedButton(
-                    textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                    //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                    color: Colors.white,
-                    child: Text('Aceptar', style: TextStyle(
-                      color:  Color.fromRGBO(83, 86, 90, 1.0),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold
-                    )),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0),
-                      side: BorderSide(color: Colors.white)
-                    ),
-                    onPressed: () {
-                        aceptar_politica();
-                    },
-                  )
-              ),
-              SizedBox(
-              width:20,
-              ),
-              Container(
-              height: 50,
-              width: 120,
-                //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: RaisedButton(
-                  textColor: Color.fromRGBO(83, 86, 90, 1.0),
-                  //textColor: Color.fromRGBO(255, 210, 0, 1.0),
-                  color: Colors.white,
-                  child: Text('Cancelar', style: TextStyle(
-                    color:  Color.fromRGBO(83, 86, 90, 1.0),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
-                  )),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50.0),
-                    side: BorderSide(color: Colors.white)
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Login(true))); 
-                  },
-                )
-              ),
-            ],
-          ) ,
-          //padding: EdgeInsets.symmetric(horizontal:10),
-      ),
-      SizedBox(height:20,),
-    ],
-  ),
     );
-}
-Widget texto() {
-  return  
+  }
+  Widget dataBody() {
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: 80,
+            //margin: EdgeInsets.only(top:21),
+            decoration: BoxDecoration(
+              color: Colors.white,  
+                //borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                image: AssetImage('images/titulop.png'),
+                fit: BoxFit.cover
+              ),
+            ),
+            child:Row(
+              mainAxisAlignment : MainAxisAlignment.center,
+              children:<Widget>[
+                Center(
+                  child:Text("Política de Tratamiento de Datos Personales",textAlign: TextAlign.center,
+                    style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold
+                    ),
+                  ),
+                )
+              ],
+            ) ,
+                //padding: EdgeInsets.symmetric(horizontal:10),
+          ),
+          Expanded(child:
+            Container(
+              width: 800,
+              child:texto(),
+            ),
+          ),
+          Container(
+            height: 60,
+              width: 700,
+              margin: EdgeInsets.only(top:21),
+              child:Row(
+                mainAxisAlignment : MainAxisAlignment.center,
+                children:<Widget>[
+                  Container(
+                    height: 50,
+                    width: 120,
+                      //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      child: RaisedButton(
+                        textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                        //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                        color: Colors.white,
+                        child: Text('Aceptar', style: TextStyle(
+                          color:  Color.fromRGBO(83, 86, 90, 1.0),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold
+                        )),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                          side: BorderSide(color: Colors.white)
+                        ),
+                        onPressed: () {
+                            aceptar_politica();
+                        },
+                      )
+                  ),
+                  SizedBox(
+                  width:20,
+                  ),
+                  Container(
+                  height: 50,
+                  width: 120,
+                    //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: RaisedButton(
+                      textColor: Color.fromRGBO(83, 86, 90, 1.0),
+                      //textColor: Color.fromRGBO(255, 210, 0, 1.0),
+                      color: Colors.white,
+                      child: Text('Cancelar', style: TextStyle(
+                        color:  Color.fromRGBO(83, 86, 90, 1.0),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                      )),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                        side: BorderSide(color: Colors.white)
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => Login(true))); 
+                      },
+                    )
+                  ),
+                ],
+              ) ,
+              //padding: EdgeInsets.symmetric(horizontal:10),
+          ),
+          SizedBox(height:20,),
+        ],
+      ),
+    );
+  }
+  Widget texto() {  
+    return  
     ListView(
       children:[
         Container(
-        padding: EdgeInsets.all(10),
-        child: Text("La información contenida en las bases de datos de Manuelita, es sometida a distintas formas de tratamiento, tales como: recolección, intercambio, actualización, procesamiento, reproducción, corrección, uso, organización, almacenamiento, circulación o supresión, entre otras, todo lo anterior en cumplimiento de las finalidades y los objetivos establecidos en la presente Política de Tratamiento de Datos Personales."
-                    "La información referenciada, podrá ser entregada, transmitida o transferida a entidades públicas, socios comerciales, contratistas, empleados, afiliados, y/o compañías filiales, subsidiarias o vinculadas, única y exclusivamente con el fin de cumplir con las finalidades de la base de datos correspondiente."
-                    "También podrá ser transmitida o transferida a los titulares, sus causahabientes y representantes legales. En todo caso, la entrega, transmisión o transferencia se hará previa suscripción de los compromisos que sean necesarios para salvaguardar la confidencialidad y privacidad de la información autorizada para tratar. A su vez, en cumplimiento de deberes legales,Manuelita. podrá suministrar la información personal a entidades judiciales o administrativas."
-                    "También podrá ser transmitida o transferida a los titulares, sus causahabientes y representantes legales. En todo caso, la entrega, transmisión o transferencia se hará previa suscripción de los compromisos que sean necesarios para salvaguardar la confidencialidad y privacidad de la información autorizada para tratar. A su vez, en cumplimiento de deberes legales,Manuelita. podrá suministrar la información personal a entidades judiciales o administrativas."
-                    "Manuelita, velará por el correcto uso de datos personales de menores de edad, garantizando que se cumpla con las exigencias legales aplicables y que todo tratamiento esté previamente autorizado y se encuentre justificado en el interés superior de los menores.",textAlign: TextAlign.justify),
+          width:anchoContainer,
+          padding: EdgeInsets.all(10),
+          child: 
+          Text(
+            "Autorizo libre y voluntariamente a Manuelita S.A. como responsable del tratamiento de los datos," 
+            "para la recolección, almacenamiento, uso, transmisión y/o transferencia de los datos personales" 
+            "suministrados a la compañía, para que sean tratados conforme a las siguientes finalidades:" 
+            ,textAlign: TextAlign.justify,
+            style: TextStyle(
+              color:Colors.black,
+              fontSize:16,
+              height:1.5,
+            )
+          ),
+        ),
+        Container(
+          width:anchoContainer,
+          padding: EdgeInsets.fromLTRB(10,5,10,5),
+          child: 
+          Text(
+            "i. Atender las funcionalidades internas del sistema tales como creación de usuario, uso de la " 
+            "aplicación, actualizaciones de la aplicación."
+            ,textAlign: TextAlign.justify,
+            style: TextStyle(
+              color:Colors.black,
+              fontSize:16,
+              height:1.5,
+            )
+          ),
+        ),
+        Container(
+          width:anchoContainer,
+          padding: EdgeInsets.fromLTRB(10,5,10,5),
+          child: 
+          Text(
+            "ii. Recibir notificaciones vía correo electrónico, mensajes de texto -SMS-, Whatsapp, llamada " 
+            "telefónica."
+            ,textAlign: TextAlign.justify,
+            style: TextStyle(
+              color:Colors.black,
+              fontSize:16,
+              height:1.5,
+            )
+          ),
+        ),
+        Container(
+          width:anchoContainer,
+          padding: EdgeInsets.fromLTRB(10,5,10,5),
+          child: 
+          Text(
+            "iii. Acceder a información referente a la relación comercial/contractual establecida con " 
+            "Manuelita S.A. (entradas de caña, liquidaciones, cronológicos, producciones, certificados " 
+            "tributarios, recomendaciones de asistencia técnica)."
+            ,textAlign: TextAlign.justify,
+            style: TextStyle(
+              color:Colors.black,
+              fontSize:16,
+              height:1.5,
+            )
+          ),
+        ),
+        Container(
+          width:anchoContainer,
+          padding: EdgeInsets.fromLTRB(10,5,10,5),
+          child: 
+          Text(
+            "iv. Actualizar mis datos personales para la verificación ante centrales de riesgo, emisión de " 
+            "certificados tributarios y demás actividades administrativas, contables y fiscales que se " 
+            "derivan de dicha relación comercial/contractual."
+            ,textAlign: TextAlign.justify,
+            style: TextStyle(
+              color:Colors.black,
+              fontSize:16,
+              height:1.5,
+            )
+          ),
+        ),
+        Container(
+          width:anchoContainer,
+          padding: EdgeInsets.fromLTRB(10,5,10,5),
+          child: 
+          Text(
+            "Como Titular de los datos tengo derecho a conocer, actualizar, rectificar, suprimir y revocar la " 
+            "autorización y el procedimiento para ejercer mis derechos lo puedo consultar en la Política "
+            "de protección de datos personales publicada en www.manuelita.com o puede dirigir sus preguntas," 
+            "quejas, reclamos o solicitudes al correo:"
+            ,textAlign: TextAlign.justify,
+            style: TextStyle(
+              color:Colors.black,
+              fontSize:16,
+              height:1.5,
+            )
+          ),
+        ),
+        Container(
+          width:anchoContainer,
+          padding: EdgeInsets.fromLTRB(10,5,10,5),
+          child: 
+          Text(
+            "protecciondedatos@manuelita.co"
+            ,textAlign: TextAlign.center,
+            style: TextStyle(
+              color:Colors.black,
+              fontSize:16,
+              height:1.5,
+              fontWeight: FontWeight.bold,
+            )
+          ),
         ),
       ]
     );
-}
+  }
 }

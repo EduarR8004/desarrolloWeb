@@ -37,6 +37,17 @@ var documentoUsuario='El campo Documento es obligatorio.';
 var telefonoUsuario='El campo Número de teléfono es obligatorio.';
 var emailUsuario='El campo Email es obligatorio.';
 var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
+GlobalKey<FormState> keyForm = new GlobalKey();
+ TextEditingController  user = new TextEditingController();
+ TextEditingController  nombre_completo = new TextEditingController();
+ TextEditingController  nit = new TextEditingController();
+ TextEditingController  clave_acceso = new TextEditingController();
+ TextEditingController  telefono1 = new TextEditingController();
+ TextEditingController  telefono2 = new TextEditingController();
+ TextEditingController  telefono3 = new TextEditingController();
+ TextEditingController  email = new TextEditingController();
+ TextEditingController  email_alternativo = new TextEditingController();
+ TextEditingController  roles = new TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -61,17 +72,7 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
     }
   }
  
- GlobalKey<FormState> keyForm = new GlobalKey();
- TextEditingController  user = new TextEditingController();
- TextEditingController  nombre_completo = new TextEditingController();
- TextEditingController  nit = new TextEditingController();
- TextEditingController  clave_acceso = new TextEditingController();
- TextEditingController  telefono1 = new TextEditingController();
- TextEditingController  telefono2 = new TextEditingController();
- TextEditingController  telefono3 = new TextEditingController();
- TextEditingController  email = new TextEditingController();
- TextEditingController  email_alternativo = new TextEditingController();
- TextEditingController  roles = new TextEditingController();
+ 
 
  
  crear_usuario()async{
@@ -162,21 +163,30 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
     });
   }
 
-  listar_usuario()async{
+  listar_usuario(email)async{
     var session= Conexion();
     session.set_token(widget.data.token);
     var usuario= Usuarios(session);
     var token=widget.data.token;
-    usuario.descargar_usuarios('').then((_){
+    usuario.descargar_usuarios(email).then((_){
       List usuarios=usuario.obtener_usuarios();
-
+      print(usuarios);
       final data = Data.usuarios(
         token:token ,
         usuarios: usuario.obtener_usuarios(),
         parametro:''
       );
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => DataTableUsuarios(data:widget.data,parametro:'')));          
+      if(usuarios.length>0){
+        warningDialog(
+          context, 
+          "El correo "+email+" ya se encuentra vinculado a un usuario",
+          negativeAction: (){
+          },
+        );
+        return;
+      }else{
+        save();
+      }   
     });
   }
 
@@ -546,7 +556,7 @@ var creacion="Usuario creado correctamente\n""Desea crear un nuevo usuario?";
                     SnackBar(content: Text('Processing Data'))
                   );                            
                 }else{
-                  save();
+                  listar_usuario(email.text);
                 } 
               },
             ),

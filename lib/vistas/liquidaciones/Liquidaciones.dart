@@ -1130,12 +1130,13 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
                             mostrarbonificacionTotal?Center(child:Text(entradaG.rend_bonif,textAlign: TextAlign.center,),):Container(),
                           ),
                           DataCell(
-                            Center(child:convertirMoneda(entradaG.valor_total),),
+                            Center(child:Text(entradaG.valor_total,textAlign: TextAlign.center),),
+                            //Center(child:convertirMoneda(entradaG.valor_total.toString())),
                           ),
                           DataCell(
-                            Center(child:convertirMoneda(entradaG.valor_desc),),
+                            Center(child:Text(entradaG.valor_desc,textAlign: TextAlign.center),),
+                            //Center(child:convertirMoneda(entradaG.valor_desc)),
                           ),
-                          
                           DataCell(
                             entradaG.id==''?Center(child:Container(child: IconButton(icon: Icon(
                               Icons.error,
@@ -1242,7 +1243,8 @@ Future <List<Ajuste>> listar_anticipos(ini,fin,cod_hda)async{
                               mostrarHaciendaCana?Center(child:Text(entradaG.predio,textAlign: TextAlign.center,),):Container(),
                             ),
                             DataCell(
-                              Center(child:convertirMoneda(entradaG.valor),),
+                              Center(child:Text(entradaG.valor,textAlign: TextAlign.center),),
+                              //Center(child:convertirMoneda(entradaG.valor),),
                             ),
                             DataCell(
                               entradaG.id==''?Center(child:Container(child: IconButton(icon: Icon(

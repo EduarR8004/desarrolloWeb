@@ -49,7 +49,7 @@ class ProfilePageState extends State<ProfilePage>with SingleTickerProviderStateM
         )
       ],
     ).show();
-}
+  }
 
 
   @override
@@ -66,8 +66,8 @@ class ProfilePageState extends State<ProfilePage>with SingleTickerProviderStateM
           ),
           drawer: menu,
           body: Container(
-          alignment: Alignment.center,
-          color:Colors.white ,
+            alignment: Alignment.center,
+            color:Colors.white ,
             child:Center(
               child:Container(
                 width: 1200,

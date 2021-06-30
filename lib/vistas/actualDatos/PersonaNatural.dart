@@ -33,7 +33,7 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
       Map ruta=verDocumentos.establecer_ruta();  
       session.getFile(_url+ruta['ruta'].toString()).then((f){ 
         ms.hide();  
-        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'archivo.pdf']);     
+        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'Formato Vinculación Proveedor Persona Natural.pdf']);     
       });    
     });
   }
@@ -51,7 +51,7 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
       Map ruta=verDocumentos.establecer_ruta();  
       session.getFile(_url+ruta['ruta'].toString()).then((f){ 
         ms.hide();  
-        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'archivo.pdf']);     
+        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'Autorización de Datos Personales.pdf']);     
       });    
     });
   }

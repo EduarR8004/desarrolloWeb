@@ -801,127 +801,127 @@ Widget  dataTable(tipo,ini,fin) {
             scrollDirection: Axis.vertical,
             child: SingleChildScrollView( 
               scrollDirection: Axis.horizontal,
-                child: DataTable(
-                  headingRowColor:
-                    MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
-                    //Color.fromRGBO(136,139, 141, 1.0)
-                    sortAscending: sort,
-                    sortColumnIndex: 0,
-                    horizontalMargin:10,
-                    columnSpacing:10,
-                    columns: [
-                      DataColumn(
-                        label: Text("Id",style: TextStyle(
-                          color:Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize:15,
-                        )),
-                        numeric: false,
-                        tooltip: "Id",
-                        onSort: (columnIndex, ascending) {
-                          setState(() {
-                            sort = !sort;
-                          });
-                          onSortColum(columnIndex, ascending);
-                        }
-                      ),
-                      DataColumn(
-                        label: Text("Tipo",style: TextStyle(
-                          color:Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize:15,
-                        )),
-                        numeric: false,
-                        tooltip: "Tipo",
-                        onSort: (columnIndex, ascending) {
-                          setState(() {
-                            sort = !sort;
-                          });
-                          onSortColum(columnIndex, ascending);
-                        }
-                      ),
-                      DataColumn(
-                        label: Text("Estado",style: TextStyle(
-                          color:Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize:15,
-                        )),
-                        numeric: false,
-                        tooltip: "Estado",
-                      ),
-                      DataColumn(
-                        label: Text("Distribución",style: TextStyle(
-                          color:Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize:15,
-                        )),
-                        numeric: false,
-                        tooltip: "Distribución",
-                      ),
-                      DataColumn(
-                        label: Text("Fecha",style: TextStyle(
-                          color:Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize:15,
-                        )),
-                        numeric: false,
-                        tooltip: "Fecha",
-                      ),
-                      DataColumn(
-                        label: Text("Notas",style: TextStyle(
-                          color:Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize:15,
-                        )),
-                        numeric: false,
-                        tooltip: "Notas",
-                      ),
-                      DataColumn(
-                        label: Text("Creada Por",style: TextStyle(
-                          color:Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize:15,
-                        )),
-                        numeric: false,
-                        tooltip: "Creada Por",
-                      ),
-                      ],
-                      rows: ordenes.map(
-                        (ord) => DataRow(
-                            selected: selectedOrders.contains(ord),
-                            onSelectChanged: (b) {
-                              print("Onselect");
-                              onSelectedRow(b, ord);
-                            },
-                            cells: [
-                              DataCell(
-                                Text(ord.orden_procesamiento_id),
-                                onTap: () {
-                                  print('Selected ${ord.orden_procesamiento_id}');
-                                },
-                              ),
-                              DataCell(
-                                Text(ord.descripcion_tipo),
-                              ),
-                              DataCell(
-                                Text(ord.estado),
-                              ),
-                              DataCell(
-                                Text(ord.preliminar?"Preliminar":"Final"),
-                              ),
-                              DataCell(
-                                Text(ord.creation_stamp.toString()),
-                              ),
-                              DataCell(
-                                Text(ord.notas),
-                              ),
-                              DataCell(
-                                Text(ord.created_by),
-                              ),
-                            ]
+              child: DataTable(
+                headingRowColor:
+                MaterialStateColor.resolveWith((states) =>Color.fromRGBO(56, 124, 43, 1.0) ),
+                //Color.fromRGBO(136,139, 141, 1.0)
+                sortAscending: sort,
+                sortColumnIndex: 0,
+                horizontalMargin:10,
+                columnSpacing:10,
+                columns: [
+                  DataColumn(
+                    label: Text("Tipo",style: TextStyle(
+                      color:Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize:15,
+                    )),
+                    numeric: false,
+                    tooltip: "Tipo",
+                    onSort: (columnIndex, ascending) {
+                      setState(() {
+                        sort = !sort;
+                      });
+                      onSortColum(columnIndex, ascending);
+                    }
+                  ),
+                  DataColumn(
+                    label: Text("Estado",style: TextStyle(
+                      color:Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize:15,
+                    )),
+                    numeric: false,
+                    tooltip: "Estado",
+                  ),
+                  DataColumn(
+                    label: Text("Distribución",style: TextStyle(
+                      color:Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize:15,
+                    )),
+                    numeric: false,
+                    tooltip: "Distribución",
+                  ),
+                  DataColumn(
+                    label: Text("Fecha",style: TextStyle(
+                      color:Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize:15,
+                    )),
+                    numeric: false,
+                    tooltip: "Fecha",
+                  ),
+                  DataColumn(
+                    label: Text("Notas",style: TextStyle(
+                      color:Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize:15,
+                    )),
+                    numeric: false,
+                    tooltip: "Notas",
+                  ),
+                  DataColumn(
+                    label: Text("Creada Por",style: TextStyle(
+                      color:Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize:15,
+                    )),
+                    numeric: false,
+                    tooltip: "Creada Por",
+                  ),
+                  DataColumn(
+                    label: Text("Id",style: TextStyle(
+                      color:Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize:15,
+                    )),
+                    numeric: false,
+                    tooltip: "Id",
+                    onSort: (columnIndex, ascending) {
+                      setState(() {
+                        sort = !sort;
+                      });
+                      onSortColum(columnIndex, ascending);
+                    }
+                  ),
+                ],
+                rows: ordenes.map(
+                  (ord) => DataRow(
+                      selected: selectedOrders.contains(ord),
+                      onSelectChanged: (b) {
+                        print("Onselect");
+                        onSelectedRow(b, ord);
+                      },
+                      cells: [
+                        DataCell(
+                          Text(ord.descripcion_tipo),
                         ),
-                      ).toList(),
-                ),
+                        DataCell(
+                          Text(ord.estado),
+                        ),
+                        DataCell(
+                          Text(ord.preliminar?"Preliminar":"Final"),
+                        ),
+                        DataCell(
+                          Text(ord.creation_stamp.toString()),
+                        ),
+                        DataCell(
+                          Text(ord.notas),
+                        ),
+                        DataCell(
+                          Text(ord.created_by),
+                        ),
+                        DataCell(
+                          Text(ord.orden_procesamiento_id),
+                          onTap: () {
+                            print('Selected ${ord.orden_procesamiento_id}');
+                          },
+                        ),
+                      ]
+                  ),
+                ).toList(),
+              ),
             ),
           );  
       }else{
@@ -931,8 +931,8 @@ Widget  dataTable(tipo,ini,fin) {
           //Splash1(),
         );
       }
-      },
-    );
+    },
+  );
 }
 
 Widget  dataTableVacia(tipo,ini,fin) {

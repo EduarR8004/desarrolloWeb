@@ -68,7 +68,7 @@ class ActualizarDatospState extends State<ActualizarDatosp>with SingleTickerProv
                       child:Text('Señor Proveedor, a continuación encontrará la información para realizar el proceso de vinculación y/o actualización de documentos para personas Jurídicas y Naturales. Una vez cuente con la documentación completa, por favor enviarla al correo:',
                       textAlign: TextAlign.justify,style: TextStyle(
                         color:Colors.black,
-                        fontSize: 16,
+                        fontSize: 18,
                         height:1.5,
                       //fontWeight: FontWeight.bold
                       ),),

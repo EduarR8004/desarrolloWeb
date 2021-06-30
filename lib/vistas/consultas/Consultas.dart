@@ -431,6 +431,12 @@ Widget listaAgnoInicial(){
   );
 }
 
+Widget convertirFecha( String valor){
+    var parte= valor.split(" ");
+    var respuesta = parte[0];
+      return  Text(respuesta ,textAlign: TextAlign.center);
+  }
+
 Widget listaAgnoFinal(){
   return Container(
     height: 40,
@@ -702,7 +708,7 @@ Widget listaAgnoFinal(){
                     (entradaG) => DataRow(
                     cells: [
                       DataCell(
-                        Center(child:Text(entradaG.fecha_distribucion.toString(),textAlign: TextAlign.center,)),
+                        Center(child:convertirFecha(entradaG.fecha_distribucion.toString())),
                         onTap: () {
               
                         },

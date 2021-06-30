@@ -943,7 +943,7 @@ void confirm (dialog){
                         Container(
                           color: Colors.white,
                           width: MediaQuery.of(context).size.width,
-                          height: 123,
+                          height: 143,
                           margin: EdgeInsets.all(8),
                           // decoration: BoxDecoration(
                           //   borderRadius: BorderRadius.only(
@@ -987,7 +987,7 @@ void confirm (dialog){
                                       ) ,
                                     ),
                                   ),
-                                  Spacer(),
+                                  SizedBox(height: 20),
                                   Text('Actualización\n''    De Datos',
                                     style: TextStyle(
                                       color: Color.fromRGBO(83, 86, 90, 1.0),
@@ -1061,7 +1061,7 @@ void confirm (dialog){
                                       ) ,
                                     ),
                                   ),
-                                  Spacer(),
+                                  SizedBox(height: 20),
                                   Text('Actualización\n''    De Datos',style: TextStyle(
                                     color: Color.fromRGBO(83, 86, 90, 1.0),
                                     fontSize: letra,

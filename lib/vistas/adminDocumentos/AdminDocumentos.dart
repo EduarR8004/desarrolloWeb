@@ -33,6 +33,10 @@ class _AdminDocumentosState extends State<AdminDocumentos> {
   dynamic _file;
   bool sort,adjuntar,procesar,mostrarDistri,preliminar;
   String dropdownValue,tipo,nuevaOrden,tabla,registros,nombreArchivo='',mensajeError;
+  String consulta="El nombre de cada archivo contenido dentro del ZIP debe seguir la estructura XXXXXX_YYYY.pdf en donde:"
+  "XXXXXX: Es el nit del proveedor"
+  "YYYY: Representa el año de expedición del documento";
+  String liquidacion="El programa lee el contenido del PDF generado por SICAP y detecta por cada hoja los valores de los campos Fecha(en la parte superior derecha del documento), NIT y Hacienda partiendo el PDF por esta llave";
   Map orden;
   num totalRegistros;
   ProgressDialog ms;
@@ -348,37 +352,85 @@ mostrar(String texto,context,nuevaOrden){
                 setState(() {
                   dropdownValue = newValueLiq;
                   nuevaOrden=orden['id'].toString();
-                  if(tipo =='Donación Fondo Social')
+                  if(newValueLiq =='Donación Fondo Social')
                   {
                     tipo='FondoSocial';
+                    infoDialog(
+                      context, 
+                      consulta,
+                      negativeAction: (){
+                      },
+                    );
                   }
-                  if(tipo =='Donación Cenicaña')
+                  if(newValueLiq =='Donación Cenicaña')
                   {
                     tipo='DonacionesCenicana';
+                    infoDialog(
+                      context, 
+                      consulta,
+                      negativeAction: (){
+                      },
+                    );
                   }
-                  if(tipo =='Retención en la Fuente')
+                  if(newValueLiq =='Retención en la Fuente')
                   {
                     tipo='Retenciones';
+                    infoDialog(
+                      context, 
+                      consulta,
+                      negativeAction: (){
+                      },
+                    );
                   }
-                  if(tipo =='Certificados de Ingresos y Costos')
+                  if(newValueLiq =='Certificados de Ingresos y Costos')
                   {
                     tipo='IngresosYCostos';
+                    infoDialog(
+                      context, 
+                      consulta,
+                      negativeAction: (){
+                      },
+                    );
                   }
-                  if(tipo =='ICA')
+                  if(newValueLiq =='ICA')
                   {
                     tipo='Ica';
+                    infoDialog(
+                      context, 
+                      consulta,
+                      negativeAction: (){
+                      },
+                    );
                   }
-                  if(tipo =='Anticipos')
+                  if(newValueLiq =='Anticipos')
                   {
                     tipo='LiquidacionAnticipos';
+                    infoDialog(
+                      context, 
+                      consulta,
+                      negativeAction: (){
+                      },
+                    );
                   }
-                  if(tipo =='Liquidación Caña')
+                  if(newValueLiq =='Liquidación Caña')
                   {
                     tipo='LiquidacionCana';
+                    infoDialog(
+                      context, 
+                      liquidacion,
+                      negativeAction: (){
+                      },
+                    );
                   }
-                  if(tipo =='Ajuste de Mercado Excedentario')
+                  if(newValueLiq =='Ajuste de Mercado Excedentario')
                   {
                     tipo='LiquidacionMercadoExcedentario';
+                    infoDialog(
+                      context, 
+                      liquidacion,
+                      negativeAction: (){
+                      },
+                    );
                   }      
                     adjuntar=true;
                 }); 

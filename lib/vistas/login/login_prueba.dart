@@ -206,13 +206,13 @@ validar()async{
         crono: true,
         usuario_actual:usuario_actual 
       );
-      if(loginProvider.get_aceptar()){
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-                                Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => Inicio(data:data,retorno:''),)); }); 
-      }else{
+      // if(loginProvider.get_aceptar()){
+      //   WidgetsBinding.instance.addPostFrameCallback((_) {
+      //                           Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => Inicio(data:data,retorno:''),)); }); 
+      // }else{
         WidgetsBinding.instance.addPostFrameCallback((_) {
                                 Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => PoliticaTratamientoDatos(data:data,retorno:''),)); }); 
-      }
+      //}
         
     });              
   });

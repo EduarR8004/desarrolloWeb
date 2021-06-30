@@ -502,7 +502,7 @@ Widget dataBody() {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children:<Widget>[
-              SizedBox(height:20),
+              SizedBox(height:15),
               Row(
               mainAxisAlignment:MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -511,6 +511,7 @@ Widget dataBody() {
                   Column(
                     mainAxisAlignment:MainAxisAlignment.start,
                     children:[
+                      SizedBox(height:30,),
                       Padding(
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
                         child:Row(
@@ -537,7 +538,8 @@ Widget dataBody() {
                               Text('Año Inicial'),
                             ),
                             listaAgnoInicial(),
-                          ]),
+                          ]
+                        ),
                       ),
                       Padding(
                       padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
@@ -644,13 +646,13 @@ Widget dataBody() {
                       ),
                     ],
                   ),
-                  SizedBox(height:20),
+                  SizedBox(width:20,),
                   Column(
-                  mainAxisAlignment:MainAxisAlignment.start,
-                  children:[
-                    SizedBox(height:30),
-                    mostrar(),
-                  ]
+                    mainAxisAlignment:MainAxisAlignment.start,
+                    children:[
+                      SizedBox(height:30),
+                      mostrar(),
+                    ]
                   ),
                 ]
               ),
@@ -812,7 +814,8 @@ Widget dataBody() {
                             //Text(entradaG.fecha,textAlign: TextAlign.center,),
                           ),
                           DataCell(
-                            Center(child:convertirMoneda(entradaG.valor),),
+                            Center(child:Text(entradaG.valor,textAlign: TextAlign.center)),
+                            //Center(child:convertirMoneda(entradaG.valor),),
                           ),
                           DataCell(
                               entradaG.id==''?Center(child:Container(child: IconButton(icon: Icon(

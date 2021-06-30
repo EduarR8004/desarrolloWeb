@@ -18,7 +18,7 @@ class _PersonaJuridicaState extends State<PersonaJuridica> {
   String _url='https://proveedores-cana.manuelita.com/';
   String urlPDFPath = "";
   ProgressDialog ms;
-  double letra=16;
+  double letra=18;
   obtener_ruta_juridica() async{
     var session= Conexion();
     session.set_token(widget.data.token);
@@ -32,7 +32,7 @@ class _PersonaJuridicaState extends State<PersonaJuridica> {
       Map ruta=verDocumentos.establecer_ruta();  
       session.getFile(_url+ruta['ruta'].toString()).then((f){   
         ms.hide();
-        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'archivo.pdf']);     
+        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'Formato Vinculación Proveedor Persona Jurídicas.pdf']);     
       });    
     });
   }
@@ -48,7 +48,7 @@ class _PersonaJuridicaState extends State<PersonaJuridica> {
             Container(
               width: 600,
               margin: const EdgeInsets.fromLTRB(5, 20, 5,5),
-              child:Text('1. Para descargar el Formato de Vinculación Proveedor, por favor haga clic en el botón "Descargar Archivo". Al final del formato se encuentra el listado de documentos que deben ser enviados para la vincuación',
+              child:Text('1. Para descargar el Formato de Vinculación Proveedor, por favor haga clic en el botón "Descargar Archivo". Al final del formato se encuentra el listado de documentos que deben ser enviados para la vinculación',
               textAlign: TextAlign.justify,
               style: TextStyle(
                 color:Colors.black,
