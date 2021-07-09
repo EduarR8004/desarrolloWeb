@@ -67,7 +67,7 @@ class _PersonaNatuarlState extends State<PersonaNatuarl> {
               Container(
                 width: 600,
                 margin: const EdgeInsets.fromLTRB(5, 20, 5,5),
-                child:Text('1. Para descargar el Formato de Vinculación Proveedor, por favor haga clic en el botón "Descargar Archivo". Al final del formato se encuentra el listado de documentos que deben ser enviados para la vincuación'
+                child:Text('1. Para descargar el Formato de Vinculación Proveedor, por favor haga clic en el botón "Descargar Archivo". Al final del formato se encuentra el listado de documentos que deben ser enviados para la vinculación.'
                 ,textAlign: TextAlign.justify,
                 style: TextStyle(
                   color:Colors.black,

@@ -63,7 +63,7 @@ class _ReporteUsuariosState extends State<ReporteUsuarios> {
       print(ruta['ruta'].toString());
       session.getFile(_url+ruta['ruta'].toString()).then((f){   
         ms.hide();
-        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'archivo.txt']);    
+        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'Reporte Uusarios.csv']);    
       });    
     });
   }
@@ -82,7 +82,7 @@ class _ReporteUsuariosState extends State<ReporteUsuarios> {
       print(ruta['ruta'].toString());
       session.getFile(_url+ruta['ruta'].toString()).then((f){   
         ms.hide();
-        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'archivo.csv']);    
+        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'Reporte Pol.Aceptación.csv']);    
       });    
     });
   }
@@ -118,7 +118,7 @@ class _ReporteUsuariosState extends State<ReporteUsuarios> {
                       fontSize:20,
                       )
                     ):
-                    Text("Reporte de Politica de Aceptación",
+                    Text("Reporte de Política de Aceptación",
                       style: TextStyle(
                         color:Colors.black,
                         fontWeight: FontWeight.bold,

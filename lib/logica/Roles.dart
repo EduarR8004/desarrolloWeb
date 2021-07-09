@@ -59,12 +59,13 @@ Future <List<Rol>>descargar_roles_noasignados(id)async{
    this._no_roles= no_roles;
 }
 
-asignar_rol_usuario(id,rol)async{
+asignar_rol_usuario(id,rol,rolesNombre)async{
 
   List map;
    var params={
       "usuario_id":id.toString(),
-      "rol_ids":rol
+      "rol_ids":rol,
+      "rol_nombre":rolesNombre
   };
    map = await this.session.callMethodListS('/api/usuarios/asignar_rol_usuario',params);
    List<Rol> no_roles=[];
@@ -76,12 +77,13 @@ asignar_rol_usuario(id,rol)async{
 
 }
 
-remover_rol_usuario(id,rol)async{
+remover_rol_usuario(id,rol,rolesNombre)async{
 
   List map;
    var params={
       "usuario_id":id.toString(),
-      "rol_ids":rol
+      "rol_ids":rol,
+      "rol_nombre":rolesNombre
   };
   await this.session.callMethodListS('/api/usuarios/remover_rol_usuario',params);
 

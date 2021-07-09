@@ -63,8 +63,8 @@ class ActualizarDatospState extends State<ActualizarDatosp>with SingleTickerProv
                     Container(
                       alignment: Alignment.center,
                       margin: const EdgeInsets.fromLTRB(10,20, 10,1),
-                      height: 150,
-                      width: 400,
+                      height: 155,
+                      width: 600,
                       child:Text('Señor Proveedor, a continuación encontrará la información para realizar el proceso de vinculación y/o actualización de documentos para personas Jurídicas y Naturales. Una vez cuente con la documentación completa, por favor enviarla al correo:',
                       textAlign: TextAlign.justify,style: TextStyle(
                         color:Colors.black,

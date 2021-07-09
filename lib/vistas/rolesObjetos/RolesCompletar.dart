@@ -22,29 +22,26 @@ class _RolesCompletarState extends State<RolesCompletar> {
   bool asignados = false;
 
 
-  Future <List<Usuario>> descargar_usuarios()async{
-   List map;
-   //roles=[];
-    if(users.length > 0){
-       return users;
-    }else
+  Future <List<Usuario>> listar_usuario(filtro)async{
+    if(users.length > 0)
     {
+      return users;
+    }else{
       var session= Conexion();
       session.set_token(widget.data.token);
       var usuario= Usuarios(session);
-      var params={
-          "filtro":'',
-        };
-      
-       map = await session.callMethodList('/api/usuarios/listar_usuarios',params);
-      for ( var usuario in map)
-      {
-        users.add(Usuario.fromJson(usuario));
-      }
+      var token=widget.data.token;
+      await usuario.descargar_usuarios(filtro).then((_){
+        var preUsuarios=usuario.obtener_usuarios();
+        for ( var usuario in preUsuarios)
+        {
+          users.add(usuario);
+        }        
+      });
       return users;
+
     }
-    
-}
+  }
   String currentText = "";
   GlobalKey<AutoCompleteTextFieldState<Usuario>> key = new GlobalKey();
   AutoCompleteTextField textField;
@@ -114,7 +111,7 @@ class _RolesCompletarState extends State<RolesCompletar> {
 
   Widget  autocompletar() {
     return FutureBuilder(
-      future:descargar_usuarios(),
+      future:listar_usuario(''),
       builder:(context,snapshot){
         if(snapshot.hasData){
           Column body = new Column(

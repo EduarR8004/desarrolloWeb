@@ -167,7 +167,7 @@ class Conexion extends ChangeNotifier{
       throw new JsonDecodingError(e.toString());
     }
 
- }
+  }
 
    callMethodListS( String webservice,Map params)async {
     var sess=this._token;
@@ -323,7 +323,7 @@ class Conexion extends ChangeNotifier{
     }
   }
 
- nombre_usuario(String token) async {
+  nombre_usuario(String token) async {
     Response response;
     var url = Uri.parse('https://proveedores-cana.manuelita.com/api/usuario_actual');
     try{

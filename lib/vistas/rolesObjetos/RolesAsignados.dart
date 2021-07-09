@@ -70,15 +70,17 @@ class _RolesAsignadosState extends State<RolesAsignados> {
    deleteSelected() async {
     setState(() {
       List rolesa=[];
+      List rolesNombre=[];
       if (selectedRol.isNotEmpty) {
         List<Rol> temp = [];
         temp.addAll(selectedRol);
         for (Rol rol in temp) {
           rolesa.add(rol.id);
+          rolesNombre.add(rol.nombre);
           roles.remove(rol);
           selectedRol.remove(rol); 
        }
-       remover_rol(rolesa);
+       remover_rol(rolesa,rolesNombre);
        successDialog(
         context, 
         "Se quitaron los roles seleccionados",
@@ -110,15 +112,17 @@ class _RolesAsignadosState extends State<RolesAsignados> {
 deleteSelectedNo() async {
   setState(() {
     List rolesa=[];
+    List rolesNombre=[];
     if (selectedRolNo.isNotEmpty) {
       List<Rol> temp = [];
       temp.addAll(selectedRolNo);
       for (Rol rol in temp) {
         rolesa.add(rol.id);
+        rolesNombre.add(rol.nombre);
         rolesNo.remove(rol);
         selectedRolNo.remove(rol); 
       }
-      asignar_rol(rolesa);
+      asignar_rol(rolesa,rolesNombre);
       successDialog(
         context, 
         "Se asignaron los roles seleccionados",
@@ -176,13 +180,13 @@ deleteSelectedNo() async {
     }
 }
 
-asignar_rol(rolesa)async{
+asignar_rol(rolesa,rolesNombre)async{
   var session= Conexion();
   session.set_token(widget.data.token);
   var rol= Roles(session);
   var id=widget.obj[0].usuario_id;
   var token=widget.data.token;
-  await rol.asignar_rol_usuario(id,rolesa).then((_){
+  await rol.asignar_rol_usuario(id,rolesa,rolesNombre).then((_){
         
   });
 }
@@ -215,13 +219,13 @@ asignar_rol(rolesa)async{
     }
 }
 
-remover_rol(rolesa)async{
+remover_rol(rolesa,rolesNombre)async{
   var session= Conexion();
   session.set_token(widget.data.token);
   var rol= Roles(session);
   var id=widget.obj[0].usuario_id;
   var token=widget.data;
-  await rol.remover_rol_usuario(id,rolesa).then((_){
+  await rol.remover_rol_usuario(id,rolesa,rolesNombre).then((_){
    
   });
 }

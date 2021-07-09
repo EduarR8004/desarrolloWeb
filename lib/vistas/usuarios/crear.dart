@@ -176,7 +176,7 @@ GlobalKey<FormState> keyForm = new GlobalKey();
         usuarios: usuario.obtener_usuarios(),
         parametro:''
       );
-      if(usuarios.length>0){
+      if(usuarios.length >0 && widget.editar == false ){
         warningDialog(
           context, 
           "El correo "+email+" ya se encuentra vinculado a un usuario",
