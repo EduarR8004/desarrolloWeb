@@ -646,10 +646,10 @@ class _VerCronologicoState extends State<VerCronologico> {
                                 Center(child:Text(entradaCrono.fecha_siembra),),
                               ),
                               DataCell(
-                                mostrarTierra?Center(child:Text(entradaCrono.dist_surc),):Container(),
+                                mostrarTierra?Center(child:Text(entradaCrono.distancia),):Container(),
                               ),
                               DataCell(
-                                mostrarSiembra?Center(child:Text(entradaCrono.distancia),):Container(),
+                                mostrarSiembra?Center(child:Text(entradaCrono.dist_surc),):Container(),
                               ),
                               DataCell(
                                 mostrarZona?Center(child:Text(entradaCrono.zona_agroc),):Container(),

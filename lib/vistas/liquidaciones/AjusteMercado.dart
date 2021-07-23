@@ -503,158 +503,161 @@ Widget dataBody() {
             crossAxisAlignment: CrossAxisAlignment.center,
             children:<Widget>[
               SizedBox(height:15),
-              Row(
-              mainAxisAlignment:MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  SizedBox(width:30),
-                  Column(
-                    mainAxisAlignment:MainAxisAlignment.start,
-                    children:[
-                      SizedBox(height:30,),
-                      Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
-                        child:Row(
+              Expanded(
+                child:
+                Row(
+                mainAxisAlignment:MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[
+                    SizedBox(width:30),
+                    Column(
+                      mainAxisAlignment:MainAxisAlignment.start,
+                      children:[
+                        SizedBox(height:30,),
+                        Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 5),
+                          child:Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children:[
+                              Container(
+                                padding:const EdgeInsets.fromLTRB(10, 0, 10, 10) ,
+                                width:20,
+                                child:
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.calendar_today,
+                                      color: Colors.grey,
+                                      size:40,
+                                    ),
+                                    onPressed: () {
+                                      //Navigator.of(context).pop();
+                                    },
+                                  ),
+                              ),
+                              Container(
+                                padding:const EdgeInsets.fromLTRB(40, 10, 5, 10) ,
+                                child:
+                                Text('Año Inicial'),
+                              ),
+                              listaAgnoInicial(),
+                            ]
+                          ),
+                        ),
+                        Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+                          child:Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children:[
-                            Container(
-                              padding:const EdgeInsets.fromLTRB(10, 0, 10, 10) ,
-                              width:20,
-                              child:
-                                IconButton(
-                                  icon: Icon(
+                            children:[
+                              Container(
+                                padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
+                                width:20,
+                                child:
+                                  IconButton(
+                                    icon: Icon(
                                     Icons.calendar_today,
                                     color: Colors.grey,
                                     size:40,
-                                  ),
-                                  onPressed: () {
-                                    //Navigator.of(context).pop();
-                                  },
+                                    ),
+                                    onPressed: () {
+                                          //Navigator.of(context).pop();
+                                    },
                                 ),
-                            ),
-                            Container(
-                              padding:const EdgeInsets.fromLTRB(40, 10, 5, 10) ,
-                              child:
-                              Text('Año Inicial'),
-                            ),
-                            listaAgnoInicial(),
-                          ]
-                        ),
-                      ),
-                      Padding(
-                      padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-                        child:Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                          children:[
-                            Container(
-                              padding:const EdgeInsets.fromLTRB(10, 10, 10, 10) ,
-                              width:20,
-                              child:
-                                IconButton(
-                                  icon: Icon(
-                                  Icons.calendar_today,
-                                  color: Colors.grey,
-                                  size:40,
-                                  ),
-                                  onPressed: () {
-                                        //Navigator.of(context).pop();
-                                  },
                               ),
-                            ),
-                            Container(
-                              padding:const EdgeInsets.fromLTRB(40, 10,15, 10) ,
-                              child:Text('Año Final'),
-                            ),
-                            listaAgnoFinal(),
-                          ]),
-                      ),
-                      lista(),
-                      Container(
-                        width: 300,
-                        height: 40,
-                        alignment: Alignment.centerLeft,
-                        margin: const EdgeInsets.fromLTRB(30, 10, 0,10),
-                        decoration: BoxDecoration(
-                        border: Border(bottom:BorderSide(width: 1,
-                                  color: Color.fromRGBO(83, 86, 90, 1.0),),),
+                              Container(
+                                padding:const EdgeInsets.fromLTRB(40, 10,15, 10) ,
+                                child:Text('Año Final'),
+                              ),
+                              listaAgnoFinal(),
+                            ]),
                         ),
-                        child: DropdownButtonHideUnderline(
-                          child: new DropdownButton<String>(
-                            hint: Padding(
-                            padding: const EdgeInsets.all(0),
-                            child: Center(
-                              child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15.0,
-                              fontFamily: 'Karla',
-                            ),),),
-                            ),
-                            value:selectedRegion,
-                            isDense: true,
-                            onChanged: (String newValue) {
-                              if(dropdownAgnoInicial!=''&& dropdownAgnoFinal!="")
-                              {  
-                                int numeroFi=int.parse(dropdownAgnoInicial);
-                                int numeroFf=int.parse(dropdownAgnoFinal);
-                                if(numeroFi < numeroFf || numeroFi == numeroFf )
-                                {
+                        lista(),
+                        Container(
+                          width: 300,
+                          height: 40,
+                          alignment: Alignment.centerLeft,
+                          margin: const EdgeInsets.fromLTRB(30, 10, 0,10),
+                          decoration: BoxDecoration(
+                          border: Border(bottom:BorderSide(width: 1,
+                                    color: Color.fromRGBO(83, 86, 90, 1.0),),),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: new DropdownButton<String>(
+                              hint: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Center(
+                                child:Text(haciendaUnica!=null?haciendaUnica:'Seleccione una Hacienda', textAlign: TextAlign.left,style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15.0,
+                                fontFamily: 'Karla',
+                              ),),),
+                              ),
+                              value:selectedRegion,
+                              isDense: true,
+                              onChanged: (String newValue) {
+                                if(dropdownAgnoInicial!=''&& dropdownAgnoFinal!="")
+                                {  
+                                  int numeroFi=int.parse(dropdownAgnoInicial);
+                                  int numeroFf=int.parse(dropdownAgnoFinal);
+                                  if(numeroFi < numeroFf || numeroFi == numeroFf )
+                                  {
+                                    setState(() {
+                                      parametro=entrada.where((a) => a.nm_hda==newValue);
+                                      codRespeuesta=parametros(parametro);
+                                      cambiar = false;
+                                      detalle = true;
+                                      contador=0;
+                                      selectedRegion = newValue;
+                                    });
+                                  }
+                                  else
+                                  {
+                                    errorDialog(
+                                    context, 
+                                    error,
+                                    negativeAction: (){
+                                    },
+                                  );
+                                  }
+                                }else{
                                   setState(() {
-                                    parametro=entrada.where((a) => a.nm_hda==newValue);
-                                    codRespeuesta=parametros(parametro);
-                                    cambiar = false;
-                                    detalle = true;
-                                    contador=0;
-                                    selectedRegion = newValue;
+                                    tabla = true;
                                   });
-                                }
-                                else
-                                {
                                   errorDialog(
-                                  context, 
-                                  error,
-                                  negativeAction: (){
-                                  },
-                                );
+                                    context, 
+                                    error,
+                                    negativeAction: (){
+                                    },
+                                  );
                                 }
-                              }else{
-                                setState(() {
-                                  tabla = true;
-                                });
-                                errorDialog(
-                                  context, 
-                                  error,
-                                  negativeAction: (){
-                                  },
-                                );
-                              }
-                                
-                            print(selectedRegion);
-                            },
-                            items: _entrada.map((EntradaCana map) {
-                              return new DropdownMenuItem<String>(
-                                value: map.nm_hda,
-                                child:Padding(
-                                  padding: const EdgeInsets.fromLTRB(10, 5, 18,2),
-                                  child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.left,
-                                    style: new TextStyle(color: Colors.black)
+                                  
+                              print(selectedRegion);
+                              },
+                              items: _entrada.map((EntradaCana map) {
+                                return new DropdownMenuItem<String>(
+                                  value: map.nm_hda,
+                                  child:Padding(
+                                    padding: const EdgeInsets.fromLTRB(10, 5, 18,2),
+                                    child:new Text(map.cod_hda+' - '+map.nm_hda,textAlign: TextAlign.left,
+                                      style: new TextStyle(color: Colors.black)
+                                    ),
                                   ),
-                                ),
-                              );
-                            }).toList(),
+                                );
+                              }).toList(),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(width:20,),
-                  Column(
-                    mainAxisAlignment:MainAxisAlignment.start,
-                    children:[
-                      SizedBox(height:30),
-                      mostrar(),
-                    ]
-                  ),
-                ]
+                      ],
+                    ),
+                    SizedBox(width:20,),
+                    Column(
+                      mainAxisAlignment:MainAxisAlignment.start,
+                      children:[
+                        SizedBox(height:30),
+                        Expanded(child:mostrar()),
+                      ]
+                    ),
+                  ]
+                ),
               ),
                 // SizedBox(height:2),
                 // Container(
@@ -900,4 +903,3 @@ Widget dataBody() {
     );
   }
 }
-

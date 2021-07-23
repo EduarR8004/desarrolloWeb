@@ -508,6 +508,7 @@ class Conexion extends ChangeNotifier{
 
   var request = http.MultipartRequest('POST',Uri.parse(_url+"/api/admin_documentos/cargar_fuente_en_orden"));
   request.fields["orden_id"]=id;
+  //request.fields["nombre_archivo"]=id;
   
   request.files.add(await http.MultipartFile.fromBytes("archivo",fileBytes));
   var totalByteLength = request.contentLength;

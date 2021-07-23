@@ -929,34 +929,35 @@ void confirm (dialog){
                       ),
                     ),
                     obj_menu.contains("AO001") || obj_menu.contains("ZZ999")?
-                    InkWell(
-                      onTap: () {
-                          WidgetsBinding.instance.addPostFrameCallback((_) { 
-                            Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  ActualizarDatosp (data:widget.data)));
-                          });
-
-                          // WidgetsBinding.instance.addPostFrameCallback((_) { 
-                          //              Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  FileWeb()));});
-                      },
+                    Center(
                       child:
-                      Center(child:
-                        Container(
-                          color: Colors.white,
-                          width: MediaQuery.of(context).size.width,
-                          height: 143,
-                          margin: EdgeInsets.all(8),
-                          // decoration: BoxDecoration(
-                          //   borderRadius: BorderRadius.only(
-                          //     topLeft: Radius.circular(40),
-                          //     topRight: Radius.circular(40),
-                          //   ),
-                          //   color: Color.fromRGBO(31, 58, 47, 1.0),
-                          // ),
-                          child: 
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children:<Widget>[
-                              Column(
+                      Container(
+                        color: Colors.white,
+                        width: MediaQuery.of(context).size.width,
+                        height: 143,
+                        margin: EdgeInsets.all(8),
+                        // decoration: BoxDecoration(
+                        //   borderRadius: BorderRadius.only(
+                        //     topLeft: Radius.circular(40),
+                        //     topRight: Radius.circular(40),
+                        //   ),
+                        //   color: Color.fromRGBO(31, 58, 47, 1.0),
+                        // ),
+                        child: 
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children:<Widget>[
+                            InkWell(
+                              onTap: () {
+                                  WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                    Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  ActualizarDatosp (data:widget.data)));
+                                  });
+
+                                  // WidgetsBinding.instance.addPostFrameCallback((_) { 
+                                  //              Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) =>  FileWeb()));});
+                              },
+                              child:
+                                Column(
                                 children: <Widget>[
                                   Container(
                                     height: 85,
@@ -997,8 +998,8 @@ void confirm (dialog){
                                   ),
                                 ]
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ):

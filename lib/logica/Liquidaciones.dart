@@ -32,12 +32,14 @@ Liquidaciones(Conexion s){
     }
    
    map = await this.session.callMethodList('/api/liquidaciones_cana/listar_liquidacion',params);
-   List<Liquidacion> usuarios=[];
-   for ( var usuario in map)
+   List<Liquidacion> liquidaciones=[];
+   for ( var liquidacion in map)
    {
-     usuarios.add(Liquidacion.fromJson(usuario));
+     //if (liquidacion['DOCUMENTO_ID'] != null){
+      liquidaciones.add(Liquidacion.fromJson(liquidacion));
+     //}
    }
-   this._liquidaciones= usuarios;
+   this._liquidaciones= liquidaciones;
 }
 
  Future <List<Ajuste>>listar_anticipos(ini,fin,cod_hda)async{
@@ -60,8 +62,10 @@ Liquidaciones(Conexion s){
    map = await this.session.callMethodList('/api/liquidaciones_cana/listar_anticipos',params);
    List<Ajuste> anticipos=[];
    for ( var anticipo in map)
-   {
-     anticipos.add(Ajuste.fromJson(anticipo));
+   { 
+      if (anticipo['DOCUMENTO_ID'] != null){
+        anticipos.add(Ajuste.fromJson(anticipo));
+      }
    }
    this._anticipos= anticipos;
 }
@@ -87,7 +91,9 @@ Future <List<Ajuste>>listar_ajuste(ini,fin,cod_hda)async{
    List<Ajuste> ajustes=[];
    for ( var ajuste in map)
    {
-     ajustes.add(Ajuste.fromJson(ajuste));
+     if (ajuste['DOCUMENTO_ID'] != null){
+      ajustes.add(Ajuste.fromJson(ajuste));
+     }
    }
    this._ajustes= ajustes;
 }

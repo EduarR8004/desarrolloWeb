@@ -179,68 +179,69 @@ Future get_preference()async{
 	});     
 }
 validar()async{
-  var loginProvider = Provider.of<Conexion>(context, listen: false);
   var session= Conexion();
-  var seguridad= Seguridad(loginProvider);
-  var usuario= Usuarios(loginProvider);
+  var seguridad= Seguridad(session);
+  var usuario= Usuarios(session);
   await pr.show();
-  loginProvider.autenticar(nameController.text, passwordController.text).then((_) {
-  List<String> adminu;
-  seguridad.descargar_todos().then((_){
-    usuario.usuario_actual().then((_){
-      usuario_actual=usuario.obtener_usuario();
-      adminu=seguridad.obtener_todos();
-      objetos.addAll(adminu);
-      pr.hide();
-      if(Platform.isAndroid){
-        set_preference();
-      }
-      final data = Data.mensaje(
-        usuario:stored_user ,
-        pass:stored_pass,
-        token: loginProvider.get_session(),
-        obj: objetos,
-        entrada: true,
-        produccion: true,
-        crono: true,
-        usuario_actual:usuario_actual 
-      );
-      if(loginProvider.get_aceptar()){
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-                                Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => Inicio(data:data,retorno:''),)); }); 
-      }else{
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-                                Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => PoliticaTratamientoDatos(data:data,retorno:''),)); }); 
-      }
-        
-    });              
-  });
-  if(loginProvider.validar == true){
-    String token=session.get_session();
-  }else{
-    var mensaje=session; 
-    if (mensaje!=null)
-    { 
-      pr.hide();
-      confirm (mensaje.mensaje);                    
+  session.autenticar(nameController.text, passwordController.text).then((_) {
+    List<String> adminu;
+    seguridad.descargar_todos().then((_){
+      usuario.usuario_actual().then((_){
+        usuario_actual=usuario.obtener_usuario();
+        adminu=seguridad.obtener_todos();
+        objetos.addAll(adminu);
+        pr.hide();
+        if(Platform.isAndroid){
+          set_preference();
+        }
+        final data = Data.mensaje(
+          usuario:stored_user ,
+          pass:stored_pass,
+          token: session.get_session(),
+          obj: objetos,
+          entrada: true,
+          produccion: true,
+          crono: true,
+          usuario_actual:usuario_actual 
+        );
+        if(session.get_aceptar()){
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => Inicio(data:data,retorno:''),)); 
+          }); 
+        }else{
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            Navigator.pushReplacement( context, MaterialPageRoute( builder: (context) => PoliticaTratamientoDatos(data:data,retorno:''),)); 
+          }); 
+        }
+      });              
+    });
+    if(session.validar == true){
+      String token=session.get_session();
     }else{
-      pr.hide();
-      confirm ("Sin conexión al servidor");
-    }                        
-  }              
+      var mensaje=session; 
+      if (mensaje!=null)
+      { 
+        pr.hide();
+        confirm (mensaje.mensaje);                    
+      }else{
+        pr.hide();
+        confirm ("Sin conexión al servidor");
+      }                        
+    }              
   }).catchError( (onError){
 
-  if(onError is SessionNotFound){
-  return 'Usuario o Contraseña Incorrecta';
-                          
-  }else if(onError is ConnectionError){
+    if(onError is SessionNotFound){
+    return 'Usuario o Contraseña Incorrecta';
                             
-  }else{
-                          
-  }
+    }else if(onError is ConnectionError){
+                              
+    }else{
+                            
+    }
                                                   
   });
 }
+
 
   Widget build(BuildContext context) {
   pr = new ProgressDialog(context,type: ProgressDialogType.Normal, isDismissible: true, showLogs: true);

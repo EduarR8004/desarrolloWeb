@@ -258,7 +258,7 @@ class _PoliticaTratamientoDatosState extends State<PoliticaTratamientoDatos> {
           padding: EdgeInsets.fromLTRB(10,5,10,5),
           child: 
           Text(
-            "protecciondedatos@manuelita.co"
+            "protecciondedatos@manuelita.com"
             ,textAlign: TextAlign.center,
             style: TextStyle(
               color:Colors.black,

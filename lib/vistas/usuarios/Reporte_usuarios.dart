@@ -63,7 +63,7 @@ class _ReporteUsuariosState extends State<ReporteUsuarios> {
       print(ruta['ruta'].toString());
       session.getFile(_url+ruta['ruta'].toString()).then((f){   
         ms.hide();
-        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'Reporte Uusarios.csv']);    
+        js.context.callMethod ('webSaveAs', <dynamic> [html.Blob (<List <int>> [f]), 'Reporte Usarios.csv']);    
       });    
     });
   }
